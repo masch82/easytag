@@ -32,6 +32,8 @@ easytag_SOURCES = \
  flac_tag.c \
  flac_tag.h \
  genres.h \
+ gtk2_compat.h \
+ gtk2_compat.c \
  id3_tag.c \
  id3_tag.h \
  id3v24_tag.c \

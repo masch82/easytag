@@ -44,6 +44,8 @@
 #include "log.h"
 #include "charset.h"
 
+#include "gtk2_compat.h"
+
 #ifdef WIN32
 #   include <windows.h>
 #endif
@@ -154,7 +156,7 @@ gboolean Write_Playlist_Window_Key_Press (GtkWidget *window, GdkEvent *event);
 void     Destroy_Write_Playlist_Window   (void);
 void     Playlist_Write_Button_Pressed   (void);
 gboolean Write_Playlist                  (gchar *play_list_name);
-gboolean Playlist_Check_Content_Mask     (GtkObject *widget_to_show_hide, GtkEntry *widget_source);
+gboolean Playlist_Check_Content_Mask     (GtkWidget *widget_to_show_hide, GtkEntry *widget_source);
 void     Playlist_Convert_Forwardslash_Into_Backslash (gchar *string);
 
 void Open_Search_File_Window          (void);
@@ -229,7 +231,7 @@ GtkWidget *Create_Button_With_Icon_And_Label (const gchar *pixmap_name, gchar *l
     GtkWidget *Pixmap;
 
     Button = gtk_button_new();
-    HBox = gtk_hbox_new(FALSE,0);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_container_add(GTK_CONTAINER(Button),HBox);
 
     /* Add a pixmap if not null */
@@ -378,7 +380,7 @@ gchar *Get_Active_Combo_Box_Item (GtkComboBox *combo)
  * Event attached to an entry to disable an other widget (for example: a button)
  * when the entry is empty
  */
-void Entry_Changed_Disable_Object(GtkObject *widget_to_disable, GtkEditable *source_widget)
+void Entry_Changed_Disable_Object(GtkWidget *widget_to_disable, GtkEditable *source_widget)
 {
     gchar *text = NULL;
 
@@ -386,9 +388,9 @@ void Entry_Changed_Disable_Object(GtkObject *widget_to_disable, GtkEditable *sou
 
     text = gtk_editable_get_chars(GTK_EDITABLE(source_widget),0,-1);
     if (!text || strlen(text)<1)
-        gtk_widget_set_sensitive(GTK_WIDGET(widget_to_disable),FALSE);
+        gtk_widget_set_sensitive(widget_to_disable,FALSE);
     else
-        gtk_widget_set_sensitive(GTK_WIDGET(widget_to_disable),TRUE);
+        gtk_widget_set_sensitive(widget_to_disable,TRUE);
 
     g_free(text);
 }
@@ -432,7 +434,7 @@ void Insert_Only_Digit (GtkEditable *editable, const gchar *inserted_text, gint 
     // Null terminate for the benefit of glib/gtk
     result[j] = '\0';
 
-    if (result[0] == (gchar)NULL)
+    if (result[0] == (gchar)'\0')
     {
         g_free(result);
         return;
@@ -568,7 +570,7 @@ void Destroy_Mouse_Cursor (void)
 {
     if (MouseCursor)
     {
-        gdk_cursor_unref(MouseCursor);
+	gdk_cursor_unref(MouseCursor);
         MouseCursor = NULL;
     }
 }
@@ -579,13 +581,13 @@ void Set_Busy_Cursor (void)
     Destroy_Mouse_Cursor();
     /* Create the new cursor */
     MouseCursor = gdk_cursor_new(GDK_WATCH);
-    gdk_window_set_cursor(MainWindow->window,MouseCursor);
+    gdk_window_set_cursor(gtk_widget_get_window(MainWindow),MouseCursor);
 }
 
 void Set_Unbusy_Cursor (void)
 {
     /* Back to standard cursor */
-    gdk_window_set_cursor(MainWindow->window,NULL);
+    gdk_window_set_cursor(gtk_widget_get_window(MainWindow),NULL);
     Destroy_Mouse_Cursor();
 }
 
@@ -795,7 +797,7 @@ static void Open_File_Selection_Window (GtkWidget *entry, gchar *title, GtkFileC
     gint response;
 
     parent_window = (GtkWindow*) gtk_widget_get_toplevel(entry);
-    if (!GTK_WIDGET_TOPLEVEL(parent_window))
+    if (!gtk_widget_is_toplevel(GTK_WIDGET(parent_window)))
     {
         g_warning("Could not get parent window\n");
         return;
@@ -1229,15 +1231,12 @@ void Open_Write_Playlist_Window (void)
     GtkWidget *Separator;
     GtkWidget *Icon;
     GtkWidget *MaskStatusIconBox, *MaskStatusIconBox1;
-    GtkTooltips *Tips;
 
     if (WritePlaylistWindow != NULL)
     {
-        gdk_window_raise(WritePlaylistWindow->window);
+        gtk_window_present(GTK_WINDOW(WritePlaylistWindow));
         return;
     }
-
-    Tips = gtk_tooltips_new();
 
     WritePlaylistWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(WritePlaylistWindow),_("Generate a playlist"));
@@ -1254,7 +1253,7 @@ void Open_Write_Playlist_Window (void)
     gtk_container_add(GTK_CONTAINER(WritePlaylistWindow),Frame);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),4);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -1266,15 +1265,16 @@ void Open_Write_Playlist_Window (void)
 
     Frame = gtk_frame_new(_("M3U Playlist Name"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,TRUE,TRUE,0);
-    vbox = gtk_vbox_new(FALSE,0);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
     playlist_use_mask_name = gtk_radio_button_new_with_label(NULL, _("Use mask :"));
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_box_pack_start(GTK_BOX(hbox),playlist_use_mask_name,FALSE,FALSE,0);
-    PlayListNameMaskCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(PlayListNameMaskModel), MISC_COMBO_TEXT);
+    PlayListNameMaskCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(PlayListNameMaskModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(PlayListNameMaskCombo), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(hbox),PlayListNameMaskCombo,FALSE,FALSE,4);
     playlist_use_dir_name = gtk_radio_button_new_with_label_from_widget(
         GTK_RADIO_BUTTON(playlist_use_mask_name),_("Use directory name"));
@@ -1282,7 +1282,7 @@ void Open_Write_Playlist_Window (void)
     // History list
     Load_Play_List_Name_List(PlayListNameMaskModel, MISC_COMBO_TEXT);
     Add_String_To_Combo_List(PlayListNameMaskModel, PLAYLIST_NAME);
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(PlayListNameMaskCombo)->child), PLAYLIST_NAME);
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo))), PLAYLIST_NAME);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_use_mask_name),PLAYLIST_USE_MASK_NAME);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_use_dir_name),PLAYLIST_USE_DIR_NAME);
@@ -1290,9 +1290,9 @@ void Open_Write_Playlist_Window (void)
     // Mask status icon
     MaskStatusIconBox = Create_Pixmap_Icon_With_Event_Box("easytag-forbidden");
     gtk_box_pack_start(GTK_BOX(hbox),MaskStatusIconBox,FALSE,FALSE,0);
-    gtk_tooltips_set_tip(Tips,MaskStatusIconBox,_("Invalid Scanner Mask"),NULL);
+    gtk_widget_set_tooltip_text(MaskStatusIconBox,_("Invalid Scanner Mask"));
     // Signal connection to check if mask is correct into the mask entry
-    g_signal_connect_swapped(G_OBJECT(GTK_BIN(PlayListNameMaskCombo)->child),"changed",
+    g_signal_connect_swapped(G_OBJECT(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo))),"changed",
         G_CALLBACK(Playlist_Check_Content_Mask),G_OBJECT(MaskStatusIconBox));
 
     // Button for Mask editor
@@ -1301,7 +1301,7 @@ void Open_Write_Playlist_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Edit Masks"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Edit Masks"));
     // The masks will be edited into a tab of the preferences window. In the future...
     //g_signal_connect(G_OBJECT(Button),"clicked",(GtkSignalFunc)???,NULL);
     // FIX ME : edit the masks
@@ -1311,18 +1311,18 @@ void Open_Write_Playlist_Window (void)
     /* Playlist options */
     Frame = gtk_frame_new(_("Playlist Options"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,TRUE,TRUE,0);
-    vbox = gtk_vbox_new(FALSE,0);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
     playlist_only_selected_files = gtk_check_button_new_with_label(_("Include only the selected files"));
     gtk_box_pack_start(GTK_BOX(vbox),playlist_only_selected_files,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_only_selected_files),PLAYLIST_ONLY_SELECTED_FILES);
-    gtk_tooltips_set_tip(Tips,playlist_only_selected_files,_("If activated, only the selected files will be "
-        "written in the playlist file. Else, all the files will be written."),NULL);
+    gtk_widget_set_tooltip_text(playlist_only_selected_files,_("If activated, only the selected files will be "
+        "written in the playlist file. Else, all the files will be written."));
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(vbox),Separator,FALSE,FALSE,0);
 
     playlist_full_path = gtk_radio_button_new_with_label(NULL,_("Use full path for files in playlist"));
@@ -1334,15 +1334,15 @@ void Open_Write_Playlist_Window (void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_relative_path),PLAYLIST_RELATIVE_PATH);
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(vbox),Separator,FALSE,FALSE,0);
 
     // Create playlist in parent directory
     playlist_create_in_parent_dir = gtk_check_button_new_with_label(_("Create playlist in the parent directory"));
     gtk_box_pack_start(GTK_BOX(vbox),playlist_create_in_parent_dir,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_create_in_parent_dir),PLAYLIST_CREATE_IN_PARENT_DIR);
-    gtk_tooltips_set_tip(Tips,playlist_create_in_parent_dir,_("If activated, the playlist will be created "
-        "in the parent directory."),NULL);
+    gtk_widget_set_tooltip_text(playlist_create_in_parent_dir,_("If activated, the playlist will be created "
+        "in the parent directory."));
 
     // DOS Separator
     playlist_use_dos_separator = gtk_check_button_new_with_label(_("Use DOS directory separator"));
@@ -1350,8 +1350,8 @@ void Open_Write_Playlist_Window (void)
     gtk_box_pack_start(GTK_BOX(vbox),playlist_use_dos_separator,FALSE,FALSE,0);
 #endif
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_use_dos_separator),PLAYLIST_USE_DOS_SEPARATOR);
-    gtk_tooltips_set_tip(Tips,playlist_use_dos_separator,_("This option replaces the UNIX directory "
-        "separator '/' into DOS separator '\\'."),NULL);
+    gtk_widget_set_tooltip_text(playlist_use_dos_separator,_("This option replaces the UNIX directory "
+        "separator '/' into DOS separator '\\'."));
 
     /* Playlist content */
     if (!PlayListContentMaskModel)
@@ -1361,7 +1361,7 @@ void Open_Write_Playlist_Window (void)
 
     Frame = gtk_frame_new(_("Playlist Content"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,TRUE,TRUE,0);
-    vbox = gtk_vbox_new(FALSE,0);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
@@ -1373,23 +1373,24 @@ void Open_Write_Playlist_Window (void)
     gtk_box_pack_start(GTK_BOX(vbox),playlist_content_filename,FALSE,FALSE,0);
 
     playlist_content_mask = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(playlist_content_none), _("Write info using :"));
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_box_pack_start(GTK_BOX(hbox),playlist_content_mask,FALSE,FALSE,0);
     // Set a label, a combobox and un editor button in the 3rd radio button
-    PlayListContentMaskCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(PlayListContentMaskModel), MISC_COMBO_TEXT);
+    PlayListContentMaskCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(PlayListContentMaskModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(PlayListContentMaskCombo), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(hbox),PlayListContentMaskCombo,FALSE,FALSE,0);
     // History list
     Load_Playlist_Content_Mask_List(PlayListContentMaskModel, MISC_COMBO_TEXT);
     Add_String_To_Combo_List(PlayListContentMaskModel, PLAYLIST_CONTENT_MASK_VALUE);
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(PlayListContentMaskCombo)->child), PLAYLIST_CONTENT_MASK_VALUE);
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo))), PLAYLIST_CONTENT_MASK_VALUE);
 
     // Mask status icon
     MaskStatusIconBox1 = Create_Pixmap_Icon_With_Event_Box("easytag-forbidden");
     gtk_box_pack_start(GTK_BOX(hbox),MaskStatusIconBox1,FALSE,FALSE,0);
-    gtk_tooltips_set_tip(Tips,MaskStatusIconBox1,_("Invalid Scanner Mask"),NULL);
+    gtk_widget_set_tooltip_text(MaskStatusIconBox1,_("Invalid Scanner Mask"));
     // Signal connection to check if mask is correct into the mask entry
-    g_signal_connect_swapped(G_OBJECT(GTK_BIN(PlayListContentMaskCombo)->child),"changed",
+    g_signal_connect_swapped(G_OBJECT(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo))),"changed",
         G_CALLBACK(Playlist_Check_Content_Mask),G_OBJECT(MaskStatusIconBox1));
 
     // Button for Mask editor
@@ -1398,7 +1399,7 @@ void Open_Write_Playlist_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Edit Masks"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Edit Masks"));
     // The masks will be edited into a tab of the preferences window. In the future...
     //g_signal_connect(G_OBJECT(Button),"clicked",(GtkSignalFunc)???,NULL);
     // FIX ME : edit the masks
@@ -1410,10 +1411,10 @@ void Open_Write_Playlist_Window (void)
 
 
     /* Separator line */
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),ButtonBox,FALSE,FALSE,0);
     gtk_button_box_set_layout(GTK_BUTTON_BOX(ButtonBox),GTK_BUTTONBOX_END);
     gtk_box_set_spacing(GTK_BOX(ButtonBox), 10);
@@ -1421,23 +1422,23 @@ void Open_Write_Playlist_Window (void)
     /* Button to Cancel */
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Destroy_Write_Playlist_Window),NULL);
 
     /* Button to Write the playlist */
     Button = gtk_button_new_from_stock(GTK_STOCK_SAVE);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",G_CALLBACK(Playlist_Write_Button_Pressed),NULL);
 
     gtk_widget_show_all(WritePlaylistWindow);
     if (PLAYLIST_WINDOW_X > 0 && PLAYLIST_WINDOW_Y > 0)
-        gdk_window_move(WritePlaylistWindow->window,PLAYLIST_WINDOW_X,PLAYLIST_WINDOW_Y);
+        gtk_window_move(GTK_WINDOW(WritePlaylistWindow),PLAYLIST_WINDOW_X,PLAYLIST_WINDOW_Y);
 
     /* To initialize the mask status icon and visibility */
-    g_signal_emit_by_name(G_OBJECT(GTK_BIN(PlayListNameMaskCombo)->child),"changed");
-    g_signal_emit_by_name(G_OBJECT(GTK_BIN(PlayListContentMaskCombo)->child),"changed");
+    g_signal_emit_by_name(G_OBJECT(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo))),"changed");
+    g_signal_emit_by_name(G_OBJECT(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo))),"changed");
 }
 
 void Destroy_Write_Playlist_Window (void)
@@ -1460,21 +1461,21 @@ void Write_Playlist_Window_Apply_Changes (void)
     {
         gint x, y, width, height;
 
-        if ( WritePlaylistWindow->window && gdk_window_is_visible(WritePlaylistWindow->window)
-        &&   gdk_window_get_state(WritePlaylistWindow->window)!=GDK_WINDOW_STATE_MAXIMIZED )
+        if ( gtk_widget_get_window(WritePlaylistWindow) && gdk_window_is_visible(gtk_widget_get_window(WritePlaylistWindow))
+        &&   gdk_window_get_state(gtk_widget_get_window(WritePlaylistWindow))!=GDK_WINDOW_STATE_MAXIMIZED )
         {
             // Position and Origin of the window
-            gdk_window_get_root_origin(WritePlaylistWindow->window,&x,&y);
+            gtk_window_get_position(GTK_WINDOW(WritePlaylistWindow),&x,&y);
             PLAYLIST_WINDOW_X = x;
             PLAYLIST_WINDOW_Y = y;
-            gdk_window_get_size(WritePlaylistWindow->window,&width,&height);
+            gtk_window_get_size(GTK_WINDOW(WritePlaylistWindow),&width,&height);
             PLAYLIST_WINDOW_WIDTH  = width;
             PLAYLIST_WINDOW_HEIGHT = height;
         }
 
         /* List of variables also set in the function 'Playlist_Write_Button_Pressed' */
         if (PLAYLIST_NAME) g_free(PLAYLIST_NAME);
-        PLAYLIST_NAME                 = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListNameMaskCombo)->child)));
+        PLAYLIST_NAME                 = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo)))));
         PLAYLIST_USE_MASK_NAME        = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_use_mask_name));
         PLAYLIST_USE_DIR_NAME         = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_use_dir_name));
 
@@ -1489,7 +1490,7 @@ void Write_Playlist_Window_Apply_Changes (void)
         PLAYLIST_CONTENT_MASK         = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_content_mask));
         
         if (PLAYLIST_CONTENT_MASK_VALUE) g_free(PLAYLIST_CONTENT_MASK_VALUE);
-        PLAYLIST_CONTENT_MASK_VALUE   = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListContentMaskCombo)->child)));
+        PLAYLIST_CONTENT_MASK_VALUE   = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo)))));
 
         /* Save combobox history lists before exit */
         Save_Play_List_Name_List(PlayListNameMaskModel, MISC_COMBO_TEXT);
@@ -1506,7 +1507,7 @@ gboolean Write_Playlist_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Destroy_Write_Playlist_Window();
                 break;
         }
@@ -1529,12 +1530,12 @@ void Playlist_Write_Button_Pressed (void)
 
     // Check if playlist name was filled
     if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_use_mask_name))
-    &&   g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListNameMaskCombo)->child)), -1)<=0 )
+    &&   g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo)))), -1)<=0 )
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(playlist_use_dir_name),TRUE);
 
     /* List of variables also set in the function 'Write_Playlist_Window_Apply_Changes' */
     /***if (PLAYLIST_NAME) g_free(PLAYLIST_NAME);
-    PLAYLIST_NAME                 = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListNameMaskCombo)->child)));
+    PLAYLIST_NAME                 = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListNameMaskCombo)))));
     PLAYLIST_USE_MASK_NAME        = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_use_mask_name));
     PLAYLIST_USE_DIR_NAME         = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_use_dir_name));
 
@@ -1548,7 +1549,7 @@ void Playlist_Write_Button_Pressed (void)
     PLAYLIST_CONTENT_FILENAME     = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_content_filename));
     PLAYLIST_CONTENT_MASK         = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(playlist_content_mask));
     if (PLAYLIST_CONTENT_MASK_VALUE) g_free(PLAYLIST_CONTENT_MASK_VALUE);
-    PLAYLIST_CONTENT_MASK_VALUE   = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListContentMaskCombo)->child)));***/
+    PLAYLIST_CONTENT_MASK_VALUE   = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo)))));***/
     Write_Playlist_Window_Apply_Changes();
 
     // Path of the playlist file (may be truncated later if PLAYLIST_CREATE_IN_PARENT_DIR is TRUE)
@@ -1693,7 +1694,7 @@ void Playlist_Write_Button_Pressed (void)
     g_free(playlist_name);
 }
 
-gboolean Playlist_Check_Content_Mask (GtkObject *widget_to_show_hide, GtkEntry *widget_source)
+gboolean Playlist_Check_Content_Mask (GtkWidget *widget_to_show_hide, GtkEntry *widget_source)
 {
     gchar *tmp  = NULL;
     gchar *mask = NULL;
@@ -1827,7 +1828,7 @@ gboolean Write_Playlist (gchar *playlist_name)
                 }else if (PLAYLIST_CONTENT_MASK)
                 {
                     // Header uses generated filename from a mask
-                    gchar *mask = filename_from_display(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListContentMaskCombo)->child)));
+                    gchar *mask = filename_from_display(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo)))));
                     // Special case : we don't replace illegal characters and don't check if there is a directory separator in the mask.
                     gchar *filename_generated_utf8 = Scan_Generate_New_Filename_From_Mask(etfile,mask,TRUE);
                     gchar *filename_generated = filename_from_display(filename_generated_utf8);
@@ -1863,7 +1864,7 @@ gboolean Write_Playlist (gchar *playlist_name)
             }else if (PLAYLIST_CONTENT_MASK)
             {
                 // Header uses generated filename from a mask
-                gchar *mask = filename_from_display(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(PlayListContentMaskCombo)->child)));
+                gchar *mask = filename_from_display(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(PlayListContentMaskCombo)))));
                 gchar *filename_generated_utf8 = Scan_Generate_New_Filename_From_Mask(etfile,mask,TRUE);
                 gchar *filename_generated = filename_from_display(filename_generated_utf8);
                 fprintf(file,"#EXTINF:%d,%s\r\n",duration,filename_generated); // Must be written in system encoding (not UTF-8)
@@ -1911,7 +1912,6 @@ void Open_Search_File_Window (void)
     GtkWidget *Label;
     GtkWidget *Button;
     GtkWidget *Separator;
-    GtkTooltips *Tips;
     GtkWidget *ScrollWindow;
     GtkTreeViewColumn* column;
     GtkCellRenderer* renderer;
@@ -1935,7 +1935,7 @@ void Open_Search_File_Window (void)
 
     if (SearchFileWindow != NULL)
     {
-        gdk_window_raise(SearchFileWindow->window);
+        gtk_window_present(GTK_WINDOW(SearchFileWindow));
         return;
     }
 
@@ -1946,10 +1946,7 @@ void Open_Search_File_Window (void)
     g_signal_connect(G_OBJECT(SearchFileWindow),"key_press_event", G_CALLBACK(Search_File_Window_Key_Press),NULL);
     gtk_window_set_default_size(GTK_WINDOW(SearchFileWindow),SEARCH_WINDOW_WIDTH,SEARCH_WINDOW_HEIGHT);
 
-    // The tooltips
-    Tips = gtk_tooltips_new();
-
-    VBox = gtk_vbox_new(FALSE,0);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(SearchFileWindow),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 1);
 
@@ -1973,17 +1970,18 @@ void Open_Search_File_Window (void)
     Label = gtk_label_new(_("Search :"));
     gtk_misc_set_alignment(GTK_MISC(Label),1.0,0.5);
     gtk_table_attach(GTK_TABLE(Table),Label,0,1,0,1,GTK_FILL,GTK_FILL,0,0);
-    SearchStringCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(SearchStringModel), MISC_COMBO_TEXT);
+    SearchStringCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(SearchStringModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(SearchStringCombo), MISC_COMBO_TEXT);
     gtk_widget_set_size_request(GTK_WIDGET(SearchStringCombo),200,-1);
     gtk_table_attach(GTK_TABLE(Table),SearchStringCombo,1,5,0,1,GTK_EXPAND|GTK_FILL,GTK_FILL,0,0);
     // History List
     Load_Search_File_List(SearchStringModel, MISC_COMBO_TEXT);
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(SearchStringCombo)->child),"");
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(SearchStringCombo)->child)),
-        _("Type the word to search into files. Or type nothing to display all files."),NULL);
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(SearchStringCombo))),"");
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(SearchStringCombo)))),
+        _("Type the word to search into files. Or type nothing to display all files."));
 
     // Set content of the clipboard if available
-    gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_BIN(SearchStringCombo)->child));
+    gtk_editable_paste_clipboard(GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(SearchStringCombo))));
 
     // Where...
     Label = gtk_label_new(_("In :"));
@@ -1997,7 +1995,7 @@ void Open_Search_File_Window (void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SearchInFilename),SEARCH_IN_FILENAME);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SearchInTag),SEARCH_IN_TAG);
 
-    Separator = gtk_vseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_table_attach(GTK_TABLE(Table),Separator,3,4,1,2,GTK_FILL,GTK_FILL,4,0);
 
     // Property of the search
@@ -2210,10 +2208,10 @@ void Open_Search_File_Window (void)
     // Button to run the search
     Button = gtk_button_new_from_stock(GTK_STOCK_FIND);
     gtk_table_attach(GTK_TABLE(Table),Button,5,6,0,1,GTK_FILL,GTK_FILL,0,0);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Search_File),NULL);
-    g_signal_connect(G_OBJECT(GTK_BIN(SearchStringCombo)->child),"activate", G_CALLBACK(Search_File),NULL);
+    g_signal_connect(G_OBJECT(gtk_bin_get_child(GTK_BIN(SearchStringCombo))),"activate", G_CALLBACK(Search_File),NULL);
 
     // Button to cancel
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
@@ -2230,7 +2228,7 @@ void Open_Search_File_Window (void)
     gtk_widget_show_all(SearchFileWindow);
 
     if (SET_SEARCH_WINDOW_POSITION)
-        gdk_window_move(SearchFileWindow->window, SEARCH_WINDOW_X, SEARCH_WINDOW_Y);
+        gtk_window_move(GTK_WINDOW(SearchFileWindow), SEARCH_WINDOW_X, SEARCH_WINDOW_Y);
     //else
     //    gtk_window_set_position(GTK_WINDOW(SearchFileWindow), GTK_WIN_POS_CENTER_ON_PARENT); // Must use gtk_window_set_transient_for to work
 }
@@ -2258,21 +2256,21 @@ void Search_File_Window_Apply_Changes (void)
     {
         gint x, y, width, height;
 
-        if ( SearchFileWindow->window!=NULL && gdk_window_is_visible(SearchFileWindow->window)
-        &&   gdk_window_get_state(SearchFileWindow->window)!=GDK_WINDOW_STATE_MAXIMIZED )
+        if ( gtk_widget_get_window(SearchFileWindow)!=NULL && gdk_window_is_visible(gtk_widget_get_window(SearchFileWindow))
+        &&   gdk_window_get_state(gtk_widget_get_window(SearchFileWindow))!=GDK_WINDOW_STATE_MAXIMIZED )
         {
             // Position and Origin of the scanner window
-            gdk_window_get_root_origin(SearchFileWindow->window,&x,&y);
+            gtk_window_get_position(GTK_WINDOW(SearchFileWindow),&x,&y);
             SEARCH_WINDOW_X = x;
             SEARCH_WINDOW_Y = y;
-            gdk_window_get_size(SearchFileWindow->window,&width,&height);
+            gtk_window_get_size(GTK_WINDOW(SearchFileWindow),&width,&height);
             SEARCH_WINDOW_WIDTH  = width;
             SEARCH_WINDOW_HEIGHT = height;
         }
 
-        SEARCH_IN_FILENAME    = GTK_TOGGLE_BUTTON(SearchInFilename)->active;
-        SEARCH_IN_TAG         = GTK_TOGGLE_BUTTON(SearchInTag)->active;
-        SEARCH_CASE_SENSITIVE = GTK_TOGGLE_BUTTON(SearchCaseSensitive)->active;
+        SEARCH_IN_FILENAME    = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(SearchInFilename));
+        SEARCH_IN_TAG         = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(SearchInTag));
+        SEARCH_CASE_SENSITIVE = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(SearchCaseSensitive));
     }
 }
 
@@ -2285,7 +2283,7 @@ gboolean Search_File_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Destroy_Search_File_Window();
                 break;
         }
@@ -2313,7 +2311,7 @@ void Search_File (GtkWidget *search_button)
     if (!SearchStringCombo || !SearchInFilename || !SearchInTag || !SearchResultList)
         return;
 
-    string_to_search = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(SearchStringCombo)->child));
+    string_to_search = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(SearchStringCombo))));
     if (!string_to_search)
         return;
 
@@ -2714,14 +2712,13 @@ void Open_Load_Filename_Window (void)
     GtkWidget *loadedvbox;
     GtkWidget *filelistvbox;
     GtkWidget *vboxpaned;
-    GtkTooltips *Tips;
     gchar *path;
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
 
     if (LoadFilenameWindow != NULL)
     {
-        gdk_window_raise(LoadFilenameWindow->window);
+        gtk_window_present(GTK_WINDOW(LoadFilenameWindow));
         return;
     }
 
@@ -2736,18 +2733,16 @@ void Open_Load_Filename_Window (void)
     gtk_window_set_position(GTK_WINDOW(LoadFilenameWindow), GTK_WIN_POS_CENTER_ON_PARENT);
     gtk_window_set_default_size(GTK_WINDOW(LoadFilenameWindow),LOAD_FILE_WINDOW_WIDTH,LOAD_FILE_WINDOW_HEIGHT);
 
-    Tips = gtk_tooltips_new();
-
     Frame = gtk_frame_new(NULL);
     gtk_container_add(GTK_CONTAINER(LoadFilenameWindow),Frame);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 2);
 
     // Hbox for file entry and browser/load buttons
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(VBox),hbox,FALSE,TRUE,0);
 
     // File to load
@@ -2759,34 +2754,35 @@ void Open_Load_Filename_Window (void)
     Label = gtk_label_new(_("File :"));
     gtk_misc_set_alignment(GTK_MISC(Label),1.0,0.5);
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,0);
-    FileToLoadCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(FileToLoadModel), MISC_COMBO_TEXT);
+    FileToLoadCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(FileToLoadModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(FileToLoadCombo), MISC_COMBO_TEXT);
     gtk_widget_set_size_request(GTK_WIDGET(FileToLoadCombo), 200, -1);
     gtk_box_pack_start(GTK_BOX(hbox),FileToLoadCombo,TRUE,TRUE,0);
     // History List
     Load_File_To_Load_List(FileToLoadModel, MISC_COMBO_TEXT);
     // Initial value
     if ((path=Browser_Get_Current_Path())!=NULL)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(FileToLoadCombo)->child),path);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FileToLoadCombo))),path);
     // the 'changed' signal is attached below to enable/disable the button to load
     // Button 'browse'
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
-    g_signal_connect_swapped(G_OBJECT(Button),"clicked", G_CALLBACK(File_Selection_Window_For_File), G_OBJECT(GTK_BIN(FileToLoadCombo)->child));
+    g_signal_connect_swapped(G_OBJECT(Button),"clicked", G_CALLBACK(File_Selection_Window_For_File), G_OBJECT(gtk_bin_get_child(GTK_BIN(FileToLoadCombo))));
     // Button 'load'
     // the signal attached to this button, to load the file, is placed after the LoadFileContentList definition
     ButtonLoad = Create_Button_With_Icon_And_Label(GTK_STOCK_REVERT_TO_SAVED,_(" Load "));
     //ButtonLoad = gtk_button_new_with_label(_(" Load "));
     gtk_box_pack_start(GTK_BOX(hbox),ButtonLoad,FALSE,FALSE,0);
-    g_signal_connect_swapped(G_OBJECT(GTK_BIN(FileToLoadCombo)->child),"changed", G_CALLBACK(Button_Load_Set_Sensivity), G_OBJECT(ButtonLoad));
+    g_signal_connect_swapped(G_OBJECT(gtk_bin_get_child(GTK_BIN(FileToLoadCombo))),"changed", G_CALLBACK(Button_Load_Set_Sensivity), G_OBJECT(ButtonLoad));
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
     //
     // Vbox for loaded files
     //
-    loadedvbox = gtk_vbox_new(FALSE, 4);
+    loadedvbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
 
     // Content of the loaded file
     ScrollWindow = gtk_scrolled_window_new(NULL,NULL);
@@ -2806,11 +2802,11 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(ScrollWindow),LoadFileContentList);
 
     // Signal to automatically load the file
-    g_signal_connect_swapped(G_OBJECT(ButtonLoad),"clicked", G_CALLBACK(Load_File_Content), G_OBJECT(GTK_BIN(FileToLoadCombo)->child));
+    g_signal_connect_swapped(G_OBJECT(ButtonLoad),"clicked", G_CALLBACK(Load_File_Content), G_OBJECT(gtk_bin_get_child(GTK_BIN(FileToLoadCombo))));
     g_signal_connect(G_OBJECT(LoadFileContentList),"key-press-event", G_CALLBACK(Load_Filename_List_Key_Press),NULL);
 
     // Commands (like the popup menu)
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(loadedvbox),hbox,FALSE,FALSE,0);
 
     Button = gtk_button_new();
@@ -2818,7 +2814,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Insert a blank line before the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Insert a blank line before the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Insert_Blank_Line), G_OBJECT(LoadFileContentList));
 
@@ -2827,7 +2823,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Delete the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Delete the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Delete_Line), G_OBJECT(LoadFileContentList));
     
@@ -2836,7 +2832,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Delete all blank lines"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Delete all blank lines"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Delete_All_Blank_Lines), G_OBJECT(LoadFileContentList));
     
@@ -2848,7 +2844,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Move up the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Move up the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Move_Up), G_OBJECT(LoadFileContentList));
 
@@ -2857,7 +2853,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Move down the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Move down the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Move_Down), G_OBJECT(LoadFileContentList));
 
@@ -2869,7 +2865,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Reload"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Reload"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Reload), G_OBJECT(LoadFileContentList));
     
@@ -2879,7 +2875,7 @@ void Open_Load_Filename_Window (void)
     //
     // Vbox for file list files
     //
-    filelistvbox = gtk_vbox_new(FALSE, 4);
+    filelistvbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
 
     // List of current filenames
     ScrollWindow = gtk_scrolled_window_new(NULL,NULL);
@@ -2904,7 +2900,7 @@ void Open_Load_Filename_Window (void)
     g_signal_connect_swapped(G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(LoadFileNameList))),"changed", G_CALLBACK(Load_Filename_Select_Row_In_Other_List), G_OBJECT(LoadFileContentList));
 
     // Commands (like the popup menu)
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(filelistvbox),hbox,FALSE,FALSE,0);
 
     Button = gtk_button_new();
@@ -2912,7 +2908,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Insert a blank line before the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Insert a blank line before the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Insert_Blank_Line), G_OBJECT(LoadFileNameList));
 
@@ -2921,7 +2917,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Delete the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Delete the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Delete_Line), G_OBJECT(LoadFileNameList));
 
@@ -2930,7 +2926,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Delete all blank lines"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Delete all blank lines"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Delete_All_Blank_Lines), G_OBJECT(LoadFileNameList));
     
@@ -2942,7 +2938,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Move up the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Move up the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Move_Up), G_OBJECT(LoadFileNameList));
 
@@ -2951,7 +2947,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Move down the selected line"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Move down the selected line"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Move_Down), G_OBJECT(LoadFileNameList));
 
@@ -2963,7 +2959,7 @@ void Open_Load_Filename_Window (void)
     gtk_container_add(GTK_CONTAINER(Button),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     //gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Reload"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Reload"));
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
                              G_CALLBACK(Load_Filename_List_Reload), G_OBJECT(LoadFileNameList));
     
@@ -2973,7 +2969,7 @@ void Open_Load_Filename_Window (void)
     // Load the list of files in the list widget
     Load_File_List();
 
-    vboxpaned = gtk_hpaned_new();
+    vboxpaned = gtk_paned_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_paned_pack1(GTK_PANED(vboxpaned),loadedvbox,  TRUE,FALSE);
     gtk_paned_pack2(GTK_PANED(vboxpaned),filelistvbox,TRUE,FALSE);
     gtk_box_pack_start(GTK_BOX(VBox),vboxpaned,TRUE,TRUE,0);
@@ -2982,7 +2978,7 @@ void Open_Load_Filename_Window (void)
     Create_Load_Filename_Popup_Menu(LoadFileContentList);
     Create_Load_Filename_Popup_Menu(LoadFileNameList);
 
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(VBox),hbox,FALSE,TRUE,0);
 
     Label = gtk_label_new(_("Selected line:"));
@@ -2997,20 +2993,20 @@ void Open_Load_Filename_Window (void)
     g_signal_connect(G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(LoadFileContentList))),"changed", G_CALLBACK(Load_Filename_Edit_Text_Line), G_OBJECT(Entry));
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
     LoadFileRunScanner = gtk_check_button_new_with_label(_("Run the current scanner for each file"));
     gtk_box_pack_start(GTK_BOX(VBox),LoadFileRunScanner,FALSE,TRUE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LoadFileRunScanner),LOAD_FILE_RUN_SCANNER);
-    gtk_tooltips_set_tip(Tips,LoadFileRunScanner,_("When activating this option, after loading the "
-        "filenames, the current selected scanner will be ran (the scanner window must be opened)."),NULL);
+    gtk_widget_set_tooltip_text(LoadFileRunScanner,_("When activating this option, after loading the "
+        "filenames, the current selected scanner will be ran (the scanner window must be opened)."));
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),ButtonBox,FALSE,FALSE,0);
     gtk_button_box_set_layout(GTK_BUTTON_BOX(ButtonBox),GTK_BUTTONBOX_END);
     gtk_box_set_spacing(GTK_BOX(ButtonBox), 10);
@@ -3018,23 +3014,23 @@ void Open_Load_Filename_Window (void)
     // Button to cancel
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Destroy_Load_Filename_Window),NULL);
 
     // Button to load filenames
     Button = gtk_button_new_from_stock(GTK_STOCK_APPLY);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Load_Filename_Set_Filenames),NULL);
 
 
     // To initialize 'ButtonLoad' sensivity
-    g_signal_emit_by_name(G_OBJECT(GTK_BIN(FileToLoadCombo)->child),"changed");
+    g_signal_emit_by_name(G_OBJECT(gtk_bin_get_child(GTK_BIN(FileToLoadCombo))),"changed");
 
     gtk_widget_show_all(LoadFilenameWindow);
     if (LOAD_FILE_WINDOW_X > 0 && LOAD_FILE_WINDOW_Y > 0)
-        gdk_window_move(LoadFilenameWindow->window,LOAD_FILE_WINDOW_X,LOAD_FILE_WINDOW_Y);
+        gtk_window_move(GTK_WINDOW(LoadFilenameWindow),LOAD_FILE_WINDOW_X,LOAD_FILE_WINDOW_Y);
 }
 
 void Destroy_Load_Filename_Window (void)
@@ -3060,14 +3056,14 @@ void Load_Filename_Window_Apply_Changes (void)
     {
         gint x, y, width, height;
 
-        if ( LoadFilenameWindow->window && gdk_window_is_visible(LoadFilenameWindow->window)
-        &&   gdk_window_get_state(LoadFilenameWindow->window)!=GDK_WINDOW_STATE_MAXIMIZED )
+        if ( gtk_widget_get_window(LoadFilenameWindow) && gdk_window_is_visible(gtk_widget_get_window(LoadFilenameWindow))
+        &&   gdk_window_get_state(gtk_widget_get_window(LoadFilenameWindow))!=GDK_WINDOW_STATE_MAXIMIZED )
         {
             // Position and Origin of the window
-            gdk_window_get_root_origin(LoadFilenameWindow->window,&x,&y);
+            gtk_window_get_position(GTK_WINDOW(LoadFilenameWindow),&x,&y);
             LOAD_FILE_WINDOW_X = x;
             LOAD_FILE_WINDOW_Y = y;
-            gdk_window_get_size(LoadFilenameWindow->window,&width,&height);
+            gtk_window_get_size(GTK_WINDOW(LoadFilenameWindow),&width,&height);
             LOAD_FILE_WINDOW_WIDTH  = width;
             LOAD_FILE_WINDOW_HEIGHT = height;
         }
@@ -3085,7 +3081,7 @@ gboolean Load_Filename_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Destroy_Load_Filename_Window();
                 break;
         }
@@ -3121,11 +3117,11 @@ void Load_Filename_List_Key_Press (GtkWidget *treeview, GdkEvent *event)
 
         switch(kevent->keyval)
         {
-            case GDK_Delete:
+            case GDK_KEY_Delete:
                 Load_Filename_List_Delete_Line(treeview);
                 break;
-            case GDK_I:
-            case GDK_i:
+            case GDK_KEY_I:
+            case GDK_KEY_i:
                 Load_Filename_List_Insert_Blank_Line(treeview);
                 break;
         }
@@ -3250,31 +3246,31 @@ void Load_Filename_Select_Row_In_Other_List(GtkWidget* treeview_target, gpointer
     gtk_tree_selection_unselect_all(selection_target);
 
     // Synchronize the two lists
-    ce_adj = gtk_tree_view_get_vadjustment(treeview_orig);
-    ct_adj = gtk_tree_view_get_vadjustment(GTK_TREE_VIEW(treeview_target));
+    ce_adj = gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(treeview_orig));
+    ct_adj = gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(treeview_target));
 
-    if (GTK_ADJUSTMENT(ct_adj)->upper >= GTK_ADJUSTMENT(ct_adj)->page_size
-    &&  GTK_ADJUSTMENT(ce_adj)->upper >= GTK_ADJUSTMENT(ce_adj)->page_size)
+    if (gtk_adjustment_get_upper(GTK_ADJUSTMENT(ct_adj)) >= gtk_adjustment_get_page_size(GTK_ADJUSTMENT(ct_adj))
+    &&  gtk_adjustment_get_upper(GTK_ADJUSTMENT(ce_adj)) >= gtk_adjustment_get_page_size(GTK_ADJUSTMENT(ce_adj)))
     {
         // Rules are displayed in the both clist
-        if (GTK_ADJUSTMENT(ce_adj)->value <= GTK_ADJUSTMENT(ct_adj)->upper - GTK_ADJUSTMENT(ct_adj)->page_size)
+        if (gtk_adjustment_get_value(GTK_ADJUSTMENT(ce_adj)) <= gtk_adjustment_get_upper(GTK_ADJUSTMENT(ct_adj)) - gtk_adjustment_get_page_size(GTK_ADJUSTMENT(ct_adj)))
         {
-            gtk_adjustment_set_value(GTK_ADJUSTMENT(ct_adj),GTK_ADJUSTMENT(ce_adj)->value);
+            gtk_adjustment_set_value(GTK_ADJUSTMENT(ct_adj),gtk_adjustment_get_value(GTK_ADJUSTMENT(ce_adj)));
         } else
         {
-            gtk_adjustment_set_value(GTK_ADJUSTMENT(ct_adj),GTK_ADJUSTMENT(ct_adj)->upper - GTK_ADJUSTMENT(ct_adj)->page_size);
+            gtk_adjustment_set_value(GTK_ADJUSTMENT(ct_adj),gtk_adjustment_get_upper(GTK_ADJUSTMENT(ct_adj)) - gtk_adjustment_get_page_size(GTK_ADJUSTMENT(ct_adj)));
             indices_orig = gtk_tree_path_get_indices(path_orig);
 
             if (indices_orig[0] <= (gtk_tree_model_iter_n_children(treemodel_target, NULL) - 1))
-                gtk_adjustment_set_value(GTK_ADJUSTMENT(ce_adj),GTK_ADJUSTMENT(ct_adj)->value);
+                gtk_adjustment_set_value(GTK_ADJUSTMENT(ce_adj),gtk_adjustment_get_value(GTK_ADJUSTMENT(ct_adj)));
 
         }
-    }else if (GTK_ADJUSTMENT(ct_adj)->upper < GTK_ADJUSTMENT(ct_adj)->page_size) // Target Clist rule not visible
+    }else if (gtk_adjustment_get_upper(GTK_ADJUSTMENT(ct_adj)) < gtk_adjustment_get_page_size(GTK_ADJUSTMENT(ct_adj))) // Target Clist rule not visible
     {
         indices_orig = gtk_tree_path_get_indices(path_orig);
 
         if (indices_orig[0] <= (gtk_tree_model_iter_n_children(treemodel_target, NULL) - 1))
-            gtk_adjustment_set_value(GTK_ADJUSTMENT(ce_adj),GTK_ADJUSTMENT(ct_adj)->value);
+            gtk_adjustment_set_value(GTK_ADJUSTMENT(ce_adj),gtk_adjustment_get_value(GTK_ADJUSTMENT(ct_adj)));
     }
 
     // Must block the select signal of the target to avoid looping
@@ -3636,7 +3632,7 @@ void Load_Filename_List_Reload (GtkWidget *treeview)
 
     if (GTK_TREE_VIEW(treeview) == (GtkTreeView *)LoadFileContentList)
     {
-        Load_File_Content(GTK_BIN(FileToLoadCombo)->child);
+        Load_File_Content(gtk_bin_get_child(GTK_BIN(FileToLoadCombo)));
         
     } else if (GTK_TREE_VIEW(treeview) == (GtkTreeView *)LoadFileNameList)
     {

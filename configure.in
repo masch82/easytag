@@ -76,10 +76,10 @@ dnl -------------------------------
 dnl Checks for libraries.
 dnl -------------------------------
 
-dnl GTK+-2 libraries
-AM_PATH_GLIB_2_0(2.8.0,, AC_MSG_ERROR([*** GLIB >= 2.8.0 not installed! ***]))
-AM_PATH_GTK_2_0(2.12.0,, AC_MSG_ERROR([*** GTK >= 2.12.0 not installed! ***]))
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.12.0 glib-2.0 >= 2.8.0)
+dnl GTK+-3 libraries
+#AM_PATH_GLIB_2_0(2.8.0,, AC_MSG_ERROR([*** GLIB >= 2.8.0 not installed! ***]))
+#AM_PATH_GTK_2_0(3.0.0,, AC_MSG_ERROR([*** GTK >= 3.0.0 not installed! ***]))
+PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 2.12.0 glib-2.0 >= 2.8.0)
 
 
 dnl Patch from Ben Taylor to fix a Solaris bug (for CDDB)
@@ -488,7 +488,7 @@ echo Host System Type ........: $host
 echo Preprocessor ............: $CC $CPPFLAGS
 echo Compiler ................: $CC $CFLAGS
 echo Linker ..................: $CC $LDFLAGS $LIBS
-echo GTK2 version ............: `pkg-config --modversion gtk+-2.0`
+echo GTK3 version ............: `pkg-config --modversion gtk+-3.0`
 echo MP3 file support ........: $enable_mp3
 echo ID3v2.3 tags support ....: $enable_id3v23 $ID3LIB_VERSION
 echo Ogg Vorbis file support .: $enable_ogg
