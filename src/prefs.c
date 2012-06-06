@@ -793,7 +793,7 @@ void Open_OptionsWindow (void)
     gtk_misc_set_alignment(GTK_MISC(LabelId3v2Version),0,0.5);
 
     EventBox = gtk_event_box_new();
-    FileWritingId3v2VersionCombo = gtk_combo_box_new_text();
+    FileWritingId3v2VersionCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),FileWritingId3v2VersionCombo);
     gtk_widget_set_tooltip_text(EventBox,_("Select the ID3v2 tag version to write:\n"
         " - ID3v2.3 is written using id3lib,\n"
