@@ -42,6 +42,8 @@
 #include "cddb.h"
 #include "charset.h"
 
+#include "gtk2_compat.h"
+
 //#ifdef WIN32
 //#   include "win32/win32dep.h"
 //#endif
@@ -60,11 +62,11 @@ gint Check_Config                (void);
 
 void Set_Default_Comment_Check_Button_Toggled  (void);
 void Number_Track_Formated_Toggled             (void);
-void Number_Track_Formated_Spin_Button_Changed (GtkObject *Label, GtkObject *SpinButton);
+void Number_Track_Formated_Spin_Button_Changed (GtkWidget *Label, GtkWidget *SpinButton);
 void Change_Id3_Settings_Toggled               (void);
 void File_Writing_Id3v2_Write_Tag_Toggled      (void);
 void Use_Non_Standard_Id3_Reading_Character_Set_Toggled (void);
-void Scanner_Convert_Check_Button_Toggled_1    (GtkObject *object_rec, GtkObject *object_emi);
+void Scanner_Convert_Check_Button_Toggled_1    (GtkWidget *object_rec, GtkWidget *object_emi);
 void Cddb_Use_Proxy_Toggled                    (void);
 
 void DefaultPathToMp3_Combo_Add_String         (void);
@@ -95,7 +97,6 @@ void Open_OptionsWindow (void)
     GtkWidget *HBox, *hbox, *id3v1v2hbox;
     GtkWidget *Separator;
     GtkWidget *EventBox;
-    GtkTooltips *Tips;
     gchar temp[MAX_STRING_LEN];
     gchar *path_utf8;
     gchar *program_path;
@@ -103,7 +104,7 @@ void Open_OptionsWindow (void)
     /* Check if already opened */
     if (OptionsWindow)
     {
-        gdk_window_show(OptionsWindow->window);
+        gtk_window_present(GTK_WINDOW(OptionsWindow));
         return;
     }
 
@@ -123,11 +124,9 @@ void Open_OptionsWindow (void)
     g_signal_connect(G_OBJECT(OptionsWindow),"key_press_event",
                      G_CALLBACK(OptionsWindow_Key_Press),NULL);
 
-    Tips = gtk_tooltips_new();
-
      /* Options */
      /* The vbox */
-    OptionsVBox = gtk_vbox_new(FALSE,0);
+    OptionsVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_box_set_spacing (GTK_BOX(OptionsVBox),5);
     gtk_container_add(GTK_CONTAINER(OptionsWindow),OptionsVBox);
 
@@ -147,7 +146,7 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page(GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame), 5);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -155,12 +154,12 @@ void Open_OptionsWindow (void)
     /* File Browser frame */
     Frame = gtk_frame_new(_("File Browser"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,0);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
     /* Default directory */
-    HBox = gtk_hbox_new(FALSE,2);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),HBox,FALSE,FALSE,0);
 
     // Label
@@ -173,13 +172,14 @@ void Open_OptionsWindow (void)
     else
         DefaultPathModel = gtk_list_store_new(MISC_COMBO_COUNT, G_TYPE_STRING);
 
-    DefaultPathToMp3 = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(DefaultPathModel), MISC_COMBO_TEXT);
+    DefaultPathToMp3 = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(DefaultPathModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(DefaultPathToMp3), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(HBox),DefaultPathToMp3,TRUE,TRUE,0);
     gtk_widget_set_size_request(DefaultPathToMp3, 400, -1);
-    gtk_tooltips_set_tip(Tips,GTK_BIN(DefaultPathToMp3)->child,_("Specify the directory where "
-        "your files are located. This path will be loaded when EasyTAG starts without parameter."),NULL);
-    g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child)),"activate",G_CALLBACK(DefaultPathToMp3_Combo_Add_String),NULL);
-    //g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child)),"focus_out_event",G_CALLBACK(DefaultPathToMp3_Combo_Add_String),NULL);
+    gtk_widget_set_tooltip_text(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)),_("Specify the directory where "
+        "your files are located. This path will be loaded when EasyTAG starts without parameter."));
+    g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)))),"activate",G_CALLBACK(DefaultPathToMp3_Combo_Add_String),NULL);
+    //g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)))),"focus_out_event",G_CALLBACK(DefaultPathToMp3_Combo_Add_String),NULL);
 
     // History list
     Load_Default_Path_To_MP3_List(DefaultPathModel, MISC_COMBO_TEXT);
@@ -187,37 +187,37 @@ void Open_OptionsWindow (void)
     path_utf8 = filename_to_display(DEFAULT_PATH_TO_MP3);
     Add_String_To_Combo_List(DefaultPathModel, path_utf8);
     if (path_utf8)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child), path_utf8);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3))), path_utf8);
     g_free(path_utf8);
 
     // Button browse
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(HBox),Button,FALSE,FALSE,0);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
-                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(GTK_BIN(DefaultPathToMp3)->child));
+                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3))));
 
     /* Load directory on startup */
     LoadOnStartup = gtk_check_button_new_with_label(_("Load on startup the default directory or the directory passed as argument"));
     gtk_box_pack_start(GTK_BOX(vbox),LoadOnStartup,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LoadOnStartup),LOAD_ON_STARTUP);
-    gtk_tooltips_set_tip(Tips,LoadOnStartup,_("Automatically search files, when EasyTAG starts, "
+    gtk_widget_set_tooltip_text(LoadOnStartup,_("Automatically search files, when EasyTAG starts, "
         "into the default directory. Note that this path may be overriden by the parameter "
-        "passed to easytag (easytag /path_to/mp3_files)."),NULL);
+        "passed to easytag (easytag /path_to/mp3_files)."));
 
     /* Browse subdirectories */
     BrowseSubdir = gtk_check_button_new_with_label(_("Search subdirectories"));
     gtk_box_pack_start(GTK_BOX(vbox),BrowseSubdir,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(BrowseSubdir),BROWSE_SUBDIR);
-    gtk_tooltips_set_tip(Tips,BrowseSubdir,_("Search subdirectories for files when reading "
-        "a directory into the tree."),NULL);
+    gtk_widget_set_tooltip_text(BrowseSubdir,_("Search subdirectories for files when reading "
+        "a directory into the tree."));
 
     /* Open the node to show subdirectories */
     OpenSelectedBrowserNode = gtk_check_button_new_with_label(_("Show subdirectories when selecting "
         "a directory"));
     gtk_box_pack_start(GTK_BOX(vbox),OpenSelectedBrowserNode,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OpenSelectedBrowserNode),OPEN_SELECTED_BROWSER_NODE);
-    gtk_tooltips_set_tip(Tips,OpenSelectedBrowserNode,_("This expands the selected node into the file "
-        "browser to display the sub-directories."),NULL);
+    gtk_widget_set_tooltip_text(OpenSelectedBrowserNode,_("This expands the selected node into the file "
+        "browser to display the sub-directories."));
 
     /* Browse hidden directories */
     BrowseHiddendir = gtk_check_button_new_with_label(_("Search hidden directories"));
@@ -225,8 +225,8 @@ void Open_OptionsWindow (void)
     gtk_box_pack_start(GTK_BOX(vbox),BrowseHiddendir,FALSE,FALSE,0);
 #endif
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(BrowseHiddendir),BROWSE_HIDDEN_DIR);
-    gtk_tooltips_set_tip(Tips,BrowseHiddendir,_("Search hidden directories for files "
-        "(directories starting by a '.')."),NULL);
+    gtk_widget_set_tooltip_text(BrowseHiddendir,_("Search hidden directories for files "
+        "(directories starting by a '.')."));
 
 
 
@@ -238,7 +238,7 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame), 5);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -246,7 +246,7 @@ void Open_OptionsWindow (void)
     /* User interface */
     Frame = gtk_frame_new (_("User Interface"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -254,11 +254,11 @@ void Open_OptionsWindow (void)
     ShowHeaderInfos = gtk_check_button_new_with_label(_("Show header informations of file"));
     gtk_box_pack_start(GTK_BOX(vbox),ShowHeaderInfos,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ShowHeaderInfos),SHOW_HEADER_INFO);
-    gtk_tooltips_set_tip(Tips,ShowHeaderInfos,_("If activated, informations about the file as "
-        "the bitrate, the time, the size, will be displayed under the filename entry."),NULL);
+    gtk_widget_set_tooltip_text(ShowHeaderInfos,_("If activated, informations about the file as "
+        "the bitrate, the time, the size, will be displayed under the filename entry."));
 
     // Display color mode for changed files in list
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
     Label = gtk_label_new(_("Display changed files in list using :"));
@@ -278,11 +278,11 @@ void Open_OptionsWindow (void)
     /* Sorting List Options */
     Frame = gtk_frame_new (_("Sorting List Options"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
     /* Sorting method */
@@ -290,35 +290,35 @@ void Open_OptionsWindow (void)
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,0);
 
     EventBox = gtk_event_box_new();
-    SortingFileCombo = gtk_combo_box_new_text();
+    SortingFileCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),SortingFileCombo);
     gtk_box_pack_start(GTK_BOX(hbox),EventBox,FALSE,FALSE,2);
     gtk_widget_set_size_request(GTK_WIDGET(SortingFileCombo), 260, -1);
     gtk_combo_box_set_wrap_width(GTK_COMBO_BOX(SortingFileCombo),2); // Two columns
 
     // Items of option menu
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending file name"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending file name"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending track number"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending track number"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending creation date"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending creation date"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending title"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending title"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending artist"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending artist"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending album"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending album"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending year"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending year"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending genre"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending genre"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Ascending comment"));
-    gtk_combo_box_append_text(GTK_COMBO_BOX(SortingFileCombo), _("Descending comment"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending file name"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending file name"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending track number"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending track number"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending creation date"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending creation date"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending title"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending title"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending artist"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending artist"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending album"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending album"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending year"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending year"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending genre"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending genre"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Ascending comment"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(SortingFileCombo), NULL, _("Descending comment"));
 
     gtk_combo_box_set_active(GTK_COMBO_BOX(SortingFileCombo), SORTING_FILE_MODE);
-    gtk_tooltips_set_tip(Tips,EventBox,_("Select the type of file sorting "
-        "when loading a directory."),NULL);
+    gtk_widget_set_tooltip_text(EventBox,_("Select the type of file sorting "
+        "when loading a directory."));
 
     SortingFileCaseSensitive = gtk_check_button_new_with_label(_("Case sensitive"));
 #ifndef WIN32 /* Always true and not user modifiable on win32, as strncasecmp() doesn't work correctly with g_utf8_collate_key() */
@@ -326,8 +326,8 @@ void Open_OptionsWindow (void)
 #endif
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SortingFileCaseSensitive),
         SORTING_FILE_CASE_SENSITIVE);
-    gtk_tooltips_set_tip(Tips,SortingFileCaseSensitive,_("If activated, the "
-        "sorting of the list will be dependent on the case."),NULL);
+    gtk_widget_set_tooltip_text(SortingFileCaseSensitive,_("If activated, the "
+        "sorting of the list will be dependent on the case."));
 
     /* Message Dialog Position */
     Frame = gtk_frame_new (_("Message Dialog Position"));
@@ -342,8 +342,8 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),MessageBoxPositionNone,0,1,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(MessageBoxPositionNone),
         MESSAGE_BOX_POSITION_NONE);
-    gtk_tooltips_set_tip(Tips,MessageBoxPositionNone,_("Let the Window Manager "
-        "to place the windows."),NULL);
+    gtk_widget_set_tooltip_text(MessageBoxPositionNone,_("Let the Window Manager "
+        "to place the windows."));
 
     MessageBoxPositionCenterOnParent = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(MessageBoxPositionNone)),
@@ -351,8 +351,8 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),MessageBoxPositionCenterOnParent,1,2,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(MessageBoxPositionCenterOnParent),
         MESSAGE_BOX_POSITION_CENTER_ON_PARENT);
-    gtk_tooltips_set_tip(Tips,MessageBoxPositionCenterOnParent,_("Windows should "
-        "be placed in the center of the main window."),NULL);
+    gtk_widget_set_tooltip_text(MessageBoxPositionCenterOnParent,_("Windows should "
+        "be placed in the center of the main window."));
 
     MessageBoxPositionCenter = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(MessageBoxPositionNone)),
@@ -360,8 +360,8 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),MessageBoxPositionCenter,0,1,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(MessageBoxPositionCenter),
         MESSAGE_BOX_POSITION_CENTER);
-    gtk_tooltips_set_tip(Tips,MessageBoxPositionCenter,_("Windows should be placed "
-        "in the center of the screen."),NULL);
+    gtk_widget_set_tooltip_text(MessageBoxPositionCenter,_("Windows should be placed "
+        "in the center of the screen."));
 
     MessageBoxPositionMouse = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(MessageBoxPositionNone)),
@@ -369,8 +369,8 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),MessageBoxPositionMouse,1,2,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(MessageBoxPositionMouse),
         MESSAGE_BOX_POSITION_MOUSE);
-    gtk_tooltips_set_tip(Tips,MessageBoxPositionMouse,_("Windows should be placed "
-        "at the current mouse position."),NULL);
+    gtk_widget_set_tooltip_text(MessageBoxPositionMouse,_("Windows should be placed "
+        "at the current mouse position."));
 
     /* File Player */
     Frame = gtk_frame_new (_("File Audio Player"));
@@ -382,35 +382,36 @@ void Open_OptionsWindow (void)
     else
         gtk_list_store_clear(FilePlayerModel);
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),hbox);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 4);
     Label = gtk_label_new (_("Player to run :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,0);
-    FilePlayerCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(FilePlayerModel), MISC_COMBO_TEXT);
+    FilePlayerCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(FilePlayerModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(FilePlayerCombo), MISC_COMBO_TEXT);
     gtk_widget_set_size_request(GTK_WIDGET(FilePlayerCombo), 300, -1);
     gtk_box_pack_start(GTK_BOX(hbox),FilePlayerCombo,FALSE,FALSE,0);
-    gtk_tooltips_set_tip(Tips,GTK_BIN(FilePlayerCombo)->child,_("Enter the program used to "
+    gtk_widget_set_tooltip_text(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)),_("Enter the program used to "
         "play the files. Some arguments can be passed for the program (as 'xmms -p') before "
-        "to receive files as other arguments."),NULL);
+        "to receive files as other arguments."));
     // History List
     Load_Audio_File_Player_List(FilePlayerModel, MISC_COMBO_TEXT);
     Add_String_To_Combo_List(FilePlayerModel, AUDIO_FILE_PLAYER);
     // Don't load the parameter if XMMS not found, else user can't save the preference
     if ( (program_path=Check_If_Executable_Exists(AUDIO_FILE_PLAYER)))
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(FilePlayerCombo)->child), AUDIO_FILE_PLAYER);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FilePlayerCombo))), AUDIO_FILE_PLAYER);
     g_free(program_path);
 
     // Button browse
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
-        G_CALLBACK(File_Selection_Window_For_File), G_OBJECT(GTK_BIN(FilePlayerCombo)->child));
+        G_CALLBACK(File_Selection_Window_For_File), G_OBJECT(gtk_bin_get_child(GTK_BIN(FilePlayerCombo))));
 
     /* Log options */
     Frame = gtk_frame_new (_("Log Options"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -418,11 +419,11 @@ void Open_OptionsWindow (void)
     ShowLogView = gtk_check_button_new_with_label(_("Show log view in main window"));
     gtk_box_pack_start(GTK_BOX(vbox),ShowLogView,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ShowLogView),SHOW_LOG_VIEW);
-    gtk_tooltips_set_tip(Tips,ShowLogView,_("If activated, the log view would be "
-                                            "visible in the main window."),NULL);
+    gtk_widget_set_tooltip_text(ShowLogView,_("If activated, the log view would be "
+                                            "visible in the main window."));
    
     // Max number of lines
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 4);
     Label = gtk_label_new (_("Max number of lines :"));
@@ -434,7 +435,7 @@ void Open_OptionsWindow (void)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(LogMaxLinesSpinButton),(gfloat)LOG_MAX_LINES);
     //g_signal_connect(G_OBJECT(NumberTrackFormated),"toggled",G_CALLBACK(Number_Track_Formated_Toggled),NULL);
     //g_signal_emit_by_name(G_OBJECT(NumberTrackFormated),"toggled");
-/*    gtk_tooltips_set_tip(Tips,GTK_BIN(FilePlayerCombo)->child,_("Enter the program used to "
+/*    gtk_widget_set_tooltip_text(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)),_("Enter the program used to "
         "play the files. Some arguments can be passed for the program (as 'xmms -p') before "
         "to receive files as other arguments."),NULL);
 */
@@ -449,7 +450,7 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),5);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox),4);
 
@@ -457,19 +458,19 @@ void Open_OptionsWindow (void)
     /* File (name) Options */
     Frame = gtk_frame_new (_("File Options"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
     ReplaceIllegalCharactersInFilename = gtk_check_button_new_with_label(_("Replace illegal characters in filename (for Windows and CD-Rom)"));
     gtk_box_pack_start(GTK_BOX(vbox),ReplaceIllegalCharactersInFilename,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ReplaceIllegalCharactersInFilename),REPLACE_ILLEGAL_CHARACTERS_IN_FILENAME);
-    gtk_tooltips_set_tip(Tips,ReplaceIllegalCharactersInFilename,_("Convert illegal characters for "
+    gtk_widget_set_tooltip_text(ReplaceIllegalCharactersInFilename,_("Convert illegal characters for "
         "FAT32/16 and ISO9660 + Joliet filesystems ('\\', ':', ';', '*', '?', '\"', '<', '>', '|') "
         "of the filename to avoid problem when renaming the file. This is usefull when renaming the "
-        "file from the tag with the scanner."),NULL);
+        "file from the tag with the scanner."));
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
     /* Extension case (lower/upper?) */
@@ -479,47 +480,47 @@ void Open_OptionsWindow (void)
     FilenameExtensionLowerCase = gtk_radio_button_new_with_label(NULL,_("Lower Case"));
     gtk_box_pack_start(GTK_BOX(hbox),FilenameExtensionLowerCase,FALSE,FALSE,2);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameExtensionLowerCase),FILENAME_EXTENSION_LOWER_CASE);
-    gtk_tooltips_set_tip(Tips,FilenameExtensionLowerCase,_("For example, the extension will be converted to '.mp3'"),NULL);
+    gtk_widget_set_tooltip_text(FilenameExtensionLowerCase,_("For example, the extension will be converted to '.mp3'"));
 
     FilenameExtensionUpperCase = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FilenameExtensionLowerCase)),_("Upper Case"));
     gtk_box_pack_start(GTK_BOX(hbox),FilenameExtensionUpperCase,FALSE,FALSE,2);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameExtensionUpperCase),FILENAME_EXTENSION_UPPER_CASE);
-    gtk_tooltips_set_tip(Tips,FilenameExtensionUpperCase,_("For example, the extension will be converted to '.MP3'"),NULL);
+    gtk_widget_set_tooltip_text(FilenameExtensionUpperCase,_("For example, the extension will be converted to '.MP3'"));
 
     FilenameExtensionNoChange = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FilenameExtensionLowerCase)),_("No Change"));
     gtk_box_pack_start(GTK_BOX(hbox),FilenameExtensionNoChange,FALSE,FALSE,2);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameExtensionNoChange),FILENAME_EXTENSION_NO_CHANGE);
-    gtk_tooltips_set_tip(Tips,FilenameExtensionNoChange,_("The extension will not be converted"),NULL);
+    gtk_widget_set_tooltip_text(FilenameExtensionNoChange,_("The extension will not be converted"));
 
     /* Preserve modification time */
     PreserveModificationTime = gtk_check_button_new_with_label(_("Preserve modification time of the file"));
     gtk_box_pack_start(GTK_BOX(vbox),PreserveModificationTime,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(PreserveModificationTime),PRESERVE_MODIFICATION_TIME);
-    gtk_tooltips_set_tip(Tips,PreserveModificationTime,_("Preserve the modification time "
-        "(in file properties) when saving the file."),NULL);
+    gtk_widget_set_tooltip_text(PreserveModificationTime,_("Preserve the modification time "
+        "(in file properties) when saving the file."));
 
     /* Change directory modification time */
     UpdateParentDirectoryModificationTime = gtk_check_button_new_with_label(_("Update modification time "
         "of the parent directory of the file (recommended when using Amarok)"));
     gtk_box_pack_start(GTK_BOX(vbox),UpdateParentDirectoryModificationTime,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(UpdateParentDirectoryModificationTime),UPDATE_PARENT_DIRECTORY_MODIFICATION_TIME);
-    gtk_tooltips_set_tip(Tips,UpdateParentDirectoryModificationTime,_("The modification time "
+    gtk_widget_set_tooltip_text(UpdateParentDirectoryModificationTime,_("The modification time "
         "of the parent directory of the file will be updated when saving tag the file. At the "
         "present time it is automatically done only when renaming a file.\nThis feature is "
         "interesting when using applications like Amarok. For performance reasons, they refresh "
-        "file informations by detecting changes of the parent directory."),NULL);
+        "file informations by detecting changes of the parent directory."));
 
 
     /* Character Set for File Name */
     Frame = gtk_frame_new (_("Character Set for File Name"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
-    /****hbox = gtk_hbox_new(FALSE,2);
+    /****hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);***/
 
@@ -541,28 +542,28 @@ void Open_OptionsWindow (void)
         "character encoding"));
     gtk_table_attach(GTK_TABLE(Table),FilenameCharacterSetOther,1,2,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameCharacterSetOther),FILENAME_CHARACTER_SET_OTHER);
-    gtk_tooltips_set_tip(Tips,FilenameCharacterSetOther,_("With this option, it will "
+    gtk_widget_set_tooltip_text(FilenameCharacterSetOther,_("With this option, it will "
         "try the conversion to the encoding associated to your locale (for example : "
         "ISO-8859-1 for 'fr', KOI8-R for 'ru', ISO-8859-2 for 'ro'). If it fails, it "
-        "will try the character encoding ISO-8859-1."),NULL);
+        "will try the character encoding ISO-8859-1."));
 
     FilenameCharacterSetApproximate = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FilenameCharacterSetOther)),
         _("Force using the system character encoding and activate the transliteration"));
     gtk_table_attach(GTK_TABLE(Table),FilenameCharacterSetApproximate,1,2,2,3,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameCharacterSetApproximate),FILENAME_CHARACTER_SET_APPROXIMATE);
-    gtk_tooltips_set_tip(Tips,FilenameCharacterSetApproximate,_("With this option, when "
+    gtk_widget_set_tooltip_text(FilenameCharacterSetApproximate,_("With this option, when "
         "a character cannot be represented in the target character set, it can be "
-        "approximated through one or several similarly looking characters."),NULL);
+        "approximated through one or several similarly looking characters."));
 
     FilenameCharacterSetDiscard = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FilenameCharacterSetOther)),
         _("Force using the system character encoding and silently discard some characters"));
     gtk_table_attach(GTK_TABLE(Table),FilenameCharacterSetDiscard,1,2,3,4,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FilenameCharacterSetDiscard),FILENAME_CHARACTER_SET_DISCARD);
-    gtk_tooltips_set_tip(Tips,FilenameCharacterSetDiscard,_("With this option, when "
+    gtk_widget_set_tooltip_text(FilenameCharacterSetDiscard,_("With this option, when "
         "a characters cannot be represented in the target character set, it will "
-        "be silently discarded."),NULL);
+        "be silently discarded."));
 
 
 
@@ -574,33 +575,33 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),5);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox),4);
 
     /* Tag Options */
     Frame = gtk_frame_new (_("Tag Options"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
     DateAutoCompletion = gtk_check_button_new_with_label(_("Auto completion of date if not complete"));
     gtk_box_pack_start(GTK_BOX(vbox),DateAutoCompletion,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(DateAutoCompletion),DATE_AUTO_COMPLETION);
-    gtk_tooltips_set_tip(Tips,DateAutoCompletion,_("Try to complete the year field if you enter "
+    gtk_widget_set_tooltip_text(DateAutoCompletion,_("Try to complete the year field if you enter "
         "only the last numerals of the date (for instance, if the current year is 2005: "
-        "5 => 2005, 4 => 2004, 6 => 1996, 95 => 1995, ...)."),NULL);
+        "5 => 2005, 4 => 2004, 6 => 1996, 95 => 1995, ...)."));
 
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 
     NumberTrackFormated = gtk_check_button_new_with_label(_("Write the track field with the following number of digits :"));
     gtk_box_pack_start(GTK_BOX(hbox),NumberTrackFormated,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(NumberTrackFormated),NUMBER_TRACK_FORMATED);
-    gtk_tooltips_set_tip(Tips,NumberTrackFormated,_("If activated, the track field is written using "
+    gtk_widget_set_tooltip_text(NumberTrackFormated,_("If activated, the track field is written using "
         "the number '0' as padding to obtain a number with 'n' digits (Ex. with two digits : '05', "
-        "'09', '10',...). Else it keeps the 'raw' track value."),NULL);
+        "'09', '10',...). Else it keeps the 'raw' track value."));
 
     NumberTrackFormatedSpinButton = gtk_spin_button_new((GtkAdjustment *)gtk_adjustment_new(2.0,2.0,6.0,1.0,1.0,1.0),1.0,0);
     gtk_box_pack_start(GTK_BOX(hbox),NumberTrackFormatedSpinButton,FALSE,FALSE,0);
@@ -616,13 +617,13 @@ void Open_OptionsWindow (void)
     OggTagWriteXmmsComment = gtk_check_button_new_with_label(_("Ogg Vorbis Files : Write also the comment to the XMMS format"));
     gtk_box_pack_start(GTK_BOX(vbox),OggTagWriteXmmsComment,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OggTagWriteXmmsComment),OGG_TAG_WRITE_XMMS_COMMENT);
-    gtk_tooltips_set_tip(Tips,OggTagWriteXmmsComment,_("XMMS doesn't make use of the right way to "
+    gtk_widget_set_tooltip_text(OggTagWriteXmmsComment,_("XMMS doesn't make use of the right way to "
         "identify a comment in Ogg Vorbis files as other apps do. In fact, this field is usually labeled "
         "with 'comment=', whereas XMMS uses only `='. Please, uncheck this option if you don't want "
-        "other apps to complain about an unknown field. Comments won't be shown in XMMS, though."),NULL);
+        "other apps to complain about an unknown field. Comments won't be shown in XMMS, though."));
 
     // Separator line
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(vbox),Separator,FALSE,FALSE,0);
 
     /* Tag field focus */
@@ -697,7 +698,7 @@ void Open_OptionsWindow (void)
 #endif
     gtk_container_set_border_width(GTK_CONTAINER(Frame),5);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox),4);
 
@@ -705,7 +706,7 @@ void Open_OptionsWindow (void)
     /* Tag Rules frame */
     Frame = gtk_frame_new (_("ID3 Tag Rules"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
 
@@ -718,48 +719,48 @@ void Open_OptionsWindow (void)
     WriteId3TagsInFlacFiles = gtk_check_button_new_with_label(_("Write ID3 tags in FLAC files (in addition to FLAC tag)"));
     gtk_table_attach(GTK_TABLE(Table),WriteId3TagsInFlacFiles,0,1,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(WriteId3TagsInFlacFiles),WRITE_ID3_TAGS_IN_FLAC_FILE);
-    gtk_tooltips_set_tip(Tips,WriteId3TagsInFlacFiles,_("If activated, ID3 tags will be "
+    gtk_widget_set_tooltip_text(WriteId3TagsInFlacFiles,_("If activated, ID3 tags will be "
         "also added in the FLAC file (according the two rules above, plus the FLAC tag). "
-        "Else ID3 tags will be stripped."),NULL);
+        "Else ID3 tags will be stripped."));
 
     /* Strip tag when fields (managed by EasyTAG) are empty */
     StripTagWhenEmptyFields = gtk_check_button_new_with_label(_("Strip tags if all fields are set to blank"));
     gtk_table_attach(GTK_TABLE(Table),StripTagWhenEmptyFields,0,1,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(StripTagWhenEmptyFields),STRIP_TAG_WHEN_EMPTY_FIELDS);
-    gtk_tooltips_set_tip(Tips,StripTagWhenEmptyFields,_("As ID3v2 tags may contain other data than "
+    gtk_widget_set_tooltip_text(StripTagWhenEmptyFields,_("As ID3v2 tags may contain other data than "
         "Title, Artist, Album, Year, Track, Genre or Comment (as an attached picture, lyrics, ...), "
         "this option allows you to strip the whole tag when these seven standard data fields have "
-        "been set to blank."),NULL);
+        "been set to blank."));
 
     /* Convert old ID3v2 tag version */
     ConvertOldId3v2TagVersion = gtk_check_button_new_with_label(_("Automatically convert old ID3v2 tag versions"));
     gtk_table_attach(GTK_TABLE(Table),ConvertOldId3v2TagVersion,0,1,2,3,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ConvertOldId3v2TagVersion),CONVERT_OLD_ID3V2_TAG_VERSION);
-    gtk_tooltips_set_tip(Tips,ConvertOldId3v2TagVersion,_("If activated, an old ID3v2 tag version (as "
-        "ID3v2.2) will be updated to the ID3v2.3 version."),NULL);
+    gtk_widget_set_tooltip_text(ConvertOldId3v2TagVersion,_("If activated, an old ID3v2 tag version (as "
+        "ID3v2.2) will be updated to the ID3v2.3 version."));
 
     /* Use CRC32 */
     FileWritingId3v2UseCrc32 = gtk_check_button_new_with_label(_("Use CRC32"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2UseCrc32,1,2,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2UseCrc32),FILE_WRITING_ID3V2_USE_CRC32);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2UseCrc32,_("Set CRC32 in the ID3v2 tags"),NULL);
+    gtk_widget_set_tooltip_text(FileWritingId3v2UseCrc32,_("Set CRC32 in the ID3v2 tags"));
 
     /* Use Compression */
     FileWritingId3v2UseCompression = gtk_check_button_new_with_label(_("Use Compression"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2UseCompression,1,2,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2UseCompression),FILE_WRITING_ID3V2_USE_COMPRESSION);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2UseCompression,_("Set Compression in the ID3v2 tags"),NULL);
+    gtk_widget_set_tooltip_text(FileWritingId3v2UseCompression,_("Set Compression in the ID3v2 tags"));
 	
     /* Write Genre in text */
     FileWritingId3v2TextOnlyGenre = gtk_check_button_new_with_label(_("Write Genre in text only"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2TextOnlyGenre,1,2,2,3,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2TextOnlyGenre),FILE_WRITING_ID3V2_TEXT_ONLY_GENRE);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2TextOnlyGenre,_("Don't use ID3v1 number references in genre tag. Enable this if you see numbers as genre in your music player."),NULL);	
+    gtk_widget_set_tooltip_text(FileWritingId3v2TextOnlyGenre,_("Don't use ID3v1 number references in genre tag. Enable this if you see numbers as genre in your music player."));	
 
     /* Character Set for writing ID3 tag */
     Frame = gtk_frame_new (_("Character Set for writing ID3 tags"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    id3v1v2hbox = gtk_hbox_new(FALSE,3);
+    id3v1v2hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3);
     gtk_container_add(GTK_CONTAINER(Frame),id3v1v2hbox);
     gtk_container_set_border_width(GTK_CONTAINER(id3v1v2hbox), 2);
 
@@ -767,7 +768,7 @@ void Open_OptionsWindow (void)
     Frame = gtk_frame_new (_("ID3v2 tags"));
     gtk_box_pack_start(GTK_BOX(id3v1v2hbox),Frame,FALSE,FALSE,2);
 
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
 
@@ -780,8 +781,8 @@ void Open_OptionsWindow (void)
     FileWritingId3v2WriteTag = gtk_check_button_new_with_label(_("Write ID3v2 tag"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2WriteTag,0,5,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2WriteTag),FILE_WRITING_ID3V2_WRITE_TAG);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2WriteTag,_("If activated, an ID3v2.4 tag will be added or "
-        "updated at the beginning of the MP3 files. Else it will be stripped."),NULL);
+    gtk_widget_set_tooltip_text(FileWritingId3v2WriteTag,_("If activated, an ID3v2.4 tag will be added or "
+        "updated at the beginning of the MP3 files. Else it will be stripped."));
     g_signal_connect_after(G_OBJECT(FileWritingId3v2WriteTag),"toggled",
         G_CALLBACK(Change_Id3_Settings_Toggled),NULL);
 
@@ -794,11 +795,11 @@ void Open_OptionsWindow (void)
     EventBox = gtk_event_box_new();
     FileWritingId3v2VersionCombo = gtk_combo_box_new_text();
     gtk_container_add(GTK_CONTAINER(EventBox),FileWritingId3v2VersionCombo);
-    gtk_tooltips_set_tip(Tips,EventBox,_("Select the ID3v2 tag version to write:\n"
+    gtk_widget_set_tooltip_text(EventBox,_("Select the ID3v2 tag version to write:\n"
         " - ID3v2.3 is written using id3lib,\n"
-        " - ID3v2.4 is written using libid3tag (recommended)."),NULL);
-    gtk_combo_box_append_text(GTK_COMBO_BOX(FileWritingId3v2VersionCombo), "ID3v2.4");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(FileWritingId3v2VersionCombo), "ID3v2.3");
+        " - ID3v2.4 is written using libid3tag (recommended)."));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(FileWritingId3v2VersionCombo), NULL, "ID3v2.4");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(FileWritingId3v2VersionCombo), NULL, "ID3v2.3");
     gtk_combo_box_set_active(GTK_COMBO_BOX(FileWritingId3v2VersionCombo),
         FILE_WRITING_ID3V2_VERSION_4 ? 0 : 1);
     gtk_table_attach(GTK_TABLE(Table),EventBox,2,4,1,2,GTK_FILL,GTK_FILL,0,0);
@@ -822,11 +823,11 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2UseUnicodeCharacterSet,1,2,3,4,GTK_FILL,GTK_FILL,0,0);
 
     EventBox = gtk_event_box_new();
-    FileWritingId3v2UnicodeCharacterSetCombo = gtk_combo_box_new_text();
+    FileWritingId3v2UnicodeCharacterSetCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),FileWritingId3v2UnicodeCharacterSetCombo);
-    gtk_tooltips_set_tip(Tips,EventBox,_("Unicode type to use"),NULL);
-    gtk_combo_box_append_text(GTK_COMBO_BOX(FileWritingId3v2UnicodeCharacterSetCombo), "UTF-8");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(FileWritingId3v2UnicodeCharacterSetCombo), "UTF-16");
+    gtk_widget_set_tooltip_text(EventBox,_("Unicode type to use"));
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(FileWritingId3v2UnicodeCharacterSetCombo), NULL, "UTF-8");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(FileWritingId3v2UnicodeCharacterSetCombo), NULL, "UTF-16");
     if ( FILE_WRITING_ID3V2_UNICODE_CHARACTER_SET == NULL )
         gtk_combo_box_set_active(GTK_COMBO_BOX(FileWritingId3v2UnicodeCharacterSetCombo), 0); // Set UTF-8 by default
     else
@@ -845,10 +846,10 @@ void Open_OptionsWindow (void)
         !FILE_WRITING_ID3V2_USE_UNICODE_CHARACTER_SET);
 
     EventBox = gtk_event_box_new();
-    FileWritingId3v2NoUnicodeCharacterSetCombo = gtk_combo_box_new_text();
+    FileWritingId3v2NoUnicodeCharacterSetCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),FileWritingId3v2NoUnicodeCharacterSetCombo);
-    gtk_tooltips_set_tip(Tips,EventBox,_("Character set used to write the tag "
-        "data in the file."),NULL);
+    gtk_widget_set_tooltip_text(EventBox,_("Character set used to write the tag "
+        "data in the file."));
 
     Charset_Populate_Combobox(GTK_COMBO_BOX(FileWritingId3v2NoUnicodeCharacterSetCombo), 
         FILE_WRITING_ID3V2_NO_UNICODE_CHARACTER_SET);
@@ -865,32 +866,32 @@ void Open_OptionsWindow (void)
         _("No"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2IconvOptionsNo,2,3,6,7,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2IconvOptionsNo),FILE_WRITING_ID3V2_ICONV_OPTIONS_NO);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2IconvOptionsNo,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v2IconvOptionsNo,_("With this option, when "
         "a character cannot be represented in the target character set, it isn't changed. "
-        "But note that an error message will be displayed for information."),NULL);
+        "But note that an error message will be displayed for information."));
     FileWritingId3v2IconvOptionsTranslit = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FileWritingId3v2IconvOptionsNo)),
         _("//TRANSLIT"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2IconvOptionsTranslit,3,4,6,7,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2IconvOptionsTranslit),FILE_WRITING_ID3V2_ICONV_OPTIONS_TRANSLIT);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2IconvOptionsTranslit,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v2IconvOptionsTranslit,_("With this option, when "
         "a character cannot be represented in the target character set, it can be "
-        "approximated through one or several similarly looking characters."),NULL);
+        "approximated through one or several similarly looking characters."));
 
     FileWritingId3v2IconvOptionsIgnore = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FileWritingId3v2IconvOptionsNo)),
         _("//IGNORE"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v2IconvOptionsIgnore,4,5,6,7,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v2IconvOptionsIgnore),FILE_WRITING_ID3V2_ICONV_OPTIONS_IGNORE);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v2IconvOptionsIgnore,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v2IconvOptionsIgnore,_("With this option, when "
         "a characters cannot be represented in the target character set, it will "
-        "be silently discarded."),NULL);
+        "be silently discarded."));
 
     // ID3v1 tags
     Frame = gtk_frame_new (_("ID3v1 tags"));
     gtk_box_pack_start(GTK_BOX(id3v1v2hbox),Frame,FALSE,FALSE,2);
 
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
 
@@ -904,8 +905,8 @@ void Open_OptionsWindow (void)
     FileWritingId3v1WriteTag = gtk_check_button_new_with_label(_("Write ID3v1.x tag"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v1WriteTag,0,4,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v1WriteTag),FILE_WRITING_ID3V1_WRITE_TAG);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v1WriteTag,_("If activated, an ID3v1 tag will be added or "
-        "updated at the end of the MP3 files. Else it will be stripped."),NULL);
+    gtk_widget_set_tooltip_text(FileWritingId3v1WriteTag,_("If activated, an ID3v1 tag will be added or "
+        "updated at the end of the MP3 files. Else it will be stripped."));
     g_signal_connect_after(G_OBJECT(FileWritingId3v1WriteTag),"toggled",
         G_CALLBACK(Change_Id3_Settings_Toggled),NULL);
 
@@ -918,11 +919,11 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),Label,0,1,2,3,GTK_FILL,GTK_FILL,0,0);
 
     EventBox = gtk_event_box_new();
-    FileWritingId3v1CharacterSetCombo = gtk_combo_box_new_text();
+    FileWritingId3v1CharacterSetCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),FileWritingId3v1CharacterSetCombo);
     gtk_table_attach(GTK_TABLE(Table),EventBox,1,4,2,3,GTK_FILL,GTK_FILL,0,0);
-    gtk_tooltips_set_tip(Tips,EventBox,_("Character set used to write ID3v1 tag data "
-        "in the file."),NULL);
+    gtk_widget_set_tooltip_text(EventBox,_("Character set used to write ID3v1 tag data "
+        "in the file."));
     Charset_Populate_Combobox(GTK_COMBO_BOX(FileWritingId3v1CharacterSetCombo), FILE_WRITING_ID3V1_CHARACTER_SET);
 
     /* ID3V1 Additional iconv() options*/
@@ -934,31 +935,31 @@ void Open_OptionsWindow (void)
         _("No"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v1IconvOptionsNo,1,2,4,5,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v1IconvOptionsNo),FILE_WRITING_ID3V1_ICONV_OPTIONS_NO);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v1IconvOptionsNo,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v1IconvOptionsNo,_("With this option, when "
         "a character cannot be represented in the target character set, it isn't changed. "
-        "But note that an error message will be displayed for information."),NULL);
+        "But note that an error message will be displayed for information."));
     FileWritingId3v1IconvOptionsTranslit = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FileWritingId3v1IconvOptionsNo)),
         _("//TRANSLIT"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v1IconvOptionsTranslit,2,3,4,5,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v1IconvOptionsTranslit),FILE_WRITING_ID3V1_ICONV_OPTIONS_TRANSLIT);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v1IconvOptionsTranslit,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v1IconvOptionsTranslit,_("With this option, when "
         "a character cannot be represented in the target character set, it can be "
-        "approximated through one or several similarly looking characters."),NULL);
+        "approximated through one or several similarly looking characters."));
 
     FileWritingId3v1IconvOptionsIgnore = gtk_radio_button_new_with_label(
         gtk_radio_button_get_group(GTK_RADIO_BUTTON(FileWritingId3v1IconvOptionsNo)),
         _("//IGNORE"));
     gtk_table_attach(GTK_TABLE(Table),FileWritingId3v1IconvOptionsIgnore,3,4,4,5,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FileWritingId3v1IconvOptionsIgnore),FILE_WRITING_ID3V1_ICONV_OPTIONS_IGNORE);
-    gtk_tooltips_set_tip(Tips,FileWritingId3v1IconvOptionsIgnore,_("With this option, when "
+    gtk_widget_set_tooltip_text(FileWritingId3v1IconvOptionsIgnore,_("With this option, when "
         "a characters cannot be represented in the target character set, it will "
-        "be silently discarded."),NULL);
+        "be silently discarded."));
 
     /* Character Set for reading tag */
     Frame = gtk_frame_new (_("Character Set for reading ID3 tags"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -974,7 +975,7 @@ void Open_OptionsWindow (void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(UseNonStandardId3ReadingCharacterSet),
         USE_NON_STANDARD_ID3_READING_CHARACTER_SET);
     gtk_table_attach(GTK_TABLE(Table),UseNonStandardId3ReadingCharacterSet,0,1,0,1,GTK_FILL,GTK_FILL,0,0);
-    gtk_tooltips_set_tip(Tips,UseNonStandardId3ReadingCharacterSet,
+    gtk_widget_set_tooltip_text(UseNonStandardId3ReadingCharacterSet,
         _("This character set will be used when reading the tag data, to convert "
         "each string found in an ISO-8859-1 field in the tag (for ID3v2 or/and ID3v1 tag).\n"
         "\n"
@@ -986,15 +987,15 @@ void Open_OptionsWindow (void)
         "tags to UNICODE character set'.\n"
         "  - If unicode was not used, Russian people can select the character set "
         "'Windows-1251' to load tags written under Windows. And 'KOI8-R' to load tags "
-        "written under Unix systems."),NULL);
+        "written under Unix systems."));
 
     EventBox = gtk_event_box_new();
-    FileReadingId3v1v2CharacterSetCombo = gtk_combo_box_new_text();
+    FileReadingId3v1v2CharacterSetCombo = gtk_combo_box_text_new();
     gtk_container_add(GTK_CONTAINER(EventBox),FileReadingId3v1v2CharacterSetCombo);
     gtk_table_attach(GTK_TABLE(Table),EventBox,2,3,0,1,GTK_FILL,GTK_FILL,0,0);
 
-    gtk_tooltips_set_tip(Tips,EventBox,_("Character set used to read tag data "
-        "in the file."),NULL);
+    gtk_widget_set_tooltip_text(EventBox,_("Character set used to read tag data "
+        "in the file."));
 
     Charset_Populate_Combobox(GTK_COMBO_BOX(FileReadingId3v1v2CharacterSetCombo), 
         FILE_READING_ID3V1V2_CHARACTER_SET);
@@ -1016,14 +1017,14 @@ void Open_OptionsWindow (void)
     /* Save the number of the page. Asked in Scanner window */
     OptionsNoteBook_Scanner_Page_Num = gtk_notebook_page_num(GTK_NOTEBOOK(OptionsNoteBook),Frame);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
     /* Character conversion for the 'Fill Tag' scanner (=> FTS...) */
     Frame = gtk_frame_new (_("Fill Tag Scanner - Character Conversion"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -1041,15 +1042,15 @@ void Open_OptionsWindow (void)
         FTS_CONVERT_UNDERSCORE_AND_P20_INTO_SPACE);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(FTSConvertSpaceIntoUnderscore),
         FTS_CONVERT_SPACE_INTO_UNDERSCORE);
-    gtk_tooltips_set_tip(Tips,FTSConvertUnderscoreAndP20IntoSpace,_("If activated, this conversion "
-        "will be used when applying a mask from the scanner for tags."),NULL);
-    gtk_tooltips_set_tip(Tips,FTSConvertSpaceIntoUnderscore,_("If activated, this conversion "
-        "will be used when applying a mask from the scanner for tags."),NULL);
+    gtk_widget_set_tooltip_text(FTSConvertUnderscoreAndP20IntoSpace,_("If activated, this conversion "
+        "will be used when applying a mask from the scanner for tags."));
+    gtk_widget_set_tooltip_text(FTSConvertSpaceIntoUnderscore,_("If activated, this conversion "
+        "will be used when applying a mask from the scanner for tags."));
 
     /* Character conversion for the 'Rename File' scanner (=> RFS...) */
     Frame = gtk_frame_new (_("Rename File Scanner - Character Conversion"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
     RFSConvertUnderscoreAndP20IntoSpace = gtk_radio_button_new_with_label(NULL, _("Convert underscore " "character '_' and string '%20' to space ' '"));
@@ -1064,16 +1065,16 @@ void Open_OptionsWindow (void)
         RFS_CONVERT_SPACE_INTO_UNDERSCORE);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(RFSRemoveSpaces),
         RFS_REMOVE_SPACES);
-    gtk_tooltips_set_tip(Tips,RFSConvertUnderscoreAndP20IntoSpace,_("If activated, this conversion "
-        "will be used when applying a mask from the scanner for filenames."),NULL);
-    gtk_tooltips_set_tip(Tips,RFSConvertSpaceIntoUnderscore,_("If activated, this conversion "
-        "will be used when applying a mask from the scanner for filenames."),NULL);
-    gtk_tooltips_set_tip(Tips,RFSRemoveSpaces,_("If activated, this conversion "        "will be used when applying a mask from the scanner for filenames."),NULL);
+    gtk_widget_set_tooltip_text(RFSConvertUnderscoreAndP20IntoSpace,_("If activated, this conversion "
+        "will be used when applying a mask from the scanner for filenames."));
+    gtk_widget_set_tooltip_text(RFSConvertSpaceIntoUnderscore,_("If activated, this conversion "
+        "will be used when applying a mask from the scanner for filenames."));
+    gtk_widget_set_tooltip_text(RFSRemoveSpaces,_("If activated, this conversion "        "will be used when applying a mask from the scanner for filenames."));
 
     /* Character conversion for the 'Process Fields' scanner (=> PFS...) */
     Frame = gtk_frame_new (_("Process Fields Scanner - Character Conversion"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
 
@@ -1082,35 +1083,35 @@ void Open_OptionsWindow (void)
         "first letter of words for some prepositions and articles."));
     gtk_box_pack_start(GTK_BOX(vbox),PFSDontUpperSomeWords, FALSE, FALSE, 0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(PFSDontUpperSomeWords), PFS_DONT_UPPER_SOME_WORDS);
-    gtk_tooltips_set_tip(Tips, PFSDontUpperSomeWords, _("Don't convert first "
+    gtk_widget_set_tooltip_text( PFSDontUpperSomeWords, _("Don't convert first "
         "letter of the words like prepositions, articles and words like feat., "
         "when using the scanner 'First letter uppercase of each word' (for "
-        "example, you will obtain 'Text in an Entry' instead of 'Text In An Entry')."), NULL);
+        "example, you will obtain 'Text in an Entry' instead of 'Text In An Entry')."));
 
     /* Properties of the scanner window */
     Frame = gtk_frame_new (_("Scanner Window"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
     OpenScannerWindowOnStartup = gtk_check_button_new_with_label(_("Open the Scanner Window on startup"));
     gtk_box_pack_start(GTK_BOX(vbox),OpenScannerWindowOnStartup,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OpenScannerWindowOnStartup),OPEN_SCANNER_WINDOW_ON_STARTUP);
-    gtk_tooltips_set_tip(Tips,OpenScannerWindowOnStartup,_("Activate this option to open automatically "
-        "the scanner window when EasyTAG starts."),NULL);
+    gtk_widget_set_tooltip_text(OpenScannerWindowOnStartup,_("Activate this option to open automatically "
+        "the scanner window when EasyTAG starts."));
 
     ScannerWindowOnTop = gtk_check_button_new_with_label(_("Scanner window always on top"));
     gtk_box_pack_start(GTK_BOX(vbox),ScannerWindowOnTop,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ScannerWindowOnTop),SCANNER_WINDOW_ON_TOP);
-    gtk_tooltips_set_tip(Tips,ScannerWindowOnTop,_("If activated, the window which contains the masks "
-                        "will stay always over the main window."),NULL);
+    gtk_widget_set_tooltip_text(ScannerWindowOnTop,_("If activated, the window which contains the masks "
+                        "will stay always over the main window."));
 
 
     /* Other options */
     Frame = gtk_frame_new (_("Fields"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -1118,8 +1119,8 @@ void Open_OptionsWindow (void)
     OverwriteTagField = gtk_check_button_new_with_label(_("Overwrite fields when scanning tag"));
     gtk_box_pack_start(GTK_BOX(vbox),OverwriteTagField,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OverwriteTagField),OVERWRITE_TAG_FIELD);
-    gtk_tooltips_set_tip(Tips,OverwriteTagField,_("If activated, the scanner will replace existing text "
-        "in fields by the new one. If deactivated, only blank fields of the tag will be filled."),NULL);
+    gtk_widget_set_tooltip_text(OverwriteTagField,_("If activated, the scanner will replace existing text "
+        "in fields by the new one. If deactivated, only blank fields of the tag will be filled."));
 
     // Set a default comment text or CRC-32 checksum
     if (!DefaultCommentModel)
@@ -1127,14 +1128,15 @@ void Open_OptionsWindow (void)
     else
         gtk_list_store_clear(DefaultCommentModel);
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     SetDefaultComment = gtk_check_button_new_with_label(_("Set this text as default comment :"));
     gtk_box_pack_start(GTK_BOX(hbox),SetDefaultComment,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SetDefaultComment),SET_DEFAULT_COMMENT);
-    gtk_tooltips_set_tip(Tips,SetDefaultComment,_("Activate this option if you want to put the "
-        "following string into the comment field when using the 'Fill Tag' scanner."),NULL);
-    DefaultComment = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(DefaultCommentModel), MISC_COMBO_TEXT);
+    gtk_widget_set_tooltip_text(SetDefaultComment,_("Activate this option if you want to put the "
+        "following string into the comment field when using the 'Fill Tag' scanner."));
+    DefaultComment = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(DefaultCommentModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(DefaultComment), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(hbox),DefaultComment,FALSE,FALSE,0);
     gtk_widget_set_size_request(GTK_WIDGET(DefaultComment), 250, -1);
     g_signal_connect(G_OBJECT(SetDefaultComment),"toggled",
@@ -1146,15 +1148,15 @@ void Open_OptionsWindow (void)
     Load_Default_Tag_Comment_Text_List(DefaultCommentModel, MISC_COMBO_TEXT);
     Add_String_To_Combo_List(DefaultCommentModel, DEFAULT_COMMENT);
     if (DEFAULT_COMMENT)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(DefaultComment)->child), DEFAULT_COMMENT);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultComment))), DEFAULT_COMMENT);
 
     // CRC32 comment
     Crc32Comment = gtk_check_button_new_with_label(_("Use CRC32 as the default "
         "comment (for files with ID3 tags only)."));
     gtk_box_pack_start(GTK_BOX(vbox),Crc32Comment,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(Crc32Comment),SET_CRC32_COMMENT);
-    gtk_tooltips_set_tip(Tips,Crc32Comment,_("Calculates the CRC-32 value of the file "
-        "and writes it into the comment field when using the 'Fill Tag' scanner."),NULL);
+    gtk_widget_set_tooltip_text(Crc32Comment,_("Calculates the CRC-32 value of the file "
+        "and writes it into the comment field when using the 'Fill Tag' scanner."));
     g_signal_connect_swapped(G_OBJECT(SetDefaultComment), "toggled",
         G_CALLBACK(Scanner_Convert_Check_Button_Toggled_1),G_OBJECT(Crc32Comment));
     g_signal_connect_swapped(G_OBJECT(Crc32Comment), "toggled",
@@ -1169,38 +1171,38 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame), 5);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
     // CDDB Server Settings (Automatic Search)
     Frame = gtk_frame_new (_("Server Settings for Automatic Search"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE, 0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
     // 1rst automatic search server
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_container_add(GTK_CONTAINER(vbox),hbox);
     Label = gtk_label_new(_("Name :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
-    CddbServerNameAutomaticSearch = gtk_combo_box_entry_new_text();
+    CddbServerNameAutomaticSearch = gtk_combo_box_text_new_with_entry();
     gtk_box_pack_start(GTK_BOX(hbox),CddbServerNameAutomaticSearch,FALSE,FALSE,0);
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "freedb.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "www.gnudb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "at.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "au.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "ca.freedb.org");
-    //gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "ca2.freedb.org");
-    //gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "de.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "es.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "fi.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "ru.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "uk.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch), "us.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "freedb.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "www.gnudb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "at.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "au.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "ca.freedb.org");
+    //gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "ca2.freedb.org");
+    //gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "de.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "es.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "fi.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "ru.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "uk.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch), NULL, "us.freedb.org");
     if (CDDB_SERVER_NAME_AUTOMATIC_SEARCH)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbServerNameAutomaticSearch)->child),CDDB_SERVER_NAME_AUTOMATIC_SEARCH);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbServerNameAutomaticSearch))),CDDB_SERVER_NAME_AUTOMATIC_SEARCH);
 
     Label = gtk_label_new (_("Port :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
@@ -1220,15 +1222,15 @@ void Open_OptionsWindow (void)
         gtk_entry_set_text(GTK_ENTRY(CddbServerCgiPathAutomaticSearch),CDDB_SERVER_CGI_PATH_AUTOMATIC_SEARCH);
 
     // 2sd automatic search server
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_container_add(GTK_CONTAINER(vbox),hbox);
     Label = gtk_label_new(_("Name :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
-    CddbServerNameAutomaticSearch2 = gtk_combo_box_entry_new_text();
+    CddbServerNameAutomaticSearch2 = gtk_combo_box_text_new_with_entry();
     gtk_box_pack_start(GTK_BOX(hbox),CddbServerNameAutomaticSearch2,FALSE,FALSE,0);
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameAutomaticSearch2), "freedb.musicbrainz.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameAutomaticSearch2), NULL, "freedb.musicbrainz.org");
     if (CDDB_SERVER_NAME_AUTOMATIC_SEARCH2)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbServerNameAutomaticSearch2)->child),CDDB_SERVER_NAME_AUTOMATIC_SEARCH2);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbServerNameAutomaticSearch2))),CDDB_SERVER_NAME_AUTOMATIC_SEARCH2);
 
     Label = gtk_label_new (_("Port :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
@@ -1250,20 +1252,20 @@ void Open_OptionsWindow (void)
     // CDDB Server Settings (Manual Search)
     Frame = gtk_frame_new (_("Server Settings for Manual Search"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_container_add(GTK_CONTAINER(vbox),hbox);
     Label = gtk_label_new(_("Name :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
-    CddbServerNameManualSearch = gtk_combo_box_entry_new_text();
+    CddbServerNameManualSearch = gtk_combo_box_text_new_with_entry();
     gtk_box_pack_start(GTK_BOX(hbox),CddbServerNameManualSearch,FALSE,FALSE,0);
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameManualSearch), "www.freedb.org");
-    gtk_combo_box_append_text(GTK_COMBO_BOX(CddbServerNameManualSearch), "www.gnudb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameManualSearch), NULL, "www.freedb.org");
+    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(CddbServerNameManualSearch), NULL, "www.gnudb.org");
     if (CDDB_SERVER_NAME_MANUAL_SEARCH)
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbServerNameManualSearch)->child),CDDB_SERVER_NAME_MANUAL_SEARCH);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbServerNameManualSearch))),CDDB_SERVER_NAME_MANUAL_SEARCH);
 
     Label = gtk_label_new (_("Port :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
@@ -1285,11 +1287,11 @@ void Open_OptionsWindow (void)
     // Local access for CDDB (Automatic Search)
     Frame = gtk_frame_new (_("Local CD Data Base"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
 
-    hbox = gtk_hbox_new(FALSE,2);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_container_add(GTK_CONTAINER(vbox),hbox);
     Label = gtk_label_new(_("Path :"));
     gtk_box_pack_start(GTK_BOX(hbox),Label,FALSE,FALSE,2);
@@ -1299,15 +1301,16 @@ void Open_OptionsWindow (void)
     else
         CddbLocalPathModel = gtk_list_store_new(MISC_COMBO_COUNT, G_TYPE_STRING);
 
-    CddbLocalPath = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(CddbLocalPathModel), MISC_COMBO_TEXT);
+    CddbLocalPath = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(CddbLocalPathModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(CddbLocalPath), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(hbox),CddbLocalPath,FALSE,FALSE,0);
     gtk_widget_set_size_request(GTK_WIDGET(CddbLocalPath), 450, -1);
-    gtk_tooltips_set_tip(Tips,GTK_BIN(CddbLocalPath)->child,_("Specify the directory "
+    gtk_widget_set_tooltip_text(gtk_bin_get_child(GTK_BIN(CddbLocalPath)),_("Specify the directory "
         "where are located the local cd data base. The local cd data base contains the eleven following "
         "directories 'blues', 'classical', 'country', 'data', 'folk', 'jazz', 'newage', 'reggae', "
-        "'rock', 'soundtrack' and 'misc'."),NULL);
-    g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child)),"activate",G_CALLBACK(CddbLocalPath_Combo_Add_String),NULL);
-    //g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child)),"focus_out_event",G_CALLBACK(CddbLocalPath_Combo_Add_String),NULL);
+        "'rock', 'soundtrack' and 'misc'."));
+    g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath)))),"activate",G_CALLBACK(CddbLocalPath_Combo_Add_String),NULL);
+    //g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath)))),"focus_out_event",G_CALLBACK(CddbLocalPath_Combo_Add_String),NULL);
 
     // History list
     Load_Cddb_Local_Path_List(CddbLocalPathModel, MISC_COMBO_TEXT);
@@ -1318,14 +1321,14 @@ void Open_OptionsWindow (void)
         path_utf8 = filename_to_display(CDDB_LOCAL_PATH);
         Add_String_To_Combo_List(CddbLocalPathModel, path_utf8);
         if (path_utf8)
-            gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child), path_utf8);
+            gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath))), path_utf8);
         g_free(path_utf8);
     }
 
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
-                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(GTK_BIN(CddbLocalPath)->child));
+                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(gtk_bin_get_child(GTK_BIN(CddbLocalPath))));
 
     // CDDB Proxy Settings
     Frame = gtk_frame_new (_("Proxy Settings"));
@@ -1340,7 +1343,7 @@ void Open_OptionsWindow (void)
     CddbUseProxy = gtk_check_button_new_with_label(_("Use a proxy"));
     gtk_table_attach(GTK_TABLE(Table),CddbUseProxy,0,5,0,1,GTK_FILL,GTK_FILL,0,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbUseProxy),CDDB_USE_PROXY);
-    gtk_tooltips_set_tip(Tips,CddbUseProxy,_("Set active the settings of the proxy server."),NULL);
+    gtk_widget_set_tooltip_text(CddbUseProxy,_("Set active the settings of the proxy server."));
 
     Label = gtk_label_new("     ");
     gtk_table_attach(GTK_TABLE(Table),Label,0,1,1,2,GTK_FILL,GTK_FILL,0,0);
@@ -1352,7 +1355,7 @@ void Open_OptionsWindow (void)
     gtk_table_attach(GTK_TABLE(Table),CddbProxyName,2,3,1,2,GTK_FILL,GTK_FILL,0,0);
     if (CDDB_PROXY_NAME)
         gtk_entry_set_text(GTK_ENTRY(CddbProxyName),CDDB_PROXY_NAME);
-    gtk_tooltips_set_tip(Tips,CddbProxyName,_("Name of the proxy server."),NULL);
+    gtk_widget_set_tooltip_text(CddbProxyName,_("Name of the proxy server."));
     Label = gtk_label_new (_("Port :"));
     gtk_table_attach(GTK_TABLE(Table),Label,3,4,1,2,GTK_FILL,GTK_FILL,0,0);
     gtk_misc_set_alignment(GTK_MISC(Label),1,0.5);
@@ -1360,7 +1363,7 @@ void Open_OptionsWindow (void)
     gtk_widget_set_size_request(GTK_WIDGET(CddbProxyPort), 45, -1);
     gtk_entry_set_max_length(GTK_ENTRY(CddbProxyPort),5);
     gtk_table_attach(GTK_TABLE(Table),CddbProxyPort,4,5,1,2,GTK_FILL,GTK_FILL,0,0);
-    gtk_tooltips_set_tip(Tips,CddbProxyPort,_("Port of the proxy server."),NULL);
+    gtk_widget_set_tooltip_text(CddbProxyPort,_("Port of the proxy server."));
     sprintf(temp,"%i",CDDB_PROXY_PORT);
     gtk_entry_set_text(GTK_ENTRY(CddbProxyPort),temp);
     g_signal_connect(G_OBJECT(CddbProxyPort),"insert_text",G_CALLBACK(Insert_Only_Digit),NULL);
@@ -1372,7 +1375,7 @@ void Open_OptionsWindow (void)
     if (CDDB_PROXY_USER_NAME)
         gtk_entry_set_text(GTK_ENTRY(CddbProxyUserName),CDDB_PROXY_USER_NAME);
     gtk_table_attach(GTK_TABLE(Table),CddbProxyUserName,2,3,2,3,GTK_FILL,GTK_FILL,0,0);
-    gtk_tooltips_set_tip(Tips,CddbProxyUserName,_("Name of user for the the proxy server."),NULL);
+    gtk_widget_set_tooltip_text(CddbProxyUserName,_("Name of user for the the proxy server."));
     Label = gtk_label_new(_("User Password :"));
     gtk_table_attach(GTK_TABLE(Table),Label,3,4,2,3,GTK_FILL,GTK_FILL,0,0);
     gtk_misc_set_alignment(GTK_MISC(Label),1,0.5);
@@ -1381,7 +1384,7 @@ void Open_OptionsWindow (void)
         gtk_entry_set_text(GTK_ENTRY(CddbProxyUserPassword),CDDB_PROXY_USER_PASSWORD);
     gtk_table_attach(GTK_TABLE(Table),CddbProxyUserPassword,4,5,2,3,GTK_FILL,GTK_FILL,0,0);
     gtk_entry_set_visibility(GTK_ENTRY(CddbProxyUserPassword),FALSE);
-    gtk_tooltips_set_tip(Tips,CddbProxyUserPassword,_("Password of user for the the proxy server."),NULL);
+    gtk_widget_set_tooltip_text(CddbProxyUserPassword,_("Password of user for the the proxy server."));
     Cddb_Use_Proxy_Toggled();
 
 
@@ -1389,7 +1392,7 @@ void Open_OptionsWindow (void)
     Frame = gtk_frame_new (_("Track Name List"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,FALSE,0);
 
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 2);
 
@@ -1397,21 +1400,21 @@ void Open_OptionsWindow (void)
         "file (according position or DLM if activated below)"));
     gtk_box_pack_start(GTK_BOX(vbox),CddbFollowFile,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbFollowFile),CDDB_FOLLOW_FILE);
-    gtk_tooltips_set_tip(Tips,CddbFollowFile,_("If activated, when selecting a "
+    gtk_widget_set_tooltip_text(CddbFollowFile,_("If activated, when selecting a "
         "line in the list of tracks name, the corresponding audio file in the "
-        "main list will be also selected."),NULL);
+        "main list will be also selected."));
 
     // Check box to use DLM (also used in the cddb window)
     CddbUseDLM = gtk_check_button_new_with_label(_("Use the Levenshtein algorithm "
         "(DLM) to match lines (using title) with audio files (using filename)"));
     gtk_box_pack_start(GTK_BOX(vbox),CddbUseDLM,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbUseDLM),CDDB_USE_DLM);
-    gtk_tooltips_set_tip(Tips,CddbUseDLM,_("When activating this option, the "
+    gtk_widget_set_tooltip_text(CddbUseDLM,_("When activating this option, the "
         "Levenshtein algorithm (DLM : Damerau-Levenshtein Metric) will be used "
         "to match the CDDB title against every file name in the current folder, "
         "and to select the best match. This will be used when selecting the "
         "corresponding audio file, or applying cddb results, instead of using "
-        "directly the position order."),NULL);
+        "directly the position order."));
 
 
     /*
@@ -1422,15 +1425,15 @@ void Open_OptionsWindow (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(OptionsNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame), 5);
 
-    VBox = gtk_vbox_new(FALSE,2);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 2);
 
     ConfirmBeforeExit = gtk_check_button_new_with_label(_("Confirm exit from program"));
     gtk_box_pack_start(GTK_BOX(VBox),ConfirmBeforeExit,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ConfirmBeforeExit),CONFIRM_BEFORE_EXIT);
-    gtk_tooltips_set_tip(Tips,ConfirmBeforeExit,_("If activated, opens a dialog box to ask "
-        "confirmation before exiting the program."),NULL);
+    gtk_widget_set_tooltip_text(ConfirmBeforeExit,_("If activated, opens a dialog box to ask "
+        "confirmation before exiting the program."));
 
     ConfirmWriteTag = gtk_check_button_new_with_label(_("Confirm writing of file tag"));
     gtk_box_pack_start(GTK_BOX(VBox),ConfirmWriteTag,FALSE,FALSE,0);
@@ -1456,7 +1459,7 @@ void Open_OptionsWindow (void)
     /*
      * Buttons box of Option Window
      */
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(OptionsVBox), ButtonBox, FALSE, FALSE, 4);
 
     gtk_button_box_set_layout (GTK_BUTTON_BOX (ButtonBox), GTK_BUTTONBOX_END);
@@ -1468,25 +1471,25 @@ void Open_OptionsWindow (void)
     // Disable temporarily the apply button
     ////gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
     ////g_signal_connect(G_OBJECT(Button),"clicked",G_CALLBACK(OptionsWindow_Apply_Button),NULL);
-    ////GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
-    gtk_tooltips_set_tip(Tips,Button,_("Apply changes (but don't save) and close this window"),NULL);
+    ////gtk_widget_set_can_default(Button,TRUE);
+    gtk_widget_set_tooltip_text(Button,_("Apply changes (but don't save) and close this window"));
 
 
     /* Cancel Button */
     Button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
     gtk_container_add(GTK_CONTAINER(ButtonBox), Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(OptionsWindow_Cancel_Button),NULL);
-    GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
-    gtk_tooltips_set_tip(Tips,Button,_("Close this window without saving"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Close this window without saving"));
 
 
     /* Save Button */
     Button = gtk_button_new_from_stock(GTK_STOCK_OK);
     gtk_container_add(GTK_CONTAINER(ButtonBox), Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(OptionsWindow_Save_Button),NULL);
-    GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
-    gtk_tooltips_set_tip(Tips,Button,_("Save changes and close this window"),NULL);
+    gtk_widget_set_can_default(Button,TRUE);
+    gtk_widget_set_tooltip_text(Button,_("Save changes and close this window"));
 
     /* Show all in the options window */
     gtk_widget_show_all(OptionsWindow);
@@ -1498,22 +1501,22 @@ void Open_OptionsWindow (void)
 
 void Set_Default_Comment_Check_Button_Toggled (void)
 {
-    gtk_widget_set_sensitive(DefaultComment,GTK_TOGGLE_BUTTON(SetDefaultComment)->active);
+    gtk_widget_set_sensitive(DefaultComment,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(SetDefaultComment)));
 }
 
 void Number_Track_Formated_Toggled (void)
 {
-    gtk_widget_set_sensitive(NumberTrackFormatedSpinButton,GTK_TOGGLE_BUTTON(NumberTrackFormated)->active);
+    gtk_widget_set_sensitive(NumberTrackFormatedSpinButton,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(NumberTrackFormated)));
     // To update the example...
     g_signal_emit_by_name(G_OBJECT(NumberTrackFormatedSpinButton),"changed",NULL);
 }
 
-void Number_Track_Formated_Spin_Button_Changed (GtkObject *Label, GtkObject *SpinButton)
+void Number_Track_Formated_Spin_Button_Changed (GtkWidget *Label, GtkWidget *SpinButton)
 {
     gchar *tmp;
     gint val;
 
-    if (GTK_TOGGLE_BUTTON(NumberTrackFormated)->active)
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(NumberTrackFormated)))
         val = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(SpinButton));
     else
         val = 1;
@@ -1528,7 +1531,7 @@ void Number_Track_Formated_Spin_Button_Changed (GtkObject *Label, GtkObject *Spi
 void Use_Non_Standard_Id3_Reading_Character_Set_Toggled (void)
 {
     gtk_widget_set_sensitive(FileReadingId3v1v2CharacterSetCombo,
-        GTK_TOGGLE_BUTTON(UseNonStandardId3ReadingCharacterSet)->active);
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(UseNonStandardId3ReadingCharacterSet)));
 }
 
 void Change_Id3_Settings_Toggled (void)
@@ -1565,9 +1568,9 @@ void Change_Id3_Settings_Toggled (void)
        )
         return;
 
-    active = (GTK_TOGGLE_BUTTON(FileWritingId3v2UseUnicodeCharacterSet)->active != 0);
+    active = (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(FileWritingId3v2UseUnicodeCharacterSet)) != 0);
 
-    if (GTK_TOGGLE_BUTTON(FileWritingId3v2WriteTag)->active)
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(FileWritingId3v2WriteTag)))
     {
         gtk_widget_set_sensitive(LabelId3v2Charset, TRUE);
 
@@ -1621,7 +1624,7 @@ void Change_Id3_Settings_Toggled (void)
         gtk_widget_set_sensitive(ConvertOldId3v2TagVersion, 0);
     }
 
-    active = GTK_TOGGLE_BUTTON(FileWritingId3v1WriteTag)->active;
+    active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(FileWritingId3v1WriteTag));
 
     gtk_widget_set_sensitive(LabelId3v1Charset, active);
     gtk_widget_set_sensitive(FileWritingId3v1CharacterSetCombo, active);
@@ -1633,10 +1636,10 @@ void Change_Id3_Settings_Toggled (void)
 
 void Cddb_Use_Proxy_Toggled (void)
 {
-    gtk_widget_set_sensitive(CddbProxyName,GTK_TOGGLE_BUTTON(CddbUseProxy)->active);
-    gtk_widget_set_sensitive(CddbProxyPort,GTK_TOGGLE_BUTTON(CddbUseProxy)->active);
-    gtk_widget_set_sensitive(CddbProxyUserName,GTK_TOGGLE_BUTTON(CddbUseProxy)->active);
-    gtk_widget_set_sensitive(CddbProxyUserPassword,GTK_TOGGLE_BUTTON(CddbUseProxy)->active);
+    gtk_widget_set_sensitive(CddbProxyName,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbUseProxy)));
+    gtk_widget_set_sensitive(CddbProxyPort,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbUseProxy)));
+    gtk_widget_set_sensitive(CddbProxyUserName,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbUseProxy)));
+    gtk_widget_set_sensitive(CddbProxyUserPassword,gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbUseProxy)));
 }
 
 /* Callback from Open_OptionsWindow */
@@ -1649,7 +1652,7 @@ gboolean OptionsWindow_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
             {
                 OptionsWindow_Quit();
                 break;
@@ -1666,10 +1669,10 @@ void OptionsWindow_Apply_Button(void)
 
 #ifndef WIN32
     /* FIXME : make gtk crash on win32 */
-    Add_String_To_Combo_List(DefaultPathModel,    (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child)));
-    Add_String_To_Combo_List(FilePlayerModel,     (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(FilePlayerCombo)->child)));
-    Add_String_To_Combo_List(DefaultCommentModel, (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultComment)->child)));
-    Add_String_To_Combo_List(CddbLocalPathModel,  (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child)));
+    Add_String_To_Combo_List(DefaultPathModel,    (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)))));
+    Add_String_To_Combo_List(FilePlayerModel,     (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)))));
+    Add_String_To_Combo_List(DefaultCommentModel, (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultComment)))));
+    Add_String_To_Combo_List(CddbLocalPathModel,  (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath)))));
 #endif
 
     Apply_Changes_Of_Preferences_Window();
@@ -1685,10 +1688,10 @@ void OptionsWindow_Save_Button(void)
 
 #ifndef WIN32
     /* FIXME : make gtk crash on win32 */
-    Add_String_To_Combo_List(DefaultPathModel,      (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child)));
-    Add_String_To_Combo_List(FilePlayerModel,       (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(FilePlayerCombo)->child)));
-    Add_String_To_Combo_List(DefaultCommentModel,   (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultComment)->child)));
-    Add_String_To_Combo_List(CddbLocalPathModel,    (gchar*) gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child)));
+    Add_String_To_Combo_List(DefaultPathModel,      (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)))));
+    Add_String_To_Combo_List(FilePlayerModel,       (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)))));
+    Add_String_To_Combo_List(DefaultCommentModel,   (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultComment)))));
+    Add_String_To_Combo_List(CddbLocalPathModel,    (gchar*) gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath)))));
 #endif
 
     Save_Changes_Of_Preferences_Window();
@@ -1728,14 +1731,14 @@ void OptionsWindow_Apply_Changes (void)
         //gint x, y;
         gint width, height;
 
-        if ( OptionsWindow->window!=NULL && gdk_window_is_visible(OptionsWindow->window)
-        &&   gdk_window_get_state(OptionsWindow->window)!=GDK_WINDOW_STATE_MAXIMIZED )
+        if ( gtk_widget_get_window(OptionsWindow)!=NULL && gdk_window_is_visible(gtk_widget_get_window(OptionsWindow))
+        &&   gdk_window_get_state(gtk_widget_get_window(OptionsWindow))!=GDK_WINDOW_STATE_MAXIMIZED )
         {
             // Position and Origin of the preferences window
             //gdk_window_get_root_origin(OptionsWindow->window,&x,&y);
             //OPTIONS_WINDOW_X = x;
             //OPTIONS_WINDOW_Y = y;
-            gdk_window_get_size(OptionsWindow->window,&width,&height);
+            gtk_window_get_size(GTK_WINDOW(OptionsWindow),&width,&height);
             OPTIONS_WINDOW_WIDTH  = width;
             OPTIONS_WINDOW_HEIGHT = height;
         }
@@ -1772,7 +1775,7 @@ gint Check_DefaultPathToMp3 (void)
     gchar *path_real;
     struct stat stbuf;
 
-    path_utf8 = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child)));
+    path_utf8 = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3)))));
     if (!path_utf8 || g_utf8_strlen(path_utf8, -1) < 1)
     {
         g_free(path_utf8);
@@ -1834,7 +1837,7 @@ gint Check_CharacterSetTranslation (void)
     g_free(temp);
 
     // Check conversion when reading file
-    if ( GTK_TOGGLE_BUTTON(UseNonStandardId3ReadingCharacterSet)->active
+    if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(UseNonStandardId3ReadingCharacterSet))
     && (test_conversion_charset(reading_character,"UTF-8")!=TRUE) )
     {
         gchar *msg = g_strdup_printf(_("The character set translation from '%s'\n"
@@ -1854,7 +1857,7 @@ gint Check_CharacterSetTranslation (void)
         return 0;
     }
     // Check conversion when writing file
-    if ( GTK_TOGGLE_BUTTON(UseNonStandardId3WritingCharacterSet)->active
+    if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(UseNonStandardId3WritingCharacterSet))
     && (test_conversion_charset("UTF-8",writing_character)!=TRUE) )
     {
         gchar *msg = g_strdup_printf(_("The character set translation from '%s'\n"
@@ -1882,7 +1885,7 @@ gint Check_DefaultComment (void)
 {
     const gchar *file;
 
-    file = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultComment)->child));
+    file = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultComment))));
     if (!file || g_utf8_strlen(file, -1) < 1)
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SetDefaultComment),FALSE);
 
@@ -1903,7 +1906,7 @@ gint Check_FilePlayerCombo (void)
 #endif
 
     // The program typed
-    program_path = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(FilePlayerCombo)->child)));
+    program_path = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)))));
     g_strstrip(program_path);
     // The program file validated
     if (program_path && strlen(program_path)>0)
@@ -1912,7 +1915,7 @@ gint Check_FilePlayerCombo (void)
     if ( program_path && strlen(program_path)>0 && !program_path_validated ) // A file is typed but it is invalid!
     {
         gchar *msg = g_strdup_printf(_("The audio file player '%s' can't be found!"),
-            gtk_entry_get_text(GTK_ENTRY(GTK_BIN(FilePlayerCombo)->child)));
+            gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(FilePlayerCombo)))));
         GtkWidget *msgbox = msg_box_new(_("Error..."),
                                         GTK_WINDOW(OptionsWindow),
                                         NULL,
@@ -1952,12 +1955,12 @@ gint Check_Config (void)
  * Manage Check buttons into Scanner tab: conversion group
  * This reproduces "something" like the behaviour of radio buttons with check buttons
  */
-void Scanner_Convert_Check_Button_Toggled_1 (GtkObject *object_rec, GtkObject *object_emi)
+void Scanner_Convert_Check_Button_Toggled_1 (GtkWidget *object_rec, GtkWidget *object_emi)
 {
     if (!object_rec || !object_emi) return;
 
-    if (GTK_TOGGLE_BUTTON(object_emi)->active == TRUE)
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(object_rec),!GTK_TOGGLE_BUTTON(object_emi)->active);
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(object_emi)) == TRUE)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(object_rec),!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(object_emi)));
 
 }
 
@@ -1965,7 +1968,7 @@ void DefaultPathToMp3_Combo_Add_String (void)
 {
     const gchar *path;
 
-    path = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(DefaultPathToMp3)->child));
+    path = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(DefaultPathToMp3))));
     Add_String_To_Combo_List(GTK_LIST_STORE(DefaultPathModel), (gchar *)path);
 }
 
@@ -1973,7 +1976,7 @@ void CddbLocalPath_Combo_Add_String (void)
 {
     const gchar *path;
 
-    path = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbLocalPath)->child));
+    path = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbLocalPath))));
     Add_String_To_Combo_List(GTK_LIST_STORE(CddbLocalPath), (gchar *)path);
 }
 

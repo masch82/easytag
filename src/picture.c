@@ -41,6 +41,8 @@
 #include "bar.h"
 #include "charset.h"
 
+#include "gtk2_compat.h"
+
 #ifdef WIN32
 #   include "win32/win32dep.h"
 #endif
@@ -113,7 +115,7 @@ void Tag_Area_Picture_Drag_Data (GtkWidget *widget, GdkDragContext *dc,
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(PictureEntryView));
     gtk_tree_selection_unselect_all(selection);
 
-    uri = uri_list = g_strsplit((const gchar *)selection_data->data, "\r\n", 0);
+    uri = uri_list = g_strsplit((const gchar *)gtk_selection_data_get_data(selection_data), "\r\n", 0);
     while (*uri && strlen(*uri))
     {
         //Picture *pic;
@@ -285,7 +287,7 @@ void Picture_Add_Button_Clicked (GObject *object)
     if (!PictureEntryView) return;
 
     parent_window = (GtkWindow *) gtk_widget_get_toplevel(GTK_WIDGET(object));
-    if (!GTK_WIDGET_TOPLEVEL(parent_window))
+    if (!gtk_widget_is_toplevel(GTK_WIDGET(parent_window)))
     {
         g_warning("Could not get parent window\n");
         return;
@@ -401,7 +403,7 @@ void Picture_Properties_Button_Clicked (GObject *object)
     if (!PictureEntryView) return;
 
     parent_window = (GtkWindow *) gtk_widget_get_toplevel(GTK_WIDGET(object));
-    if (!GTK_WIDGET_TOPLEVEL(parent_window))
+    if (!gtk_widget_is_toplevel(GTK_WIDGET(parent_window)))
     {
         g_warning("Could not get parent window\n");
         return;
@@ -461,7 +463,7 @@ void Picture_Properties_Button_Clicked (GObject *object)
                                             NULL);
         gtk_tree_view_append_column(GTK_TREE_VIEW(type), column);
         gtk_widget_set_size_request(type, 256, 256);
-        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(PictureTypesWindow)->vbox),ScrollWindowPictureTypes,TRUE,TRUE,0);
+        gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(PictureTypesWindow))),ScrollWindowPictureTypes,TRUE,TRUE,0);
 
         // Behaviour following the tag type...
         switch (ETCore->ETFileDisplayed->ETFileDescription->TagType)
@@ -513,11 +515,11 @@ void Picture_Properties_Button_Clicked (GObject *object)
 
         // Description of the picture
         label = gtk_label_new(_("Picture Description:"));
-        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(PictureTypesWindow)->vbox),label,FALSE,FALSE,4);
+        gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(PictureTypesWindow))),label,FALSE,FALSE,4);
 
         // Entry for the description
         desc = gtk_entry_new();
-        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(PictureTypesWindow)->vbox),desc,FALSE,FALSE,0);
+        gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(PictureTypesWindow))),desc,FALSE,FALSE,0);
         if (pic->description)
         {
             gchar *tmp = Try_To_Validate_Utf8_String(pic->description);
@@ -606,7 +608,7 @@ void Picture_Save_Button_Clicked (GObject *object)
     if (!PictureEntryView) return;
 
     parent_window = (GtkWindow*) gtk_widget_get_toplevel(GTK_WIDGET(object));
-    if (!GTK_WIDGET_TOPLEVEL(parent_window))
+    if (!gtk_widget_is_toplevel(GTK_WIDGET(parent_window)))
     {
         g_warning("Could not get parent window\n");
         return;
@@ -990,7 +992,7 @@ void PictureEntry_Update (Picture *pic, gboolean select_it)
                                     scaled_pixbuf_width, scaled_pixbuf_height,
                                     //GDK_INTERP_NEAREST); // Lower quality but better speed
                                     GDK_INTERP_BILINEAR);
-                gdk_pixbuf_unref(pixbuf);
+                g_object_unref(pixbuf);
 
                 picture_store = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(PictureEntryView)));
                 gtk_list_store_append(picture_store, &iter1);
@@ -1004,7 +1006,7 @@ void PictureEntry_Update (Picture *pic, gboolean select_it)
 
                 if (select_it)
                     gtk_tree_selection_select_iter(selection, &iter1);
-                gdk_pixbuf_unref(scaled_pixbuf);
+                g_object_unref(scaled_pixbuf);
             }else
             {
                 GtkWidget *msgbox = NULL;
@@ -1245,7 +1247,7 @@ gboolean Picture_Entry_View_Key_Pressed (GtkTreeView *treeview, GdkEvent *event,
     {
         switch(kevent->keyval)
         {
-            case GDK_Delete:
+            case GDK_KEY_Delete:
                 Picture_Clear_Button_Clicked(NULL);
                 return TRUE;
         }

@@ -54,6 +54,8 @@
 #include "msgbox.h"
 #include "charset.h"
 
+#include "gtk2_compat.h"
+
 enum
 {
     CDDB_ALBUM_LIST_PIXBUF,
@@ -174,7 +176,7 @@ void Cddb_Search_In_All_Fields_Check_Button_Toggled     (void);
 void Cddb_Search_In_All_Categories_Check_Button_Toggled (void);
 void Cddb_Set_To_All_Fields_Check_Button_Toggled        (void);
 void Cddb_Stop_Search                                   (void);
-void Cddb_Notebook_Switch_Page                          (GtkNotebook *notebook, GtkNotebookPage *page, guint page_num, gpointer user_data);
+void Cddb_Notebook_Switch_Page                          (GtkNotebook *notebook, GtkWidget *page, guint page_num, gpointer user_data);
 void Cddb_Search_String_In_Result                       (GtkWidget *entry, GtkButton *button);
 void Cddb_Display_Red_Lines_In_Result                   (void);
 
@@ -224,7 +226,6 @@ void Open_Cddb_Window (void)
     GtkWidget *Separator;
     GtkWidget *ScrollWindow;
     GtkWidget *Icon;
-    GtkTooltips *Tips;
     gchar *CddbAlbumList_Titles[] = { NULL, N_("Artist / Album"), N_("Category")}; // Note: don't set "" instead of NULL else this will cause problem with translation language
     gchar *CddbTrackList_Titles[] = { "#", N_("Track Name"), N_("Time")};
     GtkCellRenderer* renderer;
@@ -232,10 +233,9 @@ void Open_Cddb_Window (void)
 
     if (CddbWindow != NULL)
     {
-        gdk_window_raise(CddbWindow->window);
+        gtk_window_present(GTK_WINDOW(CddbWindow));
         return;
     }
-    Tips = gtk_tooltips_new();
     CddbWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(CddbWindow),_("CD Data Base Search"));
     gtk_window_set_position(GTK_WINDOW(CddbWindow),GTK_WIN_POS_CENTER);
@@ -246,7 +246,7 @@ void Open_Cddb_Window (void)
     g_signal_connect(G_OBJECT(CddbWindow),"delete_event", G_CALLBACK(Cddb_Destroy_Window),NULL);
     g_signal_connect(G_OBJECT(CddbWindow),"key_press_event", G_CALLBACK(Cddb_Window_Key_Press),NULL);
 
-    MainVBox = gtk_vbox_new(FALSE,0);
+    MainVBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     gtk_container_add(GTK_CONTAINER(CddbWindow),MainVBox);
     gtk_container_set_border_width(GTK_CONTAINER(MainVBox),1);
 
@@ -254,7 +254,7 @@ void Open_Cddb_Window (void)
     gtk_box_pack_start(GTK_BOX(MainVBox),Frame,TRUE,TRUE,0);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox),2);
 
@@ -272,13 +272,13 @@ void Open_Cddb_Window (void)
     Label = gtk_label_new(_("Automatic Search"));
     Frame = gtk_frame_new(NULL);
     gtk_notebook_append_page(GTK_NOTEBOOK(CddbNoteBook),Frame,Label);
-    gtk_container_border_width(GTK_CONTAINER(Frame),2);
+    gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    notebookvbox = gtk_vbox_new(FALSE,4);
+    notebookvbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),notebookvbox);
-    gtk_container_border_width(GTK_CONTAINER(notebookvbox),2);
+    gtk_container_set_border_width(GTK_CONTAINER(notebookvbox),2);
 
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(notebookvbox),hbox,FALSE,FALSE,0);
 
     Label = gtk_label_new(_("Request CD database :"));
@@ -288,12 +288,12 @@ void Open_Cddb_Window (void)
     // Button to generate CddbId and request string from the selected files
     CddbSearchAutoButton = gtk_button_new_from_stock(GTK_STOCK_FIND);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchAutoButton,FALSE,FALSE,0);
-    GTK_WIDGET_SET_FLAGS(CddbSearchAutoButton,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(CddbSearchAutoButton, TRUE);
     gtk_widget_grab_default(CddbSearchAutoButton);
-    g_signal_connect(GTK_OBJECT(CddbSearchAutoButton),"clicked",G_CALLBACK(Cddb_Search_Album_From_Selected_Files),NULL);
-    gtk_tooltips_set_tip(Tips,CddbSearchAutoButton,_("Request automatically the "
+    g_signal_connect(CddbSearchAutoButton,"clicked",G_CALLBACK(Cddb_Search_Album_From_Selected_Files),NULL);
+    gtk_widget_set_tooltip_text(CddbSearchAutoButton,_("Request automatically the "
         "CDDB database using the selected files (the order is important!) to "
-        "generate the CddbID."),NULL);
+        "generate the CddbID."));
 
     // Button to stop the search
     CddbStopSearchAutoButton = Create_Button_With_Icon_And_Label(GTK_STOCK_STOP,NULL);
@@ -301,55 +301,55 @@ void Open_Cddb_Window (void)
     gtk_button_set_relief(GTK_BUTTON(CddbStopSearchAutoButton),GTK_RELIEF_NONE);
     gtk_widget_set_sensitive(GTK_WIDGET(CddbStopSearchAutoButton),FALSE);
     g_signal_connect(G_OBJECT(CddbStopSearchAutoButton), "clicked", G_CALLBACK(Cddb_Stop_Search), NULL);
-    gtk_tooltips_set_tip(Tips,CddbStopSearchAutoButton,_("Stop the search ..."),NULL);
+    gtk_widget_set_tooltip_text(CddbStopSearchAutoButton,_("Stop the search ..."));
 
     // Separator line
-    Separator = gtk_vseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_box_pack_start(GTK_BOX(hbox),Separator,FALSE,FALSE,0);
 
     // Check box to run the scanner
     CddbUseLocalAccess = gtk_check_button_new_with_label(_("Use local Cddb"));
     gtk_box_pack_start(GTK_BOX(hbox),CddbUseLocalAccess,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbUseLocalAccess),CDDB_USE_LOCAL_ACCESS);
-    gtk_tooltips_set_tip(Tips,CddbUseLocalAccess,_("When activating this option, after loading the "
-        "fields, the current selected scanner will be ran (the scanner window must be opened)."),NULL);
+    gtk_widget_set_tooltip_text(CddbUseLocalAccess,_("When activating this option, after loading the "
+        "fields, the current selected scanner will be ran (the scanner window must be opened)."));
 
     // Separator line
-    Separator = gtk_vseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_box_pack_start(GTK_BOX(hbox),Separator,FALSE,FALSE,0);
 
     // Button to select all files in list
     Button = Create_Button_With_Icon_And_Label("easytag-select-all",NULL);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Select All Files"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Select All Files"));
     g_signal_connect(G_OBJECT(Button),"clicked",G_CALLBACK(Action_Select_All_Files),NULL);
 
     // Button to invert selection of files in list
     Button = Create_Button_With_Icon_And_Label("easytag-invert-selection",NULL);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Invert Files Selection"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Invert Files Selection"));
     g_signal_connect(G_OBJECT(Button),"clicked",G_CALLBACK(Action_Invert_Files_Selection),NULL);
 
 /*    // Button to sort by ascending filename
     Button = Create_Button_With_Icon_And_Label(GTK_STOCK_SORT_ASCENDING,NULL);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Sort list ascending by filename"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Sort list ascending by filename"));
     g_signal_connect(G_OBJECT(Button),"clicked",G_CALLBACK(ET_Sort_Displayed_File_List_And_Update_UI),GINT_TO_POINTER(SORTING_BY_ASCENDING_FILENAME));
 
     // Button to sort by ascending track number
     Button = Create_Button_With_Icon_And_Label(GTK_STOCK_SORT_ASCENDING,NULL);
     gtk_box_pack_start(GTK_BOX(hbox),Button,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,Button,_("Sort list ascending by track number"),NULL);
+    gtk_widget_set_tooltip_text(Button,_("Sort list ascending by track number"));
     g_signal_connect(G_OBJECT(Button),"clicked",G_CALLBACK(ET_Sort_Displayed_File_List_And_Update_UI),GINT_TO_POINTER(SORTING_BY_ASCENDING_TRACK_NUMBER));
 */
     // Button to quit
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
     gtk_box_pack_end(GTK_BOX(hbox),Button,FALSE,FALSE,0);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Cddb_Destroy_Window),NULL);
 
 
@@ -359,16 +359,16 @@ void Open_Cddb_Window (void)
     Label = gtk_label_new(_("Manual Search"));
     Frame = gtk_frame_new(NULL);
     gtk_notebook_append_page(GTK_NOTEBOOK(CddbNoteBook),Frame,Label);
-    gtk_container_border_width(GTK_CONTAINER(Frame),2);
+    gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    notebookvbox = gtk_vbox_new(FALSE,4);
+    notebookvbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),notebookvbox);
-    gtk_container_border_width(GTK_CONTAINER(notebookvbox),2);
+    gtk_container_set_border_width(GTK_CONTAINER(notebookvbox),2);
 
     /*
      * Words to search
      */
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(notebookvbox),hbox,FALSE,FALSE,0);
 
     Label = gtk_label_new(_("Words :"));
@@ -380,29 +380,30 @@ void Open_Cddb_Window (void)
     else
         gtk_list_store_clear(CddbSearchStringModel);
 
-    CddbSearchStringCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(CddbSearchStringModel), MISC_COMBO_TEXT);
+    CddbSearchStringCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(CddbSearchStringModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(CddbSearchStringCombo),MISC_COMBO_TEXT);
     gtk_widget_set_size_request(GTK_WIDGET(CddbSearchStringCombo),220,-1);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchStringCombo,FALSE,TRUE,0);
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)),_("Enter the words to "
-        "search (separated by a space or '+')"),NULL);
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))),_("Enter the words to "
+        "search (separated by a space or '+')"));
     // History List
     Load_Cddb_Search_String_List(CddbSearchStringModel, MISC_COMBO_TEXT);
 
-    g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)),"activate",
+    g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))),"activate",
         G_CALLBACK(Cddb_Search_Album_List_From_String),NULL);
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child),"");
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo))),"");
 
     // Set content of the clipboard if available
-    gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_BIN(CddbSearchStringCombo)->child));
+    gtk_editable_paste_clipboard(GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo))));
 
     // Button to run the search
     CddbSearchButton = gtk_button_new_from_stock(GTK_STOCK_FIND);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchButton,FALSE,FALSE,0);
-    GTK_WIDGET_SET_FLAGS(CddbSearchButton,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(CddbSearchButton,TRUE);
     gtk_widget_grab_default(CddbSearchButton);
     g_signal_connect(G_OBJECT(CddbSearchButton),"clicked",
         G_CALLBACK(Cddb_Search_Album_List_From_String),NULL);
-    g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)),"changed",
+    g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))),"changed",
         G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
 
     // Button to stop the search
@@ -411,12 +412,12 @@ void Open_Cddb_Window (void)
     gtk_button_set_relief(GTK_BUTTON(CddbStopSearchButton),GTK_RELIEF_NONE);
     gtk_widget_set_sensitive(GTK_WIDGET(CddbStopSearchButton),FALSE);
     g_signal_connect(G_OBJECT(CddbStopSearchButton), "clicked", G_CALLBACK(Cddb_Stop_Search), NULL);
-    gtk_tooltips_set_tip(Tips,CddbStopSearchButton,_("Stop the search ..."),NULL);
+    gtk_widget_set_tooltip_text(CddbStopSearchButton,_("Stop the search ..."));
 
     // Button to quit
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
     gtk_box_pack_end(GTK_BOX(hbox),Button,FALSE,FALSE,0);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Cddb_Destroy_Window),NULL);
 
 
@@ -432,7 +433,7 @@ void Open_Cddb_Window (void)
     gtk_table_set_col_spacings(GTK_TABLE(Table),1);
 
     CddbSearchInAllFields      = gtk_check_button_new_with_label(_("All Fields"));
-    Separator                  = gtk_vseparator_new();
+    Separator                  = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     CddbSearchInArtistField    = gtk_check_button_new_with_label(_("Artist"));
     CddbSearchInTitleField     = gtk_check_button_new_with_label(_("Album"));
     CddbSearchInTrackNameField = gtk_check_button_new_with_label(_("Track Name"));
@@ -455,11 +456,11 @@ void Open_Cddb_Window (void)
     g_signal_connect(G_OBJECT(CddbSearchInTrackNameField), "toggled", G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
     g_signal_connect(G_OBJECT(CddbSearchInOtherField), "toggled", G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
 
-    CddbSeparatorH = gtk_hseparator_new();
+    CddbSeparatorH = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_table_attach(GTK_TABLE(Table),CddbSeparatorH,0,7,1,2,GTK_FILL,GTK_FILL,0,0);
 
     CddbSearchInAllCategories      = gtk_check_button_new_with_label(_("All Categories"));
-    CddbSeparatorV                 = gtk_vseparator_new();
+    CddbSeparatorV                 = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     CddbSearchInBluesCategory      = gtk_check_button_new_with_label(_("Blues"));
     CddbSearchInClassicalCategory  = gtk_check_button_new_with_label(_("Classical"));
     CddbSearchInCountryCategory    = gtk_check_button_new_with_label(_("Country"));
@@ -482,7 +483,7 @@ void Open_Cddb_Window (void)
     gtk_table_attach(GTK_TABLE(Table),CddbSearchInReggaeCategory,    4,5,3,4,GTK_FILL,GTK_FILL,0,0);
     gtk_table_attach(GTK_TABLE(Table),CddbSearchInRockCategory,      5,6,3,4,GTK_FILL,GTK_FILL,0,0);
     gtk_table_attach(GTK_TABLE(Table),CddbSearchInSoundtrackCategory,6,7,3,4,GTK_FILL,GTK_FILL,0,0);
-    gtk_label_set_line_wrap(GTK_LABEL(GTK_BIN(CddbSearchInAllCategories)->child),TRUE); // Wrap label of the check button.
+    gtk_label_set_line_wrap(GTK_LABEL(gtk_bin_get_child(GTK_BIN(CddbSearchInAllCategories))),TRUE); // Wrap label of the check button.
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories),     CDDB_SEARCH_IN_ALL_CATEGORIES);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbSearchInBluesCategory),     CDDB_SEARCH_IN_BLUES_CATEGORY);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbSearchInClassicalCategory), CDDB_SEARCH_IN_CLASSICAL_CATEGORY);
@@ -506,9 +507,9 @@ void Open_Cddb_Window (void)
     g_signal_connect(G_OBJECT(CddbSearchInReggaeCategory),    "toggled",G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
     g_signal_connect(G_OBJECT(CddbSearchInRockCategory),      "toggled",G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
     g_signal_connect(G_OBJECT(CddbSearchInSoundtrackCategory),"toggled",G_CALLBACK(Cddb_Set_Search_Button_Sensivity),NULL);
-    gtk_tooltips_set_tip(Tips,CddbSearchInRockCategory,_("included : funk, soul, rap, pop, industrial, metal, etc."),NULL);
-    gtk_tooltips_set_tip(Tips,CddbSearchInSoundtrackCategory,_("movies, shows"),NULL);
-    gtk_tooltips_set_tip(Tips,CddbSearchInMiscCategory,_("others that do not fit in the above categories"),NULL);
+    gtk_widget_set_tooltip_text(CddbSearchInRockCategory,_("included : funk, soul, rap, pop, industrial, metal, etc."));
+    gtk_widget_set_tooltip_text(CddbSearchInSoundtrackCategory,_("movies, shows"));
+    gtk_widget_set_tooltip_text(CddbSearchInMiscCategory,_("others that do not fit in the above categories"));
 
     // Button to display/hide the categories
     CddbShowCategoriesButton = gtk_toggle_button_new_with_label(_(" Categories "));
@@ -522,7 +523,7 @@ void Open_Cddb_Window (void)
     Frame = gtk_frame_new(_("Results :"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,TRUE,0);
 
-    hbox = gtk_hbox_new(FALSE,4);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_container_set_border_width(GTK_CONTAINER(hbox),2);
     gtk_container_add(GTK_CONTAINER(Frame),hbox);
 
@@ -535,32 +536,33 @@ void Open_Cddb_Window (void)
     else
         gtk_list_store_clear(CddbSearchStringInResultModel);
 
-    CddbSearchStringInResultCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(CddbSearchStringInResultModel), MISC_COMBO_TEXT);
+    CddbSearchStringInResultCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(CddbSearchStringInResultModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(CddbSearchStringInResultCombo),MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchStringInResultCombo,FALSE,FALSE,0);
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child)),"activate",
-                             G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child)));
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child)),_("Enter the words to "
-        "search in the list below"),NULL);
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo)))),"activate",
+                             G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo)))));
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo)))),_("Enter the words to "
+        "search in the list below"));
 
     // History List
     Load_Cddb_Search_String_In_Result_List(CddbSearchStringInResultModel, MISC_COMBO_TEXT);
 
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child),"");
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo))),"");
 
     CddbSearchStringInResultNextButton = Create_Button_With_Icon_And_Label(GTK_STOCK_GO_DOWN,NULL);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchStringInResultNextButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbSearchStringInResultNextButton),GTK_RELIEF_NONE);
-    g_signal_connect_swapped(G_OBJECT(CddbSearchStringInResultNextButton),"clicked", G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child)));
-    gtk_tooltips_set_tip(Tips,CddbSearchStringInResultNextButton,_("Search Next"),NULL);
+    g_signal_connect_swapped(G_OBJECT(CddbSearchStringInResultNextButton),"clicked", G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo)))));
+    gtk_widget_set_tooltip_text(CddbSearchStringInResultNextButton,_("Search Next"));
 
     CddbSearchStringInResultPrevButton = Create_Button_With_Icon_And_Label(GTK_STOCK_GO_UP,NULL);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSearchStringInResultPrevButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbSearchStringInResultPrevButton),GTK_RELIEF_NONE);
-    g_signal_connect_swapped(G_OBJECT(CddbSearchStringInResultPrevButton),"clicked", G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringInResultCombo)->child)));
-    gtk_tooltips_set_tip(Tips,CddbSearchStringInResultPrevButton,_("Search Previous"),NULL);
+    g_signal_connect_swapped(G_OBJECT(CddbSearchStringInResultPrevButton),"clicked", G_CALLBACK(Cddb_Search_String_In_Result), G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringInResultCombo)))));
+    gtk_widget_set_tooltip_text(CddbSearchStringInResultPrevButton,_("Search Previous"));
 
     // Separator line
-    Separator = gtk_vseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     gtk_box_pack_start(GTK_BOX(hbox),Separator,FALSE,FALSE,2);
 
     CddbDisplayRedLinesButton = gtk_toggle_button_new();
@@ -568,31 +570,31 @@ void Open_Cddb_Window (void)
     gtk_container_add(GTK_CONTAINER(CddbDisplayRedLinesButton),Icon);
     gtk_box_pack_start(GTK_BOX(hbox),CddbDisplayRedLinesButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbDisplayRedLinesButton),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,CddbDisplayRedLinesButton,_("Show only red lines (or show all lines) in the 'Artist / Album' list"),NULL);
+    gtk_widget_set_tooltip_text(CddbDisplayRedLinesButton,_("Show only red lines (or show all lines) in the 'Artist / Album' list"));
     g_signal_connect(G_OBJECT(CddbDisplayRedLinesButton),"toggled",G_CALLBACK(Cddb_Display_Red_Lines_In_Result),NULL);
 
     CddbUnselectAllInResultButton = Create_Button_With_Icon_And_Label("easytag-unselect-all",NULL);
     gtk_box_pack_end(GTK_BOX(hbox),CddbUnselectAllInResultButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbUnselectAllInResultButton),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,CddbUnselectAllInResultButton,_("Unselect all lines"),NULL);
+    gtk_widget_set_tooltip_text(CddbUnselectAllInResultButton,_("Unselect all lines"));
     g_signal_connect(G_OBJECT(CddbUnselectAllInResultButton),"clicked",G_CALLBACK(Cddb_Track_List_Unselect_All),NULL);
 
     CddbInvertSelectionInResultButton = Create_Button_With_Icon_And_Label("easytag-invert-selection",NULL);
     gtk_box_pack_end(GTK_BOX(hbox),CddbInvertSelectionInResultButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbInvertSelectionInResultButton),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,CddbInvertSelectionInResultButton,_("Invert lines selection"),NULL);
+    gtk_widget_set_tooltip_text(CddbInvertSelectionInResultButton,_("Invert lines selection"));
     g_signal_connect(G_OBJECT(CddbInvertSelectionInResultButton),"clicked",G_CALLBACK(Cddb_Track_List_Invert_Selection),NULL);
 
     CddbSelectAllInResultButton = Create_Button_With_Icon_And_Label("easytag-select-all",NULL);
     gtk_box_pack_end(GTK_BOX(hbox),CddbSelectAllInResultButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(CddbSelectAllInResultButton),GTK_RELIEF_NONE);
-    gtk_tooltips_set_tip(Tips,CddbSelectAllInResultButton,_("Select all lines"),NULL);
+    gtk_widget_set_tooltip_text(CddbSelectAllInResultButton,_("Select all lines"));
     g_signal_connect(G_OBJECT(CddbSelectAllInResultButton),"clicked",G_CALLBACK(Cddb_Track_List_Select_All),NULL);
 
     /*
      * Result of search
      */
-    CddbWindowHPaned = gtk_hpaned_new();
+    CddbWindowHPaned = gtk_paned_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),CddbWindowHPaned,TRUE,TRUE,0);
     gtk_paned_set_position(GTK_PANED(CddbWindowHPaned),CDDB_PANE_HANDLE_POSITION);
 
@@ -699,9 +701,9 @@ void Open_Cddb_Window (void)
     g_signal_connect(G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(CddbTrackListView))),
                      "changed", G_CALLBACK(Cddb_Track_List_Row_Selected), NULL);
     g_signal_connect(G_OBJECT(CddbTrackListView),"button_press_event", G_CALLBACK(Cddb_Track_List_Button_Press),NULL);
-    gtk_tooltips_set_tip(Tips, CddbTrackListView, _("Select lines to 'apply' to "
+    gtk_widget_set_tooltip_text(CddbTrackListView, _("Select lines to 'apply' to "
         "your files list. All lines will be processed if no line is selected.\n"
-        "You can also reorder lines in this list before using 'apply' button."), NULL);
+        "You can also reorder lines in this list before using 'apply' button."));
 
     /*
      * Apply results to fields...
@@ -709,12 +711,12 @@ void Open_Cddb_Window (void)
     Frame = gtk_frame_new(_("Set Into :"));
     gtk_box_pack_start(GTK_BOX(VBox),Frame,FALSE,TRUE,0);
 
-    vbox = gtk_vbox_new(FALSE,2);
+    vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_set_border_width(GTK_CONTAINER(vbox),2);
     gtk_container_add(GTK_CONTAINER(Frame),vbox);
 
     CddbSetToAllFields  = gtk_check_button_new_with_label(_("All"));
-    Separator           = gtk_vseparator_new();
+    Separator           = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     CddbSetToFileName   = gtk_check_button_new_with_label(_("File Name"));
     CddbSetToTitle      = gtk_check_button_new_with_label(_("Title"));
     CddbSetToArtist     = gtk_check_button_new_with_label(_("Artist"));
@@ -723,7 +725,7 @@ void Open_Cddb_Window (void)
     CddbSetToTrack      = gtk_check_button_new_with_label(_("Track #"));
     CddbSetToTrackTotal = gtk_check_button_new_with_label(_("# Tracks"));
     CddbSetToGenre      = gtk_check_button_new_with_label(_("Genre"));
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
     gtk_box_pack_start(GTK_BOX(hbox),CddbSetToAllFields, FALSE,FALSE,0);
     gtk_box_pack_start(GTK_BOX(hbox),Separator,          FALSE,FALSE,2);
@@ -755,15 +757,15 @@ void Open_Cddb_Window (void)
     g_signal_connect(G_OBJECT(CddbSetToGenre),     "toggled",G_CALLBACK(Cddb_Set_Apply_Button_Sensivity),NULL);
     g_signal_connect(G_OBJECT(CddbSetToFileName),  "toggled",G_CALLBACK(Cddb_Set_Apply_Button_Sensivity),NULL);
 
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 
     // Check box to run the scanner
     CddbRunScanner = gtk_check_button_new_with_label(_("Run the current scanner for each file"));
     gtk_box_pack_start(GTK_BOX(hbox),CddbRunScanner,FALSE,TRUE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbRunScanner),CDDB_RUN_SCANNER);
-    gtk_tooltips_set_tip(Tips,CddbRunScanner,_("When activating this option, after loading the "
-        "fields, the current selected scanner will be ran (the scanner window must be opened)."),NULL);
+    gtk_widget_set_tooltip_text(CddbRunScanner,_("When activating this option, after loading the "
+        "fields, the current selected scanner will be ran (the scanner window must be opened)."));
 
     // Check box to use DLM (also used in the preferences window)
     CddbUseDLM2 = gtk_check_button_new_with_label(_("Match lines with the Levenshtein algorithm"));
@@ -771,19 +773,19 @@ void Open_Cddb_Window (void)
     // Doesn't activate it by default because if the new user don't pay attention to it,
     // it will not understand why the cddb results aren't loaded correctly...
     //gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(CddbUseDLM2),CDDB_USE_DLM);
-    gtk_tooltips_set_tip(Tips,CddbUseDLM2,_("When activating this option, the "
+    gtk_widget_set_tooltip_text(CddbUseDLM2,_("When activating this option, the "
         "Levenshtein algorithm (DLM : Damerau-Levenshtein Metric) will be used "
         "to match the CDDB title against every file name in the current folder, "
         "and to select the best match. This will be used when selecting the "
         "corresponding audio file, or applying cddb results, instead of using "
-        "directly the position order."),NULL);
+        "directly the position order."));
     g_signal_connect(G_OBJECT(CddbUseDLM2),"toggled",G_CALLBACK(Cddb_Use_Dlm_2_Check_Button_Toggled),NULL);
 
     // Button to apply
     CddbApplyButton = gtk_button_new_from_stock(GTK_STOCK_APPLY);
     gtk_box_pack_end(GTK_BOX(hbox),CddbApplyButton,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(CddbApplyButton),"clicked", G_CALLBACK(Cddb_Set_Track_Infos_To_File_List),NULL);
-    gtk_tooltips_set_tip(Tips,CddbApplyButton,_("Load the selected lines or all lines (if no line selected)."),NULL);
+    gtk_widget_set_tooltip_text(CddbApplyButton,_("Load the selected lines or all lines (if no line selected)."));
 
     /*
      * Status bar
@@ -795,7 +797,7 @@ void Open_Cddb_Window (void)
     gtk_statusbar_push(GTK_STATUSBAR(CddbStatusBar),CddbStatusBarContext,_("Ready to search..."));
 
 
-    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)),"changed");
+    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))),"changed");
     g_signal_emit_by_name(G_OBJECT(CddbSearchInAllFields),"toggled");
     g_signal_emit_by_name(G_OBJECT(CddbSearchInAllCategories),"toggled");
     g_signal_emit_by_name(G_OBJECT(CddbSetToAllFields),"toggled");
@@ -805,13 +807,13 @@ void Open_Cddb_Window (void)
     if (SET_CDDB_WINDOW_POSITION
     && CDDB_WINDOW_X > 0 && CDDB_WINDOW_Y > 0)
     {
-        gdk_window_move(CddbWindow->window,CDDB_WINDOW_X,CDDB_WINDOW_Y);
+        gtk_window_move(GTK_WINDOW(CddbWindow),CDDB_WINDOW_X,CDDB_WINDOW_Y);
     }
     // Force resize window
-    gtk_widget_set_size_request(GTK_WIDGET(CddbSearchInAllFields), CddbSearchInAllCategories->allocation.width, -1);
+    gtk_widget_set_size_request(GTK_WIDGET(CddbSearchInAllFields), gtk_widget_get_allocated_width(CddbSearchInAllCategories), -1);
     g_signal_emit_by_name(G_OBJECT(CddbShowCategoriesButton),"toggled");
 
-    g_signal_connect(GTK_OBJECT(CddbNoteBook),"switch-page",G_CALLBACK(Cddb_Notebook_Switch_Page),NULL);
+    g_signal_connect(G_OBJECT(CddbNoteBook),"switch-page",G_CALLBACK(Cddb_Notebook_Switch_Page),NULL);
     //g_signal_emit_by_name(G_OBJECT(CddbNoteBook),"switch-page"); // Cause crash... => the 2 following lines to fix
     gtk_notebook_set_current_page(GTK_NOTEBOOK(CddbNoteBook),1);
     gtk_notebook_set_current_page(GTK_NOTEBOOK(CddbNoteBook),0);
@@ -853,19 +855,19 @@ void Cddb_Window_Apply_Changes (void)
     {
         gint x, y, width, height;
 
-        if ( CddbWindow->window && gdk_window_is_visible(CddbWindow->window)
-        &&   gdk_window_get_state(CddbWindow->window)!=GDK_WINDOW_STATE_MAXIMIZED )
+        if ( gtk_widget_get_window(CddbWindow) && gdk_window_is_visible(gtk_widget_get_window(CddbWindow))
+        &&   gdk_window_get_state(gtk_widget_get_window(CddbWindow))!=GDK_WINDOW_STATE_MAXIMIZED )
         {
             // Position and Origin of the window
-            gdk_window_get_root_origin(CddbWindow->window,&x,&y);
+	    gtk_window_get_position(GTK_WINDOW(CddbWindow),&x,&y);
             CDDB_WINDOW_X = x;
             CDDB_WINDOW_Y = y;
-            gdk_window_get_size(CddbWindow->window,&width,&height);
+	    gtk_window_get_size(GTK_WINDOW(CddbWindow),&width,&height);
             CDDB_WINDOW_WIDTH  = width;
             CDDB_WINDOW_HEIGHT = height;
 
             // Handle panes position
-            CDDB_PANE_HANDLE_POSITION = GTK_PANED(CddbWindowHPaned)->child1_size;
+            CDDB_PANE_HANDLE_POSITION = gtk_paned_get_position(GTK_PANED(CddbWindowHPaned));
         }
 
         CDDB_SEARCH_IN_ALL_FIELDS       = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllFields));
@@ -917,7 +919,7 @@ gboolean Cddb_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Cddb_Destroy_Window(window, event, NULL);
                 break;
         }
@@ -930,17 +932,17 @@ void Cddb_Search_In_All_Fields_Check_Button_Toggled (void)
 {
     if (CddbSearchInAllFields)
     {
-        gtk_widget_set_sensitive(CddbSearchInArtistField,   !GTK_TOGGLE_BUTTON(CddbSearchInAllFields)->active);
-        gtk_widget_set_sensitive(CddbSearchInTitleField,    !GTK_TOGGLE_BUTTON(CddbSearchInAllFields)->active);
-        gtk_widget_set_sensitive(CddbSearchInTrackNameField,!GTK_TOGGLE_BUTTON(CddbSearchInAllFields)->active);
-        gtk_widget_set_sensitive(CddbSearchInOtherField,    !GTK_TOGGLE_BUTTON(CddbSearchInAllFields)->active);
+        gtk_widget_set_sensitive(CddbSearchInArtistField,   !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllFields)));
+        gtk_widget_set_sensitive(CddbSearchInTitleField,    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllFields)));
+        gtk_widget_set_sensitive(CddbSearchInTrackNameField,!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllFields)));
+        gtk_widget_set_sensitive(CddbSearchInOtherField,    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllFields)));
     }
 }
 void Cddb_Show_Categories_Button_Toggled (void)
 {
     if (CddbShowCategoriesButton)
     {
-        if (GTK_TOGGLE_BUTTON(CddbShowCategoriesButton)->active)
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbShowCategoriesButton)))
         {
             gtk_widget_show(CddbSeparatorH);
             gtk_widget_show(CddbSearchInAllCategories);
@@ -979,30 +981,30 @@ void Cddb_Search_In_All_Categories_Check_Button_Toggled (void)
 {
     if (CddbSearchInAllCategories)
     {
-        gtk_widget_set_sensitive(CddbSearchInBluesCategory,     !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInClassicalCategory, !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInCountryCategory,   !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInFolkCategory,      !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInJazzCategory,      !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInMiscCategory,      !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInNewageCategory,    !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInReggaeCategory,    !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInRockCategory,      !GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
-        gtk_widget_set_sensitive(CddbSearchInSoundtrackCategory,!GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)->active);
+        gtk_widget_set_sensitive(CddbSearchInBluesCategory,     !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInClassicalCategory, !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInCountryCategory,   !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInFolkCategory,      !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInJazzCategory,      !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInMiscCategory,      !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInNewageCategory,    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInReggaeCategory,    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInRockCategory,      !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
+        gtk_widget_set_sensitive(CddbSearchInSoundtrackCategory,!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInAllCategories)));
     }
 }
 void Cddb_Set_To_All_Fields_Check_Button_Toggled (void)
 {
     if (CddbSetToAllFields)
     {
-        gtk_widget_set_sensitive(CddbSetToTitle,     !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToArtist,    !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToAlbum,     !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToYear,      !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToTrack,     !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToTrackTotal,!GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToGenre,     !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
-        gtk_widget_set_sensitive(CddbSetToFileName,  !GTK_TOGGLE_BUTTON(CddbSetToAllFields)->active);
+        gtk_widget_set_sensitive(CddbSetToTitle,     !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToArtist,    !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToAlbum,     !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToYear,      !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToTrack,     !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToTrackTotal,!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToGenre,     !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
+        gtk_widget_set_sensitive(CddbSetToFileName,  !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSetToAllFields)));
     }
 }
 
@@ -1036,7 +1038,7 @@ void Cddb_Use_Dlm_2_Check_Button_Toggled (void)
 {
     if (CddbUseDLM2)
     {
-        CDDB_USE_DLM = GTK_TOGGLE_BUTTON(CddbUseDLM2)->active;
+        CDDB_USE_DLM = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbUseDLM2));
     }
 }
 
@@ -1066,7 +1068,7 @@ void Cddb_Set_Search_Button_Sensivity (void)
     cddbinrockcategory       = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInRockCategory));
     cddbinsoundtrackcategory = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(CddbSearchInSoundtrackCategory));
 
-    if ( CddbSearchButton && CddbSearchStringCombo && g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)), -1) > 0
+    if ( CddbSearchButton && CddbSearchStringCombo && g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))), -1) > 0
     && (cddbinallfields     || cddbinartistfield   || cddbintitlefield        || cddbintracknamefield || cddbinotherfield)
     && (cddbinallcategories || cddbinbluescategory || cddbinclassicalcategory || cddbincountrycategory
         || cddbinfolkcategory   || cddbinjazzcategory || cddbinmisccategory || cddbinnewagecategory
@@ -1084,7 +1086,7 @@ void Cddb_Stop_Search (void)
     CddbStopSearch = TRUE;
 }
 
-void Cddb_Notebook_Switch_Page (GtkNotebook *notebook, GtkNotebookPage *page, guint page_num, gpointer user_data)
+void Cddb_Notebook_Switch_Page (GtkNotebook *notebook, GtkWidget *page, guint page_num, gpointer user_data)
 {
     gint page_total;
     guint page_tmp;
@@ -1097,7 +1099,7 @@ void Cddb_Notebook_Switch_Page (GtkNotebook *notebook, GtkNotebookPage *page, gu
         GtkWidget *frame = gtk_notebook_get_nth_page(GTK_NOTEBOOK(notebook), page_tmp); // Child of the page
         if (frame)
         {
-            GtkWidget *box = GTK_BIN(frame)->child;
+            GtkWidget *box = gtk_bin_get_child(GTK_BIN(frame));
             if (box)
             {
                 if (page_tmp == page_num)
@@ -2201,7 +2203,7 @@ gboolean Cddb_Search_Album_List_From_String_Freedb (void)
     gtk_statusbar_push(GTK_STATUSBAR(CddbStatusBar),CddbStatusBarContext,"");
 
     /* Get words to search... */
-    string = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)));
+    string = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))));
     if (!string || g_utf8_strlen(string, -1) <= 0)
         return FALSE;
 
@@ -2510,7 +2512,7 @@ gboolean Cddb_Search_Album_List_From_String_Gnudb (void)
     gtk_statusbar_push(GTK_STATUSBAR(CddbStatusBar),CddbStatusBarContext,"");
 
     /* Get words to search... */
-    string = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(CddbSearchStringCombo)->child)));
+    string = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(CddbSearchStringCombo)))));
     if (!string || g_utf8_strlen(string, -1) <= 0)
         return FALSE;
 

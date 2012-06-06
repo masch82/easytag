@@ -44,6 +44,8 @@
 #include "msgbox.h"
 #include "charset.h"
 
+#include "gtk2_compat.h"
+
 #ifndef PACKAGE_DATA_DIR
 #   include "../pixmaps/EasyTAG_logo.xpm"
 #endif
@@ -97,7 +99,7 @@ void About_Window_Key_Press (GtkWidget *window ATTRIBUTE_UNUSED, GdkEvent *event
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Quit_About_Window();
                 break;
         }
@@ -127,9 +129,7 @@ void Show_About_Window (void)
     GtkTextIter textIter;
     GtkWidget *Button;
     GtkWidget *Logo;
-    //GdkPixbuf *pixbuf = NULL;
-    GdkPixmap *pixmap;
-    GdkBitmap *mask;
+    GdkPixbuf *pixbuf = NULL;
     gchar  temp[MAX_STRING_LEN];
     gchar *temp_str;
     gint i;
@@ -250,7 +250,7 @@ void Show_About_Window (void)
     /* Check if already opened */
     if (AboutWindow)
     {
-        gdk_window_raise(AboutWindow->window);
+        gtk_window_present(GTK_WINDOW(AboutWindow));
         return;
     }
 
@@ -269,7 +269,7 @@ void Show_About_Window (void)
      /* The NoteBook */
     AboutNoteBook = gtk_notebook_new();
     gtk_notebook_popup_enable(GTK_NOTEBOOK(AboutNoteBook));
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(AboutWindow)->vbox),AboutNoteBook,TRUE,TRUE,0);
+    gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(AboutWindow))),AboutNoteBook,TRUE,TRUE,0);
 
 
     /*
@@ -281,23 +281,22 @@ void Show_About_Window (void)
     gtk_notebook_append_page (GTK_NOTEBOOK(AboutNoteBook),Frame,Label);
     gtk_container_set_border_width(GTK_CONTAINER(Frame), 2);
 
-    VBox = gtk_vbox_new(FALSE,0);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
 
     /* EasyTAG Logo */
     gtk_widget_realize(AboutWindow);
 
 #ifdef PACKAGE_DATA_DIR
-    pixmap = gdk_pixmap_create_from_xpm(AboutWindow->window,&mask,NULL,PACKAGE_DATA_DIR"/EasyTAG_logo.xpm");
+    pixbuf = gdk_pixbuf_new_from_file(PACKAGE_DATA_DIR"/EasyTAG_logo.xpm", NULL);
 #else
-    pixmap = gdk_pixmap_create_from_xpm_d(AboutWindow->window,&mask,NULL,EasyTAG_logo_xpm);
+    pixmap = gdk_pixbuf_new_from_data(EasyTAG_logo_xpm, NULL);
 #endif
     
-    if (pixmap)
+    if (pixbuf)
     {
-        Logo = gtk_image_new_from_pixmap(pixmap, mask);
-        g_object_unref(pixmap);
-        g_object_unref(mask);
+        Logo = gtk_image_new_from_pixbuf(pixbuf);
+        g_object_unref(pixbuf);
         gtk_box_pack_start(GTK_BOX(VBox),Logo,FALSE,TRUE,0);
         gtk_misc_set_padding(GTK_MISC(Logo),2,2);
     }
@@ -342,7 +341,7 @@ void Show_About_Window (void)
     Label = gtk_label_new(temp);
     gtk_box_pack_start(GTK_BOX(VBox),Label,FALSE,TRUE,0);
 
-    hbox = gtk_hbox_new(FALSE,0);
+    hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(VBox),hbox,FALSE,TRUE,0);
     Label = gtk_label_new(_("Web Page: "));
     gtk_misc_set_alignment(GTK_MISC(Label),1,0.5);
@@ -689,9 +688,9 @@ void Show_About_Window (void)
      * Close Button
      */
     Button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(AboutWindow)->action_area),Button,FALSE,FALSE,0);
+    gtk_box_pack_start(GTK_BOX(gtk_dialog_get_action_area(GTK_DIALOG(AboutWindow))),Button,FALSE,FALSE,0);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Quit_About_Window),NULL);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
 
 

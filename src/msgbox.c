@@ -31,6 +31,7 @@
 #include "misc.h"
 #include "setting.h"
 
+#include "gtk2_compat.h"
 
 GtkWidget *msg_box_new (gchar *title, GtkWindow *parent, GtkWidget **check_button, GtkDialogFlags flags, gchar *message, const gchar *icon, ...);
 
@@ -76,7 +77,7 @@ GtkWidget *msg_box_new (gchar *title,
 
     // Table to insert: the pixmap, the message and the check button
     Table = gtk_table_new(2,2,FALSE);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox),Table,TRUE,TRUE,0);
+    gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),Table,TRUE,TRUE,0);
     gtk_container_set_border_width(GTK_CONTAINER(Table),4);
     gtk_widget_show(Table);
 
@@ -117,7 +118,7 @@ GtkWidget *msg_box_new (gchar *title,
             break;
         
         Button = gtk_dialog_add_button(GTK_DIALOG(dialog),button_text,response_id);
-        GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+        gtk_widget_set_can_default(Button,TRUE);
         
         // To focus to the first button
         if (first_button)

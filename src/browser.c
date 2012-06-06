@@ -51,6 +51,8 @@
 #include "charset.h"
 #include "dlm.h"
 
+#include "gtk2_compat.h"
+
 #include <assert.h>
 
 #ifdef WIN32
@@ -196,13 +198,13 @@ void        Rename_Directory_With_Mask_Toggled   (void);
 void        Browser_Open_Run_Program_Tree_Window (void);
 void        Destroy_Run_Program_Tree_Window (void);
 gboolean    Run_Program_Tree_Window_Key_Press (GtkWidget *window, GdkEvent *event);
-void        Run_Program_With_Directory (GtkObject *combobox);
+void        Run_Program_With_Directory (GtkWidget *combobox);
 
 /* For window to run a program with the file */
 void        Browser_Open_Run_Program_List_Window (void);
 void        Destroy_Run_Program_List_Window (void);
 gboolean    Run_Program_List_Window_Key_Press (GtkWidget *window, GdkEvent *event);
-void        Run_Program_With_Selected_Files (GtkObject *combobox);
+void        Run_Program_With_Selected_Files (GtkWidget *combobox);
 
 gboolean    Run_Program (gchar *program_name, GList *args_list);
 
@@ -372,7 +374,7 @@ void Browser_Entry_Activated (void)
     const gchar *path_utf8;
     gchar *path;
 
-    path_utf8 = gtk_entry_get_text(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child));
+    path_utf8 = gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo))));
     Add_String_To_Combo_List(GTK_LIST_STORE(BrowserEntryModel), (gchar *)path_utf8);
 
     path = filename_from_display(path_utf8);
@@ -389,7 +391,7 @@ void Browser_Entry_Set_Text (gchar *text)
     if (!text || !BrowserEntryCombo)
         return;
 
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child),text);
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo))),text);
 }
 
 /*
@@ -445,10 +447,10 @@ gboolean Browser_Tree_Key_Press (GtkWidget *tree, GdkEvent *event, gpointer data
 
         switch(kevent->keyval)
         {
-            case GDK_KP_Enter:    /* Enter key in Num Pad */
-            case GDK_Return:      /* 'Normal' Enter key */
-            case GDK_t:           /* Expand/Collapse node */
-            case GDK_T:           /* Expand/Collapse node */
+            case GDK_KEY_KP_Enter:    /* Enter key in Num Pad */
+            case GDK_KEY_Return:      /* 'Normal' Enter key */
+            case GDK_KEY_t:           /* Expand/Collapse node */
+            case GDK_KEY_T:           /* Expand/Collapse node */
                 if(gtk_tree_view_row_expanded(GTK_TREE_VIEW(tree), treePath))
                     gtk_tree_view_collapse_row(GTK_TREE_VIEW(tree), treePath);
                 else
@@ -458,15 +460,15 @@ gboolean Browser_Tree_Key_Press (GtkWidget *tree, GdkEvent *event, gpointer data
                 return TRUE;
                 break;
 
-            case GDK_e:           /* Expand node */
-            case GDK_E:           /* Expand node */
+            case GDK_KEY_e:           /* Expand node */
+            case GDK_KEY_E:           /* Expand node */
                 gtk_tree_view_expand_row(GTK_TREE_VIEW(tree), treePath, FALSE);
                 gtk_tree_path_free(treePath);
                 return TRUE;
                 break;
 
-            case GDK_c:           /* Collapse node */
-            case GDK_C:           /* Collapse node */
+            case GDK_KEY_c:           /* Collapse node */
+            case GDK_KEY_C:           /* Collapse node */
                 gtk_tree_view_collapse_row(GTK_TREE_VIEW(tree), treePath);
                 gtk_tree_path_free(treePath);
                 return TRUE;
@@ -522,7 +524,7 @@ gboolean Browser_List_Key_Press (GtkWidget *list, GdkEvent *event, gpointer data
         {
             switch(kevent->keyval)
             {
-                case GDK_Delete:
+                case GDK_KEY_Delete:
                     Action_Delete_Selected_Files();
                     return TRUE;
             }
@@ -549,7 +551,7 @@ gboolean Browser_List_Key_Press (GtkWidget *list, GdkEvent *event, gpointer data
             BrowserListTimerId = 0;
         }
         // Start a new timer of 500ms
-        BrowserListTimerId = g_timeout_add(500,(GtkFunction)Browser_List_Stop_Timer,&timer_is_running);
+        BrowserListTimerId = g_timeout_add(500,(GSourceFunc)Browser_List_Stop_Timer,&timer_is_running);
         timer_is_running = TRUE;
 
         // Browse the list keeping the current classification
@@ -781,7 +783,7 @@ gboolean Browser_Tree_Node_Selected (GtkTreeSelection *selection, gpointer user_
 
     /* Display the selected path into the BrowserEntry */
     pathName_utf8 = filename_to_display(pathName);
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child), pathName_utf8);
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo))), pathName_utf8);
 
     /* Start to read the directory */
     /* The first time, 'counter' is equal to zero. And if we don't want to load
@@ -2561,8 +2563,8 @@ void Browser_Tree_Rebuild (gchar *path_to_load)
         /* If no node selected, get path from BrowserEntry or default path */
         if (BrowserCurrentPath != NULL)
             current_path = g_strdup(BrowserCurrentPath);
-        else if (g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child)), -1) > 0)
-            current_path = filename_from_display(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child)));
+        else if (g_utf8_strlen(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo)))), -1) > 0)
+            current_path = filename_from_display(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo)))));
         else
             current_path = g_strdup(DEFAULT_PATH_TO_MP3);
     }
@@ -2598,7 +2600,6 @@ void Browser_Tree_Rename_Directory (gchar *last_path, gchar *new_path)
     gchar *new_basename;
     gchar *new_basename_utf8;
     gchar *path;
-    gboolean valid;
 
     if (!last_path || !new_path)
         return;
@@ -2617,7 +2618,7 @@ void Browser_Tree_Rename_Directory (gchar *last_path, gchar *new_path)
 
     for (i = 1; textsplit[i] != NULL; i++)
     {
-        valid = gtk_tree_model_get_iter(GTK_TREE_MODEL(directoryTreeModel), &iter, parentpath);
+        gtk_tree_model_get_iter(GTK_TREE_MODEL(directoryTreeModel), &iter, parentpath);
         childpath = Find_Child_Node(&iter, textsplit[i]);
         if (childpath == NULL)
         {
@@ -2632,7 +2633,7 @@ void Browser_Tree_Rename_Directory (gchar *last_path, gchar *new_path)
         parentpath = childpath;
     }
 
-    valid = gtk_tree_model_get_iter(GTK_TREE_MODEL(directoryTreeModel), &iter, parentpath);
+    gtk_tree_model_get_iter(GTK_TREE_MODEL(directoryTreeModel), &iter, parentpath);
     gtk_tree_path_free(parentpath);
 
     /* Rename the on-screen node */
@@ -2793,10 +2794,10 @@ static gboolean check_for_subdir (gchar *path)
 GdkPixbuf *Pixmap_From_Directory_Permission (gchar *path)
 {
     DIR *dir;
-    struct stat statbuf;
-
 
 #if 0
+    struct stat statbuf;
+
     // TESTING : to display a different icon for non writable directories
     if (stat(path,&statbuf) == 0)
     {
@@ -3032,7 +3033,6 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     GtkWidget *Icon;
     GtkCellRenderer *renderer;
     GtkTreeViewColumn *column;
-    GtkTooltips *Tips;
     GtkWidget *PopupMenu;
     gchar *BrowserTree_Titles[] = {N_("Tree")};
     gchar *BrowserList_Titles[] = {N_("File Name"),N_("Title"),N_("Artist"),N_("Album Artist"),N_("Album"),
@@ -3042,13 +3042,12 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     gchar *ArtistList_Titles[]  = {N_("Artist"),N_("# Albums"),N_("# Files")};
     gchar *AlbumList_Titles[]   = {N_("Album"),N_("# Files")};
 
-    Tips = gtk_tooltips_new();
-    VerticalBox = gtk_vbox_new(FALSE,2);
+    VerticalBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,2);
     gtk_container_set_border_width(GTK_CONTAINER(VerticalBox),2);
 
 
     // HBox for BrowserEntry + BrowserLabel
-    HBox = gtk_hbox_new(FALSE,0);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
     gtk_box_pack_start(GTK_BOX(VerticalBox),HBox,FALSE,TRUE,0);
 
     /*
@@ -3060,7 +3059,7 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     gtk_box_pack_start(GTK_BOX(HBox),BrowserParentButton,FALSE,FALSE,0);
     gtk_button_set_relief(GTK_BUTTON(BrowserParentButton),GTK_RELIEF_NONE);
     g_signal_connect(G_OBJECT(BrowserParentButton),"clicked",G_CALLBACK(Browser_Parent_Button_Clicked),NULL);
-    gtk_tooltips_set_tip(Tips,BrowserParentButton,_("Go to parent directory"),NULL);
+    gtk_widget_set_tooltip_text(BrowserParentButton,_("Go to parent directory"));
 
     /*
      * The entry box for displaying path
@@ -3070,14 +3069,15 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     else
         BrowserEntryModel = gtk_list_store_new(MISC_COMBO_COUNT, G_TYPE_STRING);
 
-    BrowserEntryCombo = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(BrowserEntryModel), MISC_COMBO_TEXT);
+    BrowserEntryCombo = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(BrowserEntryModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(BrowserEntryCombo), MISC_COMBO_TEXT);
     /* History list */
     Load_Path_Entry_List(BrowserEntryModel, MISC_COMBO_TEXT);
     //gtk_combo_box_set_wrap_width(GTK_COMBO_BOX(BrowserEntryCombo),2); // Two columns to display paths
 
-    g_signal_connect(G_OBJECT(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child)),"activate",G_CALLBACK(Browser_Entry_Activated),NULL);
+    g_signal_connect(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo)))),"activate",G_CALLBACK(Browser_Entry_Activated),NULL);
     gtk_box_pack_start(GTK_BOX(HBox),BrowserEntryCombo,TRUE,TRUE,1);
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(BrowserEntryCombo)->child)),_("Enter a directory to browse."),NULL);
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo)))),_("Enter a directory to browse."));
 
     /*
      * The button to select a directory to browse
@@ -3085,8 +3085,8 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     BrowserButton = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(HBox),BrowserButton,FALSE,FALSE,1);
     g_signal_connect_swapped(G_OBJECT(BrowserButton),"clicked",
-                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(GTK_BIN(BrowserEntryCombo)->child));
-    gtk_tooltips_set_tip(Tips,BrowserButton,_("Select a directory to browse."),NULL);
+                             G_CALLBACK(File_Selection_Window_For_Directory),G_OBJECT(gtk_bin_get_child(GTK_BIN(BrowserEntryCombo))));
+    gtk_widget_set_tooltip_text(BrowserButton,_("Select a directory to browse."));
 
 
     /*
@@ -3211,7 +3211,7 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
      * The ScrollWindows with the Artist and Album Lists
      */
 
-    ArtistAlbumVPaned = gtk_vpaned_new();
+    ArtistAlbumVPaned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
 
     Label = gtk_label_new(_("Artist & Album"));
     gtk_notebook_append_page(GTK_NOTEBOOK(BrowserNoteBook),ArtistAlbumVPaned,Label);
@@ -3629,7 +3629,7 @@ GtkWidget *Create_Browser_Items (GtkWidget *parent)
     /*
      * The pane for the tree and list
      */
-    BrowserHPaned = gtk_hpaned_new();
+    BrowserHPaned = gtk_paned_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VerticalBox),BrowserHPaned,TRUE,TRUE,0);
     gtk_paned_pack1(GTK_PANED(BrowserHPaned),BrowserNoteBook,TRUE,TRUE);   // Left side
     gtk_paned_pack2(GTK_PANED(BrowserHPaned),ScrollWindowFileList,TRUE,TRUE); // Right side
@@ -3657,7 +3657,6 @@ void Browser_Open_Rename_Directory_Window (void)
     GtkWidget *ButtonBox;
     GtkWidget *Button;
     GtkWidget *Separator;
-    GtkTooltips *Tips;
     gchar *directory_parent = NULL;
     gchar *directory_name = NULL;
     gchar *directory_name_utf8 = NULL;
@@ -3666,7 +3665,7 @@ void Browser_Open_Rename_Directory_Window (void)
 
     if (RenameDirectoryWindow != NULL)
     {
-        gdk_window_raise(RenameDirectoryWindow->window);
+        gtk_window_present(GTK_WINDOW(RenameDirectoryWindow));
         return;
     }
 
@@ -3694,9 +3693,6 @@ void Browser_Open_Rename_Directory_Window (void)
         return;
     }
 
-    /* The tooltips */
-    Tips = gtk_tooltips_new();
-
     directory_name_utf8 = filename_to_display(directory_name);
 
     RenameDirectoryWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -3712,7 +3708,7 @@ void Browser_Open_Rename_Directory_Window (void)
     gtk_container_add(GTK_CONTAINER(RenameDirectoryWindow),Frame);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -3723,23 +3719,23 @@ void Browser_Open_Rename_Directory_Window (void)
     gtk_label_set_line_wrap(GTK_LABEL(Label),TRUE);
 
     /* The combobox to rename the directory */
-    RenameDirectoryCombo = gtk_combo_box_entry_new_text();
+    RenameDirectoryCombo = gtk_combo_box_text_new_with_entry();
     gtk_box_pack_start(GTK_BOX(VBox),RenameDirectoryCombo,FALSE,FALSE,0);
     /* Set the directory into the combobox */
-    gtk_combo_box_prepend_text(GTK_COMBO_BOX(RenameDirectoryCombo), directory_name_utf8);
-    gtk_combo_box_prepend_text(GTK_COMBO_BOX(RenameDirectoryCombo), "");
-    gtk_entry_set_text(GTK_ENTRY(GTK_BIN(RenameDirectoryCombo)->child),directory_name_utf8);
-    Attach_Popup_Menu_To_Tag_Entries(GTK_ENTRY(GTK_BIN(RenameDirectoryCombo)->child));
+    gtk_combo_box_text_prepend(GTK_COMBO_BOX_TEXT(RenameDirectoryCombo), directory_name_utf8, directory_name_utf8);
+    gtk_combo_box_text_prepend(GTK_COMBO_BOX_TEXT(RenameDirectoryCombo), "", "");
+    gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryCombo))),directory_name_utf8);
+    Attach_Popup_Menu_To_Tag_Entries(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryCombo))));
 
     /* Rename directory : check box + combo box + Status icon */
-    HBox = gtk_hbox_new(FALSE,2);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,2);
     gtk_box_pack_start(GTK_BOX(VBox),HBox,TRUE,TRUE,0);
 
     RenameDirectoryWithMask = gtk_check_button_new_with_label(_("Use mask :"));
     gtk_box_pack_start(GTK_BOX(HBox),RenameDirectoryWithMask,FALSE,FALSE,0);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask),RENAME_DIRECTORY_WITH_MASK);
-    gtk_tooltips_set_tip(Tips,RenameDirectoryWithMask,_("If activated, it will use "
-        "masks to rename directory."),NULL);
+    gtk_widget_set_tooltip_text(RenameDirectoryWithMask,_("If activated, it will use "
+        "masks to rename directory."));
     g_signal_connect(G_OBJECT(RenameDirectoryWithMask),"toggled",G_CALLBACK(Rename_Directory_With_Mask_Toggled),NULL);
 
     // Set up list model which is used by the combobox
@@ -3750,17 +3746,17 @@ void Browser_Open_Rename_Directory_Window (void)
         gtk_list_store_clear(RenameDirectoryMaskModel);
 
     // The combo box to select the mask to apply
-    RenameDirectoryMaskCombo = gtk_combo_box_entry_new();
+    RenameDirectoryMaskCombo = gtk_combo_box_new_with_entry();
     gtk_combo_box_set_model(GTK_COMBO_BOX(RenameDirectoryMaskCombo), GTK_TREE_MODEL(RenameDirectoryMaskModel));
-    gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(RenameDirectoryMaskCombo), MASK_EDITOR_TEXT);
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(RenameDirectoryMaskCombo), MASK_EDITOR_TEXT);
     gtk_widget_set_size_request(RenameDirectoryMaskCombo, 80, -1);
 
     gtk_box_pack_start(GTK_BOX(HBox),RenameDirectoryMaskCombo,TRUE,TRUE,0);
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child)),
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo)))),
         _("Select or type in a mask using codes (see Legend in Scanner Window) to rename "
-        "the directory from tag fields."),NULL);
+        "the directory from tag fields."));
     // Signal to generate preview (preview of the new directory)
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child)),"changed",
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo)))),"changed",
         G_CALLBACK(Scan_Rename_Directory_Generate_Preview),NULL);
 
     // Load masks into the combobox from a file
@@ -3768,7 +3764,7 @@ void Browser_Open_Rename_Directory_Window (void)
     if (RENAME_DIRECTORY_DEFAULT_MASK)
     {
         Add_String_To_Combo_List(RenameDirectoryMaskModel, RENAME_DIRECTORY_DEFAULT_MASK);
-        gtk_entry_set_text(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child), RENAME_DIRECTORY_DEFAULT_MASK);
+        gtk_entry_set_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo))), RENAME_DIRECTORY_DEFAULT_MASK);
     }else
     {
         gtk_combo_box_set_active(GTK_COMBO_BOX(RenameDirectoryMaskCombo), 0);
@@ -3777,9 +3773,9 @@ void Browser_Open_Rename_Directory_Window (void)
     // Mask status icon
     RenameDirectoryMaskStatusIconBox = Create_Pixmap_Icon_With_Event_Box("easytag-forbidden");
     gtk_box_pack_start(GTK_BOX(HBox),RenameDirectoryMaskStatusIconBox,FALSE,FALSE,0);
-    gtk_tooltips_set_tip(Tips,RenameDirectoryMaskStatusIconBox,_("Invalid Scanner Mask"),NULL);
+    gtk_widget_set_tooltip_text(RenameDirectoryMaskStatusIconBox,_("Invalid Scanner Mask"));
     // Signal connection to check if mask is correct into the mask entry
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child)),"changed",
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo)))),"changed",
         G_CALLBACK(Scan_Check_Rename_File_Mask),G_OBJECT(RenameDirectoryMaskStatusIconBox));
 
     // Preview label
@@ -3789,10 +3785,10 @@ void Browser_Open_Rename_Directory_Window (void)
     gtk_box_pack_start(GTK_BOX(VBox),RenameDirectoryPreviewLabel,TRUE,TRUE,0);
 
     /* Separator line */
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),ButtonBox,FALSE,FALSE,0);
     gtk_button_box_set_layout(GTK_BUTTON_BOX(ButtonBox),GTK_BUTTONBOX_END);
     gtk_box_set_spacing(GTK_BOX(ButtonBox),10);
@@ -3800,16 +3796,16 @@ void Browser_Open_Rename_Directory_Window (void)
     /* Button to cancel */
     Button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",G_CALLBACK(Destroy_Rename_Directory_Window), G_OBJECT(RenameDirectoryCombo));
 
     /* Button to save: to rename directory */
     Button = gtk_button_new_from_stock(GTK_STOCK_APPLY);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked", G_CALLBACK(Rename_Directory),NULL);
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RenameDirectoryCombo)->child)),"changed",
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryCombo)))),"changed",
         G_CALLBACK(Entry_Changed_Disable_Object),G_OBJECT(Button));
 
     g_signal_connect_swapped(G_OBJECT(RenameDirectoryWindow),"destroy", G_CALLBACK(Destroy_Rename_Directory_Window), NULL);
@@ -3819,7 +3815,7 @@ void Browser_Open_Rename_Directory_Window (void)
 
     // Just center it over the main window
     gtk_window_set_position(GTK_WINDOW(RenameDirectoryWindow), GTK_WIN_POS_CENTER_ON_PARENT);
-    gtk_window_set_policy(GTK_WINDOW(RenameDirectoryWindow),FALSE,FALSE,TRUE);
+    gtk_window_set_resizable(GTK_WINDOW(RenameDirectoryWindow),FALSE);
     gtk_widget_set_size_request(GTK_WIDGET(RenameDirectoryWindow), 350, -1);
 
     // To avoid/minimize 'flicker'
@@ -3829,7 +3825,7 @@ void Browser_Open_Rename_Directory_Window (void)
     g_signal_emit_by_name(G_OBJECT(RenameDirectoryWithMask),"toggled");
 
     // To initialize PreviewLabel + MaskStatusIconBox
-    g_signal_emit_by_name(G_OBJECT(GTK_BIN(RenameDirectoryMaskCombo)->child),"changed");
+    g_signal_emit_by_name(G_OBJECT(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo))),"changed");
 
     g_free(directory_name_utf8);
 }
@@ -3846,11 +3842,11 @@ void Destroy_Rename_Directory_Window (void)
         g_signal_handlers_block_by_func(RenameDirectoryWindow, Destroy_Rename_Directory_Window, NULL);
 
         if (RENAME_DIRECTORY_DEFAULT_MASK) g_free(RENAME_DIRECTORY_DEFAULT_MASK);
-        RENAME_DIRECTORY_DEFAULT_MASK = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child)));
+        RENAME_DIRECTORY_DEFAULT_MASK = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo)))));
         Add_String_To_Combo_List(RenameDirectoryMaskModel, RENAME_DIRECTORY_DEFAULT_MASK);
         Save_Rename_Directory_Masks_List(RenameDirectoryMaskModel, MASK_EDITOR_TEXT);
 
-        RENAME_DIRECTORY_WITH_MASK = GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active;
+        RENAME_DIRECTORY_WITH_MASK = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask));
 
         gtk_list_store_clear(RenameDirectoryMaskModel);
 
@@ -3881,17 +3877,17 @@ void Rename_Directory (void)
     directory_parent    = g_object_get_data(G_OBJECT(RenameDirectoryWindow),"Parent_Directory");
     directory_last_name = g_object_get_data(G_OBJECT(RenameDirectoryWindow),"Current_Directory");
 
-    if (GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active)
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)))
     {
         // Renamed from mask
-        gchar *mask = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(RenameDirectoryMaskCombo)->child)));
+        gchar *mask = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryMaskCombo)))));
         directory_new_name = Scan_Generate_New_Directory_Name_From_Mask(ETCore->ETFileDisplayed,mask,FALSE);
         g_free(mask);
 
     }else
     {
         // Renamed 'manually'
-        directory_new_name  = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(RenameDirectoryCombo)->child)));
+        directory_new_name  = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RenameDirectoryCombo)))));
     }
 
     /* Check if a name for the directory have been supplied */
@@ -4123,7 +4119,7 @@ gboolean Rename_Directory_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 // Destroy_Rename_Directory_Window();
                 g_signal_emit_by_name(window, "destroy");
                 break;
@@ -4134,10 +4130,10 @@ gboolean Rename_Directory_Window_Key_Press (GtkWidget *window, GdkEvent *event)
 
 void Rename_Directory_With_Mask_Toggled (void)
 {
-    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryCombo),            !GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active);
-    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryMaskCombo),         GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active);
-    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryMaskStatusIconBox), GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active);
-    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryPreviewLabel),      GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)->active);
+    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryCombo),            !gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)));
+    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryMaskCombo),         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)));
+    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryMaskStatusIconBox), gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)));
+    gtk_widget_set_sensitive(GTK_WIDGET(RenameDirectoryPreviewLabel),      gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(RenameDirectoryWithMask)));
 }
 
 
@@ -4155,12 +4151,11 @@ void Browser_Open_Run_Program_Tree_Window (void)
     GtkWidget *ButtonBox;
     GtkWidget *Button;
     GtkWidget *Separator;
-    GtkTooltips *Tips;
     gchar *current_directory = NULL;
 
     if (RunProgramTreeWindow != NULL)
     {
-        gdk_window_raise(RunProgramTreeWindow->window);
+        gtk_window_present(GTK_WINDOW(RunProgramTreeWindow));
         return;
     }
 
@@ -4179,13 +4174,11 @@ void Browser_Open_Run_Program_Tree_Window (void)
     // Just center it over mainwindow
     gtk_window_set_position(GTK_WINDOW(RunProgramTreeWindow), GTK_WIN_POS_CENTER_ON_PARENT);
 
-    Tips = gtk_tooltips_new();
-
     Frame = gtk_frame_new(NULL);
     gtk_container_add(GTK_CONTAINER(RunProgramTreeWindow),Frame);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -4193,37 +4186,38 @@ void Browser_Open_Run_Program_Tree_Window (void)
     gtk_box_pack_start(GTK_BOX(VBox),Label,TRUE,FALSE,0);
     gtk_label_set_line_wrap(GTK_LABEL(Label),TRUE);
 
-    HBox = gtk_hbox_new(FALSE,4);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(VBox),HBox,FALSE,FALSE,2);
     gtk_container_set_border_width(GTK_CONTAINER(HBox), 2);
 
     /* The combobox to enter the program to run */
-    RunProgramComboBox = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(RunProgramModel), MISC_COMBO_TEXT);
+    RunProgramComboBox = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(RunProgramModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(RunProgramComboBox), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(HBox),RunProgramComboBox,TRUE,TRUE,0);
     gtk_widget_set_size_request(GTK_WIDGET(RunProgramComboBox),250,-1);
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),_("Enter the program to run. "
-        "It will receive the current directory as parameter."),NULL);
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),_("Enter the program to run. "
+        "It will receive the current directory as parameter."));
 
     /* History list */
     gtk_list_store_clear(RunProgramModel);
     Load_Run_Program_With_Directory_List(RunProgramModel, MISC_COMBO_TEXT);
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"activate",
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"activate",
         G_CALLBACK(Run_Program_With_Directory),G_OBJECT(RunProgramComboBox));
 
     /* The button to Browse */
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(HBox),Button,FALSE,FALSE,0);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
-                             G_CALLBACK(File_Selection_Window_For_File),G_OBJECT(GTK_BIN(RunProgramComboBox)->child));
+                             G_CALLBACK(File_Selection_Window_For_File),G_OBJECT(gtk_bin_get_child(GTK_BIN(RunProgramComboBox))));
 
     /* We attach usefull data to the combobox (into Run_Program_With_Directory) */
     g_object_set_data(G_OBJECT(RunProgramComboBox), "Current_Directory", current_directory);
 
     /* Separator line */
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),ButtonBox,FALSE,FALSE,0);
     gtk_button_box_set_layout(GTK_BUTTON_BOX(ButtonBox),GTK_BUTTONBOX_END);
     gtk_box_set_spacing(GTK_BOX(ButtonBox), 10);
@@ -4231,17 +4225,17 @@ void Browser_Open_Run_Program_Tree_Window (void)
     /* Button to cancel */
     Button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Destroy_Run_Program_Tree_Window),NULL);
 
     /* Button to execute */
     Button = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button,TRUE);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked", G_CALLBACK(Run_Program_With_Directory),G_OBJECT(RunProgramComboBox));
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"changed", G_CALLBACK(Entry_Changed_Disable_Object),G_OBJECT(Button));
-    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"changed",NULL);
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"changed", G_CALLBACK(Entry_Changed_Disable_Object),G_OBJECT(Button));
+    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"changed",NULL);
 
     gtk_widget_show_all(RunProgramTreeWindow);
 }
@@ -4264,7 +4258,7 @@ gboolean Run_Program_Tree_Window_Key_Press (GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Destroy_Run_Program_Tree_Window();
                 break;
         }
@@ -4272,7 +4266,7 @@ gboolean Run_Program_Tree_Window_Key_Press (GtkWidget *window, GdkEvent *event)
     return FALSE;
 }
 
-void Run_Program_With_Directory (GtkObject *combobox)
+void Run_Program_With_Directory (GtkWidget *combobox)
 {
     gchar *program_name;
     gchar *current_directory;
@@ -4281,7 +4275,7 @@ void Run_Program_With_Directory (GtkObject *combobox)
 
     if (!GTK_IS_COMBO_BOX(combobox)) return;
 
-    program_name      = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
+    program_name      = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combobox)))));
     current_directory = g_object_get_data(G_OBJECT(combobox), "Current_Directory");
 #ifdef WIN32
     /* On win32 : 'winamp.exe "c:\path\to\dir"' succeed, while 'winamp.exe "c:\path\to\dir\"' fails */
@@ -4321,11 +4315,10 @@ void Browser_Open_Run_Program_List_Window (void)
     GtkWidget *ButtonBox;
     GtkWidget *Button;
     GtkWidget *Separator;
-    GtkTooltips *Tips;
 
     if (RunProgramListWindow != NULL)
     {
-        gdk_window_raise(RunProgramListWindow->window);
+        gtk_window_present(GTK_WINDOW(RunProgramListWindow));
         return;
     }
 
@@ -4339,13 +4332,11 @@ void Browser_Open_Run_Program_List_Window (void)
     // Just center over mainwindow
     gtk_window_set_position(GTK_WINDOW(RunProgramListWindow),GTK_WIN_POS_CENTER_ON_PARENT);
 
-    Tips = gtk_tooltips_new();
-
     Frame = gtk_frame_new(NULL);
     gtk_container_add(GTK_CONTAINER(RunProgramListWindow),Frame);
     gtk_container_set_border_width(GTK_CONTAINER(Frame),2);
 
-    VBox = gtk_vbox_new(FALSE,4);
+    VBox = gtk_box_new(GTK_ORIENTATION_VERTICAL,4);
     gtk_container_add(GTK_CONTAINER(Frame),VBox);
     gtk_container_set_border_width(GTK_CONTAINER(VBox), 4);
 
@@ -4353,37 +4344,38 @@ void Browser_Open_Run_Program_List_Window (void)
     gtk_box_pack_start(GTK_BOX(VBox),Label,TRUE,TRUE,0);
     gtk_label_set_line_wrap(GTK_LABEL(Label),TRUE);
 
-    HBox = gtk_hbox_new(FALSE,4);
+    HBox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,4);
     gtk_box_pack_start(GTK_BOX(VBox),HBox,FALSE,FALSE,2);
     gtk_container_set_border_width(GTK_CONTAINER(HBox), 2);
 
     /* The combobox to enter the program to run */
-    RunProgramComboBox = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(RunProgramModel), MISC_COMBO_TEXT);
+    RunProgramComboBox = gtk_combo_box_new_with_model_and_entry(GTK_TREE_MODEL(RunProgramModel));
+    gtk_combo_box_set_entry_text_column(GTK_COMBO_BOX(RunProgramComboBox), MISC_COMBO_TEXT);
     gtk_box_pack_start(GTK_BOX(HBox),RunProgramComboBox,TRUE,TRUE,0);
     gtk_widget_set_size_request(GTK_WIDGET(RunProgramComboBox),250,-1);
-    gtk_tooltips_set_tip(Tips,GTK_WIDGET(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),_("Enter the program to run. "
-        "It will receive the current file as parameter."),NULL);
+    gtk_widget_set_tooltip_text(GTK_WIDGET(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),_("Enter the program to run. "
+        "It will receive the current file as parameter."));
 
     /* History list */
     gtk_list_store_clear(RunProgramModel);
     Load_Run_Program_With_File_List(RunProgramModel, MISC_COMBO_TEXT);
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"activate",
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"activate",
         G_CALLBACK(Run_Program_With_Selected_Files),G_OBJECT(RunProgramComboBox));
 
     /* The button to Browse */
     Button = gtk_button_new_from_stock(GTK_STOCK_OPEN);
     gtk_box_pack_start(GTK_BOX(HBox),Button,FALSE,FALSE,0);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked",
-                             G_CALLBACK(File_Selection_Window_For_File),G_OBJECT(GTK_BIN(RunProgramComboBox)->child));
+                             G_CALLBACK(File_Selection_Window_For_File),G_OBJECT(gtk_bin_get_child(GTK_BIN(RunProgramComboBox))));
 
     /* We attach usefull data to the combobox (into Run_Program_With_Directory) */
     //g_object_set_data(G_OBJECT(Combo), "Current_File", current_file);
 
     /* Separator line */
-    Separator = gtk_hseparator_new();
+    Separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),Separator,FALSE,FALSE,0);
 
-    ButtonBox = gtk_hbutton_box_new ();
+    ButtonBox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(VBox),ButtonBox,FALSE,FALSE,0);
     gtk_button_box_set_layout(GTK_BUTTON_BOX(ButtonBox),GTK_BUTTONBOX_END);
     gtk_box_set_spacing(GTK_BOX(ButtonBox), 10);
@@ -4391,17 +4383,17 @@ void Browser_Open_Run_Program_List_Window (void)
     /* Button to cancel */
     Button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button, TRUE);
     gtk_widget_grab_default(Button);
     g_signal_connect(G_OBJECT(Button),"clicked", G_CALLBACK(Destroy_Run_Program_List_Window),NULL);
 
     /* Button to execute */
     Button = gtk_button_new_from_stock(GTK_STOCK_EXECUTE);
     gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
-    GTK_WIDGET_SET_FLAGS(Button,GTK_CAN_DEFAULT);
+    gtk_widget_set_can_default(Button, TRUE);
     g_signal_connect_swapped(G_OBJECT(Button),"clicked", G_CALLBACK(Run_Program_With_Selected_Files),G_OBJECT(RunProgramComboBox));
-    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"changed", G_CALLBACK(Entry_Changed_Disable_Object),G_OBJECT(Button));
-    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(GTK_BIN(RunProgramComboBox)->child)),"changed",NULL);
+    g_signal_connect_swapped(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"changed", G_CALLBACK(Entry_Changed_Disable_Object),G_OBJECT(Button));
+    g_signal_emit_by_name(G_OBJECT(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(RunProgramComboBox)))),"changed",NULL);
 
     gtk_widget_show_all(RunProgramListWindow);
 }
@@ -4424,7 +4416,7 @@ gboolean Run_Program_List_Window_Key_Press(GtkWidget *window, GdkEvent *event)
         kevent = (GdkEventKey *)event;
         switch(kevent->keyval)
         {
-            case GDK_Escape:
+            case GDK_KEY_Escape:
                 Destroy_Run_Program_List_Window();
                 break;
         }
@@ -4432,7 +4424,7 @@ gboolean Run_Program_List_Window_Key_Press(GtkWidget *window, GdkEvent *event)
     return FALSE;
 }
 
-void Run_Program_With_Selected_Files (GtkObject *combobox)
+void Run_Program_With_Selected_Files (GtkWidget *combobox)
 {
     gchar   *program_name;
     ET_File *ETFile;
@@ -4446,7 +4438,7 @@ void Run_Program_With_Selected_Files (GtkObject *combobox)
         return;
 
     // Programe name to run
-    program_name = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_BIN(combobox)->child)));
+    program_name = g_strdup(gtk_entry_get_text(GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combobox)))));
 
     // List of files to pass as parameters
     selected_paths = gtk_tree_selection_get_selected_rows(gtk_tree_view_get_selection(GTK_TREE_VIEW(BrowserList)), NULL);
