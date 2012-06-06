@@ -30,6 +30,8 @@ GtkWidget *gtk_button_box_new(GtkOrientation orientation);
 	gtk_combo_box_entry_new_text()
 #define gtk_combo_box_new_with_model_and_entry(x) \
 	gtk_combo_box_entry_new_with_model(x, MISC_COMBO_TEXT)
+#define gtk_combo_box_new_with_entry() \
+	gtk_combo_box_entry_new()
 #define gtk_combo_box_set_entry_text_column(x, y)
 #define gtk_combo_box_text_new_with_entry() gtk_combo_box_entry_new_text()
 
@@ -44,7 +46,7 @@ GtkWidget *gtk_button_box_new(GtkOrientation orientation);
 #define GDK_KEY_Escape GDK_Escape
 #define GDK_KEY_i GDK_i
 #define GDK_KEY_I GDK_I
-#define GDK_KEY_KP GDK_KP
+#define GDK_KEY_KP_Enter GDK_KP_Enter
 #define GDK_KEY_Return GDK_Return
 #define GDK_KEY_t GDK_t
 #define GDK_KEY_T GDK_T
@@ -64,7 +66,8 @@ void gtk_widget_set_can_focus(GtkWidget *widget, gboolean can_default);
 #define gtk_dialog_get_action_area(x) GTK_DIALOG(x)->action_area
 #define gtk_adjustment_get_page_size(x) GTK_ADJUSTMENT(x)->page_size
 #define gtk_adjustment_get_value(x) GTK_ADJUSTMENT(x)->value
-#define gtk_selection_data_get_data(x) GTK_SELECTION_DATA(x)->data
+#define gtk_adjustment_get_upper(x) GTK_ADJUSTMENT(x)->upper
+#define gtk_selection_data_get_data(x) (x)->data
 #define gtk_widget_get_window(x) GTK_WIDGET(x)->window
 
 #endif
