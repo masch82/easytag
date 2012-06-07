@@ -86,7 +86,7 @@ AM_PATH_GLIB_2_0(2.8.0,, AC_MSG_ERROR([*** GLIB >= 2.8.0 not installed! ***]))
 dnl GTK+ libraries
 if test "x$enable_gtk3" = "xyes"; then
 	AM_PATH_GTK_3_0(3.0.0,, AC_MSG_ERROR([*** GTK >= 3.0.0 not installed! ***]))
-elif test "x$enable_gtk3" = "xauto"; then
+elif test "x$enable_gtk3" = "xauto" -a "x$enable_gtk2" != "xyes"; then
 	AM_PATH_GTK_3_0(3.0.0,, [enable_gtk3=no])
 fi
 if test "x$enable_gtk3" = "xno" -a "x$enable_gtk2" != "xno"; then
