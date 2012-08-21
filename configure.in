@@ -81,6 +81,10 @@ dnl -------------------------------
 dnl Checks for libraries.
 dnl -------------------------------
 
+# for the gtk checks to succeed both gtk-2.0.m4 and gtk-3.0.m4 have to be present in
+# /share/aclocal or your distributions according location for autogen.sh repsectivly
+# autoconf to work properly, otherwise you will get "undefined macro"
+
 dnl GLIB library
 AM_PATH_GLIB_2_0(2.8.0,, AC_MSG_ERROR([*** GLIB >= 2.8.0 not installed! ***]))
 dnl GTK+ libraries
@@ -434,6 +438,44 @@ else
     echo "*** Wavpack file support disabled on commandline"
     echo "*** (Install libwavpack, and use --enable-wavpack to enable it)"
     echo "***"
+fi
+
+
+dnl ################################################
+dnl # Gtk-Mac-Integration
+dnl ################################################
+
+if test "x$enable_gtk3" != "xno"; then
+	# check for gtk3 quartz & gtk-mac-integration
+	AC_MSG_CHECKING(for Mac OS X gtk3 quartz backend)
+	GTK_CHECK_BACKEND([quartz], [3.0], [have_gtk_quartz=yes], [have_gtk_quartz=no])
+	if test "x$have_gtk_quartz" = "xyes"; then
+			AC_MSG_RESULT(yes)
+			AC_MSG_CHECKING(for Mac OS X gtk-mac-integration)
+	        PKG_CHECK_MODULES(GTK_MAC, gtk-mac-integration)
+	        AC_SUBST(GTK_MAC_LIBS)
+	        AC_SUBST(GTK_MAC_CFLAGS)
+	else
+			AC_MSG_RESULT(no)
+			echo "no quartz ?????"
+	fi
+else
+	if test "x$enable_gtk2" != "xno"; then
+		# check for gtk2 quartz & gtk-mac-integration
+		AC_MSG_CHECKING(for Mac OS X gtk2 quartz backend)
+		_gdk_tgt=`$PKG_CONFIG --variable=target gdk-2.0`
+		# We don't the conditional in Automake and since it can't be defined in if else loop - leave it out
+		# AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test x$_gdk_tgt = xquartz])
+		if test "x$_gdk_tgt" = xquartz; then 
+			AC_MSG_RESULT(yes)
+			AC_MSG_CHECKING(for Mac OS X gtk-mac-integration)
+		   PKG_CHECK_MODULES(GTK_MAC, gtk-mac-integration)
+		   AC_SUBST(GTK_MAC_LIBS)
+		   AC_SUBST(GTK_MAC_CFLAGS)
+		else
+			AC_MSG_RESULT(no)
+		fi
+	fi
 fi
 
 dnl Use -Wall if we have gcc.
