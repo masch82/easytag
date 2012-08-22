@@ -62,6 +62,10 @@
 #   include "win32/win32dep.h"
 #endif
 
+#ifdef MAC_INTEGRATION
+#	include <gtkmacintegration/gtkosxapplication.h>
+#endif
+
 #include "../pixmaps/EasyTAG_icon.xpm"
 
 
@@ -182,6 +186,11 @@ int main (int argc, char *argv[])
 
     /* Initialize GTK */
     gtk_init(&argc, &argv);
+
+#ifdef MAC_INTEGRATION
+	/* Initialize gtk osx integration */
+	GtkOSXApplication *theApp = g_object_new(GTK_TYPE_OSX_APPLICATION, NULL);
+#endif
 
     /* Get home variable */
 #ifdef WIN32
@@ -334,6 +343,12 @@ int main (int argc, char *argv[])
     g_signal_connect(G_OBJECT(MainWindow),"delete_event",G_CALLBACK(Quit_MainWindow),NULL);
     g_signal_connect(G_OBJECT(MainWindow),"destroy",G_CALLBACK(Quit_MainWindow),NULL);
 
+#ifdef MAC_INTEGRATION
+	/* special quit signal hook, to passthrough signals from osx */
+	g_signal_connect(theApp, "NSApplicationBlockTermination",
+					 G_CALLBACK(Quit_MainWindow), NULL);
+#endif
+
     /* Minimised window icon */
     gtk_widget_realize(MainWindow);
 
@@ -410,6 +425,11 @@ int main (int argc, char *argv[])
     ProgressArea = Create_Progress_Bar();
     gtk_box_pack_end(GTK_BOX(HBox),ProgressArea,FALSE,FALSE,0);
 
+#ifdef MAC_INTEGRATION
+	/* tell gtkosxapp that we are ready */
+	gtk_osxapplication_ready(theApp);
+#endif
+
     gtk_widget_show(MainWindow);
 
     if (SET_MAIN_WINDOW_POSITION)
@@ -421,6 +441,12 @@ int main (int argc, char *argv[])
 
     /* Enter the event loop */
     gtk_main ();
+
+#ifdef MAC_INTEGRATION
+	/* clean up on Mac OS X */
+	g_object_unref(theApp);
+#endif
+
     return 0;
 }
 
