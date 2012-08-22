@@ -704,6 +704,10 @@ void About_Window_Go_To_Home_Page (void)
 {
 #ifdef WIN32
     wineasytag_notify_uri(WEBPAGE);
+#elif __MACOSX__
+	/* open with the default Webbrowser under Mac OS X using the Mac OS X "open" command*/
+    if (system("open "WEBPAGE)==0)
+		printf("Error opening the Webpage\n");
 #else
     if (system("gnome-moz-remote "WEBPAGE)!=0)
         if (system("x-www-browser "WEBPAGE)!=0)

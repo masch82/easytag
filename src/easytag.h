@@ -43,6 +43,9 @@
 #  define ATTRIBUTE_UNUSED
 #endif 
 
+/* If we have an Apple computer and a mach kernel - we are one MacOS X*/
+#define __MACOSX__ __APPLE__ && __MACH__
+
 
 /***************
  * Declaration *
