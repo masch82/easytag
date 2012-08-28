@@ -87,7 +87,7 @@ EXTRA_DIST = \
  win32/nsis/easytag-install.ico \
  win32/nsis/easytag-uninstall.bmp 
 
-easytag_LDADD = $(GTK_LIBS) libmpg123/libmpg123.a libapetag/libapetag.a  id3lib/libid3bugfix.a
+easytag_LDADD = $(GTK_LIBS) $(GTK_MAC_LIBS) libmpg123/libmpg123.a libapetag/libapetag.a  id3lib/libid3bugfix.a
 
 localedir = $(datadir)/locale
 PACKAGE_DATA_DIR = $(datadir)/$(PACKAGE)
