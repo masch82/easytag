@@ -55,6 +55,14 @@
 #   include "win32/gtkwin32dep.h"
 #endif
 
+#ifdef __MACOSX__
+#	include "osx_util.h"
+#endif
+
+#ifdef MAC_INTEGRATION
+#	include <gtkmacintegration/gtkosxapplication.h>
+#endif
+
 
 /****************
  * Declarations *
@@ -287,7 +295,17 @@ void Show_About_Window (void)
     /* EasyTAG Logo */
     gtk_widget_realize(AboutWindow);
 
-#ifdef PACKAGE_DATA_DIR
+#ifdef MAC_INTEGRATION
+	if (is_running_from_osx_appBundle()) {
+		gchar* path = quartz_application_get_resource_path();
+		gchar* completeFilename = g_strconcat (path, "/EasyTAG_logo.xpm", NULL );
+		pixbuf = gdk_pixbuf_new_from_file(completeFilename, NULL);
+		g_free(path);
+		g_free(completeFilename);
+	} else {
+		pixbuf = gdk_pixbuf_new_from_file(PACKAGE_DATA_DIR"/EasyTAG_logo.xpm", NULL);
+	}
+#elif defined PACKAGE_DATA_DIR
     pixbuf = gdk_pixbuf_new_from_file(PACKAGE_DATA_DIR"/EasyTAG_logo.xpm", NULL);
 #else
     pixmap = gdk_pixbuf_new_from_data(EasyTAG_logo_xpm, NULL);
@@ -623,15 +641,28 @@ void Show_About_Window (void)
     gtk_text_buffer_get_iter_at_offset(TextBuffer, &textIter, 0);
 
     // The file 'ChangeLog' to read
+#ifdef MAC_INTEGRATION
+	gchar* completeFilename;
+	if (is_running_from_osx_appBundle()) {
+		gchar* path = quartz_application_get_resource_path();
+		completeFilename = g_strconcat (path, "/ChangeLog", NULL );
+		g_free(path);
+	} else {
+		completeFilename = g_strconcat (PACKAGE_DATA_DIR, "/ChangeLog", NULL );
+	}
+    if ( (file=fopen(completeFilename,"r"))==0 )
+    {
+		g_free(completeFilename);
+#else
     if ( (file=fopen(PACKAGE_DATA_DIR"/ChangeLog","r"))==0 )
     {
+#endif
         gchar *msg = g_strdup_printf(_("Can't open file '%s' (%s)\n"),PACKAGE_DATA_DIR"/ChangeLog",g_strerror(errno));
         gtk_text_buffer_insert_with_tags_by_name(TextBuffer, &textIter,
                                                  msg, -1,
                                                  "monospace", "red_foreground", NULL);
         g_free(msg);
-    } else
-    {
+    } else {
         gint first_version = 0;
 
         while (fgets(temp,sizeof(temp),file))
