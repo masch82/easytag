@@ -313,9 +313,16 @@ void Picture_Add_Button_Clicked (GObject *object)
     gtk_file_filter_set_name(GTK_FILE_FILTER(filter), _("PNG and JPEG"));
     gtk_file_filter_add_mime_type(GTK_FILE_FILTER(filter), "image/jpeg"); // Using mime type avoid problem of case sensitive with extensions
     gtk_file_filter_add_mime_type(GTK_FILE_FILTER(filter), "image/png");
-    //gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpeg"); // Warning: *.JPEG or *.JpEg files will not be displayed
-    //gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpg");
-    //gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.png");
+#ifdef MAC_INTEGRATION
+	// The mime filters don't work on Mac OS, so we have to explicitly permit file extensions
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpeg"); // Warning: *.JPEG or *.JpEg files will not be displayed
+	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.JPEG");
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpg");
+	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.JPG");
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.png");
+	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.PNG");
+#endif
+
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (FileSelectionWindow), GTK_FILE_FILTER(filter));
     // Make this filter the default
     gtk_file_chooser_set_filter(GTK_FILE_CHOOSER(FileSelectionWindow), GTK_FILE_FILTER(filter));
