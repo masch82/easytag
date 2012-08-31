@@ -57,6 +57,8 @@ easytag_SOURCES = \
  ogg_header.h \
  ogg_tag.c \
  ogg_tag.h \
+ osx_util.c \
+ osx_util.h \
  picture.c \
  picture.h \
  prefs.c \
