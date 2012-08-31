@@ -38,6 +38,16 @@
 
 #include "gtk2_compat.h"
 
+#ifdef MAC_INTEGRATION
+#include <gtkmacintegration/gtkosxapplication.h>
+#include <gtkmacintegration/gtk-mac-menu.h>
+  #if GTK_CHECK_VERSION(2,90,7)
+  #include <gdk/gdkkeysyms-compat.h>
+  #else
+  #include <gdk/gdkkeysyms.h>
+  #endif
+#endif
+
 /***************
  * Declaration *
  ***************/
@@ -191,6 +201,7 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
         { AM_SORT_ASCENDING_FILE_SAMPLERATE,  GTK_STOCK_SORT_ASCENDING,  _("Ascending by samplerate"),       NULL, _("Ascending by samplerate"),       G_CALLBACK(Menu_Sort_Action) },
         { AM_SORT_DESCENDING_FILE_SAMPLERATE, GTK_STOCK_SORT_DESCENDING, _("Descending by samplerate"),      NULL, _("Descending by samplerate"),      G_CALLBACK(Menu_Sort_Action) },
 
+#ifndef MAC_INTEGRATION
         { AM_OPEN_FILE_WITH,     GTK_STOCK_OPEN,             _("Open File(s) with ..."),      NULL,                _("Open File(s) with ..."),     G_CALLBACK(Browser_Open_Run_Program_List_Window) },
         { AM_SELECT_ALL_FILES,   "easytag-select-all",       _("Select All Files"),           "<Control>A",        _("Select All Files"),          G_CALLBACK(Action_Select_All_Files) },
         { AM_UNSELECT_ALL_FILES, "easytag-unselect-all",     _("Unselect All Files"),         "<Shift><Control>A", _("Unselect All Files"),        G_CALLBACK(Action_Unselect_All_Files) },
@@ -244,6 +255,63 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 
         { MENU_HELP,                NULL,                   _("_Help"),                             NULL,         NULL,                                 NULL },
         { AM_OPEN_ABOUT_WINDOW,     GTK_STOCK_ABOUT,        _("_About"),                            NULL,         _("About"),                           G_CALLBACK(Show_About_Window) },
+
+#else
+		/* These are the changed shortcuts for the Mac Menubar, they only apply when GTK-Mac-Integration is present */
+		{ AM_OPEN_FILE_WITH,     GTK_STOCK_OPEN,             "_Open",						  "<Meta>O",        _("Open File(s) with ..."),     G_CALLBACK(Browser_Open_Run_Program_List_Window) },		
+        { AM_SELECT_ALL_FILES,   "easytag-select-all",       _("Select All Files"),           "<Meta>A",        _("Select All Files"),          G_CALLBACK(Action_Select_All_Files) },
+        { AM_UNSELECT_ALL_FILES, "easytag-unselect-all",     _("Unselect All Files"),         "<Shift><Meta>A", _("Unselect All Files"),        G_CALLBACK(Action_Unselect_All_Files) },
+        { AM_INVERT_SELECTION,   "easytag-invert-selection", _("Invert Files Selection"),     "<Meta>I",        _("Invert Files Selection"),    G_CALLBACK(Action_Invert_Files_Selection) },
+        { AM_DELETE_FILE,        GTK_STOCK_DELETE,           _("Delete File(s)"),             NULL,             _("Delete File(s)"),            G_CALLBACK(Action_Delete_Selected_Files) },
+        { AM_FIRST,              GTK_STOCK_GOTO_FIRST,       _("_First File"),                "<Meta>Home",     _("First File"),                G_CALLBACK(Action_Select_First_File) },
+        { AM_PREV,               GTK_STOCK_GO_BACK,          _("_Previous File"),             "Page_Up",        _("Previous File"),             G_CALLBACK(Action_Select_Prev_File) },
+        { AM_NEXT,               GTK_STOCK_GO_FORWARD,       _("_Next File"),                 "Page_Down",      _("Next File"),                 G_CALLBACK(Action_Select_Next_File) },
+        { AM_LAST,               GTK_STOCK_GOTO_LAST,        _("_Last File"),                 "<Meta>End",      _("Last File"),                 G_CALLBACK(Action_Select_Last_File) },
+        // XXX GTK1 version uses Ctrl+C for scanner, this doesnt work in GTK1 as its copy! in gtk2, behaviour is different
+        // and binding Ctrl+C effectively stops the user copying text..
+        { AM_SCAN,               "easytag-scan",             _("S_can File(s)"),              NULL,             _("Scan File(s)"),              G_CALLBACK(Action_Scan_Selected_Files) },
+        { AM_REMOVE,             GTK_STOCK_CLEAR,            _("_Remove Tag(s)"),             "<Meta>R",        _("Remove Tag(s)"),             G_CALLBACK(Action_Remove_Selected_Tags) },
+        { AM_UNDO,               GTK_STOCK_UNDO,             _("_Undo Last File(s) Changes"), "<Meta>Z",        _("Undo Last File(s) Changes"), G_CALLBACK(Action_Undo_Selected_Files) },
+        { AM_REDO,               GTK_STOCK_REDO,             _("R_edo Last File(s) Changes"), "<Shift><Meta>Z", _("Redo Last File(s) Changes"), G_CALLBACK(Action_Redo_Selected_File) },
+        { AM_SAVE,               GTK_STOCK_SAVE,             _("_Save File(s)"),              "<Meta>S",        _("Save File(s)"),              G_CALLBACK(Action_Save_Selected_Files) },
+        { AM_SAVE_FORCED,        GTK_STOCK_SAVE,             _("_Force Saving File(s)"),      "<Shift><Meta>S", _("Force Saving File(s)"),      G_CALLBACK(Action_Force_Saving_Selected_Files) },
+        { AM_UNDO_HISTORY,       GTK_STOCK_UNDO,             _("Undo Last Changes"),          NULL,             _("Undo Last Changes"),         G_CALLBACK(Action_Undo_From_History_List) },
+        { AM_REDO_HISTORY,       GTK_STOCK_REDO,             _("Redo Last Changes"),          NULL,             _("Redo Last Changes"),         G_CALLBACK(Action_Redo_From_History_List) },
+        { AM_QUIT,               GTK_STOCK_QUIT,             _("_Quit"),                      "<Meta>Q",        _("Quit"),                      G_CALLBACK(Quit_MainWindow) },
+
+        { MENU_BROWSER,                NULL,                   _("_Browser"),                      NULL,                NULL,                               NULL },
+        { AM_LOAD_HOME_DIR,            GTK_STOCK_HOME,         _("Go to _Home Directory"),         "<Alt>Home",      _("Go to Home Directory"),          G_CALLBACK(Browser_Load_Home_Directory) },
+        { AM_LOAD_DESKTOP_DIR,         GTK_STOCK_JUMP_TO,      _("Go to Desktop Directory"),       NULL,        	 _("Go to Desktop Directory"),       G_CALLBACK(Browser_Load_Desktop_Directory) },
+        { AM_LOAD_DOCUMENTS_DIR,       GTK_STOCK_JUMP_TO,      _("Go to Documents Directory"),     NULL,         	 _("Go to Documents Directory"),     G_CALLBACK(Browser_Load_Documents_Directory) },
+        { AM_LOAD_DOWNLOADS_DIR,       GTK_STOCK_JUMP_TO,      _("Go to Downloads Directory"),     NULL,         	 _("Go to Downloads Directory"),     G_CALLBACK(Browser_Load_Downloads_Directory) },
+        { AM_LOAD_MUSIC_DIR,           GTK_STOCK_JUMP_TO,      _("Go to Music Directory"),         NULL,         	 _("Go to Music Directory"),         G_CALLBACK(Browser_Load_Music_Directory) },
+        { AM_LOAD_DEFAULT_DIR,         GTK_STOCK_JUMP_TO,      _("Go to _Default Directory"),      "<Meta>D",        _("Go to Default Directory"),       G_CALLBACK(Browser_Load_Default_Directory) },
+        { AM_SET_PATH_AS_DEFAULT,      GTK_STOCK_DIRECTORY,    _("Set _Current Path as Default"),  NULL,             _("Set Current Path as Default"),   G_CALLBACK(Set_Current_Path_As_Default) },
+        { AM_TREE_OR_ARTISTALBUM_VIEW, "easytag-artist-album", _("Tree View | Artist-Album View"), NULL,             _("Tree View | Artist-Album View"), G_CALLBACK(Menu_Sort_Action) },
+        { AM_RENAME_DIR,               GTK_STOCK_INDEX,        _("Rename Directory ..."),          "F2",             _("Rename Directory ..."),          G_CALLBACK(Browser_Open_Rename_Directory_Window) },
+        { AM_RELOAD_DIRECTORY,         GTK_STOCK_REFRESH,      _("Reload Directory"),              "F5",             _("Reload Directory"),              G_CALLBACK(Browser_Reload_Directory) },
+        { AM_BROWSE_DIRECTORY_WITH,    GTK_STOCK_EXECUTE,      _("Browse Directory with ..."),     NULL,             _("Browse Directory with ..."),     G_CALLBACK(Browser_Open_Run_Program_Tree_Window) },
+        { AM_COLLAPSE_TREE,            NULL,                   _("_Collapse Tree"),                "<Meta><Shift>C", _("_Collapse Tree"),                G_CALLBACK(Browser_Tree_Collapse) },
+        { AM_INITIALIZE_TREE,          GTK_STOCK_REFRESH,      _("_Refresh Tree"),                 "<Meta><Shift>R", _("_Refresh Tree"),                 G_CALLBACK(Browser_Tree_Rebuild) },
+
+        { MENU_SCANNER,              NULL,                  _("S_canner"),                          NULL,         NULL,                                 NULL },
+        { AM_SCANNER_FILL_TAG,       "easytag-scan",        _("_Fill Tag(s) ..."),                  NULL,         _("Fill Tag(s) ..."),                 G_CALLBACK(Scan_Use_Fill_Tag_Scanner) },
+        { AM_SCANNER_RENAME_FILE,    "easytag-scan",        _("_Rename File(s) and Directory ..."), NULL,         _("Rename File(s) and Directory ..."),G_CALLBACK(Scan_Use_Rename_File_Scanner) },
+        { AM_SCANNER_PROCESS_FIELDS, "easytag-scan",        _("_Process Field(s) ..."),             NULL,         _("Process Fields(s) ..."),           G_CALLBACK(Scan_Use_Process_Fields_Scanner) },
+
+        { MENU_MISC,                NULL,                   _("_Misc"),                             NULL,         NULL,                                 NULL },
+        { AM_SEARCH_FILE,           GTK_STOCK_FIND,         _("Search _File(s) ..."),               "<Meta>F", 	   _("Search File(s)..."),               G_CALLBACK(Open_Search_File_Window) },
+        { AM_CDDB_SEARCH,           GTK_STOCK_CDROM,        _("CD Data _Base Search ..."),          "<Meta>B", 	   _("CDDB Search ..."),                 G_CALLBACK(Open_Cddb_Window) },
+        { AM_FILENAME_FROM_TXT,     GTK_STOCK_OPEN,         _("Load Filenames from TXT ..."),       "<Meta>T",     _("Load Filenames from TXT ..."),     G_CALLBACK(Open_Load_Filename_Window) },
+        { AM_WRITE_PLAYLIST,        GTK_STOCK_SAVE_AS,      _("Write Playlist ..."),                "<Meta>W",     _("Write Playlist ..."),              G_CALLBACK(Open_Write_Playlist_Window) },
+        { AM_RUN_AUDIO_PLAYER,      "easytag-sound",        _("Run Audio Player"),                  "<Meta>X",     _("Run Audio Player"),                G_CALLBACK(Run_Audio_Player_Using_Selection) },
+
+        { MENU_SETTINGS,            NULL,                   _("_Settings"),                         NULL,         NULL,                                 NULL },
+        { AM_OPEN_OPTIONS_WINDOW,   GTK_STOCK_PREFERENCES,  _("_Preferences ..."),                  "<Meta>,",     _("Preferences ..."),                 G_CALLBACK(Open_OptionsWindow) },
+
+        { MENU_HELP,                NULL,                   _("_Help"),                             NULL,         NULL,                                 NULL },
+        { AM_OPEN_ABOUT_WINDOW,     GTK_STOCK_ABOUT,        _("_About"),                            NULL,         _("About"),                           G_CALLBACK(Show_About_Window) },
+#endif
 
 
         /*
@@ -333,6 +401,38 @@ void Create_UI (GtkWidget **ppmenubar, GtkWidget **pptoolbar)
 
     *pptoolbar = toolbar;
     *ppmenubar = menubar;
+
+#ifdef MAC_INTEGRATION
+	/* If gtk-mac-integration is available we register with the osx menubar after the menubar has been completly constructed
+	   note that because of the inclusion of GMenuItem in gtk > 3.4.0 may be conflicts have yet to be sorted out with
+	   conflicting implementations of GMenuItem in gtk-mac-integration and gtk - the former will probably be deprecated in 
+	   the future */
+	
+	// Change the Shortcut for the Prefs, because comma doesn't work else
+	gtk_accel_map_change_entry("<Actions>/actions/Preferences", GDK_comma, 
+							GDK_META_MASK, TRUE);
+							
+	GtkOSXApplication *theApp = g_object_new(GTK_TYPE_OSX_APPLICATION, NULL);				
+	
+	gtk_osxapplication_set_menu_bar (theApp, GTK_MENU_SHELL(menubar));
+	
+	GtkWidget *about_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/HelpMenu/About");
+	gtk_osxapplication_insert_app_menu_item(theApp, about_item, 0);
+	gtk_osxapplication_insert_app_menu_item (theApp, gtk_separator_menu_item_new(), 1);
+
+	GtkWidget *preferences_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/SettingsMenu/Preferences");
+	gtk_osxapplication_insert_app_menu_item(theApp, preferences_item, 2);
+	
+	GtkWidget *setting_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/SettingsMenu");
+	gtk_widget_set_visible(setting_item, FALSE);
+	
+	GtkWidget *filequit_item = gtk_ui_manager_get_widget(UIManager, "/MenuBar/FileMenu/Quit");
+	gtk_widget_set_visible(filequit_item, FALSE);
+
+	// Hide the original menubar in the application window, because it is not needed anymore
+	gtk_widget_hide (menubar);
+	gtk_osxapplication_set_use_quartz_accelerators(theApp, TRUE);	
+#endif
 }
 
 
