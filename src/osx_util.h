@@ -32,5 +32,10 @@
 #include "../config.h"
 
 #ifdef MAC_INTEGRATION
-	gboolean is_running_from_osx_appBundle();
+#	include <gtkmacintegration/gtkosxapplication.h>
+#endif
+
+#ifdef MAC_INTEGRATION
+	gboolean is_running_from_osx_appBundle();	
+	gboolean osx_open_file_cb (GtkOSXApplication *app, gchar *path, gpointer user_data);
 #endif

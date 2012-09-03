@@ -28,8 +28,10 @@
 */
 
 #include <glib.h>
+#include <glib/gstdio.h>
 
 #include "osx_util.h"
+#include "browser.h"
 
 #ifdef MAC_INTEGRATION
 #	include <gtkmacintegration/gtkosxapplication.h>
@@ -44,4 +46,61 @@ gboolean is_running_from_osx_appBundle() {
 	else
 		return FALSE;
 }
+
+/*
+ * Callback function to be executed on the main gtk loop
+ */
+static gboolean
+osx_open_file_idle_callback (gpointer user_data)
+{
+	gchar *path = (gchar *) user_data;	
+	g_print("OSX open file/folder :  %s \n", path);
+	
+	/* Since files are only passed via (Finder) drag'n'drop
+	 * and then the dock validates the drag contents with the
+	 * supported file types in the applications plist, these should
+	 * always be correct paths,
+	 * however it can not hurt to validate
+	 */
+	if (g_file_test(path, G_FILE_TEST_EXISTS )) {
+		if (g_file_test(path, G_FILE_TEST_IS_REGULAR )) {
+			// the path is a file - extract dir name and continue
+			path = g_path_get_dirname(path);
+		} if (g_file_test(path, G_FILE_TEST_IS_DIR )) {
+			// the path is a directory - all well do nothing and continue
+		} else {
+			// The file path but is neither a dir nor a regular file, so we can't handle it
+			return FALSE;	
+		}
+	} else {
+		// If the file doesn't exist just return and ignore
+		return FALSE;
+	}
+	
+	Browser_Tree_Select_Dir(path);
+	
+	g_free(path);
+
+   /* return FALSE to be automatically removed from the list of event sources and will not be called again */
+   return FALSE;
+}
+
+/*
+ * Mediator function between the Apple-App-RunLoop and the GTK-RunLoop
+ */
+gboolean osx_open_file_cb (GtkOSXApplication *app, gchar *path, gpointer user_data)
+{
+	gchar *test = g_strdup(path);
+	
+	/* Schedule the open File action to be performed on the gtk main loop
+	 * thread, when it's available again and idle
+	 * We cannot call UI actions here directly, this would force the Apple Event loop
+	 * and thus the application to crash
+	 */
+	gdk_threads_add_idle(osx_open_file_idle_callback, (gpointer) test);
+	
+	/* return true to indicate we handled the NSOpenApplication */
+	return TRUE;
+}
+
 #endif

@@ -64,6 +64,7 @@
 
 #ifdef MAC_INTEGRATION
 #	include <gtkmacintegration/gtkosxapplication.h>
+#	include "osx_util.h"
 #endif
 
 #include "../pixmaps/EasyTAG_icon.xpm"
@@ -347,6 +348,9 @@ int main (int argc, char *argv[])
 	/* special quit signal hook, to passthrough signals from osx */
 	g_signal_connect(theApp, "NSApplicationBlockTermination",
 					 G_CALLBACK(Quit_MainWindow), NULL);
+					
+	g_signal_connect(theApp, "NSApplicationOpenFile",
+				     G_CALLBACK(osx_open_file_cb), NULL);
 #endif
 
     /* Minimised window icon */
