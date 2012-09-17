@@ -31,10 +31,10 @@
 #include <glib/gstdio.h>
 
 #include "osx_util.h"
-#include "browser.h"
 
 #ifdef MAC_INTEGRATION
 #	include <gtkmacintegration/gtkosxapplication.h>
+#	include "browser.h"
 #endif
 
 
