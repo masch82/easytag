@@ -41,10 +41,13 @@
 #ifdef MAC_INTEGRATION
 gboolean is_running_from_osx_appBundle() {
 	gchar *bundle_id = quartz_application_get_bundle_id();
-	if (bundle_id != NULL )
+	if (bundle_id != NULL) {
+		g_free(bundle_id);
 		return TRUE;
-	else
+	} else {
+		g_free(bundle_id);
 		return FALSE;
+	}
 }
 
 /*
