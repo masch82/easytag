@@ -315,12 +315,9 @@ void Picture_Add_Button_Clicked (GObject *object)
     gtk_file_filter_add_mime_type(GTK_FILE_FILTER(filter), "image/png");
 #ifdef MAC_INTEGRATION
 	// The mime filters don't work on Mac OS, so we have to explicitly permit file extensions
-    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpeg"); // Warning: *.JPEG or *.JpEg files will not be displayed
-	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.JPEG");
-    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.jpg");
-	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.JPG");
-    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.png");
-	gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.PNG");
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.[jJ][pP][eE][gG]");
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.[jJ][pP][gG]");
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(filter), "*.[pP][nN][gG]");
 #endif
 
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (FileSelectionWindow), GTK_FILE_FILTER(filter));
