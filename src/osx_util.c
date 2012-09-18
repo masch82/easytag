@@ -57,6 +57,8 @@ static gboolean
 osx_open_file_idle_callback (gpointer user_data)
 {
 	gchar *path = (gchar *) user_data;	
+	gchar *path2 = NULL;
+	gboolean fileIsValid = FALSE;
 	g_print("OSX open file/folder :  %s \n", path);
 	
 	/* Since files are only passed via (Finder) drag'n'drop
@@ -68,21 +70,25 @@ osx_open_file_idle_callback (gpointer user_data)
 	if (g_file_test(path, G_FILE_TEST_EXISTS )) {
 		if (g_file_test(path, G_FILE_TEST_IS_REGULAR )) {
 			// the path is a file - extract dir name and continue
-			path = g_path_get_dirname(path);
-		} if (g_file_test(path, G_FILE_TEST_IS_DIR )) {
+			path2 = g_path_get_dirname(path);
+			g_free(path);
+			path = g_strdup(path2);
+		} 
+		if (g_file_test(path, G_FILE_TEST_IS_DIR )) {
 			// the path is a directory - all well do nothing and continue
+			fileIsValid = TRUE;
 		} else {
-			// The file path but is neither a dir nor a regular file, so we can't handle it
-			return FALSE;	
+			// The file path is neither a dir nor a regular file, so we can't handle it
 		}
 	} else {
 		// If the file doesn't exist just return and ignore
-		return FALSE;
 	}
 	
-	Browser_Tree_Select_Dir(path);
+	if (fileIsValid)
+		Browser_Tree_Select_Dir(path);
 	
 	g_free(path);
+	g_free(path2);
 
    /* return FALSE to be automatically removed from the list of event sources and will not be called again */
    return FALSE;
