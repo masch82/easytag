@@ -189,6 +189,7 @@ void Show_About_Window (void)
             {"    - Yuval Hager ",                  _("(Hebrew translation)")},
             {"    - Miloš Popović ",                _("(Serbian translation)")},
             {"    - Götz Waschk ",                  _("(German translation)")},
+            {"    - Algimantas Margevičius ",       _("(Lithuanian translation)")},
             {NULL,NULL}
             };
 
