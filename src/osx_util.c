@@ -72,7 +72,7 @@ osx_open_file_idle_callback (gpointer user_data)
 			// the path is a file - extract dir name and continue
 			path2 = g_path_get_dirname(path);
 			g_free(path);
-			path = g_strdup(path2);
+			path = path2;
 		} 
 		if (g_file_test(path, G_FILE_TEST_IS_DIR )) {
 			// the path is a directory - all well do nothing and continue
@@ -88,7 +88,6 @@ osx_open_file_idle_callback (gpointer user_data)
 		Browser_Tree_Select_Dir(path);
 	
 	g_free(path);
-	g_free(path2);
 
    /* return FALSE to be automatically removed from the list of event sources and will not be called again */
    return FALSE;
