@@ -99,14 +99,17 @@ osx_open_file_idle_callback (gpointer user_data)
  */
 gboolean osx_open_file_cb (GtkOSXApplication *app, gchar *path, gpointer user_data)
 {
-	gchar *test = g_strdup(path);
+	/* String needs to be duplicated and not freed !
+	 * otherwise it won't be available in the other thread and it will crash
+	 */
+	gchar *path2 = g_strdup(path);
 	
 	/* Schedule the open File action to be performed on the gtk main loop
 	 * thread, when it's available again and idle
 	 * We cannot call UI actions here directly, this would force the Apple Event loop
 	 * and thus the application to crash
 	 */
-	gdk_threads_add_idle(osx_open_file_idle_callback, (gpointer) test);
+	gdk_threads_add_idle(osx_open_file_idle_callback, (gpointer) path2);
 	
 	/* return true to indicate we handled the NSOpenApplication */
 	return TRUE;
