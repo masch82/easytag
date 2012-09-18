@@ -1,259 +1,244 @@
-# Romanian translation of EasyTAG.
-# Copyright (C) 2002-2005 Free Software Foundation, Inc.
-# Pauliuc George <pauliuc@gmx.net>, 2002, 2003, 2004, 2005.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Algimantas Margevičius <margevicius.algimantas@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: EasyTAG 1.99.4\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-17 16:45-0700\n"
-"PO-Revision-Date: 2005-04-19 10:07+0200\n"
-"Last-Translator: Pauliuc George <romania@users.sourceforge.net>\n"
-"Language-Team: Romanian <pauliuc@gmx.net>\n"
-"Language: ro\n"
+"PO-Revision-Date: 2012-09-18 07:34+0300\n"
+"Last-Translator: Algimantas Margevičius <margevicius.algimantas@gmail.com>\n"
+"Language-Team: Lietuvių <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Romanian\n"
-"X-Poedit-Country: ROMANIA\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
 #: src/about.c:141
-#, fuzzy
 msgid ""
 "    EasyTAG is an utility for viewing and editing tags for MP3, MP2, FLAC, "
 "Ogg Vorbis, MP4/AAC, MusePack and Monkey's Audio files. Its simple and nice "
 "GTK+ interface makes tagging easier under GNU/Linux."
 msgstr ""
-"    EasyTAG este un utilitar pentru afisarea, modificarea si scrierea "
-"etichtelor fisierelor MP3, MP2, FLAC, Ogg Vorbis, MusePack si Monkey Audio. "
-"Interfata sa simpla (GTK+) face etichetarea mai simpla."
+"    „EasyTAG“ yra programa skirta MP3, MP2, FLAC, Ogg Vorbis, MP4/AAC, "
+"MusePack ir Monkey Audio failų žymių peržiūrai ir redagavimui. Graži ir "
+"paprasta GTK+ sąsaja žymių tvarkymą GNU/Linux sistemose padaro paprastu ir "
+"aiškiu."
 
 #: src/about.c:149 src/about.c:150 src/about.c:151 src/about.c:152
 #: src/about.c:183
 msgid "(German translation)"
-msgstr "(Traducerea germana)"
+msgstr "(Vokiečių vertimas)"
 
 #: src/about.c:153 src/about.c:154
 msgid "(Russian translation)"
-msgstr "(Traducerea rus�)"
+msgstr "(Rusų vertimas)"
 
 #: src/about.c:155 src/about.c:156
 msgid "(Dutch translation)"
-msgstr "(Traducerea olandez�)"
+msgstr "(Olandų vertimas)"
 
 #: src/about.c:157 src/about.c:158 src/about.c:159
 msgid "(Swedish translation)"
-msgstr "(Traducerea suedez�)"
+msgstr "(Švedų vertimas)"
 
 #: src/about.c:160 src/about.c:161 src/about.c:162
 msgid "(Hungarian translation)"
-msgstr "(Traducerea ungar�)"
+msgstr "(Vengrų vertimas)"
 
 #: src/about.c:163 src/about.c:164
 msgid "(Italian translation)"
-msgstr "(Traducerea italian�)"
+msgstr "(Italų vertimas)"
 
 #: src/about.c:165
 msgid "(Japanese translation)"
-msgstr "(Traducerea japonez�)"
+msgstr "(Japonų vertimas)"
 
 #: src/about.c:166 src/about.c:167
 msgid "(Ukrainian translation)"
-msgstr "(Traducerea ucrainian�)"
+msgstr "(Ukrainiečių vertimas)"
 
 #: src/about.c:168 src/about.c:169
 msgid "(Czech translation)"
-msgstr "(Traducerea ceh�)"
+msgstr "(Čekų vertimas)"
 
 #: src/about.c:170 src/about.c:171 src/about.c:172
 msgid "(Spanish translation)"
-msgstr "(Traducerea spaniol�)"
+msgstr "(Ispanų vertimas)"
 
 #: src/about.c:173
 msgid "(Polish translation)"
-msgstr "(Traducerea polonez�)"
+msgstr "(Lenkų vertimas)"
 
 #: src/about.c:174
 msgid "(Romanian translation)"
-msgstr "(Traducerea rom�n�)"
+msgstr "(Rumunų vertimas)"
 
 #: src/about.c:175
 msgid "(Danish translation)"
-msgstr "(Traducerea daneza)"
+msgstr "(Danų vertimas)"
 
 #: src/about.c:176
-#, fuzzy
 msgid "(Greek translation)"
-msgstr "(Traducerea germana)"
+msgstr "(Graikų vertimas)"
 
 #: src/about.c:177
-#, fuzzy
 msgid "(Brazilian Portuguese translation)"
-msgstr "(Traducerea japonez�)"
+msgstr "(Brazilijos portugalų vertimas)"
 
 #: src/about.c:178
-#, fuzzy
 msgid "(Bulgarian translation)"
-msgstr "(Traducerea ungar�)"
+msgstr "(Bulgarų vertimas)"
 
 #: src/about.c:179
-#, fuzzy
 msgid "(Chinese translation)"
-msgstr "(Traducerea japonez�)"
+msgstr "(Kinų vertimas)"
 
 #: src/about.c:180
-#, fuzzy
 msgid "(Chinese (Taiwan) translation)"
-msgstr "(Traducerea japonez�)"
+msgstr "(Kinų (Taivano) vertimas)"
 
 #: src/about.c:181
-#, fuzzy
 msgid "(Hebrew translation)"
-msgstr "(Traducerea germana)"
+msgstr "(Hebrajų vertimas)"
 
 #: src/about.c:182
-#, fuzzy
 msgid "(Serbian translation)"
-msgstr "(Traducerea germana)"
+msgstr "(Serbų vertimas)"
 
 #: src/about.c:184
-#, fuzzy
 msgid "(Lithuanian translation)"
-msgstr "(Traducerea italian�)"
+msgstr "(Lietuvių vertimas)"
 
 #: src/about.c:243
 msgid "Extension Name"
-msgstr ""
+msgstr "Plėtinys"
 
 #: src/about.c:244
 msgid "Status"
-msgstr ""
+msgstr "Būsena"
 
 #: src/about.c:245 src/browser.c:3039 src/misc.c:1927 src/prefs.c:670
 msgid "Comment"
-msgstr "Comentariu"
+msgstr "Komentaras"
 
 #. Config
 #: src/about.c:262
 msgid "About..."
-msgstr "Despre..."
+msgstr "Apie..."
 
 #.
 #. * Tab for common informations
 #.
 #: src/about.c:280 src/bar.c:244
 msgid "About"
-msgstr "Despre"
+msgstr "Apie"
 
 #: src/about.c:326
 #, c-format
 msgid "(compiled: %s)"
-msgstr "(compilat: %s)"
+msgstr "(sukompiliuota: %s)"
 
 #: src/about.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "(using: GTK+ %d.%d.%d)"
-msgstr "(folosind: GTK+ %d.%d.%d si id3lib %d.%d.%d)"
+msgstr "(naudojant: GTK+ %d.%d.%d)"
 
 #: src/about.c:338
 #, c-format
 msgid "Author: %s"
-msgstr "Autor: %s"
+msgstr "Autorius: %s"
 
 #: src/about.c:342 src/easytag.c:233
 #, c-format
 msgid "E-mail: %s"
-msgstr "E-mail: %s"
+msgstr "El. paštas: %s"
 
 #: src/about.c:348
 msgid "Web Page: "
-msgstr "Pagin� de web: "
+msgstr "Tinklalapis:"
 
 #: src/about.c:361
 msgid "Description:"
-msgstr "Descriere:"
+msgstr "Aprašymas:"
 
 #.
 #. * Tab for extensions
 #.
 #: src/about.c:377
 msgid "Extensions"
-msgstr ""
+msgstr "Plėtiniai"
 
 #: src/about.c:443
-#, fuzzy
 msgid "MP3 file support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "MP3 failų palaikymas"
 
 #: src/about.c:446 src/about.c:476 src/about.c:488 src/about.c:504
 #: src/about.c:517 src/about.c:529
 msgid "enabled"
-msgstr ""
+msgstr "įjungta"
 
 #: src/about.c:450 src/about.c:466 src/about.c:479 src/about.c:491
 #: src/about.c:508 src/about.c:520 src/about.c:532
 msgid "disabled"
-msgstr ""
+msgstr "išjungta"
 
 #: src/about.c:459
-#, fuzzy
 msgid "ID3v2.3 tags writting support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "ID3v2.3 žymių rašymo palaikymas"
 
 #: src/about.c:462
-#, fuzzy
 msgid "available"
-msgstr "Nu este destul� memorie"
+msgstr "prieinama"
 
 #: src/about.c:473
-#, fuzzy
 msgid "Ogg Vorbis file support"
-msgstr "(Suportul pentru Ogg Vorbis dezactivat)"
+msgstr "Ogg Vorbis failų palaikymas"
 
 #: src/about.c:485
-#, fuzzy
 msgid "Speex file support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "Speex failų palaikymas"
 
 #: src/about.c:501
-#, fuzzy
 msgid "FLAC file support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "FLAC failų palaikymas"
 
 #: src/about.c:514
-#, fuzzy
 msgid "MP4/AAC file support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "MP4/AAC failų palaikymas"
 
 #: src/about.c:526
-#, fuzzy
 msgid "WavPack file support"
-msgstr "(Suportul pentru FLAC dezactivat)"
+msgstr "WavPack failų palaikymas"
 
 #.
 #. * Tab for thanks
 #.
 #: src/about.c:541
 msgid "Thanks"
-msgstr "Mul�umiri"
+msgstr "Dėkojame"
 
 #: src/about.c:561
 msgid "Translations:\n"
-msgstr "Traduceri:\n"
+msgstr "Išvertėi:\n"
 
 #: src/about.c:591
 msgid "General:\n"
-msgstr "General:\n"
+msgstr "Bendra:\n"
 
 #: src/about.c:608
 msgid "Changes"
-msgstr "Schimbari"
+msgstr "Pakeitimai"
 
 #: src/about.c:630
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open file '%s' (%s)\n"
-msgstr "Nu pot deschide '%s' (%s)"
+msgstr "Nepavyko atverti failo „%s“ (%s)\n"
 
 #. g_print(_("ERROR while opening file: '%s' (%s)."),filename_utf8,g_strerror(errno));
 #: src/ape_tag.c:74 src/et_core.c:4520 src/flac_header.c:126 src/id3_tag.c:146
@@ -261,665 +246,647 @@ msgstr "Nu pot deschide '%s' (%s)"
 #: src/mp4_header.c:220 src/mp4_tag.c:98 src/mp4_tag.c:109 src/mp4_tag.c:281
 #: src/mp4_tag.c:290 src/mpeg_header.c:209 src/ogg_header.c:82
 #: src/ogg_header.c:186 src/ogg_tag.c:146 src/ogg_tag.c:657
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR while opening file: '%s' (%s)."
-msgstr "Eroare �n timpul deschiderii fisierului: '%s' (%s)."
+msgstr "Klaida atveriant failą: „%s“ (%s)."
 
 #.
 #. * Main Menu Actions
 #.
 #: src/bar.c:148
 msgid "_File"
-msgstr "_Fisier"
+msgstr "_Failas"
 
 #: src/bar.c:149
 msgid "Sort list by tag"
-msgstr "Ordoneaza lista de etichete :"
+msgstr "Rikiuoti sąrašą pagal žymę"
 
 #: src/bar.c:150
 msgid "Sort list by property"
-msgstr "Ordoneaza lista dupa proprietati"
+msgstr "Rikiuoti sąrašą pagal savybes"
 
 #: src/bar.c:151
 msgid "Ascending by filename"
-msgstr "Crescator dupa numele de fisier"
+msgstr "Pagal failo vardą didėjimo tvarka"
 
 #: src/bar.c:152
 msgid "Descending by filename"
-msgstr "Descrescator dupa numele de fisier"
+msgstr "Pagal failo vardą mažėjimo tvarka"
 
 #: src/bar.c:153
 msgid "Ascending by creation date"
-msgstr "Crescator dupa data creatiei"
+msgstr "Pagal sukūrimo datą didėjimo tvarka"
 
 #: src/bar.c:154
 msgid "Descending by creation date"
-msgstr "Descrescator dupa data creatiei"
+msgstr "Pagal sukūrimo datą mažėjimo tvarka"
 
 #: src/bar.c:155
 msgid "Ascending by track number"
-msgstr "Crescator dupa numarul pistei"
+msgstr "Pagal takelio numerį didėjimo tvarka"
 
 #: src/bar.c:156
 msgid "Descending by track number"
-msgstr "Descrescator dupa numarul pistei"
+msgstr "Pagal takelio numerį mažėjimo tvarka"
 
 #: src/bar.c:157
 msgid "Ascending by title"
-msgstr "Crescator dupa titlu"
+msgstr "Pagal pavadinimą didėjimo tvarka"
 
 #: src/bar.c:158
 msgid "Descending by title"
-msgstr "Descrescator dupa titlu"
+msgstr "Pagal pavadinimą mažėjimo tvarka"
 
 #: src/bar.c:159
 msgid "Ascending by artist"
-msgstr "Crescator dupa artist"
+msgstr "Pagal atlikėją didėjimo tvarka"
 
 #: src/bar.c:160
 msgid "Descending by artist"
-msgstr "Descrescator dupa artist"
+msgstr "Pagal atlikėją mažėjimo tvarka"
 
 #: src/bar.c:161
-#, fuzzy
 msgid "Ascending by album artist"
-msgstr "Crescator dupa artist"
+msgstr "Pagal albumo atlikėją didėjimo tvarka"
 
 #: src/bar.c:162
-#, fuzzy
 msgid "Descending by album artist"
-msgstr "Descrescator dupa artist"
+msgstr "Pagal albumo atlikėją mažėjimo tvarka"
 
 #: src/bar.c:163
 msgid "Ascending by album"
-msgstr "Crescator dupa album"
+msgstr "Pagal albumą didėjimo tvarka"
 
 #: src/bar.c:164
 msgid "Descending by album"
-msgstr "Descrescator dupa album"
+msgstr "Pagal albumą mažėjimo tvarka"
 
 #: src/bar.c:165
 msgid "Ascending by year"
-msgstr "Crescator dupa an"
+msgstr "Pagal metus didėjimo tvarka"
 
 #: src/bar.c:166
 msgid "Descending by year"
-msgstr "Descrescator dupa an"
+msgstr "Pagal metus mažėjimo tvarka"
 
 #: src/bar.c:167
 msgid "Ascending by genre"
-msgstr "Crescator dupa gen"
+msgstr "Pagal žanrą didėjimo tvarka"
 
 #: src/bar.c:168
 msgid "Descending by genre"
-msgstr "Descrescator dupa gen"
+msgstr "Pagal žanrą mažėjimo tvarka"
 
 #: src/bar.c:169
 msgid "Ascending by comment"
-msgstr "Crescator dupa comentariu"
+msgstr "Pagal komentarą didėjimo tvarka"
 
 #: src/bar.c:170
 msgid "Descending by comment"
-msgstr "Descrescator dupa comentariu"
+msgstr "Pagal komentarą mažėjimo tvarka"
 
 #: src/bar.c:171
 msgid "Ascending by composer"
-msgstr "Crescator dupa compozitor"
+msgstr "Pagal kompozitorių didėjimo tvarka"
 
 #: src/bar.c:172
 msgid "Descending by composer"
-msgstr "Descrescator dupa compozitor"
+msgstr "Pagal kompozitorių mažėjimo tvarka"
 
 #: src/bar.c:173
 msgid "Ascending by original artist"
-msgstr "Crescator dupa artistul initial"
+msgstr "Pagal originalų atlikėją didėjimo tvarka"
 
 #: src/bar.c:174
 msgid "Descending by original artist"
-msgstr "Descrescator dupa artistul initial"
+msgstr "Pagal originalų atlikėją mažėjimo tvarka"
 
 #: src/bar.c:175
 msgid "Ascending by copyright"
-msgstr "Crescator dupa dreptul de autor"
+msgstr "Pagal autorines teises didėjimo tvarka"
 
 #: src/bar.c:176
 msgid "Descending by copyright"
-msgstr "Descrescator dupa dreptul de autor"
+msgstr "Pagal autorines teises mažėjimo tvarka"
 
 #: src/bar.c:177
 msgid "Ascending by URL"
-msgstr "Crescator dupa URL"
+msgstr "Pagal URL didėjimo tvarka"
 
 #: src/bar.c:178
 msgid "Descending by URL"
-msgstr "Descrescator dupa URL"
+msgstr "Pagal URL mažėjimo tvarka"
 
 #: src/bar.c:179
 msgid "Ascending by encoder name"
-msgstr "Crescator dupa numele codorului"
+msgstr "Pagal kodavimą didėjimo tvarka"
 
 #: src/bar.c:180
 msgid "Descending by encoder name"
-msgstr "Descrescator dupa numele codorului"
+msgstr "Pagal kodavimą mažėjimo tvarka"
 
 #: src/bar.c:181
 msgid "Ascending by file type"
-msgstr "Crescator dupa tipul de fisier"
+msgstr "Pagal failo tipą didėjimo tvarka"
 
 #: src/bar.c:182
 msgid "Descending by file type"
-msgstr "Descrescator dupa tipul de fisier"
+msgstr "Pagal failo tipą mažėjimo tvarka"
 
 #: src/bar.c:183
 msgid "Ascending by file size"
-msgstr "Crescator dupa dimensiunea fisierului"
+msgstr "Pagal failo dydį didėjimo tvarka"
 
 #: src/bar.c:184
 msgid "Descending by file size"
-msgstr "Descrescator dupa lungimea fisierului"
+msgstr "Pagal failo dydį mažėjimo tvarka"
 
 #: src/bar.c:185
 msgid "Ascending by duration"
-msgstr "Ordoneaza lista crescator dupa durata"
+msgstr "Pagal trukmę didėjimo tvarka"
 
 #: src/bar.c:186
 msgid "Descending by duration"
-msgstr "Ordoneaza lista descrescator dupa durata"
+msgstr "Pagal trukmę mažėjimo tvarka"
 
 #: src/bar.c:187
 msgid "Ascending by bitrate"
-msgstr "Ordoneaza lista crescator dupa bitrate"
+msgstr "Pagal bitų dažnį didėjimo tvarka"
 
 #: src/bar.c:188
 msgid "Descending by bitrate"
-msgstr "Ordoneaza lista descrescator dupa bitrate"
+msgstr "Pagal bitų dažnį mažėjimo tvarka"
 
 #: src/bar.c:189
 msgid "Ascending by samplerate"
-msgstr "Ordoneaza lista crescator dupa rata de esantionare"
+msgstr "Pagal diskretizacijos dažnį didėjimo tvarka"
 
 #: src/bar.c:190
 msgid "Descending by samplerate"
-msgstr "Ordoneaza lista descrescator dupa rata de esantionare"
+msgstr "Pagal diskretizacijos dažnį mažėjimo tvarka"
 
 #: src/bar.c:192
 msgid "Open File(s) with ..."
-msgstr "Deschide fisierul(-ele) cu ..."
+msgstr "Atverti failą(-us) su..."
 
 #: src/bar.c:193 src/cddb.c:325
 msgid "Select All Files"
-msgstr "Alege toate fisierele"
+msgstr "Pasirinkti visus failus"
 
 #: src/bar.c:194
 msgid "Unselect All Files"
-msgstr "Deselecteaza toate fisierele"
+msgstr "Nepasirinkti nieko"
 
 #: src/bar.c:195 src/cddb.c:332
 msgid "Invert Files Selection"
-msgstr "Inveseaza alegerea"
+msgstr "Invertuoti pasirinkimą"
 
 #: src/bar.c:196
 msgid "Delete File(s)"
-msgstr "Sterge fisierul(-ele)..."
+msgstr "Pašalinti failą(-us)"
 
 #: src/bar.c:197
 msgid "_First File"
-msgstr "Primul _fisier"
+msgstr "_Pirmas failas"
 
 #: src/bar.c:197
 msgid "First File"
-msgstr "Primul fisier"
+msgstr "Pirmas failas"
 
 #: src/bar.c:198
 msgid "_Previous File"
-msgstr "_Precedentul fisier"
+msgstr "_Ankstesnis failas"
 
 #: src/bar.c:198
 msgid "Previous File"
-msgstr "/Fisier/_Precedentul fisier"
+msgstr "Ankstesnis failas"
 
 #: src/bar.c:199
 msgid "_Next File"
-msgstr "/Fisier/Urmatorul fisier"
+msgstr "_Sekantis failas"
 
 #: src/bar.c:199
 msgid "Next File"
-msgstr "Urmatorul fisier"
+msgstr "Sekantis failas"
 
 #: src/bar.c:200
 msgid "_Last File"
-msgstr "Ultimu_l fisier"
+msgstr "_Paskutinis failas"
 
 #: src/bar.c:200
 msgid "Last File"
-msgstr "Ultimul fisier"
+msgstr "Paskutinis failas"
 
 #. XXX GTK1 version uses Ctrl+C for scanner, this doesnt work in GTK1 as its copy! in gtk2, behaviour is different
 #. and binding Ctrl+C effectively stops the user copying text..
 #: src/bar.c:203
 msgid "S_can File(s)"
-msgstr "Examineaza fi_sierul(-ele)"
+msgstr "S_kenuoti failą(-us)"
 
 #: src/bar.c:203
 msgid "Scan File(s)"
-msgstr "Examineaza fisierul(-ele)"
+msgstr "Skenuoti failą(-us)"
 
 #: src/bar.c:204
 msgid "_Remove Tag(s)"
-msgstr "Ste_rge eticheta(-ele)"
+msgstr "P_ašalinti žymę(-es)"
 
 #: src/bar.c:204
 msgid "Remove Tag(s)"
-msgstr "/Fisier/Ste_rge eticheta(-ele)"
+msgstr "Pašalinti žymę(-es)"
 
 #: src/bar.c:205
 msgid "_Undo Last File(s) Changes"
-msgstr "An_uleaza ultimele schimbari"
+msgstr "_Atšaukti paskutinį failo pakeitimą"
 
 #: src/bar.c:205
 msgid "Undo Last File(s) Changes"
-msgstr "An_uleaza ultimele schimbari"
+msgstr "Atšaukti paskutinį failo pakeitimą"
 
 #: src/bar.c:206
 msgid "R_edo Last File(s) Changes"
-msgstr "R_efa ultimele schimbari"
+msgstr "_Pakartoti paskutinį keitimą"
 
 #: src/bar.c:206
 msgid "Redo Last File(s) Changes"
-msgstr "Refa ultimele schimbari"
+msgstr "Pakartoti paskutinį keitimą"
 
 #: src/bar.c:207
 msgid "_Save File(s)"
-msgstr "S_alveaza fisierul(-ele)"
+msgstr "_Išsaugoti failą(-us)"
 
 #: src/bar.c:207
 msgid "Save File(s)"
-msgstr "Salveaza fisierul(-ele)"
+msgstr "Išsaugoti failą(-us)"
 
 #: src/bar.c:208
-#, fuzzy
 msgid "_Force Saving File(s)"
-msgstr "Examineaza fi_sierul(-ele)"
+msgstr "_Priverstinis failo(-ų) saugojimas"
 
 #: src/bar.c:208
-#, fuzzy
 msgid "Force Saving File(s)"
-msgstr "Examineaza fisierul(-ele)"
+msgstr "Priverstinis failo(-ų) saugojimas"
 
 #: src/bar.c:209
 msgid "Undo Last Changes"
-msgstr "Anuleaza ultimele schimbari"
+msgstr "Atšaukti paskutinius keitimus"
 
 #: src/bar.c:210
 msgid "Redo Last Changes"
-msgstr "Refa ultimele schimbari"
+msgstr "Pakartoti paskutinius keitimus"
 
 #: src/bar.c:211
 msgid "_Quit"
-msgstr "_Iesire"
+msgstr "I_šeiti"
 
 #: src/bar.c:211
 msgid "Quit"
-msgstr "Iesi"
+msgstr "Išeiti"
 
 #: src/bar.c:213
 msgid "_Browser"
-msgstr "_Navigator"
+msgstr "Naršyklė"
 
 #: src/bar.c:214
 msgid "Go to _Home Directory"
-msgstr "Mergi �n directorul _personal"
+msgstr "Eiti į _namų aplanką"
 
 #: src/bar.c:214
 msgid "Go to Home Directory"
-msgstr "Mergi �n directorul personal"
+msgstr "Eiti į namų aplanką"
 
 #: src/bar.c:215
-#, fuzzy
 msgid "Go to Desktop Directory"
-msgstr "Mergi �n directorul implicit"
+msgstr "Eiti į darbastalio aplanką"
 
 #: src/bar.c:216
-#, fuzzy
 msgid "Go to Documents Directory"
-msgstr "Mergi �n directorul personal"
+msgstr "Eiti į dokumentų aplanką"
 
 #: src/bar.c:217
-#, fuzzy
 msgid "Go to Downloads Directory"
-msgstr "Mergi �n directorul personal"
+msgstr "Eiti į atsiuntimų aplanką"
 
 #: src/bar.c:218
-#, fuzzy
 msgid "Go to Music Directory"
-msgstr "Mergi �n directorul personal"
+msgstr "Eiti į muzikos aplanką"
 
 #: src/bar.c:219
 msgid "Go to _Default Directory"
-msgstr "Mergi �n _directorul implicit"
+msgstr "Eiti į _numatytąjį aplanką"
 
 #: src/bar.c:219
 msgid "Go to Default Directory"
-msgstr "Mergi �n directorul implicit"
+msgstr "Eiti į numatytąjį aplanką"
 
 #: src/bar.c:220
 msgid "Set _Current Path as Default"
-msgstr "Fixeaza _calea curenta ca implicita"
+msgstr "Nustatyti _dabartinį kelią numatytuoju"
 
 #: src/bar.c:220
 msgid "Set Current Path as Default"
-msgstr "Fixeaz� calea curent� ca implicit�"
+msgstr "Nustatyti dabartinį kelią numatytuoju"
 
 #: src/bar.c:221
 msgid "Tree View | Artist-Album View"
-msgstr "Arborescenta|Artist-Album"
+msgstr "Aplankų medžio rodinys | Atlikėjo-Albumo rodinys"
 
 #: src/bar.c:222
 msgid "Rename Directory ..."
-msgstr "Redenumeste directorul..."
+msgstr "Pervadinti aplanką..."
 
 #: src/bar.c:223
 msgid "Reload Directory"
-msgstr "Re�ncarc� directorul"
+msgstr "Įkelti aplanką iš naujo"
 
 #: src/bar.c:224 src/browser.c:4173
 msgid "Browse Directory with ..."
-msgstr "Navigheaz� directorul cu ..."
+msgstr "Naršyti aplanką su..."
 
 #: src/bar.c:225
 msgid "_Collapse Tree"
-msgstr "_Pliaza arborele"
+msgstr "_Suskleisti medį"
 
 #: src/bar.c:226
 msgid "_Refresh Tree"
-msgstr "_Re�mprospateaza arborele"
+msgstr "_Atnaujinti medį"
 
 #: src/bar.c:228 src/bar.c:257
 msgid "S_canner"
-msgstr "_Examinator"
+msgstr "_Skeneris"
 
 #: src/bar.c:229
 msgid "_Fill Tag(s) ..."
-msgstr "_Completeaza eticheta(-ele)..."
+msgstr "_Užpildyti žymes..."
 
 #: src/bar.c:229
 msgid "Fill Tag(s) ..."
-msgstr "Completeaza eticheta(-ele)..."
+msgstr "Užpildyti žymes..."
 
 #: src/bar.c:230
 msgid "_Rename File(s) and Directory ..."
-msgstr "_Redenumeste fisierul(ele) si directorul..."
+msgstr "_Pervadinti failą(-us) ir aplanką..."
 
 #: src/bar.c:230
 msgid "Rename File(s) and Directory ..."
-msgstr "Redenumeste fisierul(ele) si directorul"
+msgstr "Pervadinti failą(-us) ir aplanką..."
 
 #: src/bar.c:231
 msgid "_Process Field(s) ..."
-msgstr "_Prelucreaza cimpurile"
+msgstr "_Apdoroti laukelius..."
 
 #: src/bar.c:231
 msgid "Process Fields(s) ..."
-msgstr "Prelucreaza cimpurile"
+msgstr "Apdoroti laukelius..."
 
 #: src/bar.c:233
 msgid "_Misc"
-msgstr "_Diverse"
+msgstr "_Kita"
 
 #: src/bar.c:234
 msgid "Search _File(s) ..."
-msgstr "Cauta _fisierul(-ele)..."
+msgstr "Ieškoti _failo(-ų)..."
 
 #: src/bar.c:234
 msgid "Search File(s)..."
-msgstr "Cauta fisierul(-ele)..."
+msgstr "Ieškoti failo(-ų)..."
 
 #: src/bar.c:235
 msgid "CD Data _Base Search ..."
-msgstr "Cauta _baza de date CD..."
+msgstr "CD duomenų _bazės paieška..."
 
 #: src/bar.c:235
 msgid "CDDB Search ..."
-msgstr "Cautare CDDB"
+msgstr "CDDB paieška..."
 
 #: src/bar.c:236
 msgid "Load Filenames from TXT ..."
-msgstr "�ncarca numele de fisiere din TXT..."
+msgstr "Įkelti failų vardus iš TXT..."
 
 #: src/bar.c:237
 msgid "Write Playlist ..."
-msgstr "Scriu playlist..."
+msgstr "Įrašyti grojaraštį..."
 
 #: src/bar.c:238 src/bar.c:258 src/bar.c:259 src/bar.c:260
 msgid "Run Audio Player"
-msgstr "Execut� playerul audio"
+msgstr "Paleisti audio grotuvą"
 
 #: src/bar.c:240
 msgid "_Settings"
-msgstr "_Setari"
+msgstr "_Nustatymai"
 
 #: src/bar.c:241
 msgid "_Preferences ..."
-msgstr "_Preferinte..."
+msgstr "_Nustatymai ..."
 
 #: src/bar.c:241
 msgid "Preferences ..."
-msgstr "Preferinte..."
+msgstr "Nustatymai..."
 
 #: src/bar.c:243
 msgid "_Help"
-msgstr "_Ajutor"
+msgstr "Ž_inynas"
 
 #: src/bar.c:244
 msgid "_About"
-msgstr "_Despre"
+msgstr "_Apie"
 
 #.
 #. * Following items are on toolbar but not on menu
 #.
 #: src/bar.c:250
 msgid "Stop the current action"
-msgstr "Opre�te ac�iunea curent�"
+msgstr "Sustabdyti dabartinį veiksmą"
 
 #.
 #. * Popup menu's Actions
 #.
 #: src/bar.c:256
 msgid "_File Operations"
-msgstr "Optiuni ale numelui de _fisier"
+msgstr "_Failų operacijos"
 
 #: src/bar.c:261
 msgid "CDDB Search File(s)..."
-msgstr "Cauta fisierul(ele) in CDDB..."
+msgstr "CDDB failo(-ų) paieška..."
 
 #. { AM_ARTIST_OPEN_FILE_WITH,     GTK_STOCK_OPEN,    _("Open File(s) with ..."),     NULL, _("Open File(s) with ..."),     G_CALLBACK(Browser_Open_Run_Program_List_Window??? Browser_Open_Run_Program_Tree_Window???) },
 #. { AM_ALBUM_OPEN_FILE_WITH,      GTK_STOCK_OPEN,    _("Open File(s) with ..."),     NULL, _("Open File(s) with ..."),     G_CALLBACK(Browser_Open_Run_Program_List_Window??? Browser_Open_Run_Program_Tree_Window???) },
 #: src/bar.c:265
 msgid "Clean Log"
-msgstr ""
+msgstr "Išvalyti žurnalą"
 
 #. { AM_BROWSE_SUBDIR,      GTK_STOCK_INDEX,        _("Browse _Sub-directories"),                         NULL, _("Browse _Sub-directories"),                         NULL,                                    FALSE },
 #: src/bar.c:272
 msgid "Browse _Sub-directories"
-msgstr "Navigheaza _subdirectoarele"
+msgstr "Naršyti _poaplankius"
 
 #. { AM_BROWSER_HIDDEN_DIR, NULL,                   _("Show Hidden Directories"),                         NULL, _("Show Hidden Directories"),                         G_CALLBACK(Browser_Tree_Rebuild),     FALSE },
 #: src/bar.c:275
-#, fuzzy
 msgid "Show Hidden Directories"
-msgstr "Cauta directoarele ascunse"
+msgstr "Rodyti paslėptus aplankus"
 
 #: src/bar.c:277
 msgid "Show tree browser / Display by Artist and Album"
-msgstr "Arata navigaotrul arborelui / Afiseaza dupa Artist si Album"
+msgstr "Rodyti medžio naršyklę / Rodyti Atlikėją ir albumą"
 
 #: src/bar.c:314
 #, c-format
 msgid "Could not merge UI, error was: %s\n"
-msgstr "Nu pot uni interfata, eroarea a fost: %s\n"
+msgstr "Sulieti UI nepavyko, įvyko klaida: %s\n"
 
 #: src/bar.c:414
 msgid "Ready to start..."
-msgstr "Gata s� pornesc..."
+msgstr "Pasiruošęs..."
 
 #: src/browser.c:364
 msgid "New default path for files selected"
-msgstr "Nou� cale implicit� pentru fi�ierele alese"
+msgstr "Naujas numatytasis kelias pasirinktiems failams"
 
 #. Some files haven't been saved
 #: src/browser.c:752 src/easytag.c:4943 src/easytag.c:4970
 msgid "Confirm..."
-msgstr "Confirm�ri..."
+msgstr "Patvirtinti..."
 
 #: src/browser.c:756
 msgid ""
 "Some files have been modified but not saved...\n"
 "Do you want to save them before changing the directory?"
 msgstr ""
-"Unele fi�iere au fost modificate dar nu au fost salvate...\n"
-"Dori�i s� le salvez �nainte de a schimba directorul?"
+"Kai kurie failai buvo pakeisti, bet neišsaugoti...\n"
+"Ar. prieš keičiant aplanką. norite juos išsaugoti?"
 
 #: src/browser.c:2215
-#, fuzzy
 msgid "<All albums>"
-msgstr "# Albume"
+msgstr "<Visi albumai>"
 
 #: src/browser.c:2626
 #, c-format
 msgid "Error: Searching for %s, could not find node %s in tree."
-msgstr "Eroare: cautind %s, nu am gasit nodul %s in arbore."
+msgstr "Klaida: ieškant „%s“ medyje nerastas %s"
 
 #: src/browser.c:3037 src/browser.c:3165
 msgid "Tree"
-msgstr "Arbore"
+msgstr "Medis"
 
 #: src/browser.c:3038 src/cddb.c:718 src/misc.c:1918
 msgid "File Name"
-msgstr "Numele fi�ierlui"
+msgstr "Failo vardas"
 
 #: src/browser.c:3038 src/cddb.c:719 src/misc.c:1919 src/prefs.c:666
 msgid "Title"
-msgstr "Titlu"
+msgstr "Pavadinimas"
 
 #: src/browser.c:3038 src/browser.c:3042 src/cddb.c:436 src/cddb.c:720
 #: src/misc.c:1920 src/prefs.c:667
 msgid "Artist"
-msgstr "Artist"
+msgstr "Atlikėjas"
 
 #: src/browser.c:3038 src/misc.c:1921
-#, fuzzy
 msgid "Album Artist"
-msgstr "Artist"
+msgstr "Albumo atlikėjas"
 
 #: src/browser.c:3038 src/browser.c:3043 src/cddb.c:437 src/cddb.c:721
 #: src/misc.c:1922 src/prefs.c:668
 msgid "Album"
-msgstr "Album"
+msgstr "Albumas"
 
 #: src/browser.c:3039 src/cddb.c:722 src/misc.c:1924
 msgid "Year"
-msgstr "An"
+msgstr "Metai"
 
 #: src/browser.c:3039 src/misc.c:1925
 msgid "Track"
-msgstr "Pist�"
+msgstr "Takelis"
 
 #: src/browser.c:3039 src/cddb.c:725 src/misc.c:1926 src/prefs.c:669
 msgid "Genre"
-msgstr "Gen"
+msgstr "Žanras"
 
 #: src/browser.c:3040 src/misc.c:1928 src/picture.c:838 src/prefs.c:671
 msgid "Composer"
-msgstr "Compozitor"
+msgstr "Kompozitorius"
 
 #: src/browser.c:3040 src/misc.c:1929 src/prefs.c:672
 msgid "Orig. Artist"
-msgstr "Artist initial"
+msgstr "Orig. atlikėjas"
 
 #: src/browser.c:3040 src/misc.c:1930
 msgid "Copyright"
-msgstr "Drept de autor"
+msgstr "Autorinės teisės"
 
 #: src/browser.c:3041 src/misc.c:1931
 msgid "URL"
 msgstr "URL"
 
 #: src/browser.c:3041
-#, fuzzy
 msgid "Encoded By"
-msgstr "Codor"
+msgstr "Kodavo"
 
 #: src/browser.c:3042
 msgid "# Albums"
-msgstr "# Albume"
+msgstr "# Albumai"
 
 #: src/browser.c:3042 src/browser.c:3043
 msgid "# Files"
-msgstr "# Fisiere"
+msgstr "# Failai"
 
 #: src/browser.c:3063
 msgid "Go to parent directory"
-msgstr "Mergi �n directorul parinte"
+msgstr "Eiti į aukštesnį aplanką"
 
 #: src/browser.c:3080
 msgid "Enter a directory to browse."
-msgstr "Introduce�i un director de navigat."
+msgstr "Įveskite kurį aplanką naršyti."
 
 #: src/browser.c:3089
-#, fuzzy
 msgid "Select a directory to browse."
-msgstr "Alege�i un director de navigat!"
+msgstr "Pasirinkite kurį aplanką naršyti."
 
 #.
 #. * The label for displaying number of files in path (without subdirs)
 #.
 #: src/browser.c:3095
-#, fuzzy
 msgid "... file(s)"
-msgstr "%u fisier(e)"
+msgstr "...failas(-ai)"
 
 #: src/browser.c:3216
 msgid "Artist & Album"
-msgstr "Artist si Album"
+msgstr "Atlikėjas ir albumas"
 
 #: src/browser.c:3703
 msgid "Rename the directory"
-msgstr "Redenume�te directorul"
+msgstr "Pervadinti aplanką"
 
 #: src/browser.c:3719
 #, c-format
 msgid "Rename the directory '%s' to : "
-msgstr "Redenume�te directorul '%s' : "
+msgstr "Pervadinti aplanką „%s“ į:"
 
 #: src/browser.c:3738 src/misc.c:1273
 msgid "Use mask :"
-msgstr "Foloseste masca:"
+msgstr "Naudoti kaukę:"
 
 #: src/browser.c:3741
-#, fuzzy
 msgid "If activated, it will use masks to rename directory."
-msgstr "Daca este activata, lista va fi creata in directorul parinte.."
+msgstr "Jei aktyvuota, aplanko pervadinimui bus naudojami šablonai...."
 
 #: src/browser.c:3760
-#, fuzzy
 msgid ""
 "Select or type in a mask using codes (see Legend in Scanner Window) to "
 "rename the directory from tag fields."
 msgstr ""
-"Alege�i sau introduceti un mask folosind codurile (vezi legenda) pentru a "
-"examina numele de fi�iere �i calea. Folosit pentru a completa c�mpurile "
-"etichetei."
+"Norėdami pervadinti aplanką naudodami informaciją iš žymių laukelių "
+"pasirinkite arba įveskite šablono kodą (žiūrėkite legendą skenerio lange)."
 
 #: src/browser.c:3780 src/misc.c:1293 src/misc.c:1390 src/scan.c:2494
 #: src/scan.c:2561 src/scan.c:2928
 msgid "Invalid Scanner Mask"
-msgstr "Mask de examinare invalid"
+msgstr "Netinkamas skenerio šablonas"
 
 #. Preview label
 #: src/browser.c:3786
-#, fuzzy
 msgid "Rename directory preview..."
-msgstr "Previziualizeaz� redenumirea fi�ierului"
+msgstr "Pervadinamo aplanko peržiūra..."
 
 #. Log_Print(LOG_ERROR,msg);
 #: src/browser.c:3902 src/browser.c:3922 src/browser.c:3994 src/browser.c:4035
@@ -929,16 +896,17 @@ msgstr "Previziualizeaz� redenumirea fi�ierului"
 #: src/easytag.c:3526 src/id3_tag.c:558 src/misc.c:1664 src/picture.c:1138
 #: src/prefs.c:1799 src/prefs.c:1916
 msgid "Error..."
-msgstr "Eroare..."
+msgstr "Klaida..."
 
 #: src/browser.c:3906
 msgid "You must type a directory name!"
-msgstr "Trebuie s� introduce�i un nume de director!"
+msgstr "Turite nurodyti aplanko vardą!"
 
 #: src/browser.c:3926
 #, c-format
 msgid "Could not convert '%s' into filename encoding. Please use another name."
-msgstr "Nu pot converti '%s' in codarea fisierului. Alegeti alt nume."
+msgstr ""
+"Konvertuoti „%s“ į failo vardo koduotę nepavyko. Pasirinkite kitą pavadinimą."
 
 #. TODO
 #. // The same directory already exists. So we ask if we want to move the files
@@ -974,7 +942,7 @@ msgid ""
 "Can't rename because this directory name already exists!\n"
 "(%s)"
 msgstr ""
-"Nu pot redenumi pentru c� acest nume de director exist� deja!\n"
+"Neįmanoma pervadinti, nes toks aplanko vardas jau yra!\n"
 "(%s)"
 
 #: src/browser.c:4033 src/browser.c:4065
@@ -986,178 +954,176 @@ msgid ""
 "'%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot redenumi directorul\n"
-"'%s'\n"
-"�n \n"
-"'%s'!\n"
+"Pervadinti aplanką\n"
+"„%s“\n"
+"į\n"
+"„%s“ nepavyko!\n"
 "(%s)"
 
 #: src/browser.c:4114
 msgid "Directory renamed"
-msgstr "Director redenumit"
+msgstr "Aplankas pervadintas"
 
 #: src/browser.c:4192 src/browser.c:4352
 msgid "Program to run :"
-msgstr "Program de executat :"
+msgstr "Paleisti programą:"
 
 #: src/browser.c:4204
 msgid ""
 "Enter the program to run. It will receive the current directory as parameter."
 msgstr ""
-"Introduce�i programul de executat. O s� primeasc� directorul curent ca "
-"parametru."
+"Pasirinkite kurią programą vykdyti. JI kaip parametrą gaus esamą aplanką."
 
 #: src/browser.c:4333
 msgid "Open File with ..."
-msgstr "Deschide fisierul cu ..."
+msgstr "Atverti failą su..."
 
 #: src/browser.c:4364
 msgid ""
 "Enter the program to run. It will receive the current file as parameter."
 msgstr ""
-"Introduce�i programul de executat. El va primi fi�ierul curent ca parametru."
+"Pasirinkite kurią programą vykdyti. JI kaip parametrą gaus esamą failą."
 
 #: src/browser.c:4521
 msgid "You must type a program name!"
-msgstr "Trebuie s� introduce�i un nume de fi�ier!"
+msgstr "Turite nurodyti programą!"
 
 #: src/browser.c:4535 src/misc.c:873
 #, c-format
 msgid "The program '%s' can't be found!"
-msgstr ""
+msgstr "Programa „%s“ nerasta!"
 
 #: src/browser.c:4590 src/misc.c:919
-#, fuzzy, c-format
+#, c-format
 msgid "Can't execute %s (error %d)!\n"
-msgstr "Nu pot executa %s (%s)!\n"
+msgstr "Įvykdyti %s nepavyko (klaida %d)!\n"
 
 #: src/browser.c:4609 src/misc.c:958
 msgid "Can't fork another process!\n"
-msgstr "Nu pot porni (fork) alt proces!\n"
+msgstr "Nepavyko atšakoti kito proceso!\n"
 
 #: src/browser.c:4643
 #, c-format
 msgid "Executed command : '%s %s'"
-msgstr "Comanda executat� : '%s %s'"
+msgstr "Vykdyta komanda: „%s %s“"
 
 #: src/cddb.c:228
 msgid "Artist / Album"
-msgstr "Artist / Album"
+msgstr "Atlikėjas / Albumas"
 
 #: src/cddb.c:228
 msgid "Category"
-msgstr "Categorie"
+msgstr "Kategorija"
 
 #. Note: don't set "" instead of NULL else this will cause problem with translation language
 #: src/cddb.c:229 src/cddb.c:438
 msgid "Track Name"
-msgstr "Num�rul pistei"
+msgstr "Takelio pavadinimas"
 
 #: src/cddb.c:229
 msgid "Time"
-msgstr "Timp"
+msgstr "Laikas"
 
 #: src/cddb.c:240
 msgid "CD Data Base Search"
-msgstr "Cautare CD in baza de date"
+msgstr "CD duomenų bazės paieška"
 
 #.
 #. * 1 - Page for automatic search (generate the CDDBId from files)
 #.
 #: src/cddb.c:272
 msgid "Automatic Search"
-msgstr "Cautare automata"
+msgstr "Automatinė paieška"
 
 #: src/cddb.c:284
-#, fuzzy
 msgid "Request CD database :"
-msgstr "Cere baza de date FreeDB:"
+msgstr "CD duomenų bazės užklausa:"
 
 #: src/cddb.c:294
 msgid ""
 "Request automatically the CDDB database using the selected files (the order "
 "is important!) to generate the CddbID."
 msgstr ""
-"Cere automat baza CDDB folosit fisierele alese (ordinea e importanta!) "
-"pentru a genera CddbID."
+"Automatiškai užklausti CDDB naudojant pasirinktus failus(eiliškumas - "
+"svarbu!) ir sugeneruoti CddbID."
 
 #: src/cddb.c:304 src/cddb.c:414
 msgid "Stop the search ..."
-msgstr " Opreste cautarea...  "
+msgstr "Stabdyti paiešką..."
 
 #. Check box to run the scanner
 #: src/cddb.c:311
 msgid "Use local Cddb"
-msgstr ""
+msgstr "Naudoti vietinę CDDB"
 
 #: src/cddb.c:314 src/cddb.c:765
 msgid ""
 "When activating this option, after loading the fields, the current selected "
 "scanner will be ran (the scanner window must be opened)."
 msgstr ""
-"Cind este activata aceasta optiune, dupa incarcarea cimpurilor, examinatorul "
-"curent va fi rulat (fereastra examinatorului trebuie sa fie deschisa)."
+"Pasirinkus šią parinkty, įkėlus visus laukelius, bus paleistas pasirinktas "
+"skeneris(skenerio langas turi būti atvertas)."
 
 #.
 #. * 2 - Page for manual search
 #.
 #: src/cddb.c:359
 msgid "Manual Search"
-msgstr "Cautare manuala"
+msgstr "Rankinė paieška"
 
 #: src/cddb.c:374
 msgid "Words :"
-msgstr "Cuvinte :"
+msgstr "Žodžiai:"
 
 #: src/cddb.c:386
 msgid "Enter the words to search (separated by a space or '+')"
-msgstr "Introduce�i cuvintele de c�utat (separate de un spa�iu sau '+')"
+msgstr "Įveskite paieškos žodžius (atskirtus tarpu arba „+“)"
 
 #.
 #. * Search options
 #.
 #: src/cddb.c:426
 msgid "Search In :"
-msgstr "Caut� �n :"
+msgstr "Kur ieškoti:"
 
 #: src/cddb.c:434
 msgid "All Fields"
-msgstr "Toate c�mpurile"
+msgstr "Visi laukai"
 
 #: src/cddb.c:439 src/picture.c:816 src/prefs.c:842
 msgid "Other"
-msgstr "Altele"
+msgstr "Kita"
 
 #: src/cddb.c:461
 msgid "All Categories"
-msgstr "Toate categoriile"
+msgstr "Visos kategorijos"
 
 #: src/cddb.c:463
 msgid "Blues"
-msgstr "Blues"
+msgstr "Bliuzas"
 
 #: src/cddb.c:464
 msgid "Classical"
-msgstr "Clasic"
+msgstr "Klasika"
 
 #: src/cddb.c:465
 msgid "Country"
-msgstr "Country"
+msgstr "Kantri"
 
 #: src/cddb.c:466
 msgid "Folk"
-msgstr "Folk"
+msgstr "Liaudies"
 
 #: src/cddb.c:467
 msgid "Jazz"
-msgstr "Jazz"
+msgstr "Džiazas"
 
 #.
 #. * Misc
 #.
 #: src/cddb.c:468 src/prefs.c:236 src/prefs.c:237
 msgid "Misc"
-msgstr "Diverse"
+msgstr "Kita"
 
 #: src/cddb.c:469
 msgid "Newage"
@@ -1165,72 +1131,73 @@ msgstr "Newage"
 
 #: src/cddb.c:470
 msgid "Reggae"
-msgstr "Raggae"
+msgstr "Regis"
 
 #: src/cddb.c:471
 msgid "Rock"
-msgstr "Rock"
+msgstr "Rokas"
 
 #: src/cddb.c:472
 msgid "Soundtrack"
-msgstr "Coloan�Sonor�"
+msgstr "Garso takelis"
 
 #: src/cddb.c:509
 msgid "included : funk, soul, rap, pop, industrial, metal, etc."
-msgstr "inclus: funk, soul, rap, pop, industrial, metal, etc."
+msgstr "įeina: funk, soul, rap, pop, industrial, metal, ir t.t."
 
 #: src/cddb.c:510
 msgid "movies, shows"
-msgstr "filme, spectacole"
+msgstr "filmai, laidos"
 
 #: src/cddb.c:511
 msgid "others that do not fit in the above categories"
-msgstr "altele care nu se �ncadreaz� �n categoriile de mai sus"
+msgstr "kiti, kurie nepatenka į kitas kategorijas"
 
 #. Button to display/hide the categories
 #: src/cddb.c:514
 msgid " Categories "
-msgstr " Categorii "
+msgstr " Kategorijos"
 
 #.
 #. * Results command
 #.
 #: src/cddb.c:522
 msgid "Results :"
-msgstr "Rezultate :"
+msgstr "Rezultatai:"
 
 #: src/cddb.c:529 src/misc.c:1973
 msgid "Search :"
-msgstr "C�utare :"
+msgstr "Ieškoti:"
 
 #: src/cddb.c:542
 msgid "Enter the words to search in the list below"
-msgstr "Introduceti cuvintele de cautat in lista de mai jos"
+msgstr "Įveskite paieškos frazę"
 
 #: src/cddb.c:554
 msgid "Search Next"
-msgstr "Cauta urmatorul"
+msgstr "Ieškoti kito"
 
 #: src/cddb.c:560
 msgid "Search Previous"
-msgstr "Cauta precedentul"
+msgstr "Ieškoti ankstesnio"
 
 #: src/cddb.c:571
-#, fuzzy
 msgid "Show only red lines (or show all lines) in the 'Artist / Album' list"
-msgstr "Afisaza doar liniile rosii/toate liniile"
+msgstr ""
+"„Atlikėjų/Albumų“ sąraše rodyti tik raudonas eilutes (arba rodyti visas "
+"eilutes)"
 
 #: src/cddb.c:577 src/cddb.c:1500
 msgid "Unselect all lines"
-msgstr "Deselecteaza toate liniile"
+msgstr "Nepasirinkti jokių eilučių"
 
 #: src/cddb.c:583
 msgid "Invert lines selection"
-msgstr "Inverseaza alegerea liniilor"
+msgstr "Invertuoti eilučių pasirinkimą"
 
 #: src/cddb.c:589 src/cddb.c:1495
 msgid "Select all lines"
-msgstr "Alege toate liniile"
+msgstr "Pasirinkti visas eilutes"
 
 #: src/cddb.c:702
 msgid ""
@@ -1238,39 +1205,38 @@ msgid ""
 "no line is selected.\n"
 "You can also reorder lines in this list before using 'apply' button."
 msgstr ""
-"Alegeti liniile care se vor aplica listei dvs de fisiere. Toate liniile vor "
-"fi prelucrate daca nu este selectata nici o linie.\n"
-"De asemenea, puteti reordona liniile in aceasta lista inainte sa apasati "
-"butonul \"Aplica\"."
+"Pasirinkite eilutes kurios bus „pritaikytos“ jūsų failų sąrašui. Jei "
+"nepasirinkta jokia eilutė bus apdorotos visos.\n"
+"Taipogi prieš „pritaikant“ galite pakeisti eilučių tvarką."
 
 #.
 #. * Apply results to fields...
 #.
 #: src/cddb.c:709
 msgid "Set Into :"
-msgstr "Fixeaz� �n :"
+msgstr "Nustatyti į:"
 
 #: src/cddb.c:716
 msgid "All"
-msgstr "Toate"
+msgstr "Visas"
 
 #: src/cddb.c:723
 msgid "Track #"
-msgstr "Pist� #"
+msgstr "Takelio nr."
 
 #: src/cddb.c:724
 msgid "# Tracks"
-msgstr "# Piste"
+msgstr "Takelių nr."
 
 #. Check box to run the scanner
 #: src/cddb.c:762 src/misc.c:3003
 msgid "Run the current scanner for each file"
-msgstr "Ruleaza examinatorul curent pentru fiecare fisier"
+msgstr "Dabartinį skenerį vykdyti kiekvienam failui"
 
 #. Check box to use DLM (also used in the preferences window)
 #: src/cddb.c:769
 msgid "Match lines with the Levenshtein algorithm"
-msgstr ""
+msgstr "Atitikti eilutes su Levenšteino(Levenshtein) algoritmu"
 
 #. Doesn't activate it by default because if the new user don't pay attention to it,
 #. it will not understand why the cddb results aren't loaded correctly...
@@ -1283,84 +1249,91 @@ msgid ""
 "when selecting the corresponding audio file, or applying cddb results, "
 "instead of using directly the position order."
 msgstr ""
+"Įjungus šią parinktį, ieškoti failų CDDB pavadinimų bus naudojamas "
+"Levenšteino(Levenshtein) algoritmas(DLM : Damerau-Levenshtein Metric). Tai "
+"bus naudojama pasirenkant atitinkamą audio failą ar pritaikant cddb "
+"rezultatą."
 
 #: src/cddb.c:786
 msgid "Load the selected lines or all lines (if no line selected)."
 msgstr ""
-"Incarca liniile alese sau toate liniile (daca nici una nu a fost aleasa)."
+"Įkelti pasirinktas eilutes arba visas eilutes (jei nepasirinkta jokia "
+"eilutė)."
 
 #: src/cddb.c:795 src/misc.c:2228
 msgid "Ready to search..."
-msgstr "Gata s� caut..."
+msgstr "Paieškai pasirengta..."
 
 #: src/cddb.c:1315
 #, c-format
 msgid ""
 "Album: '%s', artist: '%s', length: '%s', year: '%s', genre: '%s', ID: '%s'"
-msgstr "Album: '%s', artist: '%s', lungime: '%s', an: '%s', gen: '%s', ID '%s'"
+msgstr ""
+"Albumas: „%s“, atlikėjas: „%s“, trukmė: „%s“, metai: „%s“, žanras: „%s“, ID: "
+"„%s“"
 
 #: src/cddb.c:1505
 msgid "Invert selection"
-msgstr "Inverseaza alegerea"
+msgstr "Apversti pasirinkimą"
 
 #: src/cddb.c:1513
 msgid "Sort by Track Number"
-msgstr "Ordoneaza lista crescator dupa numar"
+msgstr "Rikiuoti pagal takelio numerį"
 
 #: src/cddb.c:1518
 msgid "Sort by Track Name"
-msgstr "Ordoneaza dupa numele pistei"
+msgstr "Rikiuoti pagal takelio vardą"
 
 #: src/cddb.c:1616
 #, c-format
 msgid "Resolving host '%s' ..."
-msgstr "Rezolv gazda '%s'..."
+msgstr "Atpažįstamas kompiuterio vardas: „%s“..."
 
 #: src/cddb.c:1624
 #, c-format
 msgid "Can't resolve host '%s' (%s)!"
-msgstr "Nu pot rezolva gazda '%s' (%s)!"
+msgstr "Išspręsti kompiuterio vardo nepavyko „%s“ (%s)!"
 
 #: src/cddb.c:1639
 #, c-format
 msgid "Can't create a new socket (%s)!"
-msgstr "Nu pot crea o nou� muf� (%s)!"
+msgstr "Sukurti naujos jungties nepavyko (%s)!"
 
 #. Open connection to the server
 #: src/cddb.c:1653
 #, c-format
 msgid "Connecting to host '%s', port '%d' ..."
-msgstr "M� conectez la gazda '%s', port '%d' ..."
+msgstr "Jungiamasi prie kompiuterio „%s“, prievadu „%d“..."
 
 #: src/cddb.c:1660
 #, c-format
 msgid "Can't connect to host '%s' (%s)!"
-msgstr "Nu m� pot conecta la gazda '%s' (%s)!"
+msgstr "Prisijungti prie kompiuterio „%s“ nepavyko (%s)!"
 
 #: src/cddb.c:1666
 #, c-format
 msgid "Connected to host '%s'"
-msgstr "Conectat la gazda '%s'"
+msgstr "Prisijungta prie „%s“"
 
 #: src/cddb.c:1755
 #, c-format
 msgid "Receiving data (%s) ..."
-msgstr "Primesc datele (%s) ..."
+msgstr "Gaunami duomenys iš (%s)..."
 
 #: src/cddb.c:1767
-#, fuzzy, c-format
+#, c-format
 msgid "Error when reading cddb response (%s)!"
-msgstr "Eroare �n timp ce �tergeam eticheta ID3v1 de la '%s' (%s)\n"
+msgstr "Klaida skaitant cddb atsakymą (%s)!"
 
 #: src/cddb.c:1773
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create file '%s' (%s)"
-msgstr "Nu pot crea sau deschide '%s' (%s)"
+msgstr "Sukurti failo „%s“ nepavyko (%s)"
 
 #: src/cddb.c:1823 src/misc.c:3158 src/setting.c:1393
 #, c-format
 msgid "Can't open file '%s' (%s)"
-msgstr "Nu pot deschide '%s' (%s)"
+msgstr "Atverti failo „%s“ nepavyko (%s)"
 
 #. g_print("Request Cddb_Search_Album_List_From_String_Freedb : '%s'\n", cddb_in);
 #. Send the request
@@ -1370,12 +1343,12 @@ msgstr "Nu pot deschide '%s' (%s)"
 #. Send the request
 #: src/cddb.c:2265 src/cddb.c:2585 src/cddb.c:3448
 msgid "Sending request ..."
-msgstr "Trimit cerere ..."
+msgstr "Siunčiama užklausa..."
 
 #: src/cddb.c:2269 src/cddb.c:2589 src/cddb.c:3153 src/cddb.c:3452
 #, c-format
 msgid "Can't send the request (%s)!"
-msgstr "Nu pot trimite cerere (%s)!"
+msgstr "Išsiųsti užklausos nepavyko (%s)!"
 
 #.
 #. * Read the answer
@@ -1383,88 +1356,88 @@ msgstr "Nu pot trimite cerere (%s)!"
 #. Read the answer
 #: src/cddb.c:2291 src/cddb.c:3166 src/cddb.c:3461
 msgid "Receiving data ..."
-msgstr "Primesc datele ..."
+msgstr "Gaunami duomenys..."
 
 #: src/cddb.c:2298 src/cddb.c:2618 src/cddb.c:3173 src/cddb.c:3468
-#, fuzzy
 msgid "The server returned a wrong answer!"
-msgstr "Serverul a intors un raspuns gresit! (%s)"
+msgstr "Serveris atsakė netinkamai!"
 
 #: src/cddb.c:2312 src/cddb.c:2634 src/cddb.c:3188 src/cddb.c:3485
 #: src/cddb.c:3500
 #, c-format
 msgid "The server returned a wrong answer! (%s)"
-msgstr "Serverul a intors un raspuns gresit! (%s)"
+msgstr "Serveris atsakė netinkamai! (%s)"
 
 #: src/cddb.c:2459
 msgid "Sorry, the web-based search is currently down!"
-msgstr "Regret, cautarea web este inaccesibila"
+msgstr "Atsiprašome, tinklo paieška šiuo metu neveikia!"
 
 #: src/cddb.c:2461 src/cddb.c:2806
 #, c-format
 msgid "Found %d matching album(s)"
-msgstr "Am g�sit %d album(e)"
+msgstr "Rasta %d atitinkančių albumų"
 
 #: src/cddb.c:2606
-#, fuzzy, c-format
+#, c-format
 msgid "Receiving data of page %d (album %d/%d)..."
-msgstr "Primesc datele (%s) ..."
+msgstr "Gaunami puslapio %d duomenys (albumas %d/%d)..."
 
 #: src/cddb.c:2608
-#, fuzzy, c-format
+#, c-format
 msgid "Receiving data of page %d ..."
-msgstr "Primesc datele (%s) ..."
+msgstr "Gaunami puslapio %d duomenys..."
 
 #: src/cddb.c:2773
 msgid "More results to load ..."
-msgstr ""
+msgstr "Daugiau rezultatų..."
 
 #: src/cddb.c:2902
 msgid "No file selected!"
-msgstr "Nici un fisier ales!"
+msgstr "Nepasirinktas failas!"
 
 #. The CD redbook standard defines the maximum number of tracks as 99, any
 #. queries with more than 99 tracks will never return a result.
 #: src/cddb.c:2910
 msgid "More than 99 files selected! Can't send request!"
-msgstr ""
+msgstr "Pasirinkti daugiau nei 99 failai! Neįmanoma išsiųsti užklausos!"
 
 #: src/cddb.c:2916
 #, c-format
 msgid "%d file(s) selected!"
-msgstr "%d fisier(e) alese!"
+msgstr "Pasirinkta %d failų!"
 
 #: src/cddb.c:2991
-#, fuzzy
 msgid "Local CD search..."
-msgstr "Gata s� caut..."
+msgstr "Vietinių CD paieška..."
 
 #: src/cddb.c:2995
 msgid ""
 "The path for 'Local CD Data Base' wasn't defined!\n"
 "Fill it in the preferences window before to use this search."
 msgstr ""
+"„Vietinės CD duomenų bazės“ kelias nenustatytas!\n"
+"Prieš paiešką nustatymuose nustatykite šį kelią."
 
 #. g_print("Request Cddb_Search_Album_From_Selected_Files : '%s'\n", cddb_in);
 #: src/cddb.c:3143
 #, c-format
 msgid "Sending request (CddbId: %s, #tracks: %d, Disc length: %d) ..."
-msgstr "Trimit cererea (CddbId: %s, #piste: %d, Lungime disc: %d)..."
+msgstr "Siunčiama užklausa (CddbId: %s, #tracks: %d, Disc length: %d) ..."
 
 #: src/cddb.c:3296
-#, fuzzy, c-format
+#, c-format
 msgid "Found %d matching album(s) for DiscID '%s'"
-msgstr "Am g�sit %d album(e)"
+msgstr "Rasta %d albumų atitinkančių DiscID „%s“"
 
 #: src/cddb.c:3392
-#, fuzzy, c-format
+#, c-format
 msgid "Can't load file: '%s' (%s)!"
-msgstr "Nu pot deschide '%s' (%s)"
+msgstr "Įkelti failo nepavyko: „%s“ (%s)!"
 
 #. Load the track list of the album
 #: src/cddb.c:3691
 msgid "Loading album track list ..."
-msgstr "�ncarc lista de piste a albumului"
+msgstr "Įkeliamas albumo takelių sąrašas..."
 
 #: src/cddb.c:3888
 #, c-format
@@ -1474,163 +1447,163 @@ msgid ""
 "\n"
 "Do you want to continue ?"
 msgstr ""
-"Atentie, adaugati %d linii din rezultatele CDDB la %d linii in lista de "
-"fisiere!\n"
+"Būkite atsargūs, jūs pritaikote %d CDDB rezultatų eilutes %d failų sąrašo "
+"eilutėms!\n"
 "\n"
-"Continuati?"
+"Ar norite tęsti?"
 
 #: src/cddb.c:3891
 msgid "Write Tag from CDDB..."
-msgstr "Scrie eticheta din CDDB..."
+msgstr "Įrašyti žymę iš CDDB..."
 
 #: src/charset.c:49
 msgid "Arabic (IBM-864)"
-msgstr "Arab (IBM-864)"
+msgstr "Arabų (IBM-864)"
 
 #: src/charset.c:50
 msgid "Arabic (ISO-8859-6)"
-msgstr "Arab (ISO-8859-6)"
+msgstr "Arabų (ISO-8859-6)"
 
 #: src/charset.c:51
 msgid "Arabic (Windows-1256)"
-msgstr "Arab (Windows-1256)"
+msgstr "Arabų (Windows-1256)"
 
 #: src/charset.c:52
 msgid "Baltic (ISO-8859-13)"
-msgstr "Baltic (ISO-8859-13)"
+msgstr "Baltų (ISO-8859-13)"
 
 #: src/charset.c:53
 msgid "Baltic (ISO-8859-4)"
-msgstr "Baltic (ISO-8859-4)"
+msgstr "Baltų (ISO-8859-4)"
 
 #: src/charset.c:54
 msgid "Baltic (Windows-1257)"
-msgstr "Baltic (Windows-1257)"
+msgstr "Baltų (Windows-1257)"
 
 #: src/charset.c:55
 msgid "Celtic (ISO-8859-14)"
-msgstr "Celtic (ISO-8859-14)"
+msgstr "Keltų (ISO-8859-14)"
 
 #: src/charset.c:56
 msgid "Central European (IBM-852)"
-msgstr "Central-european (IBM-852)"
+msgstr "Centrinės Europos (IBM-852)"
 
 #: src/charset.c:57
 msgid "Central European (ISO-8859-2)"
-msgstr "Central-european (ISO-8859-2)"
+msgstr "Centrinės Europos (ISO-8859-2)"
 
 #: src/charset.c:58
 msgid "Central European (Windows-1250)"
-msgstr "Central-european (Windows-1250)"
+msgstr "Centrinės Europos (Windows-1250)"
 
 #: src/charset.c:59
 msgid "Chinese Simplified (GB18030)"
-msgstr "Chinez� simplificat� (GB18030)"
+msgstr "Kinų supaprastinta (GB18030)"
 
 #: src/charset.c:60
 msgid "Chinese Simplified (GB2312)"
-msgstr "Chinez� simplificat� (GB2312)"
+msgstr "Kinų supaprastinta (GB2312)"
 
 #: src/charset.c:61
 msgid "Chinese Traditional (Big5)"
-msgstr "Chinez� tradi�ional� (Big5)"
+msgstr "Kinų tradicinė (Big5)"
 
 #: src/charset.c:62
 msgid "Chinese Traditional (Big5-HKSCS)"
-msgstr "Chinez� tradi�ional� (Big5-HKSCS)"
+msgstr "Kinų tradicinė (Big5-HKSCS)"
 
 #: src/charset.c:63
 msgid "Cyrillic (IBM-855)"
-msgstr "Chirilic (IBM-855)"
+msgstr "Kirilica (IBM-855)"
 
 #: src/charset.c:64
 msgid "Cyrillic (ISO-8859-5)"
-msgstr "Chirilic (ISO-8859-5)"
+msgstr "Kirilica (ISO-8859-5)"
 
 #: src/charset.c:65
 msgid "Cyrillic (ISO-IR-111)"
-msgstr "Chirilic (ISO-IR-111)"
+msgstr "Kirilica (ISO-IR-111)"
 
 #: src/charset.c:66
 msgid "Cyrillic (KOI8-R)"
-msgstr "Chirilic (KOI8-R)"
+msgstr "Kirilica (KOI8-R)"
 
 #: src/charset.c:67
 msgid "Cyrillic (Windows-1251)"
-msgstr "Chirilic (Windows-1251)"
+msgstr "Kirilica (Windows-1251)"
 
 #: src/charset.c:68
 msgid "Cyrillic/Russian (CP-866)"
-msgstr "Chirilic/Rus� (CP-866)"
+msgstr "Kirilica/Rusų (CP-866)"
 
 #: src/charset.c:69
 msgid "Cyrillic/Ukrainian (KOI8-U)"
-msgstr "Chirilic/Ucrainian� (KOI8-U)"
+msgstr "Kirilica/Ukrainiečių (KOI8-U)"
 
 #: src/charset.c:70
 msgid "English (US-ASCII)"
-msgstr "Englez� (US-ASCII)"
+msgstr "Anglų (US-ASCII)"
 
 #: src/charset.c:71
 msgid "Greek (ISO-8859-7)"
-msgstr "Greac� (ISO-8859-7)"
+msgstr "Graikų (ISO-8859-7)"
 
 #: src/charset.c:72
 msgid "Greek (Windows-1253)"
-msgstr "Greac� (Windows-1253)"
+msgstr "Graikų (Windows-1253)"
 
 #: src/charset.c:73
 msgid "Hebrew (IBM-862)"
-msgstr "Ebraic� (IBM-862)"
+msgstr "Hebrajų (IBM-862)"
 
 #: src/charset.c:74
 msgid "Hebrew (Windows-1255)"
-msgstr "Ebraic� (Windows-1255)"
+msgstr "Hebrajų (Windows-1255)"
 
 #: src/charset.c:75
 msgid "Japanese (EUC-JP)"
-msgstr "Japonez� (EUC-JP)"
+msgstr "Japonų (EUC-JP)"
 
 #: src/charset.c:76
 msgid "Japanese (ISO-2022-JP)"
-msgstr "Japonez� (ISO-2022-JP)"
+msgstr "Japonų (ISO-2022-JP)"
 
 #: src/charset.c:77
 msgid "Japanese (Shift_JIS)"
-msgstr "Japonez� (Shift_JIS)"
+msgstr "Japonų (Shift_JIS)"
 
 #: src/charset.c:78
 msgid "Korean (EUC-KR)"
-msgstr "Corean� (EUC-KR)"
+msgstr "Korėjiečių (EUC-KR)"
 
 #: src/charset.c:79
 msgid "Nordic (ISO-8859-10)"
-msgstr "Nordic� (ISO-8859-10)"
+msgstr "Šiaurės Europos (ISO-8859-10)"
 
 #: src/charset.c:80
 msgid "South European (ISO-8859-3)"
-msgstr "Sud-european� (ISO-8859-3)"
+msgstr "Pietų Europos (ISO-8859-3)"
 
 #: src/charset.c:81
 msgid "Thai (TIS-620)"
-msgstr "Tailandez� (TIS-620)"
+msgstr "Tajų (TIS-620)"
 
 #: src/charset.c:82
 msgid "Turkish (IBM-857)"
-msgstr "Turc� (IBM-857)"
+msgstr "Turkų (IBM-857)"
 
 #: src/charset.c:83
 msgid "Turkish (ISO-8859-9)"
-msgstr "Turc� (ISO-8859-9)"
+msgstr "Turkų (ISO-8859-9)"
 
 #: src/charset.c:84
 msgid "Turkish (Windows-1254)"
-msgstr "Turc� (Windows-1254)"
+msgstr "Turkų (Windows-1254)"
 
 #. {N_("Unicode (UTF-7)"),                   "UTF-7"         },
 #: src/charset.c:86
 msgid "Unicode (UTF-8)"
-msgstr "Unicode (UTF-8)"
+msgstr "Unikodas (UTF-8)"
 
 #. {N_("Unicode (UTF-16BE)"),                "UTF-16BE"      },
 #. {N_("Unicode (UTF-16LE)"),                "UTF-16LE"      },
@@ -1638,116 +1611,116 @@ msgstr "Unicode (UTF-8)"
 #. {N_("Unicode (UTF-32LE)"),                "UTF-32LE"      },
 #: src/charset.c:93
 msgid "Vietnamese (VISCII)"
-msgstr "Vietnamez� (VISCII)"
+msgstr "Vietnamiečių (VISCII)"
 
 #: src/charset.c:94
 msgid "Vietnamese (Windows-1258)"
-msgstr "Vietnamez� (Windows-1258)"
+msgstr "Vietnamiečių (Windows-1258)"
 
 #: src/charset.c:95
 msgid "Visual Hebrew (ISO-8859-8)"
-msgstr "Ebraic� vizual� (ISO-8859-8)"
+msgstr "Vizualioji hebrajų (ISO-8859-8)"
 
 #: src/charset.c:96
 msgid "Western (IBM-850)"
-msgstr "Vestic (IBM-850)"
+msgstr "Vakarų (IBM-850)"
 
 #: src/charset.c:97
 msgid "Western (ISO-8859-1)"
-msgstr "Vestic (ISO-8859-1)"
+msgstr "Vakarų (ISO-8859-1)"
 
 #: src/charset.c:98
 msgid "Western (ISO-8859-15)"
-msgstr "Vestic (ISO-8859-15)"
+msgstr "Vakarų (ISO-8859-15)"
 
 #: src/charset.c:99
 msgid "Western (Windows-1252)"
-msgstr "Vestic (Windows-1252)"
+msgstr "Vakarų (Windows-1252)"
 
 #: src/charset.c:544
 #, c-format
 msgid "The filename '%s' couldn't be converted into UTF-8 (%s)."
-msgstr ""
+msgstr "Failo vardo „%s“ konvertuoti į UTF-8 nepavyko (%s)."
 
 #: src/charset.c:545 src/charset.c:644 src/charset.c:708
 msgid "Invalid UTF-8"
-msgstr "Unicode invalid(UTF-8)"
+msgstr "Netinkamas UTF-8"
 
 #: src/charset.c:643
 #, c-format
 msgid ""
 "The UTF-8 string '%s' couldn't be converted into filename encoding (%s)."
-msgstr ""
+msgstr "Konvertuoti UTF-8 eilutę „%s“ į failo vardo koduotę nepavyko (%s)."
 
 #: src/charset.c:707
 #, c-format
 msgid "The string '%s' couldn't be converted into UTF-8 (%s)."
-msgstr ""
+msgstr "Eilutės „%s“ konvertuoti į UTF-8 nepavyko (%s)."
 
 #. Starting messages
 #: src/easytag.c:198
-#, fuzzy, c-format
+#, c-format
 msgid "Starting EasyTAG %s (PId: %d) ..."
-msgstr "Pornesc EasyTAG %s (Pld: %d) ...\n"
+msgstr "Paleidžiama EasyTAG %s (Pid: %d)..."
 
 #: src/easytag.c:200
-#, fuzzy, c-format
+#, c-format
 msgid "Currently using libid3tag version %s ..."
-msgstr "Folosesc id3lib versiunea %d.%d.%d ...\n"
+msgstr "Naudojama libid3tag versija %s..."
 
 #: src/easytag.c:203
-#, fuzzy, c-format
+#, c-format
 msgid "Currently using id3lib version %d.%d.%d ..."
-msgstr "Folosesc id3lib versiunea %d.%d.%d ...\n"
+msgstr "Naudojama id3lib versija %d.%d.%d ..."
 
 #: src/easytag.c:210
 #, c-format
 msgid "Variable EASYTAGLANG defined. Setting locale : '%s'"
-msgstr ""
+msgstr "Kintamasis EASYTAGLANG nustatytas. Nustatoma kalba: „%s“"
 
 #: src/easytag.c:212
-#, fuzzy, c-format
+#, c-format
 msgid "Setting locale : '%s'"
-msgstr "Redenumesc fi�ierul '%s'"
+msgstr "Nustatoma kalba: „%s“"
 
 #: src/easytag.c:216
 #, c-format
 msgid "Currently using locale '%s' (and eventually '%s')..."
-msgstr ""
+msgstr "Naudojama kalba „%s“ (ir galiausiai „%s“)..."
 
 #: src/easytag.c:232
 #, c-format
 msgid "%s %s by %s (compiled %s, %s)\n"
-msgstr "%s %s de %s (compilat %s, %s)\n"
+msgstr "%s %s skūrė %s (sukompiliuota %s, %s)\n"
 
 #: src/easytag.c:234
 #, c-format
 msgid "Web Page: %s"
-msgstr "Pagin� de web: %s"
+msgstr "Tinklapis: %s"
 
 #: src/easytag.c:309
 #, c-format
 msgid "Unknown parameter or path '%s'\n"
-msgstr ""
+msgstr "Nežinomas parametras arba kelias „%s“\n"
 
 #.
 #. * Browser
 #.
 #: src/easytag.c:433 src/prefs.c:145 src/prefs.c:146
 msgid "Browser"
-msgstr "Navigator"
+msgstr "Naršyklė"
 
 #: src/easytag.c:455 src/et_core.c:2692
 msgid "File"
-msgstr "Fi�ier"
+msgstr "Failas"
 
 #: src/easytag.c:481
 msgid "Read Only File"
-msgstr "Fi�ier doar citire"
+msgstr "Failas tik skaitymui"
 
 #: src/easytag.c:484
 msgid "File Link Broken"
-msgstr "Leg�tur� fi�ier incorect�"
+msgstr "Nuoroda į failą neveikia"
 
 #. Default values are MPs data
 #. MPEG, Layer versions
@@ -1757,11 +1730,11 @@ msgstr "MPEG"
 
 #: src/easytag.c:500 src/easytag.c:4461
 msgid "?, Layer ?"
-msgstr "?, Strat ?"
+msgstr "?, sluoksnis ?"
 
 #: src/easytag.c:505
 msgid "Bitrate:"
-msgstr "Bitrate:"
+msgstr "Bitų dažnis:"
 
 #: src/easytag.c:507 src/easytag.c:4462
 msgid "? kb/s"
@@ -1769,7 +1742,7 @@ msgstr "? kb/s"
 
 #: src/easytag.c:512
 msgid "Freq:"
-msgstr "Frecven��:"
+msgstr "Dažnis:"
 
 #: src/easytag.c:514 src/easytag.c:4463
 msgid "? Hz"
@@ -1778,7 +1751,7 @@ msgstr "? Hz"
 #. Mode
 #: src/easytag.c:522 src/easytag.c:4464 src/mpeg_header.c:377
 msgid "Mode:"
-msgstr "Mod:"
+msgstr "Režimas:"
 
 #: src/easytag.c:524 src/easytag.c:538 src/easytag.c:4465 src/easytag.c:4466
 #: src/easytag.c:4467
@@ -1787,7 +1760,7 @@ msgstr "?"
 
 #: src/easytag.c:529
 msgid "Size:"
-msgstr "Lungime:"
+msgstr "Dydis:"
 
 #: src/easytag.c:531
 msgid "? kb"
@@ -1795,146 +1768,140 @@ msgstr "? kb"
 
 #: src/easytag.c:536
 msgid "Time:"
-msgstr "Timp:"
+msgstr "Trukmė:"
 
 #. Main Frame
 #: src/easytag.c:582 src/et_core.c:2630
 msgid "Tag"
-msgstr "Etichet�"
+msgstr "Žymė"
 
 #.
 #. * 1 - Page for common tag fields
 #.
 #: src/easytag.c:604
 msgid "Common"
-msgstr "Comun"
+msgstr "Bendra"
 
 #. Title
 #: src/easytag.c:616
 msgid "Title:"
-msgstr "Titlu:"
+msgstr "Pavadinimas:"
 
 #: src/easytag.c:629
 msgid "Tag selected files with this title"
-msgstr "Eticheteaza fisierele alese cu titlul acesta"
+msgstr "Žymėti pasirinktus failus su šiuo pavadinimu"
 
 #. Artist
 #: src/easytag.c:636
 msgid "Artist:"
-msgstr "Artist:"
+msgstr "Atlikėjas:"
 
 #: src/easytag.c:648
 msgid "Tag selected files with this artist"
-msgstr "Eticheteaza toate fisierele cu artistul acesta"
+msgstr "Žymėti pasirinktus failus su šiuo atlikėju"
 
 #. Album Artist
 #: src/easytag.c:654
-#, fuzzy
 msgid "Album Artist:"
-msgstr "Artist:"
+msgstr "Albumo atlikėjas:"
 
 #: src/easytag.c:666
-#, fuzzy
 msgid "Tag selected files with this album artist"
-msgstr "Eticheteaza toate fisierele cu artistul acesta"
+msgstr "Žymėti pasirinktus failus su šiuo albumo atlikėju"
 
 #. Album
 #: src/easytag.c:672
 msgid "Album:"
-msgstr "Album:"
+msgstr "Albumas:"
 
 #: src/easytag.c:685
 msgid "Tag selected files with this album name"
-msgstr "Eticheteaza fisierele alese cu albumul acesta"
+msgstr "Žymėti pasirinktus failus su šiuo albumo pavadinimu"
 
 #. Disc Number
 #: src/easytag.c:691
-#, fuzzy
 msgid "CD:"
-msgstr "CD"
+msgstr "CD:"
 
 #: src/easytag.c:707
 msgid "Tag selected files with this disc number"
-msgstr "Eticheteaza fisierele alese cu acest numar de disc"
+msgstr "Žymėti pasirinktus failus su šiuo disko numeriu"
 
 #. Year
 #: src/easytag.c:713
 msgid "Year:"
-msgstr "An:"
+msgstr "Metai:"
 
 #: src/easytag.c:730
 msgid "Tag selected files with this year"
-msgstr "Eticheteaza fisierele alese cu anul acesta"
+msgstr "Žymėti pasirinktus failus su šiais metais"
 
 #: src/easytag.c:742
 msgid "Number selected tracks sequentially. Starts at 01 in each subdirectory."
-msgstr ""
-"Numara pistele alese secvential. Porneste de la 01 �n fiecare subdirector"
+msgstr "Sunumeruoti pasirinktus takelius. Prasideda 01 kiekviename aplanke."
 
 #. To have enought space to display the icon
 #. To have enought space to display the icon
 #: src/easytag.c:751
 msgid "Track #:"
-msgstr "Pist� #:"
+msgstr "Takelio nr.:"
 
 #: src/easytag.c:777
 msgid ""
 "Set the number of files, in the same directory of the displayed file, to the "
 "selected tracks."
-msgstr ""
-"Alegeti numarul de fisiere, din acelasi director cu fisierul afisat, pentru "
-"pistele alese"
+msgstr "Nustatykite failų skaičių tame pačiame aplanke kaip ir rodomas failas."
 
 #: src/easytag.c:796
 msgid "Tag selected files with this number of tracks"
-msgstr "Eticheteaza fisierele alese cu acest numar de piste"
+msgstr "Žymėti pasirinktus failus su šiuo takelių numeriu"
 
 #. Genre
 #: src/easytag.c:802
 msgid "Genre:"
-msgstr "Gen"
+msgstr "Žanras:"
 
 #: src/easytag.c:827
 msgid "Tag selected files with this genre"
-msgstr "Eticheteaza fisierele alese cu acest gen"
+msgstr "Žymėti pasirinktus failus su šiuo žanru"
 
 #. Comment
 #: src/easytag.c:833
 msgid "Comment:"
-msgstr "Comentariu:"
+msgstr "Komentaras:"
 
 #: src/easytag.c:858
 msgid "Tag selected files with this comment"
-msgstr "Eticheteaza fisierele alese cu acest comentariu"
+msgstr "Žymėti pasirinktus failus su šiuo komentaru"
 
 #. Attach_Popup_Menu_To_Tag_Entries(GTK_ENTRY(CommentView));
 #. g_object_set_data(G_OBJECT(CommentView),"MButtonName",CommentMButton);
 #. Composer (name of the composers)
 #: src/easytag.c:867
 msgid "Composer:"
-msgstr "Compozitor:"
+msgstr "Kompozitorius:"
 
 #: src/easytag.c:879
 msgid "Tag selected files with this composer"
-msgstr "Eticheteaza fisierele alese cu acest compozitor"
+msgstr "Žymėti pasirinktus failus su šiuo kompozitoriumi"
 
 #. Original Artist / Performer
 #: src/easytag.c:886
 msgid "Orig. Artist:"
-msgstr "Artist initial:"
+msgstr "Orig. atlikėjas:"
 
 #: src/easytag.c:898
 msgid "Tag selected files with this original artist"
-msgstr "Eticheteaza toate fisierele cu artistul initial acesta"
+msgstr "Žymėti pasirinktus failus su šiuo originaliu atlikėju"
 
 #. Copyright
 #: src/easytag.c:905
 msgid "Copyright:"
-msgstr "Drept de autor:"
+msgstr "Autorinės teisės:"
 
 #: src/easytag.c:917
 msgid "Tag selected files with this copyright"
-msgstr "Eticheteaza toate fisierele cu 'dreptul de autor' acesta"
+msgstr "Žymėti pasirinktus failus su šiomis autorinėmis teisėmis"
 
 #. URL
 #: src/easytag.c:924
@@ -1943,208 +1910,207 @@ msgstr "URL:"
 
 #: src/easytag.c:936
 msgid "Tag selected files with this URL"
-msgstr "Eticheteaza fisierele alese cu URL-ul acesta"
+msgstr "Žymėti pasirinktus failus su šiuo URL"
 
 #. Encoded by
 #: src/easytag.c:943
 msgid "Encoded by:"
-msgstr "Codor:"
+msgstr "Kodavimas:"
 
 #: src/easytag.c:955
 msgid "Tag selected files with this encoder name"
-msgstr "Eticheteaza fisierele alese cu acest codor"
+msgstr "Žymėti pasirinktus failus su šiuo kodavimu"
 
 #.
 #. * 2 - Page for extra tag fields
 #.
 #: src/easytag.c:1018
 msgid "Pictures"
-msgstr "Imagini"
+msgstr "Paveikslėliai"
 
 #. Picture
 #: src/easytag.c:1029
 msgid "Pictures:"
-msgstr "Imagini:"
+msgstr "Paveikslėliai:"
 
 #: src/easytag.c:1049
 msgid "You can use drag and drop to add picture."
-msgstr "Puteti folosi 'drag and drop' pentru a adauga o imagine."
+msgstr "Norėdami pridėti paveikslėlį galite atvilkti ir numesti jį."
 
 #: src/easytag.c:1087
 msgid "Tag selected files with these pictures"
-msgstr "Eticheteaza fisierele alese cu aceste imagini"
+msgstr "Žymėti pasirinktus failus su šiais paveikslėliais"
 
 #: src/easytag.c:1097
 msgid "Add pictures to the tag (drag and drop is also available)."
-msgstr "Adauga imagini etichetei ('drag and drop' este disponibil)."
+msgstr "Pridėti paveikslėlį į žymes (taipogi veikia atvilkimas)."
 
 #: src/easytag.c:1103
 msgid "Remove selected pictures, else all pictures."
-msgstr "Sterge imaginile alese sau toate imaginile."
+msgstr "Pašalinti pasirinktus paveikslėlius, arba visus."
 
 #: src/easytag.c:1113
 msgid "Save the selected pictures on the hard disk."
-msgstr "Salveaza imaginile alese pe hard disc"
+msgstr "Išsaugoti pasirinktus paveikslėlius kietajame diske."
 
 #: src/easytag.c:1120
 msgid "Set properties of the selected pictures."
-msgstr "Alegeti proprietatile imaginilor alese."
+msgstr "Nustatyti pasirinktų paveikslėlių savybes."
 
 #: src/easytag.c:1200
 #, c-format
 msgid "Selected files tagged with title '%s'."
-msgstr "Fisierele alese etichetate cu titlul '%s'."
+msgstr "Pasirinkti failai sužymėti su pavadinimu „%s“."
 
 #: src/easytag.c:1202
 msgid "Removed title from selected files."
-msgstr "Sters titlul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas pavadinimas."
 
 #: src/easytag.c:1219
 #, c-format
 msgid "Selected files tagged with artist '%s'."
-msgstr "Toate fisierele etichetate cu artistul '%s'."
+msgstr "Pasirinkti failai sužymėti su atlikėju „%s“."
 
 #: src/easytag.c:1221
 msgid "Removed artist from selected files."
-msgstr "Sters artistul din toate fisierele."
+msgstr "Iš pasirinktų failų pašalintas atlikėjas."
 
 #: src/easytag.c:1238
-#, fuzzy, c-format
+#, c-format
 msgid "Selected files tagged with album artist '%s'."
-msgstr "Toate fisierele etichetate cu artistul '%s'."
+msgstr "Pasirinkti failai sužymėti su albumo atlikėju „%s“."
 
 #: src/easytag.c:1240
-#, fuzzy
 msgid "Removed album artist from selected files."
-msgstr "Sters artistul din toate fisierele."
+msgstr "Iš pasirinktų failų pašalintas albumo atlikėjas."
 
 #: src/easytag.c:1257
 #, c-format
 msgid "Selected files tagged with album '%s'."
-msgstr "Fisierele alese etichetate cu albumul '%s'."
+msgstr "Pasirinkti failai sužymėti su albumu „%s“."
 
 #: src/easytag.c:1259
 msgid "Removed album name from selected files."
-msgstr "Sters albumul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas albumas."
 
 #: src/easytag.c:1276
 #, c-format
 msgid "Selected files tagged with disc number '%s'."
-msgstr "Fisierele alese etichetate cu numarul de disc '%s'."
+msgstr "Pasirinkti failai sužymėti su disko numeriu „%s“."
 
 #: src/easytag.c:1278
 msgid "Removed disc number from selected files."
-msgstr "Sters numarul de disc din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas disko numeris."
 
 #: src/easytag.c:1295
 #, c-format
 msgid "Selected files tagged with year '%s'."
-msgstr "Fisierele alese etichetate cu anul '%s'."
+msgstr "Pasirinkti failai sužymėti su metais „%s“."
 
 #: src/easytag.c:1297
 msgid "Removed year from selected files."
-msgstr "Sters anul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalinti metai."
 
 #: src/easytag.c:1325 src/easytag.c:1421
 #, c-format
 msgid "Selected files tagged with track like 'xx/%s'."
-msgstr "Fisierele alese etichetate cu pista 'xx/%s'."
+msgstr "Pasirinkti failai sužymėti su takeliu „xx/%s“."
 
 #: src/easytag.c:1328
 msgid "Selected files tagged with track like 'xx'."
-msgstr "Fisierele alese etichetate cu pista 'xx'."
+msgstr "Pasirinkti failai sužymėti su takeliu „xx“."
 
 #: src/easytag.c:1332 src/easytag.c:1424
 msgid "Removed track number from selected files."
-msgstr "Sters numarul pistei din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas takelio numeris."
 
 #. msg = g_strdup_printf(_("All %d tracks numbered sequentially."), ETCore->ETFileSelectionList_Length);
 #: src/easytag.c:1390
 msgid "Selected tracks numbered sequentially."
-msgstr "Pistele alese etichetate secvential."
+msgstr "Pasirinkti failai sunumeruoti iš eilės."
 
 #: src/easytag.c:1442
 #, c-format
 msgid "Selected files tagged with genre '%s'."
-msgstr "Fisierele alese etichetate cu genul '%s'."
+msgstr "Pasirinkti failai sužymėti su žanru „%s“."
 
 #: src/easytag.c:1444
 msgid "Removed genre from selected files."
-msgstr "Sters genul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas žanras."
 
 #: src/easytag.c:1468
 #, c-format
 msgid "Selected files tagged with comment '%s'."
-msgstr "Fisierele alese etichetate cu comentariul '%s'."
+msgstr "Pasirinkti failai sužymėti su komentaru „%s“."
 
 #: src/easytag.c:1470
 msgid "Removed comment from selected files."
-msgstr "Sters comentariul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas komentaras."
 
 #: src/easytag.c:1487
 #, c-format
 msgid "Selected files tagged with composer '%s'."
-msgstr "Fisierele alese etichetate cu compozitorul '%s'."
+msgstr "Pasirinkti failai sužymėti su kompozitoriumi „%s“."
 
 #: src/easytag.c:1489
 msgid "Removed composer from selected files."
-msgstr "Sters compozitorul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas kompozitorius."
 
 #: src/easytag.c:1506
 #, c-format
 msgid "Selected files tagged with original artist '%s'."
-msgstr "Toate fisierele etichetate cu artistul initial '%s'."
+msgstr "Pasirinkti failai sužymėti su originaliu atlikėju „%s“."
 
 #: src/easytag.c:1508
 msgid "Removed original artist from selected files."
-msgstr "Sters artistul intial din toate fisierele."
+msgstr "Iš pasirinktų failų pašalintas originalus atlikėjas."
 
 #: src/easytag.c:1525
 #, c-format
 msgid "Selected files tagged with copyright '%s'."
-msgstr "Toate fisierele etichetate cu 'dreptul de autor' '%s'."
+msgstr "Pasirinkti failai sužymėti su autorinėmis teisėmis „%s“."
 
 #: src/easytag.c:1527
 msgid "Removed copyright from selected files."
-msgstr "Sters 'dreptul de autor' din toate fisierele."
+msgstr "Iš pasirinktų failų pašalintos autorinės teisės."
 
 #: src/easytag.c:1544
 #, c-format
 msgid "Selected files tagged with URL '%s'."
-msgstr "Fisierele alese etichetate cu URL '%s'."
+msgstr "Pasirinkti failai sužymėti su URL „%s“."
 
 #: src/easytag.c:1546
 msgid "Removed URL from selected files."
-msgstr "Sters URL din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas URL."
 
 #: src/easytag.c:1563
 #, c-format
 msgid "Selected files tagged with encoder name '%s'."
-msgstr "Fisierele alese etichetate cu codorul '%s'."
+msgstr "Pasirinkti failai sužymėti su kodavimu „%s“."
 
 #: src/easytag.c:1565
 msgid "Removed encoder name from selected files."
-msgstr "Sters codorul din fisierele alese."
+msgstr "Iš pasirinktų failų pašalintas kodavimas."
 
 #: src/easytag.c:1600
 msgid "Selected files tagged with pictures."
-msgstr "Fisierele alese etichetate cu imagini '%s'."
+msgstr "Pasirinkti failai sužymėti su paveikslėliais."
 
 #: src/easytag.c:1602
 msgid "Removed pictures from selected files."
-msgstr "Sters imaginile din fisierele alese."
+msgstr "Iš pasirinktų failų pašalinti paveikslėliai."
 
 #: src/easytag.c:1841
 msgid "Select Mode and Mask, and redo the same action"
-msgstr "Alege�i modul �i masca �i ref� aceea�i actiune"
+msgstr "Pasirinkite režimą ir šabloną ir pakartokite tą patį veiksmą"
 
 #: src/easytag.c:1896
 msgid "All tags have been scanned"
-msgstr "Toate etichetele au fost examinate"
+msgstr "Visos žymės nuskenuotos"
 
 #: src/easytag.c:1953
 msgid "All tags have been removed"
-msgstr "Toate etichetele au fost �terse"
+msgstr "Visos žymės pašalintos"
 
 #: src/easytag.c:2240
 #, c-format
@@ -2152,84 +2118,81 @@ msgid ""
 "Be careful, several files (%d file(s)) were changed by an external program.\n"
 "Do you want to continue anyway?"
 msgstr ""
+"Atsargiai keli failai (%d failas(-ai)) pakeisti išorine programa.\n"
+"Ar vistiek tęsti?"
 
 #: src/easytag.c:2242
-#, fuzzy
 msgid "Saving File(s)..."
-msgstr "Cauta fisierul(-ele)..."
+msgstr "Išsaugomi failai..."
 
 #: src/easytag.c:2300 src/easytag.c:2321
 msgid "Saving files was stopped..."
-msgstr ""
+msgstr "Failų saugojimas sustabdytas..."
 
 #: src/easytag.c:2323
 msgid "All files have been saved..."
-msgstr "Toate fi�ierele au fost salvate..."
+msgstr "Visi failai išsaugoti..."
 
 #: src/easytag.c:2471
 msgid "Files have been partially deleted..."
-msgstr "Fisierele au fost partial sterse..."
+msgstr "Failai buvo iš dalies pašalinti..."
 
 #: src/easytag.c:2473
 msgid "All files have been deleted..."
-msgstr "Toate fisierele au fost sterse..."
+msgstr "Visi failai pašalinti..."
 
 #. ET_Display_File_Data_To_UI(ETFile);
 #: src/easytag.c:2586
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Do you want to write the tag of file\n"
 "'%s' ?"
-msgstr ""
-"Dori�i s� scrie�i eticheta fi�ierului\n"
-"'%s' ?"
+msgstr "Ar norite įrašyti failo „%s“ žymę?\n"
 
 #: src/easytag.c:2590 src/easytag.c:2603
 msgid "Write Tag..."
-msgstr "Scriu eticheta..."
+msgstr "Įrašyti žymę..."
 
 #. Directories and filename changed
 #: src/easytag.c:2678
-#, fuzzy
 msgid "Rename File and Directory..."
-msgstr "Redenumeste fisierul si directorul"
+msgstr "Pervadinti failą ir aplanką..."
 
 #: src/easytag.c:2679
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do you want to rename the file and directory \n"
 "'%s'\n"
 "to \n"
 "'%s' ?"
 msgstr ""
-"Dori�i s� redenumi�i fi�ierul \n"
-"'%s'\n"
-"�n \n"
-"'%s' ?"
+"Ar norite pervadinti failą ir aplanką\n"
+"„%s“\n"
+"į\n"
+"„%s“?"
 
 #. Only directories changed
 #: src/easytag.c:2684
-#, fuzzy
 msgid "Rename Directory..."
-msgstr "Redenumeste directorul..."
+msgstr "Pervadinti aplanką..."
 
 #: src/easytag.c:2685
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do you want to rename the directory \n"
 "'%s'\n"
 "to \n"
 "'%s' ?"
 msgstr ""
-"Dori�i s� redenumi�i fi�ierul \n"
-"'%s'\n"
-"�n \n"
-"'%s' ?"
+"Ar norite pervadinti aplanką\n"
+"„%s“\n"
+"į\n"
+"„%s“?"
 
 #. Only filename changed
 #: src/easytag.c:2691
 msgid "Rename File..."
-msgstr "Redenume�te fi�ierul..."
+msgstr "Pervadinti failą..."
 
 #: src/easytag.c:2692
 #, c-format
@@ -2239,19 +2202,19 @@ msgid ""
 "to \n"
 "'%s' ?"
 msgstr ""
-"Dori�i s� redenumi�i fi�ierul \n"
-"'%s'\n"
-"�n \n"
-"'%s' ?"
+"Ar norite pervadinti failą\n"
+"„%s“\n"
+"į\n"
+"„%s“?"
 
 #: src/easytag.c:2789
 #, c-format
 msgid "Writing tag of '%s'"
-msgstr "Scriu eticheta la '%s'"
+msgstr "Įrašoma „%s“ žymė"
 
 #: src/easytag.c:2795
 msgid "Tag(s) written"
-msgstr "Eticheta(le) scris(e)"
+msgstr "Žymė(-ės) įrašyta"
 
 #. Special for Ogg Vorbis because the error is defined into 'vcedit_error(state)'
 #: src/easytag.c:2804 src/easytag.c:2811
@@ -2260,20 +2223,18 @@ msgid ""
 "Can't write tag in file '%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot scrie eticheta �n fi�ierul '%s'!\n"
+"Įrašyti žymių faile „%s“ nepavyko!\n"
 "(%s)"
 
 #: src/easytag.c:2806 src/easytag.c:2813
-#, fuzzy, c-format
+#, c-format
 msgid "Can't write tag in file '%s'! (%s)"
-msgstr ""
-"Nu pot scrie eticheta �n fi�ierul '%s'!\n"
-"(%s)"
+msgstr "Faile „%s“ įrašyti žymės nepavyko! (%s)"
 
 #: src/easytag.c:2957
 #, c-format
 msgid "Renaming file '%s'"
-msgstr "Redenumesc fi�ierul '%s'"
+msgstr "Pervadinamas failas „%s“"
 
 #. Renaming file to the temporary filename has failed
 #. Renaming file from the temporary filename has failed
@@ -2285,23 +2246,19 @@ msgid ""
 "'%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot redenumi fi�ierul '%s'\n"
-" �n \n"
-"'%s'!\n"
+"Nepavyko pervadinti failo „%s“\n"
+" į \n"
+"„%s“!\n"
 "(%s)"
 
 #: src/easytag.c:2979 src/easytag.c:3025 src/easytag.c:3287
-#, fuzzy, c-format
+#, c-format
 msgid "Can't rename file '%s' to '%s'! (%s)"
-msgstr ""
-"Nu pot redenumi fi�ierul '%s'\n"
-" �n \n"
-"'%s'!\n"
-"(%s)"
+msgstr "Nepavyko pervadinti failo „%s“ į „%s“! (%s)"
 
 #: src/easytag.c:2999 src/easytag.c:3045 src/easytag.c:3074 src/easytag.c:3307
 msgid "File(s) not renamed..."
-msgstr "Fi�ierul(ele) neredenumite..."
+msgstr "Failas(-ai) nepervadinti..."
 
 #: src/easytag.c:3052
 #, c-format
@@ -2311,19 +2268,15 @@ msgid ""
 "because the following file already exists:\n"
 "'%s'"
 msgstr ""
-"Nu pot redenumi fi�ierul\n"
-"'%s'\n"
-"pentru c� urm�torul fi�ier deja exist�:\n"
-"'%s'"
+"Nepavyko pervadinti failo\n"
+"„%s“\n"
+"nes toks failas jau yra:\n"
+"„%s“"
 
 #: src/easytag.c:3054
-#, fuzzy, c-format
+#, c-format
 msgid "Can't rename file '%s' because the following file already exists: '%s'"
-msgstr ""
-"Nu pot redenumi fi�ierul\n"
-"'%s'\n"
-"pentru c� urm�torul fi�ier deja exist�:\n"
-"'%s'"
+msgstr "Nepavyko pervadinti failo „%s“, nes toks failas jau yra: „%s“"
 
 #: src/easytag.c:3097
 #, c-format
@@ -2332,85 +2285,73 @@ msgid ""
 "'%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot crea directorul\n"
-"'%s'\n"
+"Nepavyko sukurti paskirties aplanko\n"
+"„%s“!\n"
 "(%s)"
 
 #: src/easytag.c:3099
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create target directory '%s'! (%s)"
-msgstr ""
-"Nu pot crea directorul\n"
-"'%s'\n"
-"(%s)"
+msgstr "Paskirties aplanko sukurti nepavyko „%s“! (%s)"
 
 #. Renaming file has succeeded
 #: src/easytag.c:3133
 #, c-format
 msgid "Renamed file '%s' to '%s'"
-msgstr "Fi�ier redenumit '%s' �n '%s'"
+msgstr "Failas „%s“ pervadintas į „%s“"
 
 #: src/easytag.c:3139
 msgid "File(s) renamed..."
-msgstr "Fisierul(ele) redenumite..."
+msgstr "Failas(-ai) pervadinti..."
 
 #: src/easytag.c:3149 src/easytag.c:3210
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't remove old directory\n"
 "'%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot citi directorul :\n"
-"'%s'\n"
+"Pašalinti seno aplanko nepavyko\n"
+"„%s“!\n"
 "(%s)"
 
 #: src/easytag.c:3151 src/easytag.c:3212
-#, fuzzy, c-format
+#, c-format
 msgid "Can't remove old directory '%s'! (%s)"
-msgstr ""
-"Nu pot citi directorul :\n"
-"'%s'\n"
-"(%s)"
+msgstr "Pašalinti seno aplanko nepavyko „%s“! (%s)"
 
 #. Renaming file has succeeded
 #: src/easytag.c:3194
-#, fuzzy, c-format
+#, c-format
 msgid "Moved file '%s' to '%s'"
-msgstr "Fi�ier redenumit '%s' �n '%s'\n"
+msgstr "Failas „%s“ perkeltas į „%s“"
 
 #: src/easytag.c:3200
-#, fuzzy
 msgid "File(s) moved..."
-msgstr "Fisierul(ele) redenumite..."
+msgstr "Failas(-ai) perkeltas..."
 
 #. Moving file has failed
 #: src/easytag.c:3246
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't move file '%s'\n"
 " to \n"
 "'%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot redenumi fi�ierul '%s'\n"
-" �n \n"
-"'%s'!\n"
+"Perkelti failo „%s“\n"
+"į\n"
+"„%s“ nepavyko!\n"
 "(%s)"
 
 #: src/easytag.c:3248
-#, fuzzy, c-format
+#, c-format
 msgid "Can't move file '%s' to '%s'! (%s)"
-msgstr ""
-"Nu pot redenumi fi�ierul '%s'\n"
-" �n \n"
-"'%s'!\n"
-"(%s)"
+msgstr "Neįmanoma perkelti failo „%s“ į „%s“! (%s)"
 
 #: src/easytag.c:3268
-#, fuzzy
 msgid "File(s) not moved..."
-msgstr "Fi�ierul(ele) neredenumite..."
+msgstr "Failas(-ai) neperkelti..."
 
 #: src/easytag.c:3346
 #, c-format
@@ -2418,17 +2359,17 @@ msgid ""
 "Do you really want to delete definitively the file\n"
 "'%s' ?"
 msgstr ""
-"Sigur doriti sa stergeti definitiv fisierul\n"
-"'%s' ?"
+"Ar tikrai norite pašalinti aprašymo failą\n"
+"„%s“?"
 
 #: src/easytag.c:3349 src/easytag.c:3362
 msgid "Delete File..."
-msgstr "�terge fi�ierul..."
+msgstr "Pašalinti failą..."
 
 #: src/easytag.c:3390
 #, c-format
 msgid "File '%s' deleted"
-msgstr "Fisierul '%s' a fost sters"
+msgstr "Failas „%s“ pašalintas"
 
 #: src/easytag.c:3525
 #, c-format
@@ -2437,128 +2378,128 @@ msgid ""
 "'%s'\n"
 "(%s)"
 msgstr ""
-"Nu pot citi directorul :\n"
-"'%s'\n"
+"Perskaityti aplanką nepavyko:\n"
+"„%s“\n"
 "(%s)"
 
 #. Read the directory recursively
 #: src/easytag.c:3553
 msgid "Search in progress..."
-msgstr "C�utare �n curs..."
+msgstr "Ieškoma..."
 
 #: src/easytag.c:3570 src/et_core.c:2699
 #, c-format
 msgid "File: '%s'"
-msgstr "Fi�ier: '%s'"
+msgstr "Failas: „%s“"
 
 #: src/easytag.c:3620
 #, c-format
 msgid "Found %d file(s) in this directory and subdirectories."
-msgstr "Gasit %d fisier(e) �n acest director si subdirectoare."
+msgstr "Šiame aplanke ir poaplankiuose rastas %d failas(-ai)."
 
 #: src/easytag.c:3622
 #, c-format
 msgid "Found %d file(s) in this directory."
-msgstr "Gasit %d fisier(e) �n acest director."
+msgstr "Šiame aplanke rastas %d failas(-ai)."
 
 #. And refresh the number of files in this directory
 #: src/easytag.c:3635 src/et_core.c:2783
 #, c-format
 msgid "%u file(s)"
-msgstr "%u fisier(e)"
+msgstr "%u failas(-ai)"
 
 #: src/easytag.c:3641
 msgid "No file found in this directory and subdirectories!"
-msgstr "Nici un fi�ier nu a fost g�sit �n acest director �i subdirectoare!"
+msgstr "Šiame aplanke ir poaplankiuose failų nerasta!"
 
 #: src/easytag.c:3643
 msgid "No file found in this directory!"
-msgstr "Nici un fi�ier nu a fost g�sit �n acest director!"
+msgstr "Šiame aplanke failų nerasta!"
 
 #: src/easytag.c:3731
 msgid "Searching..."
-msgstr "Caut..."
+msgstr "Ieškoma..."
 
 #. Button to stop...
 #: src/easytag.c:3751
 msgid "  STOP the search...  "
-msgstr "  Opre�te c�utarea...  "
+msgstr "  Stabdyti paiešką...  "
 
 #: src/easytag.c:4493
 msgid "Select a directory to browse!"
-msgstr "Alege�i un director de navigat!"
+msgstr "Pasirinkite aplanką kurį naršysite!"
 
 #. Menu items
 #: src/easytag.c:4624
 msgid "Tag selected files with this field"
-msgstr "Eticheteaza fisierele alese cu titlul acesta"
+msgstr "Pažymėti pasirinktus failus su šiuo laukeliu"
 
 #: src/easytag.c:4635
 msgid "Convert '_' and '%20' to spaces"
-msgstr "Schimb� '_' �i '%20' �n spa�ii"
+msgstr "Konvertuoti „_“ ir „%20“ į tarpus"
 
 #: src/easytag.c:4642 src/scan.c:2693
 msgid "Convert ' ' to '_'"
-msgstr "Schimb� ' ' �n '_'"
+msgstr "Konvertuoti „ “ į „_“"
 
 #. Group: capitalize, ...
 #: src/easytag.c:4653 src/scan.c:2744
 msgid "All uppercase"
-msgstr "Toate majuscule"
+msgstr "Visos didžiosios"
 
 #: src/easytag.c:4660 src/scan.c:2745
 msgid "All downcase"
-msgstr "Toate minuscule"
+msgstr "Visos mažosios"
 
 #: src/easytag.c:4667 src/scan.c:2746
 msgid "First letter uppercase"
-msgstr "Prima liter� majuscul�"
+msgstr "Pirma raidė – didžioji"
 
 #: src/easytag.c:4674 src/scan.c:2747
 msgid "First letter uppercase of each word"
-msgstr "Prima liter� a fiec�rui cuv�nt majuscul�"
+msgstr "Kiekvieno žodžio pirma raidė – didžioji"
 
 #. Group: insert/remove spaces
 #: src/easytag.c:4685 src/prefs.c:1057 src/scan.c:2795
 msgid "Remove spaces"
-msgstr "�terge spa�iile"
+msgstr "Pašalinti tarpus"
 
 #: src/easytag.c:4692
 msgid "Insert space before uppercase letter"
-msgstr "Introdu spa�iu �nainte de majuscul�"
+msgstr "Prieš didžiąją raidę įterpti tarpą"
 
 #: src/easytag.c:4699
 msgid "Remove duplicate spaces or underscores"
-msgstr "�terge spa�iile si underscores multiple"
+msgstr "Pašalinti dvigubus tarpus ar pabraukimo simbolius"
 
 #. gchar commmand[256];
 #. To send messages to the console...
 #: src/easytag.c:4719 src/easytag.c:4727
 #, c-format
 msgid "EasyTAG %s: Abnormal exit! (PId: %d)."
-msgstr "EasyTAG %s: Ie�ire anormal�! (PId: %d)."
+msgstr "EasyTAG %s: Nenormalus išėjimas! (PId: %d)."
 
 #: src/easytag.c:4720 src/easytag.c:4729
-#, fuzzy, c-format
+#, c-format
 msgid "Received signal %s (%d)\a"
-msgstr "Primit semnalul %s (%d)\n"
+msgstr "Gautas signalas %s (%d)\a"
 
 #: src/easytag.c:4722 src/easytag.c:4731
-#, fuzzy
 msgid ""
 "You have probably found a bug in EasyTAG. Please, send a bug report with a "
 "gdb backtrace ('gdb easytag core' then 'bt' and 'l') and informations to "
 "reproduce it to easytag@gmail.com"
 msgstr ""
-"Probabil ati gasit o problema cu EasyTAG. Va rog sa trimiteti un raport cu "
-"gdb backtrace ('gdb easytag core' apoi 'bt') la easytag@gmail.com\n"
+"Greičiausiai atskleidėte EasyTag klaidą. Atsiųskite pranešimą apie klaidą su "
+"gdb pėdsakais („gdb easytag core“ tada „bt“ ir „l“) ir informacija kaip "
+"atkurti tą klaidą į easytag@gmail.com"
 
 #: src/easytag.c:4858
 msgid "Unknown signal"
-msgstr "Semnal necunoscut"
+msgstr "Nežinomas signalas"
 
 #: src/easytag.c:4874
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Usage: easytag [option] \n"
@@ -2576,107 +2517,105 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Folosire: easytag [optiune] \n"
-"   sau: easytag [director]\n"
+"Naudojimas: easytag [parinktis] \n"
+"   ar: easytag [aplankas]\n"
 "\n"
-"Optiuni:\n"
-"--------\n"
-"-h, --help      Afisaza acest text si iesi\n"
-"-v, --version   Afisaza informatii de baza si iesi\n"
+"Parinktis:\n"
+"-------\n"
+"-h, --help        Parodo šį tekstą ir išeina.\n"
+"-v, --version     Parodo pagrindinę informaciją ir išeina.\n"
 "\n"
-"Director:\n"
-"---------\n"
-"/calea_spre/fisiere   Folositi o cale absoluta pentru a �ncarca\n"
-"., ./                 �ncarca directorul curent\n"
+"Aplankas:\n"
+"----------\n"
+"%s/path_to/files  Naudokite absoliutų kelią norėdami įkrauti,\n"
+"path_to/files     Naudokite reliatyvų kelią.\n"
+"\n"
 
 #: src/easytag.c:4902
 msgid "EasyTAG: Normal exit."
-msgstr "EasyTAG: Ie�ire normal�."
+msgstr "EasyTAG: Normalus išėjimas."
 
 #: src/easytag.c:4947
 msgid ""
 "Some files have been modified but not saved...\n"
 "Do you want to save them before exiting the program?"
 msgstr ""
-"Unele fi�iere au fost modificate dar nu �i salvate...\n"
-"Dori�i s� le salvez �nainte de ie�ire?"
+"Kai kurie failai buvo pakeisti, bet neišsaugoti...\n"
+"Ar prieš išeinant norite juos išsaugoti?"
 
 #: src/easytag.c:4974
 msgid " Do you really want to exit the program? "
-msgstr " Sigur vre�i s� ie�iti din program? "
+msgstr "Ar tikrai norite palikti programą?"
 
 #: src/et_core.c:632
 #, c-format
 msgid "Automatic corrections applied for file '%s'."
-msgstr ""
+msgstr "Failui „%s“ pritaikyti automatiniai pataisymai."
 
 #: src/et_core.c:2596
 msgid "ID3 Tag"
-msgstr "Etichet� ID3"
+msgstr "ID3 žymė"
 
 #: src/et_core.c:2602
 msgid "Ogg Vorbis Tag"
-msgstr "Eticheta Ogg Vorbis"
+msgstr "Ogg Vorbis žymė"
 
 #: src/et_core.c:2608
 msgid "FLAC Vorbis Tag"
-msgstr "Eticheta FLAC Vorbis"
+msgstr "FLAC Vorbis žymė"
 
 #: src/et_core.c:2613
 msgid "APE Tag"
-msgstr "Eticheta APE"
+msgstr "APE žymė"
 
 #: src/et_core.c:2618
 msgid "MP4/M4A/AAC Tag"
-msgstr ""
+msgstr "MP4/M4A/AAC žymė"
 
 #: src/et_core.c:2624
 msgid "Wavpack Tag"
-msgstr ""
+msgstr "Wavpack žymė"
 
 #: src/et_core.c:2644
 msgid "MP3 File"
-msgstr "Fi�ier MP3"
+msgstr "MP3 failas"
 
 #: src/et_core.c:2648
 msgid "MP2 File"
-msgstr "Fi�ier MP2"
+msgstr "MP2 failas"
 
 #: src/et_core.c:2654
 msgid "Ogg Vorbis File"
-msgstr "Fi�ier Ogg Vorbis"
+msgstr "Ogg Vorbis failas"
 
 #: src/et_core.c:2660
-#, fuzzy
 msgid "Speex File"
-msgstr "Urmatorul fisier"
+msgstr "Speex failas"
 
 #: src/et_core.c:2666
 msgid "FLAC File"
-msgstr "Fi�ier FLAC"
+msgstr "FLAC failas"
 
 #: src/et_core.c:2671
 msgid "MusePack File"
-msgstr "Fisier MusePack"
+msgstr "MusePack failas"
 
 #: src/et_core.c:2675
 msgid "Monkey's Audio File"
-msgstr "Fisier Monkey's Audio"
+msgstr "Monkey's Audio failas"
 
 #: src/et_core.c:2680
-#, fuzzy
 msgid "MP4/AAC File"
-msgstr "Fi�ier MP2"
+msgstr "MP4/AAC failas"
 
 #: src/et_core.c:2686
-#, fuzzy
 msgid "Wavpack File"
-msgstr "Fisier MusePack"
+msgstr "Wavpack failas"
 
 #: src/et_core.c:2969
-#, fuzzy, c-format
+#, c-format
 msgid "Pictures (%d)"
-msgstr "Imagini"
+msgstr "Paveikslėliai (%d)"
 
 #. Bitrate
 #: src/et_core.c:3008 src/flac_header.c:302 src/monkeyaudio_header.c:86
@@ -2695,24 +2634,24 @@ msgid "%d Hz"
 msgstr "%d Hz"
 
 #: src/et_core.c:3153
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Could not convert filename : '%s'\n"
 "into system filename encoding\n"
 "(Try setting the environment variable G_FILENAME_ENCODING)."
 msgstr ""
-"Nu pot converti numele de fisier: '%s'\n"
-"in codarea sistemului de fisiere\n"
-"(Incercati sa modificati variabila de mediu G_FILENAME_ENCODING)."
+"Failo vardo konvertuoti į sistemos \n"
+"koduotę neįmanoma: „%s“\n"
+"(Pabandykite nustatyti aplinkos kintamąjį G_FILENAME_ENCODING).\n"
 
 #: src/et_core.c:3156 src/scan.c:676
 msgid "Filename translation"
-msgstr "Optiuni ale conversiei numelui de fisier"
+msgstr "Failo vardo vertimas"
 
 #: src/et_core.c:4671 src/et_core.c:4679
 #, c-format
 msgid "The filename '%s' exceeds %d characters and will be truncated!\n"
-msgstr ""
+msgstr "Failo vardas „%s“ ilgesnis nei %d simboliai todėl bus sutrumpintas!\n"
 
 #. Nothing to display
 #. gtk_label_set_text(GTK_LABEL(VersionLabel),"");
@@ -2722,7 +2661,7 @@ msgstr ""
 #: src/flac_header.c:298 src/monkeyaudio_header.c:96 src/musepack_header.c:98
 #: src/ogg_header.c:245 src/wavpack_header.c:72
 msgid "Encoder:"
-msgstr "Codor:"
+msgstr "Kodavimas:"
 
 #. Mode
 #. Mode
@@ -2730,16 +2669,13 @@ msgstr "Codor:"
 #. Mode
 #: src/flac_header.c:312 src/mp4_header.c:286 src/ogg_header.c:267
 #: src/wavpack_header.c:88
-#, fuzzy
 msgid "Channels:"
-msgstr "Schimbari"
+msgstr "Kanalai:"
 
 #: src/flac_tag.c:142 src/flac_tag.c:861 src/flac_tag.c:871
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR while opening file: '%s' as FLAC (%s)."
-msgstr ""
-"Eroare �n timpul deschiderii fisierului: '%s' (%s).\n"
-"\a"
+msgstr "KLAIDA atveriant failą: „%s“ kaip FLAC (%s)."
 
 #: src/flac_tag.c:329 src/ogg_tag.c:298
 #, c-format
@@ -2747,41 +2683,43 @@ msgid ""
 "The year value '%s' seems to be invalid in file '%s'. The information will "
 "be lost while saving tag."
 msgstr ""
+"Metų reikšmė „%s“ faile „%s“ yra netinkama. Išsaugant žymę informacija bus "
+"prarasta."
 
 #: src/flac_tag.c:1079
 #, c-format
 msgid "Picture block isn't valid: '%s'"
-msgstr ""
+msgstr "Paveikslėlio blokas netinkamas: „%s“"
 
 #: src/flac_tag.c:1113 src/ogg_tag.c:849
 #, c-format
 msgid "ERROR: Failed to write comments to file '%s' (%s)."
-msgstr "Eroare: Am e�uat s� scriu comentariile �n fi�ierul '%s' (%s)."
+msgstr "KLAIDA: Į failą „%s“ nepavyko įrašyti komentarų.(%s)"
 
 #: src/flac_tag.c:1118 src/ogg_tag.c:856
 #, c-format
 msgid "Written tag of '%s'"
-msgstr "Eticheta de la '%s' scris�"
+msgstr "Žymė „%s“ įrašyta"
 
 #: src/id3_tag.c:501
 #, c-format
 msgid "Removed tag of '%s'"
-msgstr "�ters eticheta de la '%s'"
+msgstr "„%s“ žymė pašalinta"
 
 #: src/id3_tag.c:505 src/id3_tag.c:608
 #, c-format
 msgid "Error while removing ID3v1 tag of '%s' (%s)"
-msgstr "Eroare �n timp ce �tergeam eticheta ID3v1 de la '%s' (%s)"
+msgstr "Klaida šalinant „%s“ ID3v1 žymę (%s)"
 
 #: src/id3_tag.c:507 src/id3_tag.c:580
 #, c-format
 msgid "Error while removing ID3v2 tag of '%s' (%s)"
-msgstr "Eroare �n timp ce �tergeam eticheta ID3v2 de la '%s' (%s)"
+msgstr "Klaida šalinant „%s“ ID3v2 žymę (%s)"
 
 #: src/id3_tag.c:526
 #, c-format
 msgid "Error while updating ID3v2 tag of '%s' (%s)"
-msgstr "Eroare �n timp ce actualizam eticheta ID3v2 de la '%s' (%s)"
+msgstr "Klaida atnaujinat „%s“ ID3v2 žymę (%s)"
 
 #: src/id3_tag.c:548
 #, c-format
@@ -2797,76 +2735,86 @@ msgid ""
 "\n"
 "File : %s"
 msgstr ""
+"Atrodo jūs bandėte išsaugoti žymę unikodu, bet aptikta jog jūsų id3lib yra "
+"su klaidom.\n"
+"Jei iš naujo įkelsite šį failą, kai kurie simboliai žymėje gali būti "
+"atvaizduoti netinkamai...\n"
+"Prašome pritaikyti id3lib pataisą, esančią src/id3lib/"
+"patch_id3lib_3.8.3_UTF16_writing_bug.diff\n"
+"EasyTag paketo pradiniame kode.\n"
+"Šis pranešimas bus rodomas tik kartą.\n"
+"\n"
+"Failas: %s"
 
 #: src/id3_tag.c:600
 #, c-format
 msgid "Error while updating ID3v1 tag of '%s' (%s)"
-msgstr "Eroare �n timp ce actualizam eticheta ID3v1 de la '%s' (%s)"
+msgstr "Klaida atnaujinant ID3v1 „%s“ žymę (%s)"
 
 #: src/id3_tag.c:614
 #, c-format
 msgid "Updated tag of '%s'"
-msgstr "Eticheta de la '%s' actualizat�"
+msgstr "Atnaujinta „%s“ žymė"
 
 #: src/id3_tag.c:633
 msgid "No error reported"
-msgstr "F�r� erori"
+msgstr "Neaptikta jokių klaidų"
 
 #: src/id3_tag.c:635
 msgid "No available memory"
-msgstr "Nu este destul� memorie"
+msgstr "Nėra prieinamos atminties"
 
 #: src/id3_tag.c:637
 msgid "No data to parse"
-msgstr "Nici o informa�ie de examinat"
+msgstr "Nėra duomenų apdrojimui"
 
 #: src/id3_tag.c:639
 msgid "Improperly formatted data"
-msgstr "Date incorect formatate"
+msgstr "Netinkamai suformuoti duomenys"
 
 #: src/id3_tag.c:641
 msgid "No buffer to write to"
-msgstr "Nici o memorie tampon �n care s� scriu"
+msgstr "Nėra buferio rašymui"
 
 #: src/id3_tag.c:643
 msgid "Buffer is too small"
-msgstr "Memoria tampon este prea mic�"
+msgstr "Buferis per mažas"
 
 #: src/id3_tag.c:645
 msgid "Invalid frame ID"
-msgstr "Frame ID incorect"
+msgstr "Netinkamas kadro ID"
 
 #: src/id3_tag.c:647
 msgid "Requested field not found"
-msgstr "C�mpul cerut negasit"
+msgstr "Pageidaujamas laukelis nerastas"
 
 #: src/id3_tag.c:649
 msgid "Unknown field type"
-msgstr "Tip de c�mp necunoscut"
+msgstr "Nežinomas laukelio tipas"
 
 #: src/id3_tag.c:651
 msgid "Tag is already attached to a file"
-msgstr "Eticheta este deja ata�at� unui fi�ier"
+msgstr "Žymė jau susieta su failu"
 
 #: src/id3_tag.c:653
 msgid "Invalid tag version"
-msgstr "Versiune de etichet� incorect�"
+msgstr "Netinkama žymės versija"
 
 #: src/id3_tag.c:655
 msgid "No file to parse"
-msgstr "Nici un fi�ier de examinat"
+msgstr "Nėra failo apdorojimui"
 
 #: src/id3_tag.c:657
 msgid "Attempting to write to a read-only file"
-msgstr "�ncercare de scriere a unui fi�ier disponibil doar pentru citire"
+msgstr "Bandoma rašyti į tik skaitomą failą"
 
 #: src/id3_tag.c:659
 msgid "Error in compression/uncompression"
-msgstr "Eroare la compresie/decompresie"
+msgstr "Klaida suspaudime/išskleidime"
 
 #: src/id3_tag.c:661
 msgid "Unknown error message!"
-msgstr "Mesaj de eroare necunoscut!"
+msgstr "Nežinoma klaida!"
 
 #: src/id3_tag.c:1236
 #, c-format
@@ -2874,37 +2822,37 @@ msgid ""
 "As the following corrupted file: '%s'\n"
 "will cause an error in id3lib, it will not be processed by the program."
 msgstr ""
+"Šis failas yra sugadintas: „%s“\n"
+"tai sukels id3lib klaidą, programa jo neapdoros."
 
 #: src/id3_tag.c:1238
-#, fuzzy
 msgid "Corrupted file..."
-msgstr "Salvati fisierul..."
+msgstr "Sugadintas failas..."
 
 #: src/log.c:95
 msgid "Log"
-msgstr ""
+msgstr "Žurnalas"
 
 #: src/misc.c:778
 msgid "Select file..."
-msgstr "Alege�i fi�ierul..."
+msgstr "Pasirinkite failą..."
 
 #: src/misc.c:783
 msgid "Select directory..."
-msgstr "Alege�i directorul..."
+msgstr "Parinkite aplanką..."
 
 #: src/misc.c:857
-#, fuzzy
 msgid "Warning..."
-msgstr "Caut..."
+msgstr "Įspėjimas..."
 
 #: src/misc.c:861
 msgid "No audio player defined!"
-msgstr ""
+msgstr "Nenurodytas audio grotuvas!"
 
 #: src/misc.c:964
 #, c-format
 msgid "Can't execute %s (%s)!\n"
-msgstr "Nu pot executa %s (%s)!\n"
+msgstr "Nepavyko įvykdyti %s (%s)!\n"
 
 #. Units Tab of file size (bytes,kilobytes,...)
 #: src/misc.c:1129 src/misc.c:1148
@@ -2929,82 +2877,80 @@ msgstr "TB"
 
 #: src/misc.c:1243
 msgid "Generate a playlist"
-msgstr "Genereaz� un playlist"
+msgstr "Generuoti grojaraštį"
 
 #: src/misc.c:1267
 msgid "M3U Playlist Name"
-msgstr "Numele M3U playlist"
+msgstr "M3U grojaraščio vardas"
 
 #: src/misc.c:1280
 msgid "Use directory name"
-msgstr "Folose�te numele de director"
+msgstr "Naudoti aplanko vardą"
 
 #: src/misc.c:1304 src/misc.c:1401
 msgid "Edit Masks"
-msgstr "Modific� mask"
+msgstr "Redaguoti šablonus"
 
 #. Playlist options
 #: src/misc.c:1312
 msgid "Playlist Options"
-msgstr "Op�iuni playlist"
+msgstr "Grojaraščio nustatymai"
 
 #: src/misc.c:1318
 msgid "Include only the selected files"
-msgstr "Include doar fisierele alese"
+msgstr "Įtraukti tik pasirinktus failus"
 
 #: src/misc.c:1321
 msgid ""
 "If activated, only the selected files will be written in the playlist file. "
 "Else, all the files will be written."
 msgstr ""
-"Daca se activeaza doar fisierele alese vor fi scrise in \"playlist\". Altfel "
-"toate vor fi scrise."
+"Jei aktyvuota, į grojaraščio failą bus įrašyti tik pasirinkti failai. Kitu "
+"atveju bus įrašyti visi failai."
 
 #: src/misc.c:1328
 msgid "Use full path for files in playlist"
-msgstr "Folose�te calea complet� pentru fi�ierele din playlist"
+msgstr "Grojaraštyje naudoti pilnus kelius"
 
 #: src/misc.c:1331
 msgid "Use relative path for files in playlist"
-msgstr "Folose�te calea relativ� pentru fi�ierele din playlist"
+msgstr "Grojaraštyje naudoti reliatyvius kelius"
 
 #. Create playlist in parent directory
 #: src/misc.c:1341
 msgid "Create playlist in the parent directory"
-msgstr "Creaza playlist in directorul parinte"
+msgstr "Grojraštį sukurti esamame aplanke"
 
 #: src/misc.c:1344
 msgid "If activated, the playlist will be created in the parent directory."
-msgstr "Daca este activata, lista va fi creata in directorul parinte.."
+msgstr "Jei aktyvuota, grojaraštis bus sukurtas aukštesniame aplanke."
 
 #. DOS Separator
 #: src/misc.c:1348
 msgid "Use DOS directory separator"
-msgstr "Foloseste separatorul de directoare din DOS"
+msgstr "Naudoti DOS aplankų skirtuką"
 
 #: src/misc.c:1353
 msgid ""
 "This option replaces the UNIX directory separator '/' into DOS separator "
 "'\\'."
-msgstr ""
-"Aceasta optiune schimba separatorul de directoare UNIX '/' in separatorul "
-"DOS '\\'."
+msgstr "Ši parinktis pakeičia UNIX aplanko skirtuką „/“ į DOS skirtuką „\\“."
 
 #: src/misc.c:1362
 msgid "Playlist Content"
-msgstr "Con�inutul playlist"
+msgstr "Grojaraščio turinys"
 
 #: src/misc.c:1368
 msgid "Write only list of files"
-msgstr "List� de fi�iere disponibile doar pentru scriere"
+msgstr "Rašyti tik failų sąrašą"
 
 #: src/misc.c:1372
 msgid "Write info using filename"
-msgstr "Scrie informa�iile folosind numele de fi�ier"
+msgstr "Informaciją rašyti naudojant failo vardą"
 
 #: src/misc.c:1375
 msgid "Write info using :"
-msgstr "Scrie informa�iile folosind :"
+msgstr "Rašyti informaciją naudojant:"
 
 #: src/misc.c:1640
 #, c-format
@@ -3012,12 +2958,12 @@ msgid ""
 "Playlist file '%s' already exists!\n"
 "Overwrite?"
 msgstr ""
-"Fi�ierul playlist '%s' exist� deja!\n"
-"Suprascriu?"
+"Grojaraščio failas „%s“ jau yra!\n"
+"Perrašyti?"
 
 #: src/misc.c:1641
 msgid "Write Playlist..."
-msgstr "Scriu playlist..."
+msgstr "Rašyti grojaraštį..."
 
 #. Writing fails...
 #: src/misc.c:1663
@@ -3026,13 +2972,13 @@ msgid ""
 "Can't write playlist file '%s'!\n"
 "(%s)"
 msgstr ""
-"Nu pot scrie fi�ierul playlist '%s'!\n"
+"Įrašyti grojaraščio failo „%s“ nepavyko!\n"
 "(%s)"
 
 #: src/misc.c:1676
 #, c-format
 msgid "Written playlist file '%s'"
-msgstr "Am scris fi�ierul playlist '%s'"
+msgstr "Grojaraščio failas „%s“ įrašytas"
 
 #: src/misc.c:1923
 msgid "CD"
@@ -3040,183 +2986,170 @@ msgstr "CD"
 
 #: src/misc.c:1932
 msgid "Encoded by"
-msgstr "Codor"
+msgstr "Koduota su"
 
 #: src/misc.c:1943
 msgid "Search a file"
-msgstr "Caut� un fi�ier"
+msgstr "Ieškoti failo"
 
 #: src/misc.c:1983
 msgid ""
 "Type the word to search into files. Or type nothing to display all files."
 msgstr ""
-"Introduceti cuvintul de cautat in fisiere. Sau nu scrieti nimic pentru a "
-"afisa toate fisierele."
+"Įrašykite žodį kurio bus ieškoma failuose. Arba neįrašykite nieko ir bus "
+"rodomi visi failai."
 
 #. Where...
 #: src/misc.c:1989
 msgid "In :"
-msgstr "�n :"
+msgstr "Kur:"
 
 #: src/misc.c:1992
-#, fuzzy
 msgid "the File Name"
-msgstr "Nume de fi�ier"
+msgstr "failo varde"
 
 #. Note : label changed to "the Tag" (to be the only one) to fix a Hungarian grammatical problem (which uses one word to say "in the tag" like here)
 #: src/misc.c:1994
-#, fuzzy
 msgid "the Tag"
-msgstr "Scriu eticheta..."
+msgstr "žymėje"
 
 #. Property of the search
 #: src/misc.c:2004 src/prefs.c:323
 msgid "Case sensitive"
-msgstr "Cu majuscule seminifcative"
+msgstr "Skirti mažąsias ir didžiąsias raides"
 
 #: src/misc.c:2453
 #, c-format
 msgid "Found : %d file(s)"
-msgstr "Gasit : %d fi�ier(e)"
+msgstr "Rasta: %d failas(-ai)"
 
 #: src/misc.c:2729
 msgid "Load the filenames from a TXT file"
-msgstr "�ncarc� numele de fi�ier dintr-un fi�ier TXT"
+msgstr "Įkelti failų vardus iš TXT failo"
 
 #: src/misc.c:2759
 msgid "File :"
-msgstr "Fi�ier :"
+msgstr "Failas:"
 
 #. Button 'load'
 #. the signal attached to this button, to load the file, is placed after the LoadFileContentList definition
 #: src/misc.c:2777
 msgid " Load "
-msgstr " �ncarc� "
+msgstr " Įkelti "
 
 #: src/misc.c:2800
-#, fuzzy
 msgid "Content of TXT file"
-msgstr "Confirm� redenumirea fi�ierului"
+msgstr "TXT failo turinys"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2821 src/misc.c:2915
-#, fuzzy
 msgid "Insert a blank line before the selected line"
-msgstr "Introdu un spa�iu �nainte de o majuscul�"
+msgstr "Prieš pasirinktą eilutę įterpti tuščią eilutę"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2830 src/misc.c:2924
-#, fuzzy
 msgid "Delete the selected line"
-msgstr "�terge aceast� linie"
+msgstr "Pašalinti pasirinktą eilutę"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2839 src/misc.c:2933 src/misc.c:3406
 msgid "Delete all blank lines"
-msgstr "�terge toate liniile goale"
+msgstr "Pašalinti visas tuščias eilutes"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2851 src/misc.c:2945
-#, fuzzy
 msgid "Move up the selected line"
-msgstr "Include doar fisierele alese"
+msgstr "Pasirinktą eilutę perkelti aukštyn"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2860 src/misc.c:2954
-#, fuzzy
 msgid "Move down the selected line"
-msgstr "Include doar fisierele alese"
+msgstr "Pasirinktą eilutę perkelti žemyn"
 
 #. gtk_button_set_relief(GTK_BUTTON(Button),GTK_RELIEF_NONE);
 #: src/misc.c:2872 src/misc.c:2966 src/misc.c:3430
 msgid "Reload"
-msgstr "Re�ncarc�"
+msgstr "Įkelti iš naujo"
 
 #: src/misc.c:2893
-#, fuzzy
 msgid "List of files"
-msgstr "List� de fi�iere disponibile doar pentru scriere"
+msgstr "Failų sąrašas"
 
 #: src/misc.c:2988
-#, fuzzy
 msgid "Selected line:"
-msgstr "Alege toate liniile"
+msgstr "Pasirinkta eilutė:"
 
 #: src/misc.c:3006
 msgid ""
 "When activating this option, after loading the filenames, the current "
 "selected scanner will be ran (the scanner window must be opened)."
 msgstr ""
-"Cind este activata aceasta optiune, dupa incarcarea numelor de fisier, "
-"examinatorul curent va fi rulat (fereastra examinatorului trebuie sa fie "
-"deschisa)."
+"Aktyvavus šią parinkty, įkėlus failus, bus paleistas pasirinktas skeneris "
+"(skenerio langas turi būt atvertas)."
 
 #: src/misc.c:3394
 msgid "Insert a blank line"
-msgstr "Introdu o linie goal�"
+msgstr "Įterpti tuščią eilutę"
 
 #: src/misc.c:3400
 msgid "Delete this line"
-msgstr "�terge aceast� linie"
+msgstr "Pašalinti šią eilutę"
 
 #: src/misc.c:3415
-#, fuzzy
 msgid "Move up this line"
-msgstr "Mut� sus aceast� masc�"
+msgstr "Perkelti eilutę aukštyn"
 
 #: src/misc.c:3421
-#, fuzzy
 msgid "Move down this line"
-msgstr "Mut� jos aceast� masc�"
+msgstr "Perkelti eilutę žemyn"
 
 #. Mode changed to profile name
 #: src/monkeyaudio_header.c:78 src/musepack_header.c:80
 msgid "Profile:"
-msgstr "Profil:"
+msgstr "Profilis:"
 
 #: src/mp4_header.c:130
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/mp4_header.c:131
-#, fuzzy
 msgid "Unknown"
-msgstr "Imagine necunoscuta"
+msgstr "Nežinomas"
 
 #: src/mp4_header.c:211 src/mp4_tag.c:109 src/mp4_tag.c:118 src/mp4_tag.c:290
 #: src/mp4_tag.c:297
 msgid "MP4 format invalid"
-msgstr ""
+msgstr "Netinkamas MP4 formatas"
 
 #: src/mp4_header.c:273 src/mpeg_header.c:365
-#, fuzzy, c-format
+#, c-format
 msgid "~%d kb/s"
-msgstr "%d kb/s"
+msgstr "~%d kb/s"
 
 #: src/mp4_tag.c:118 src/mp4_tag.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR reading tags from file: '%s' (%s)."
-msgstr "Eroare �n timpul deschiderii fisierului: '%s' (%s)."
+msgstr "KLAIDA skaitant žymes iš failo: „%s“ (%s)."
 
 #: src/mpeg_header.c:78
 msgid "Stereo"
-msgstr ""
+msgstr "Stereo"
 
 #: src/mpeg_header.c:79
 msgid "Joint stereo"
-msgstr ""
+msgstr "Sujungtas stereo"
 
 #: src/mpeg_header.c:80
 msgid "Dual channel"
-msgstr ""
+msgstr "Dvigubas kanalas"
 
 #: src/mpeg_header.c:81
 msgid "Single channel"
-msgstr ""
+msgstr "Viengubas kanalas"
 
 #: src/msgbox.c:101
 msgid "Repeat action for the rest of the files"
-msgstr "Repet� ac�iunea pentru celelalte fi�iere"
+msgstr "Kartoti veiksmą ir likusiems failams"
 
 #: src/ogg_header.c:100
 #, c-format
@@ -3224,26 +3157,28 @@ msgid ""
 "Ogg Vorbis: The specified bitstream does not exist or the file has been "
 "initialized improperly (file: '%s')."
 msgstr ""
+"Ogg Vorbis: Nurodytas srautas neegzistuoja arba failas nebuvo tinkamai "
+"inicijuotas (failas: „%s“)."
 
 #: src/ogg_header.c:131
 #, c-format
 msgid "Ogg Vorbis: Read from media returned an error (file: '%s')."
-msgstr ""
+msgstr "Ogg Vorbis: Skaitant failą gauta klaida (failas: „%s“)."
 
 #: src/ogg_header.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Ogg Vorbis: Bitstream is not Vorbis data (file: '%s')."
-msgstr "Fluxul Ogg nu con�ine date vorbis."
+msgstr "Ogg Vorbis: Srautas nėra Vorbis duomenų failas (failas: „%s“)."
 
 #: src/ogg_header.c:137
 #, c-format
 msgid "Ogg Vorbis: Vorbis version mismatch (file: '%s')."
-msgstr ""
+msgstr "Ogg Vorbis: Vorbis versija nesutampa (failas: „%s“)."
 
 #: src/ogg_header.c:140
 #, c-format
 msgid "Ogg Vorbis: Invalid Vorbis bitstream header (file: '%s')."
-msgstr ""
+msgstr "Ogg Vorbis: Netinkama Vorbis srauto antraštė (failas: „%s“)."
 
 #: src/ogg_header.c:143
 #, c-format
@@ -3251,47 +3186,49 @@ msgid ""
 "Ogg Vorbis: Internal logic fault, indicates a bug or heap/stack corruption "
 "(file: '%s')."
 msgstr ""
+"Ogg Vorbis: Vidinė loginė klaida, tai reiškia programos klaidą arba dėklo "
+"pažeidimą (failas: „%s“)."
 
 #: src/ogg_header.c:195 src/ogg_tag.c:188 src/ogg_tag.c:697
 #, c-format
 msgid "ERROR: Failed to open file: '%s' as vorbis (%s)."
-msgstr "Eroare: Am e�uat s� deschis fi�ierul: '%s' ca vorbis (%s)."
+msgstr "KLAIDA: nepavyko atverti failo: „%s“ kaip vorbis (%s)."
 
 #: src/ogg_tag.c:170
 #, c-format
 msgid "Warning : The Ogg Vorbis file '%s' contains an ID3v2 tag."
-msgstr "Atentie: Fisierul Ogg Vorbis '%s' contine o eticheta ID3V2."
+msgstr "Įspėjimas: Ogg Vorbis failas „%s“ turi ID3v2 žymę."
 
 #: src/picture.c:295
 msgid "Add pictures"
-msgstr "Adauga imagini"
+msgstr "Pridėti paveikslėlius"
 
 #: src/picture.c:305 src/picture.c:646
 msgid "All Files"
-msgstr "Toate fisierele"
+msgstr "Visi failai"
 
 #: src/picture.c:311 src/picture.c:652
 msgid "PNG and JPEG"
-msgstr "PNG si JPEG"
+msgstr "PNG ir JPEG"
 
 #: src/picture.c:428
 #, c-format
 msgid "Picture Properties %d/%d"
-msgstr "Proprietatile imaginii %d/%d"
+msgstr "Paveikslėlio savybės %d/%d"
 
 #: src/picture.c:458
 msgid "Picture Type"
-msgstr "Tipul imaginii"
+msgstr "Paveikslėlio tipas"
 
 #. Description of the picture
 #: src/picture.c:515
 msgid "Picture Description:"
-msgstr "Descriere imagine:"
+msgstr "Paveikslėlio aprašymas:"
 
 #: src/picture.c:634
 #, c-format
 msgid "Save picture %d/%d"
-msgstr "Salveaza imaginea %d/%d"
+msgstr "Išsaugoti paveikslėlį %d/%d"
 
 #: src/picture.c:717
 #, c-format
@@ -3300,435 +3237,431 @@ msgid ""
 "'%s'\n"
 "Do you want to overwrite?"
 msgstr ""
-"Acest fisier deja exista: \n"
-"'%s'\n"
-"Vreti sa suprascrieti?"
+"Toks failas jau yra:\n"
+"„%s“\n"
+"Ar norite perrašyti?"
 
 #: src/picture.c:719
 msgid "Save file..."
-msgstr "Salvati fisierul..."
+msgstr "Išsaugoti failą..."
 
 #: src/picture.c:803
 msgid "JPEG image"
-msgstr "Imagine JPEG"
+msgstr "JPEG paveikslėlis"
 
 #: src/picture.c:805
 msgid "PNG image"
-msgstr "Imagine PNG"
+msgstr "PNG paveikslėlis"
 
 #: src/picture.c:807
 msgid "Unknown image"
-msgstr "Imagine necunoscuta"
+msgstr "Nežinomas paveikslėlis"
 
 #: src/picture.c:818
 msgid "32x32 pixel PNG file icon"
-msgstr "Icon PNG de 32x32 pixeli"
+msgstr "32x32 pikselių PNG failo piktograma"
 
 #: src/picture.c:820
 msgid "Other file icon"
-msgstr "Alt icon"
+msgstr "Kita failo piktograma"
 
 #: src/picture.c:822
 msgid "Cover (front)"
-msgstr "Coperta (fata)"
+msgstr "Viršelis (priekis)"
 
 #: src/picture.c:824
 msgid "Cover (back)"
-msgstr "Coperta (spate)"
+msgstr "Viršelis (galas)"
 
 #: src/picture.c:826
 msgid "Leaflet page"
-msgstr "Pagina brosura"
+msgstr "Leaflet puslapis"
 
 #: src/picture.c:828
 msgid "Media (e.g. label side of CD)"
-msgstr "Media (ex. cotorul CD)"
+msgstr "Laikmena (pvz. CD užrašo pusė)"
 
 #: src/picture.c:830
 msgid "Lead artist/lead performer/soloist"
-msgstr "Artistul de baza/solo"
+msgstr "Pagrindinis atlikėjas/solistas"
 
 #: src/picture.c:832
 msgid "Artist/performer"
-msgstr "Artist/interpret"
+msgstr "Atlikėjas"
 
 #: src/picture.c:834
 msgid "Conductor"
-msgstr "Dirijor"
+msgstr "Dirigentas"
 
 #: src/picture.c:836
 msgid "Band/Orchestra"
-msgstr "Formatie/Orchestra"
+msgstr "Grupė/orkestras"
 
 #: src/picture.c:840
 msgid "Lyricist/text writer"
-msgstr "Versuri/textier"
+msgstr "Žodžių autorius"
 
 #: src/picture.c:842
 msgid "Recording location"
-msgstr "Locul inregistrarii"
+msgstr "Įrašo vieta"
 
 #: src/picture.c:844
 msgid "During recording"
-msgstr "In timpul inregistrarii"
+msgstr "Įrašymo metu"
 
 #: src/picture.c:846
 msgid "During performance"
-msgstr "In timpul spectacolului"
+msgstr "Atlikimo metu"
 
 #: src/picture.c:848
 msgid "Movie/video screen capture"
-msgstr "Captura de ecran"
+msgstr "Filmo/video ekrano įrašas"
 
 #: src/picture.c:850
 msgid "A bright coloured fish"
-msgstr "Un peste colorat intens"
+msgstr "Ryški spalvota žuvis"
 
 #: src/picture.c:852
 msgid "Illustration"
-msgstr "Ilustratie"
+msgstr "Iliustracija"
 
 #: src/picture.c:854
 msgid "Band/Artist logotype"
-msgstr "Emblema formatie/artist"
+msgstr "Grupės/Atlikėjo logotipas"
 
 #: src/picture.c:856
 msgid "Publisher/studio logotype"
-msgstr "Emblema distribuitor/studio"
+msgstr "Leidėjo/studijos logotipas"
 
 #: src/picture.c:860
 msgid "Unknown picture type"
-msgstr "Tip de imagine necunoscut"
+msgstr "Nežinomas paveikslėlio tipas"
 
 #: src/picture.c:888 src/picture.c:899
 msgid "pixels"
-msgstr "pixeli"
+msgstr "pikseliai"
 
 #: src/picture.c:889 src/picture.c:900
 msgid "Type"
-msgstr "Tip"
+msgstr "Tipas"
 
 #: src/picture.c:901
 msgid "Description"
-msgstr "Descriere"
+msgstr "Aprašymas"
 
 #: src/picture.c:957
 #, c-format
 msgid "Error with 'loader_close': %s"
-msgstr ""
+msgstr "Klaida su „loader_close“: %s"
 
 #: src/picture.c:1015
 msgid ""
 "Can't display the picture, as not enough data has been read to determine how "
 "to create the image buffer."
 msgstr ""
+"Atvaizduoti paveikslėlio neįmanoma, nes nenuskaityta pakankamai duomenų, kad "
+"būtų galima sukurti paveikslėlio buferį."
 
 #: src/picture.c:1018
 msgid "Loading Picture File..."
-msgstr ""
+msgstr "Įkraunamas paveikslėlio failas..."
 
 #: src/picture.c:1032
 #, c-format
 msgid "Error with 'loader_write': %s"
-msgstr ""
+msgstr "Klaida su „loader_write“: %s"
 
 #: src/picture.c:1117 src/picture.c:1150 src/picture.c:1169
 #, c-format
 msgid "Picture file not loaded (%s)..."
-msgstr ""
+msgstr "Paveikslėlis neįkeltas (%s)..."
 
 #: src/picture.c:1136
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't open file :\n"
 "'%s'!\n"
 "(%s)"
-msgstr "Nu pot deschide '%s' (%s)\n"
+msgstr ""
+"Atverti failo nepavyko:\n"
+"„%s“!\n"
+"(%s)"
 
 #: src/picture.c:1181
 msgid "Picture file loaded..."
-msgstr ""
+msgstr "Paveikslėlis įkeltas..."
 
 #: src/picture.c:1197 src/picture.c:1204
-#, fuzzy, c-format
+#, c-format
 msgid "Picture file can't be saved (%s)..."
-msgstr "Toate fi�ierele au fost salvate..."
+msgstr "Išsaugoti paveikslėlio nepavyko (%s)..."
 
 #. Title
 #: src/prefs.c:118
 msgid "Preferences..."
-msgstr "Preferin�e..."
+msgstr "Nustatymai..."
 
 #. File Browser frame
 #: src/prefs.c:156
 msgid "File Browser"
-msgstr "Navigator de fi�iere"
+msgstr "Failų naršyklė"
 
 #. Label
 #: src/prefs.c:167
-#, fuzzy
 msgid "Default directory :"
-msgstr "Mergi �n directorul implicit"
+msgstr "Numatytasis aplankas:"
 
 #: src/prefs.c:179
 msgid ""
 "Specify the directory where your files are located. This path will be loaded "
 "when EasyTAG starts without parameter."
 msgstr ""
-"Specifca�i directorul �n care se afl� fi�ierele. Calea va fi �nc�rcat� c�nd "
-"EasyTAG porne�te f�r� parametru."
+"Nurodykite aplanką kuriame saugomi jūsų failai. Šis kelias bus įkeltas kai "
+"EasyTAG paleidžiamas be parametrų."
 
 #. Load directory on startup
 #: src/prefs.c:200
 msgid ""
 "Load on startup the default directory or the directory passed as argument"
 msgstr ""
+"Paleidžiant įkelti numatytąjį aplanką arba aplanką kuris duotas kaip "
+"argumentas"
 
 #: src/prefs.c:203
-#, fuzzy
 msgid ""
 "Automatically search files, when EasyTAG starts, into the default directory. "
 "Note that this path may be overriden by the parameter passed to easytag "
 "(easytag /path_to/mp3_files)."
 msgstr ""
-"Automat caut� fi�ierele, c�nd EasyTAG porne�te, �n urm�toarele directoare. "
-"De remarcat: calea poate fi dat� de parametrul dat easytag (easytag /"
-"calea_spre/fi�ierele_mp3)."
+"Paleidžiant EasyTAG, automatiškai ieškoti failų numatytame aplanke. Turėkite "
+"omeny jog šis kelias gali būti pateiktas kaip parametras (easytag /"
+"kelias_iki/mp3_failų)."
 
 #. Browse subdirectories
 #: src/prefs.c:208
 msgid "Search subdirectories"
-msgstr "Caut� subdirectoarele"
+msgstr "Ieškoti poaplankių"
 
 #: src/prefs.c:211
 msgid "Search subdirectories for files when reading a directory into the tree."
-msgstr ""
-"Caut� subdirectoarele pentru fi�iere c�nd deschid un director in arbore."
+msgstr "Skaitant aplanką į medį ieškoti poaplankių."
 
 #. Open the node to show subdirectories
 #: src/prefs.c:215
-#, fuzzy
 msgid "Show subdirectories when selecting a directory"
-msgstr "Arat� subdirectoarele c�nd aleg un director"
+msgstr "Pasirenkant aplanką rodyti poaplankius"
 
 #: src/prefs.c:219
 msgid ""
 "This expands the selected node into the file browser to display the sub-"
 "directories."
-msgstr ""
-"Aceasta extinde nodul ales �n navigatorul de fi�iere pentru a afi�a "
-"subdirectoarele."
+msgstr "Tai išskleidžia pasirinktą mazgą į failų naršyklę ir rodo poaplankius."
 
 #. Browse hidden directories
 #: src/prefs.c:223
 msgid "Search hidden directories"
-msgstr "Cauta directoarele ascunse"
+msgstr "Ieškoti paslėptus aplankus"
 
 #: src/prefs.c:228
 msgid "Search hidden directories for files (directories starting by a '.')."
-msgstr ""
-"Cauta subdirectoarele pentru fisiere c�nd deschid un director in arbore."
+msgstr "Paslėptuose(aplankai kurie prasideda „.“) aplankuose ieškoti failų"
 
 #. User interface
 #: src/prefs.c:247
 msgid "User Interface"
-msgstr "Interfa�a cu utilizatorul"
+msgstr "Naudotojo sąsaja"
 
 #. Show header infos
 #: src/prefs.c:254
 msgid "Show header informations of file"
-msgstr "Arat� informa�iile din antetul fi�ierului"
+msgstr "Rodyti failo antraštės informaciją"
 
 #: src/prefs.c:257
 msgid ""
 "If activated, informations about the file as the bitrate, the time, the "
 "size, will be displayed under the filename entry."
 msgstr ""
-"Dac� este activat�, informa�iile despre fi�ier cum ar fi bitrate, timpul, "
-"lungimea vor fi afi�ate sub numele de fi�ier."
+"Jei aktyvuota, informacija apie bitų dažnį, laiką ir dydį bus rodoma prie "
+"failo įrašo."
 
 #: src/prefs.c:264
 msgid "Display changed files in list using :"
-msgstr ""
+msgstr "Pakeistus failus rodyti sąraše naudojant:"
 
 #: src/prefs.c:267
 msgid "Red color"
-msgstr ""
+msgstr "Raudoną spalvą"
 
 #: src/prefs.c:273
 msgid "Bold style"
-msgstr ""
+msgstr "Paryškintai"
 
 #. Sorting List Options
 #: src/prefs.c:279
 msgid "Sorting List Options"
-msgstr "Optiunile de ordonare a listei"
+msgstr "Rikiavimo sąrašo parinktys"
 
 #. Sorting method
 #: src/prefs.c:289
 msgid "Sort the file list by :"
-msgstr "Ordoneaz� lista de fi�iere :"
+msgstr "Failų sąrašą rikiuoti pagal:"
 
 #. Two columns
 #. Items of option menu
 #: src/prefs.c:300
 msgid "Ascending file name"
-msgstr "Cresc�tor dup� numele de fi�ier"
+msgstr "Failo vardą didėjimo tvarka"
 
 #: src/prefs.c:301
 msgid "Descending file name"
-msgstr "Descresc�tor dup� numele de fi�ier"
+msgstr "Failo vardą mažėjimo tvarka"
 
 #: src/prefs.c:302
 msgid "Ascending track number"
-msgstr "Cresc�tor dup� num�rul pistei"
+msgstr "Takelio numerį didėjimo tvarka"
 
 #: src/prefs.c:303
 msgid "Descending track number"
-msgstr "Descresc�tor dup� num�rul pistei"
+msgstr "Takelio numerį mažėjimo tvarka"
 
 #: src/prefs.c:304
 msgid "Ascending creation date"
-msgstr "Cresc�tor dup� data crea�iei"
+msgstr "Sukūrimo datą didėjimo tvarka"
 
 #: src/prefs.c:305
-#, fuzzy
 msgid "Descending creation date"
-msgstr "Descrescator dupa data creatiei"
+msgstr "Sukūrimo datą mažėjimo tvarka"
 
 #: src/prefs.c:306
 msgid "Ascending title"
-msgstr "Cresc�tor dup� titlu"
+msgstr "Pavadinimą didėjimo tvarka"
 
 #: src/prefs.c:307
 msgid "Descending title"
-msgstr "Descresc�tor dup� titlu"
+msgstr "Pavadinimą mažėjimo tvarka"
 
 #: src/prefs.c:308
 msgid "Ascending artist"
-msgstr "Cresc�tor dup� artist"
+msgstr "Atlikėją didėjimo tvarka"
 
 #: src/prefs.c:309
 msgid "Descending artist"
-msgstr "Descresc�tor dup� artist"
+msgstr "Atlikėją mažėjimo tvarka"
 
 #: src/prefs.c:310
 msgid "Ascending album"
-msgstr "Cresc�tor dup� album"
+msgstr "Albumą didėjimo tvarka"
 
 #: src/prefs.c:311
 msgid "Descending album"
-msgstr "Descresc�tor dup� album"
+msgstr "Albumą mažėjimo tvarka"
 
 #: src/prefs.c:312
 msgid "Ascending year"
-msgstr "Cresc�tor dup� an"
+msgstr "Metus didėjimo tvarka"
 
 #: src/prefs.c:313
 msgid "Descending year"
-msgstr "Descresc�tor dup� an"
+msgstr "Metus mažėjimo tvarka"
 
 #: src/prefs.c:314
 msgid "Ascending genre"
-msgstr "Cresc�tor dup� gen"
+msgstr "Žanrą didėjimo tvarka"
 
 #: src/prefs.c:315
 msgid "Descending genre"
-msgstr "Descresc�tor dup� gen"
+msgstr "Žanrą mažėjimo tvarka"
 
 #: src/prefs.c:316
 msgid "Ascending comment"
-msgstr "Cresc�tor dup� comentariu"
+msgstr "Komentarą didėjimo tvarka"
 
 #: src/prefs.c:317
 msgid "Descending comment"
-msgstr "Descresc�tor dup� comentariu"
+msgstr "Komentarą mažėjimo tvarka"
 
 #: src/prefs.c:320
 msgid "Select the type of file sorting when loading a directory."
-msgstr "Alege�i tipul de ordonare a fi�ierelor la �nc�rcarea unui director."
+msgstr ""
+"Pasirinkite failų rikiavimo tipą, kuris bus naudojamas įkeliant aplanką."
 
 #: src/prefs.c:329
 msgid "If activated, the sorting of the list will be dependent on the case."
-msgstr "Dac� este activat�, ordonarea listei va fi �ine seama de majuscule."
+msgstr ""
+"Jei aktyvuota, sąrašas bus rikiuojamas atsižvelgiant į raidžių registrą."
 
 #. Message Dialog Position
 #: src/prefs.c:333
 msgid "Message Dialog Position"
-msgstr "Pozi�ia ferestrei de dialog"
+msgstr "Pranešimo dialogo vieta"
 
 #: src/prefs.c:341
 msgid "No particular position"
-msgstr "Nici o pozi�ie aleas�"
+msgstr "Nėra numatytosios vietos"
 
 #: src/prefs.c:345
 msgid "Let the Window Manager to place the windows."
-msgstr "Las� administratorul de ferestre s� pozi�ioneze ferestrele."
+msgstr "Leisti langų tvarkyklei padėti langą."
 
 #: src/prefs.c:350
-#, fuzzy
 msgid "Center of the main window"
-msgstr "Centrul ecranului"
+msgstr "Pagrindinio lango centre"
 
 #: src/prefs.c:354
-#, fuzzy
 msgid "Windows should be placed in the center of the main window."
-msgstr "Ferestrele ar trebui pozi�ionate �n centrul ecranului."
+msgstr "Langai turėtų būti padėti pagrindinio lango centre."
 
 #: src/prefs.c:359
 msgid "Center of the screen"
-msgstr "Centrul ecranului"
+msgstr "Ekrano centre"
 
 #: src/prefs.c:363
 msgid "Windows should be placed in the center of the screen."
-msgstr "Ferestrele ar trebui pozi�ionate �n centrul ecranului."
+msgstr "Langai turėtų būti padėti ekrano centre."
 
 #: src/prefs.c:368
 msgid "Mouse position"
-msgstr "Pozi�ia cursorlui"
+msgstr "Pelės žymeklio vietoje"
 
 #: src/prefs.c:372
 msgid "Windows should be placed at the current mouse position."
-msgstr "Ferestrele ar trebui pozi�ionate la pozitia curent� a cursorului"
+msgstr "Langai turėtų būti padėti ten kur yra pelės žymeklis."
 
 #. File Player
 #: src/prefs.c:376
 msgid "File Audio Player"
-msgstr "Player pentru fisiere audio"
+msgstr "Garso failų grotuvas"
 
 #: src/prefs.c:388
 msgid "Player to run :"
-msgstr "Player de rulat:"
+msgstr "Naudoti grotuvą:"
 
 #: src/prefs.c:393
 msgid ""
 "Enter the program used to play the files. Some arguments can be passed for "
 "the program (as 'xmms -p') before to receive files as other arguments."
 msgstr ""
-"Introduce�i programul folosit s� ruleze fi�ierele. Unele argumente pot fi "
-"transferate programului (ca 'xmms -p') �nainte s� primeasc� fi�ierele ca "
-"argumente."
+"Pasirinkite kuri programa bus naudojama failų atkūrimui. Prieš gaunant "
+"failus kaip argumentus programai galima perduoti kai kuriuos parametrus "
+"(kaip „xmms -p“)"
 
 #. Log options
 #: src/prefs.c:411
-#, fuzzy
 msgid "Log Options"
-msgstr "Op�iunile etichetei"
+msgstr "Žurnalo parinktys"
 
 #. Show / hide log view
 #: src/prefs.c:418
-#, fuzzy
 msgid "Show log view in main window"
-msgstr "Centrul ecranului"
+msgstr "Pagrindiniame lange rodyti žurnalą"
 
 #: src/prefs.c:421
-#, fuzzy
 msgid "If activated, the log view would be visible in the main window."
-msgstr "Daca este activata, lista va fi creata in directorul parinte.."
+msgstr "Jei aktyvuota, pagrindiniame lange bus matomas žurnalas."
 
 #: src/prefs.c:428
 msgid "Max number of lines :"
-msgstr ""
+msgstr "Daugiausia eilučių:"
 
 #. g_signal_connect(G_OBJECT(NumberTrackFormated),"toggled",G_CALLBACK(Number_Track_Formated_Toggled),NULL);
 #. g_signal_emit_by_name(G_OBJECT(NumberTrackFormated),"toggled");
@@ -3740,21 +3673,17 @@ msgstr ""
 #. * File Settings
 #.
 #: src/prefs.c:447 src/prefs.c:448
-#, fuzzy
 msgid "File Settings"
-msgstr "_Setari"
+msgstr "Failo nustatymai"
 
 #. File (name) Options
 #: src/prefs.c:458
-#, fuzzy
 msgid "File Options"
-msgstr "Op�iuni ale numelui de fi�ier"
+msgstr "Failo parinktys"
 
 #: src/prefs.c:464
 msgid "Replace illegal characters in filename (for Windows and CD-Rom)"
-msgstr ""
-"�nlocuieste caracterele gresite din numele de fisier (pentru Windows si CD-"
-"ROM)"
+msgstr "Failo varde pakeisti netinkamus simbolius (Windows ir CD-Rom)"
 
 #: src/prefs.c:467
 msgid ""
@@ -3763,49 +3692,48 @@ msgid ""
 "problem when renaming the file. This is usefull when renaming the file from "
 "the tag with the scanner."
 msgstr ""
-"Schimba caracterele nepermise pentru sistemul de fisiere al windows ('\\', "
-"':', '*', '?', '\"', '<', '>', '|') din numele de fisiere pentru a evita "
-"problemele c�nd redenumiti fisierul. Aceasta este folositoare c�nd se "
-"redenumeste fisierul cu informatia din eticheta de catre examinator."
+"Siekiant išvengti bėdų pervadinant failus konvertuoti netinkamus simbolius "
+"FAT32/16 ir ISO9660 + Joliet failų sistemoms ('\\', ':', ';', '*', '?', "
+"'\"', '<', '>', '|'). Tai naudinga pervadinant failą iš žymės su skeneriu."
 
 #. Extension case (lower/upper?)
 #: src/prefs.c:476
 msgid "Convert filename extension to :"
-msgstr "Conversie extensie de fisier la:"
+msgstr "Konvertuoti failo vardo plėtinį į:"
 
 #: src/prefs.c:479
 msgid "Lower Case"
-msgstr "Minuscule"
+msgstr "Mažąsias raides"
 
 #: src/prefs.c:482
 msgid "For example, the extension will be converted to '.mp3'"
-msgstr "De ex. extensia va fi convertita la '.mp3'"
+msgstr "Pavyzdžiui, plėtinys bus konvertuotas į „.mp3“"
 
 #: src/prefs.c:485
 msgid "Upper Case"
-msgstr "Majuscule"
+msgstr "Didžiąsias raides"
 
 #: src/prefs.c:488
 msgid "For example, the extension will be converted to '.MP3'"
-msgstr "De ex. extensia va fi convertita la '.MP3'"
+msgstr "Pavyzdžiui, plėtinys bus konvertuotas į „.MP3“"
 
 #: src/prefs.c:491
 msgid "No Change"
-msgstr "Nici o schimbare"
+msgstr "Nieko nekeisti"
 
 #: src/prefs.c:494
 msgid "The extension will not be converted"
-msgstr "Extensia nu va fi convertita"
+msgstr "Plėtinys nebus konvertuotas"
 
 #. Preserve modification time
 #: src/prefs.c:497
 msgid "Preserve modification time of the file"
-msgstr ""
+msgstr "Nepakeisti failo keitimo laiko"
 
 #: src/prefs.c:500
 msgid ""
 "Preserve the modification time (in file properties) when saving the file."
-msgstr ""
+msgstr "Išsaugant failą nepakeisti failo keitimo laiko (failo savybėse)."
 
 #. Change directory modification time
 #: src/prefs.c:504
@@ -3813,6 +3741,7 @@ msgid ""
 "Update modification time of the parent directory of the file (recommended "
 "when using Amarok)"
 msgstr ""
+"Atnaujinti aukštesnio aplanko keitimo laiką (rekomenduojama naudojant Amarok)"
 
 #: src/prefs.c:508
 msgid ""
@@ -3823,12 +3752,16 @@ msgid ""
 "performance reasons, they refresh file informations by detecting changes of "
 "the parent directory."
 msgstr ""
+"Saugant failą aukštesnio aplanko keitimo laikas bus atnaujintas. Šiuo metu "
+"automatiškai tai daroma tik pervadinant failą.\n"
+"Ši galimybė yra įdomi tik naudojant tokias programas kaip Amarok. Dėl "
+"greitaveikos jie atnaujinimo laiką aptinka aptikdami aukštesnio aplanko "
+"keitimus."
 
 #. Character Set for File Name
 #: src/prefs.c:516
-#, fuzzy
 msgid "Character Set for File Name"
-msgstr "Setul de caractere pentru etichetele ID3"
+msgstr "Failo vardo simbolių rinkinys"
 
 #. Rules for character set
 #: src/prefs.c:532
@@ -3836,10 +3769,12 @@ msgid ""
 "Rules to apply if some characters can't be converted to the system character "
 "encoding when writing filename:"
 msgstr ""
+"Taisyklės kurios bus pritaikomos jei pervadinant failą neįmanoma konvertuoti "
+"nekurių simbolių:"
 
 #: src/prefs.c:540
 msgid "Try an other character encoding"
-msgstr ""
+msgstr "Pabandyti kitą simbolių koduotę"
 
 #: src/prefs.c:544
 msgid ""
@@ -3847,11 +3782,15 @@ msgid ""
 "your locale (for example : ISO-8859-1 for 'fr', KOI8-R for 'ru', ISO-8859-2 "
 "for 'ro'). If it fails, it will try the character encoding ISO-8859-1."
 msgstr ""
+"Su šia parinktim bus bandoma konvertuoti į koduotę susietą su jūsų naudojama "
+"kalba (pvz. ISO-8859-1 -> 'fr', KOI8-R -> 'ru', ISO-8859-2 -> 'ro'). Jei "
+"nepavyks, bus bandoma ISO-8859-1 koduotė."
 
 #: src/prefs.c:551
 msgid ""
 "Force using the system character encoding and activate the transliteration"
 msgstr ""
+"Priverstinai naudoti sistemos simbolių koduotę ir aktyvuoti transliteraciją"
 
 #: src/prefs.c:554 src/prefs.c:876 src/prefs.c:945
 msgid ""
@@ -3859,34 +3798,40 @@ msgid ""
 "character set, it can be approximated through one or several similarly "
 "looking characters."
 msgstr ""
+"Su šia parinktimi, kai simbolis negali būti atvaizduotas paskirties simbolių "
+"rinkinyje, bus naudojamas vienas ar keli panašūs simboliai."
 
 #: src/prefs.c:560
 msgid ""
 "Force using the system character encoding and silently discard some "
 "characters"
 msgstr ""
+"Priverstinai naudoti sistemos simbolių koduotę ir tyliai pašalinti kai "
+"kuriuos simbolius"
 
 #: src/prefs.c:563 src/prefs.c:885 src/prefs.c:954
 msgid ""
 "With this option, when a characters cannot be represented in the target "
 "character set, it will be silently discarded."
 msgstr ""
+"Su šia parinktimi, kai simbolis negali būti atvaizduotas paskirties simbolių "
+"rinkinyje jis bus tyliai pašalintas."
 
 #.
 #. * Tag Settings
 #.
 #: src/prefs.c:572 src/prefs.c:573
 msgid "Tag Settings"
-msgstr "Setari etichete"
+msgstr "Žymės nustatymai"
 
 #. Tag Options
 #: src/prefs.c:582
 msgid "Tag Options"
-msgstr "Op�iunile etichetei"
+msgstr "Žymės parinktys"
 
 #: src/prefs.c:588
 msgid "Auto completion of date if not complete"
-msgstr "Autocompletarea datelor daca nu sint complete"
+msgstr "Jei nebaigta, užbaigti datą"
 
 #: src/prefs.c:591
 msgid ""
@@ -3894,13 +3839,12 @@ msgid ""
 "date (for instance, if the current year is 2005: 5 => 2005, 4 => 2004, 6 => "
 "1996, 95 => 1995, ...)."
 msgstr ""
-"�ncearc� s� completezi c�mpul anului dac� introduc doar ultimele cifre ale "
-"datei (de ex., daca anul curent este 2005: 5 => 2005, 4 => 2004, 6 => 1996  "
-"95 => 1995, ...)."
+"Įvedus paskutinius metų skaičius, pabandyti užpildyti likusius (pavyzdžiui "
+"jei dabar yra 2005 metai: 5=>2005, 4 => 2004, 6 => 1996, 95 => 1995, ...)."
 
 #: src/prefs.c:598
 msgid "Write the track field with the following number of digits :"
-msgstr "Scrie c�mpul pistei cu urmatorul numar de cifre :"
+msgstr "Takelio laukelyje naudoti skaičių:"
 
 #: src/prefs.c:601
 msgid ""
@@ -3908,13 +3852,13 @@ msgid ""
 "obtain a number with 'n' digits (Ex. with two digits : '05', '09', "
 "'10',...). Else it keeps the 'raw' track value."
 msgstr ""
-"Daca este activata, c�mpul pista este scris folosind numarul '0' in "
-"completare pentru a obtine un numar cu 'n' cifre (Ex. cu doua cifre : '05, "
-"'09', '10',...). Altfel pastreaza valoarea 'bruta' a pistei."
+"Jei aktyvuota, takelio laukelis rašomas pridedant „0“ norint gauti reikiamą "
+"skaičių kiekį (pvz. norint matyti du skaičius: „05“, „09“, „10“, ...). Kitu "
+"atveju paliekamas „grynas“ takelio numeris."
 
 #: src/prefs.c:616
 msgid "Ogg Vorbis Files : Write also the comment to the XMMS format"
-msgstr "Fi�iere Ogg Vorbis : scrie comentariul �i �n formatul XMMS"
+msgstr "Ogg Vorbis failai: į XMMS formatą rašyti ir komentarą"
 
 #: src/prefs.c:619
 msgid ""
@@ -3924,70 +3868,69 @@ msgid ""
 "don't want other apps to complain about an unknown field. Comments won't be "
 "shown in XMMS, though."
 msgstr ""
-"XMMS nu folose�te corect identificatorul de comentariu din fi�ierele Ogg "
-"Vorbis a�a cum fac celelate aplica�ii. De fapt, acest c�mp este �n mod "
-"normal etichetat cu 'comment=', iar XMMS folose�te doar '='. Va rog s� "
-"debifati aceast� op�iune dac� nu vre�i ca celelalte aplica�ii s� se pling� "
-"de un c�mp necunoscut. Comentariile nu o s� apar� �n XMMS �ns�."
+"XMMS Ogg Vorbis failuose nesugeba teisingai atpažinti komentarų. Paprastai "
+"šis laukelis pavadinamas „comment=“, kur XMMS naudoja tik „=“. Atžymėkite "
+"šia parinkty jei nenorite jog kitos programos skųstųsi apie nežinomą "
+"laukelį. Atžymėjus, XMMS nerodys komentarų."
 
 #: src/prefs.c:634
 msgid ""
 "Tag field focus when switching files in list with shortcuts Page Up/Page "
 "Down:"
 msgstr ""
+"Sąraše naudojant susiejimus „Page up/Page down“ žymės laukelis gauna fokusą:"
 
 #: src/prefs.c:643
 msgid "Keep focus to the same tag field"
-msgstr ""
+msgstr "Palikti fokusą tam pačiam žymės laukeliui"
 
 #: src/prefs.c:649
 msgid "Return focus to the first tag field (ie 'Title' field)"
-msgstr ""
+msgstr "Grąžinti fokusą pirmam žymės laukeliui (t.y. „Pavadinimo“ laukeliui)"
 
 #. gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(SetFocusToFirstTagField),SET_FOCUS_TO_FIRST_TAG_FIELD);
 #. Tag Splitting
 #: src/prefs.c:654
-#, fuzzy
 msgid "Tag Splitting"
-msgstr "Setari etichete"
+msgstr "Žymių skaidymas"
 
 #: src/prefs.c:661
 msgid ""
 "For Vorbis tags, selected fields will be split atdashes and saved as "
 "separate tags"
 msgstr ""
+"Vorbis žymėms, pasirinkti laukeliai bus perskirti pagal taškus ir išsaugoti "
+"kaip atskiros žymės"
 
 #.
 #. * ID3 Tag Settings
 #.
 #: src/prefs.c:693 src/prefs.c:694
-#, fuzzy
 msgid "ID3 Tag Settings"
-msgstr "Setari etichete"
+msgstr "ID3 žymių nustatymai"
 
 #. Tag Rules frame
 #: src/prefs.c:706
 msgid "ID3 Tag Rules"
-msgstr "Regulile etichetei ID3"
+msgstr "ID3 žymių taisyklės"
 
 #. Write ID3 tags in FLAC files
 #: src/prefs.c:718
-#, fuzzy
 msgid "Write ID3 tags in FLAC files (in addition to FLAC tag)"
-msgstr "Scrie etichete ID3 in fisierele FLAC cu etichete FLAC"
+msgstr "FLAC failuose rašyti ID3 žymes (kaip papildymą FLAC žymėms)"
 
 #: src/prefs.c:721
 msgid ""
 "If activated, ID3 tags will be also added in the FLAC file (according the "
 "two rules above, plus the FLAC tag). Else ID3 tags will be stripped."
 msgstr ""
-"Daca este activata, o eticheta ID3v1 va fi adaugata sau actualizata la "
-"sf�rsitul fisierelor MP3. Altfel va fi stearsa."
+"Jei aktyvuota, FLAC faile bus pridėtos ir ID3 žymės (pagal dvi ankstesnes "
+"taisykles, plius FLAC žymė). Kitu atveju ID3 žymės bus pašalintos."
 
 #. Strip tag when fields (managed by EasyTAG) are empty
 #: src/prefs.c:726
 msgid "Strip tags if all fields are set to blank"
-msgstr "Sterge etichetele dac� toate c�mpurile s�nt goale"
+msgstr "Pašalinti žymes jei visi laukeliai tušti"
 
 #: src/prefs.c:729
 msgid ""
@@ -3996,85 +3939,82 @@ msgid ""
 "you to strip the whole tag when these seven standard data fields have been "
 "set to blank."
 msgstr ""
-"Pentru c� etichetele ID3v2 pot con�ine �i alte date dec�t titlu, artist, "
-"album, an, pist�, gen sau comentariu (cum ar fi o imagine ata�at�, versuri, "
-"etc.), aceast� op�iune permite �tergerea �ntregii etichete c�nd cele �apte "
-"c�mpuri standard s�nt goale."
+"ID3v2 žymės gali turėti daugiau duomenų nei tik Pavadinimas, Atlikėjas, "
+"Albumas, Metai, Takelis, Žanras ir Komentaras (taipogi prisegtas "
+"paveikslėlis, žodžiai, ...) ši parinktis leidžia pašalinti visą žymę kai šie "
+"septyni laukeliai tušti."
 
 #. Convert old ID3v2 tag version
 #: src/prefs.c:735
 msgid "Automatically convert old ID3v2 tag versions"
-msgstr "Schimb� automat versiunile vechi de etichete ID3v2"
+msgstr "Automatiškai konvertuoti senas ID3v2 žymių versijas"
 
 #: src/prefs.c:738
 msgid ""
 "If activated, an old ID3v2 tag version (as ID3v2.2) will be updated to the "
 "ID3v2.3 version."
 msgstr ""
-"Dac� este activat�, o veche versiune de etichet� ID3v2 (cum ar fi ID3v2.2) "
-"va fi actualizat� la versiunea ID3v2.3."
+"Jei aktyvuota, senos ID3v2 žymių versijos (tokios kaip ID3v2.2) bus "
+"atnaujintos iki ID3v2.3 versijos."
 
 #. Use CRC32
 #: src/prefs.c:742
 msgid "Use CRC32"
-msgstr ""
+msgstr "Naudoti CRC32"
 
 #: src/prefs.c:745
-#, fuzzy
 msgid "Set CRC32 in the ID3v2 tags"
-msgstr "Scrie etichet� ID3v2"
+msgstr "ID3v2 žymėse nustatyti CRC32"
 
 #. Use Compression
 #: src/prefs.c:748
 msgid "Use Compression"
-msgstr ""
+msgstr "Naudoti glaudinimą"
 
 #: src/prefs.c:751
 msgid "Set Compression in the ID3v2 tags"
-msgstr ""
+msgstr "ID3v2 žymėse nustatyti suspaudimą"
 
 #. Write Genre in text
 #: src/prefs.c:754
 msgid "Write Genre in text only"
-msgstr ""
+msgstr "Žanrą rašyti tekstu"
 
 #: src/prefs.c:757
 msgid ""
 "Don't use ID3v1 number references in genre tag. Enable this if you see "
 "numbers as genre in your music player."
 msgstr ""
+"Nenaudoti ID3v1 žanro žymės numerių atitikmenų. Įjunkite tai jei savo "
+"muzikos grotuve prie žanro matote skaičius."
 
 #. Character Set for writing ID3 tag
 #: src/prefs.c:760
-#, fuzzy
 msgid "Character Set for writing ID3 tags"
-msgstr "Setul de caractere pentru etichetele ID3"
+msgstr "ID3 žymių simbolių rinkinys"
 
 #. ID3v2 tags
 #: src/prefs.c:767
-#, fuzzy
 msgid "ID3v2 tags"
-msgstr "Scrie etichet� ID3v2"
+msgstr "ID3v2 žymės"
 
 #. Write ID3v2 tag
 #: src/prefs.c:780
 msgid "Write ID3v2 tag"
-msgstr "Scrie etichet� ID3v2"
+msgstr "Rašyti ID3v2 žymes"
 
 #: src/prefs.c:783
-#, fuzzy
 msgid ""
 "If activated, an ID3v2.4 tag will be added or updated at the beginning of "
 "the MP3 files. Else it will be stripped."
 msgstr ""
-"Dac� este activat�, o etichet� ID3v2 va fi ad�ugat� sau actualizat� la "
-"�nceputul fi�ierelor MP3. Altfel eticheta va fi �tears�."
+"Jei aktyvuota, MP3 failo pradžioje bus pridėta arba atnaujinta ID3v2.4 žymė. "
+"Kitu atveju bus pašalinta."
 
 #. ID3v2 tag version
 #: src/prefs.c:790
-#, fuzzy
 msgid "Version:"
-msgstr "Descriere:"
+msgstr "Versija:"
 
 #: src/prefs.c:797
 msgid ""
@@ -4082,38 +4022,38 @@ msgid ""
 " - ID3v2.3 is written using id3lib,\n"
 " - ID3v2.4 is written using libid3tag (recommended)."
 msgstr ""
+"Pasirinkite kurią ID3v1 versiją rašyti:\n"
+" - ID3v2.3 rašoma naudojant id3lib,\n"
+" - ID3v2.4 rašoma naudojant libid3tag (rekomenduojama)."
 
 #. Charset
 #. Id3V1 writing character set
 #: src/prefs.c:811 src/prefs.c:913
 msgid "Charset:"
-msgstr ""
+msgstr "Koduotė:"
 
 #. Unicode
 #: src/prefs.c:819
-#, fuzzy
 msgid "Unicode "
-msgstr "Unicode (UTF-8)"
+msgstr "Unikodas"
 
 #: src/prefs.c:827
-#, fuzzy
 msgid "Unicode type to use"
-msgstr "Codor"
+msgstr "Kurį unikodo tipą naudoti"
 
 #: src/prefs.c:850
 msgid "Character set used to write the tag data in the file."
-msgstr "Setul de caractere folsit pentru a scrie etichetele in fisier."
+msgstr "Kuris simbolių rinkinys bus naudojamas rašant žymės duomenis į failą."
 
 #. ID3v2 Additional iconv() options
 #. ID3V1 Additional iconv() options
 #: src/prefs.c:860 src/prefs.c:929
 msgid "Additional settings for iconv():"
-msgstr ""
+msgstr "Papildomi iconv() nustatymai:"
 
 #: src/prefs.c:865 src/prefs.c:934
-#, fuzzy
 msgid "No"
-msgstr " Nu "
+msgstr "Ne"
 
 #: src/prefs.c:868 src/prefs.c:937
 msgid ""
@@ -4121,48 +4061,48 @@ msgid ""
 "character set, it isn't changed. But note that an error message will be "
 "displayed for information."
 msgstr ""
+"Su šia parinktimi, jei simbolis negali būti atvaizduotas jis nebus "
+"pakeistas. Bus rodomas klaidos pranešimas."
 
 #: src/prefs.c:873 src/prefs.c:942
 msgid "//TRANSLIT"
-msgstr ""
+msgstr "//TRANSLIT"
 
 #: src/prefs.c:882 src/prefs.c:951
 msgid "//IGNORE"
-msgstr ""
+msgstr "//IGNORE"
 
 #. ID3v1 tags
 #: src/prefs.c:890
-#, fuzzy
 msgid "ID3v1 tags"
-msgstr "Etichet� ID3"
+msgstr "ID3v1 žymės"
 
 #. Write ID3v1 tag
 #: src/prefs.c:904
 msgid "Write ID3v1.x tag"
-msgstr "Scrie etichet� ID3v1.x"
+msgstr "Rašyti ID3v1.x žymę"
 
 #: src/prefs.c:907
 msgid ""
 "If activated, an ID3v1 tag will be added or updated at the end of the MP3 "
 "files. Else it will be stripped."
 msgstr ""
-"Dac� este activat�, o etichet� ID3v1 va fi ad�ugat� sau actualizat� la "
-"sf�r�itul fi�ierelor MP3. Altfel va fi �tears�."
+"Jei aktyvuota, MP3 failo pradžioje bus pridėta arba atnaujinta ID3v1 žymė. "
+"Kitu atveju bus pašalinta."
 
 #: src/prefs.c:924
-#, fuzzy
 msgid "Character set used to write ID3v1 tag data in the file."
-msgstr "Setul de caractere folsit pentru a scrie etichetele in fisier."
+msgstr ""
+"Simbolių rinkinys kuris bus naudojamas rašant ID3v1 žymės duomenis į failą."
 
 #. Character Set for reading tag
 #: src/prefs.c:959
-#, fuzzy
 msgid "Character Set for reading ID3 tags"
-msgstr "Setul de caractere pentru etichetele ID3"
+msgstr "Simbolių rinkinys ID3 žymių skaitymui"
 
 #: src/prefs.c:973
 msgid "Non-standart:"
-msgstr ""
+msgstr "Nestandartinis:"
 
 #: src/prefs.c:978
 msgid ""
@@ -4180,192 +4120,193 @@ msgid ""
 "'Windows-1251' to load tags written under Windows. And 'KOI8-R' to load tags "
 "written under Unix systems."
 msgstr ""
+"Šis simbolių rinkinys bus naudojamas konvertuoti žymes kurios parašytos su "
+"ISO-8859-1 (ID3v2 ar/ir ID3v1 žymėms).\n"
+"\n"
+"Pavyzdžiui:\n"
+"  - Ankstesnėse EasyTAG versijose jūs galėjote išsaugoti UTF-8 eilutes "
+"ISO-8859-1 laukelyje. Tai nėra teisinga! Šių žymių konvertavimui į unikodą: "
+"aktyvuokite šią parinktį ir pasirinkite UTF-8. Taipogi turite akytvuoti "
+"parinktį „Bandyti žymes saugoti ISO-8859-1. Jei neįmanoma naudoti UNIKODĄ "
+"(rekomenduojama)“ arba „Visada saugoti UNIKODU“.\n"
+"  - Jei unikodas nenaudotinas, Rusai gali pasirinkti simbolių rinkinį "
+"„Windows-1251“ ir bus įkeltos žymės parašytos Windows. Ir „KOi8-R“ norėdami "
+"įkelti žymes parašytas Unix sistemose."
 
 #: src/prefs.c:996
 msgid "Character set used to read tag data in the file."
-msgstr ""
-"Setul de caractere folsit pentru a citi informatiile din etichete din fisier."
+msgstr "Simbolių rinkinys naudojamas perskaityti failo žymes."
 
 #.
 #. * Scanner
 #.
 #: src/prefs.c:1011 src/prefs.c:1012
 msgid "Scanner"
-msgstr "Examinator"
+msgstr "Skeneris"
 
 #. Character conversion for the 'Fill Tag' scanner (=> FTS...)
 #: src/prefs.c:1024
 msgid "Fill Tag Scanner - Character Conversion"
-msgstr "Schimba caracterele"
+msgstr "Žymių užpildymo skeneris - Simbolių konvertavimas"
 
 #: src/prefs.c:1030 src/prefs.c:1055
 msgid "Convert underscore character '_' and string '%20' to space ' '"
-msgstr "Schimb� '_' �i '%20' �n spa�ii ' '"
+msgstr "Konvertuoti pabraukimo simbolį „_“ ir „%20“ į tarpą „ “"
 
 #: src/prefs.c:1032 src/prefs.c:1056
 msgid "Convert space ' ' to underscore '_'"
-msgstr "Schimb� spa�iile �n '_'"
+msgstr "Konvertuoti tarpą „ “ į „_“"
 
 #: src/prefs.c:1044 src/prefs.c:1046
 msgid ""
 "If activated, this conversion will be used when applying a mask from the "
 "scanner for tags."
 msgstr ""
-"Daca este activata, aceasta conversie va fi folosita cind se aplica masca "
-"examinatorului de etichete."
+"Jei aktyvuota, šis konvertavimas bus naudojamas žymėms taikant šablonus iš "
+"skenerio."
 
 #. Character conversion for the 'Rename File' scanner (=> RFS...)
 #: src/prefs.c:1050
 msgid "Rename File Scanner - Character Conversion"
-msgstr "Schimba caracterele"
+msgstr "Pervadinimo failų skeneris - simbolių konvertavimas"
 
 #: src/prefs.c:1067 src/prefs.c:1069 src/prefs.c:1071
 msgid ""
 "If activated, this conversion will be used when applying a mask from the "
 "scanner for filenames."
 msgstr ""
-"Daca este activata, conversia va fi folosita cind se aplica masca "
-"examinatorului de fisiere."
+"Jei aktyvuota, šis konvertavimas bus naudojamas žymėms taikant šablonus iš "
+"skenerio."
 
 #. Character conversion for the 'Process Fields' scanner (=> PFS...)
 #: src/prefs.c:1074
 msgid "Process Fields Scanner - Character Conversion"
-msgstr "Process Fields Scanner - Character Conversion"
+msgstr "Laukelių apdorojimo skeneris “ simbolių konvertavimas"
 
 #. Don't convert some words like to, feat. first letter uppercase.
 #: src/prefs.c:1081
 msgid ""
 "Don't uppercase first letter of words for some prepositions and articles."
-msgstr ""
+msgstr "Nekeisti raidžių į pirmą didžiąją."
 
 #: src/prefs.c:1085
-#, fuzzy
 msgid ""
 "Don't convert first letter of the words like prepositions, articles and "
 "words like feat., when using the scanner 'First letter uppercase of each "
 "word' (for example, you will obtain 'Text in an Entry' instead of 'Text In "
 "An Entry')."
 msgstr ""
-"Nu converti prima litera a cuvintelor cum ar fi prepozitiile, articolele, "
-"etc cind este folosit examinatorul 'Prima litera majuscula in fiecare "
-"cuvint'."
+"Nekonvertuoti pirmos raidės tokių žodžių kaip prielinksniai, straipsniai ir "
+"žodžiai kaip „feat.“, naudojant skeneryje „Pirma kiekvieno žodžio raidė "
+"didžioji“ (pvz. jūs gausite „Text in an Entry“ vietoj „Text In An Entry“)."
 
 #. Properties of the scanner window
 #: src/prefs.c:1091
 msgid "Scanner Window"
-msgstr "Fereastra examinatorului"
+msgstr "Skenerio langas"
 
 #: src/prefs.c:1097
 msgid "Open the Scanner Window on startup"
-msgstr "Deschide fereastra examinatorului la pornire"
+msgstr "Paleidžiant atverti skenerio langą"
 
 #: src/prefs.c:1100
 msgid ""
 "Activate this option to open automatically the scanner window when EasyTAG "
 "starts."
 msgstr ""
-"Activa�i aceast� op�iune pentru a deschide automat freastra examinatorului "
-"c�nd EasyTAG este pornit."
+"Aktyvuokite šią parinktį norėdami jog skenerio langas būtų atvertas "
+"paleidžiant EasyTAG."
 
 #: src/prefs.c:1103
 msgid "Scanner window always on top"
-msgstr "Fereastra examinatorului tot timpul deasupra"
+msgstr "Skenerio langas visada viršuje"
 
 #: src/prefs.c:1106
 msgid ""
 "If activated, the window which contains the masks will stay always over the "
 "main window."
 msgstr ""
-"Dac� este activat�, fereastra care con�ine mask va fi tot timpul peste "
-"fereastra principal�."
+"Jei aktyvuota, langas kuriame yra šablonai visada liks virš pagrindinio "
+"lango."
 
 #. Other options
 #: src/prefs.c:1111
 msgid "Fields"
-msgstr "C�mpuri"
+msgstr "Laukeliai"
 
 #. Overwrite text into tag fields
 #: src/prefs.c:1118
 msgid "Overwrite fields when scanning tag"
-msgstr "Suprascrie c�mpurile c�nd examinezi etichetele"
+msgstr "Skenuojant žymę perrašyti laukelius"
 
 #: src/prefs.c:1121
 msgid ""
 "If activated, the scanner will replace existing text in fields by the new "
 "one. If deactivated, only blank fields of the tag will be filled."
 msgstr ""
-"Dac� este activat�, examinatorul va �nlocui textul existent �n c�mpuri cu "
-"noul text. Dac� este dezactivat�, numai c�mpurile goale ale etichetei vor fi "
-"completate."
+"Jei aktyvuota, skeneris pakeis esamą tekstą nauju. Jei išjungta, bus "
+"užpildyti tik tušti laukeliai."
 
 #: src/prefs.c:1132
 msgid "Set this text as default comment :"
-msgstr "Fixeaz� acest text drept comentariu implicit :"
+msgstr "Nustatyti šį tekstą kaip numatytąjį komentarą:"
 
 #: src/prefs.c:1135
 msgid ""
 "Activate this option if you want to put the following string into the "
 "comment field when using the 'Fill Tag' scanner."
 msgstr ""
-"Activa�i aceast� op�iune dac� vre�i s� pune�i urm�torul �ir �n c�mpul "
-"comentariu c�nd folosi�i 'Completeaz� eticheta'."
+"Aktyvuokite šią parinktį jei norite įterpti šią eilutę į komentaro laukelį "
+"naudojant „Užpildyti žymes“ skenerį."
 
 #. CRC32 comment
 #: src/prefs.c:1152
 msgid "Use CRC32 as the default comment (for files with ID3 tags only)."
-msgstr ""
-"Foloseste CRC32 drept comentariu implicit (numai pentru fisierele cu "
-"etichete ID3)."
+msgstr "Kaip numatytąjį komentarą naudoti CRC32 (failam tik su ID3 žymėmis)."
 
 #: src/prefs.c:1156
 msgid ""
 "Calculates the CRC-32 value of the file and writes it into the comment field "
 "when using the 'Fill Tag' scanner."
-msgstr ""
-"Activati aceasta optiune daca vreti sa puneti urmatorul sir �n c�mpul "
-"comentariu c�nd folositi 'Completeaza eticheta'."
+msgstr "Suskaičiuoja failo CRC-32 reikšmę ir įrašo į komentaro laukelį."
 
 #.
 #. * CDDB
 #.
 #: src/prefs.c:1167 src/prefs.c:1168
 msgid "CD Data Base"
-msgstr "Baza de date CD"
+msgstr "CD duomenų bazė"
 
 #. CDDB Server Settings (Automatic Search)
 #: src/prefs.c:1177
-#, fuzzy
 msgid "Server Settings for Automatic Search"
-msgstr "Cautare automata"
+msgstr "Automatinės paieškos serverio nustatymai"
 
 #: src/prefs.c:1186 src/prefs.c:1225 src/prefs.c:1259
 msgid "Name :"
-msgstr "Nume :"
+msgstr "Pavadinimas:"
 
 #: src/prefs.c:1205 src/prefs.c:1233 src/prefs.c:1268 src/prefs.c:1356
 msgid "Port :"
-msgstr "Port :"
+msgstr "Prievadas:"
 
 #: src/prefs.c:1215 src/prefs.c:1243 src/prefs.c:1278
 msgid "CGI Path :"
-msgstr "Calea CGI :"
+msgstr "CGI kelias:"
 
 #. CDDB Server Settings (Manual Search)
 #: src/prefs.c:1251
-#, fuzzy
 msgid "Server Settings for Manual Search"
-msgstr "Set�ri server"
+msgstr "Rankinės paieškos serverio nustatymai"
 
 #. Local access for CDDB (Automatic Search)
 #: src/prefs.c:1286
-#, fuzzy
 msgid "Local CD Data Base"
-msgstr "Baza de date CD"
+msgstr "Vietinė CD duomenų bazė"
 
 #: src/prefs.c:1294
-#, fuzzy
 msgid "Path :"
-msgstr "Calea CGI :"
+msgstr "Kelias:"
 
 #: src/prefs.c:1305
 msgid ""
@@ -4374,68 +4315,70 @@ msgid ""
 "'country', 'data', 'folk', 'jazz', 'newage', 'reggae', 'rock', 'soundtrack' "
 "and 'misc'."
 msgstr ""
+"Nurodykite kelią kur yra vietinė cd duomenų bazė. Vietinė cd duomenų bazė "
+"turi vienuoliką aplankų: „blues“, „classical“, „classical“, „data“, „folk“, "
+"„jazz“, „newage“, „reggae“, „rock“, „soundtrack“ ir „misc“."
 
 #. CDDB Proxy Settings
 #: src/prefs.c:1331
 msgid "Proxy Settings"
-msgstr "Set�ri proxy"
+msgstr "Tarpinio serverio nustatymai"
 
 #: src/prefs.c:1340
 msgid "Use a proxy"
-msgstr "Folose�te proxy"
+msgstr "Naudoti tarpinį serverį"
 
 #: src/prefs.c:1343
 msgid "Set active the settings of the proxy server."
-msgstr "Fixeaz� active set�rile serverului proxy."
+msgstr "Nustatyti aktyvius tarpinio serverio nustatymus"
 
 #: src/prefs.c:1348
 msgid "Host Name :"
-msgstr "Nume gazda :"
+msgstr "Adresas:"
 
 #: src/prefs.c:1355
 msgid "Name of the proxy server."
-msgstr "Numele serverlui proxy."
+msgstr "Tarpinio serverio vardas."
 
 #: src/prefs.c:1363
 msgid "Port of the proxy server."
-msgstr "Portul serverlui proxy"
+msgstr "Tarpinio serverio prievadas."
 
 #: src/prefs.c:1368
 msgid "User Name :"
-msgstr "Nume utilizator:"
+msgstr "Naudotojo vardas:"
 
 #: src/prefs.c:1375
 msgid "Name of user for the the proxy server."
-msgstr "Numele utilizatorului serverlui proxy."
+msgstr "Tarpinio serverio naudotojo vardas."
 
 #: src/prefs.c:1376
 msgid "User Password :"
-msgstr "Parola utilizatorului:"
+msgstr "Naudotojo slaptažodis:"
 
 #: src/prefs.c:1384
 msgid "Password of user for the the proxy server."
-msgstr "Parola utilizatorului serverlui proxy."
+msgstr "Tarpinio serverio naudotojo slaptažodis."
 
 #. Track Name list (CDDB results)
 #: src/prefs.c:1389
 msgid "Track Name List"
-msgstr "Lista numelor de pista"
+msgstr "Takelių pavadinimų sąrašas"
 
 #: src/prefs.c:1396
-#, fuzzy
 msgid ""
 "Select corresponding audio file (according position or DLM if activated "
 "below)"
-msgstr "Alegeti fisierul corespondent (conform cu pozitia sau DLM)"
+msgstr ""
+"Pasirinkite atitinkamą audio failą (pagal poziciją arba DLM, jei aktyvuota)"
 
 #: src/prefs.c:1400
-#, fuzzy
 msgid ""
 "If activated, when selecting a line in the list of tracks name, the "
 "corresponding audio file in the main list will be also selected."
 msgstr ""
-"Daca este activata, cind alegeti o linie in lista numelor de piste, fisierul "
-"corespunzator in lista principala va fi ales de asemenea."
+"Jei aktyvuota, pasirenkant eilutę, takelių sąraše, bus pasirinkta ir audio "
+"failas pagrindiniame sąraše."
 
 #. Check box to use DLM (also used in the cddb window)
 #: src/prefs.c:1405
@@ -4443,45 +4386,47 @@ msgid ""
 "Use the Levenshtein algorithm (DLM) to match lines (using title) with audio "
 "files (using filename)"
 msgstr ""
+"Ieškant eilučių (naudojant pavadinimą) su audio failais (naudojant failo "
+"vardą) naudoti „Levenshtein algorithm (DLM)“"
 
 #.
 #. * Confirmation
 #.
 #: src/prefs.c:1420 src/prefs.c:1421
 msgid "Confirmation"
-msgstr "Confirm�ri"
+msgstr "Patvirtinimas"
 
 #: src/prefs.c:1429
 msgid "Confirm exit from program"
-msgstr "Confirm� ie�irea din program"
+msgstr "Patvirtinti išėjimą iš programos"
 
 #: src/prefs.c:1432
 msgid ""
 "If activated, opens a dialog box to ask confirmation before exiting the "
 "program."
 msgstr ""
-"Dac� este activat�, deschide o fereastr� de dialog s� cear� confirmarea "
-"�nainte de p�rasirea programului."
+"Jei aktyvuota, prieš išeinant iš programos bus parodytas dialogas su "
+"patvirtinimu."
 
 #: src/prefs.c:1435
 msgid "Confirm writing of file tag"
-msgstr "Confirm� scrierea etichetei fi�ierului"
+msgstr "Patvirtinti failo žymės rašymą"
 
 #: src/prefs.c:1439
 msgid "Confirm renaming of file"
-msgstr "Confirm� redenumirea fi�ierului"
+msgstr "Patvirtinti failo pervadinimą"
 
 #: src/prefs.c:1443
 msgid "Confirm deleting of file"
-msgstr "Confirma stergerea fisierului"
+msgstr "Patvirtinti failo šalinimą"
 
 #: src/prefs.c:1447
 msgid "Confirm writing of playlist"
-msgstr "Confirm� scrierea playlist"
+msgstr "Patvirtinti grojaraščio įrašymą"
 
 #: src/prefs.c:1451
 msgid "Confirm changing directory when there are unsaved changes"
-msgstr ""
+msgstr "Patvirtinti aplanko keitimą, kai yra neišsaugotų keitimų"
 
 #. Disable temporarily the apply button
 #. //gtk_container_add(GTK_CONTAINER(ButtonBox),Button);
@@ -4489,33 +4434,33 @@ msgstr ""
 #. //GTK_WIDGET_SET_FLAGS(Button, GTK_CAN_DEFAULT);
 #: src/prefs.c:1472
 msgid "Apply changes (but don't save) and close this window"
-msgstr "Aplic� modific�rile (dar nu salva) �i �nchide aceast� fereastr�"
+msgstr "Pritaikyti keitimus (bet nesaugoti) ir užverti šį langą"
 
 #: src/prefs.c:1481
 msgid "Close this window without saving"
-msgstr "�nchide fereastra f�r� s� salvezi"
+msgstr "Užverti šį langą nesaugant"
 
 #: src/prefs.c:1489
 msgid "Save changes and close this window"
-msgstr "Salveaz� schimb�rile �i �nchide fereastra"
+msgstr "Išsaugoti pakeitimus ir užverti šį langą"
 
 #. For translators : be aware to NOT translate '%.*d' in this string
 #: src/prefs.c:1522
 #, c-format
 msgid "(Example : %.*d_-_Track_name_1.mp3)"
-msgstr ""
+msgstr "(Pavyzdžiui: %.*d_-_Track_name_1.mp3)"
 
 #: src/prefs.c:1678
 msgid "Changes applied"
-msgstr "Schimb�rile aplicate"
+msgstr "Pritaikyti pakeitimai"
 
 #: src/prefs.c:1697 src/setting.c:906
 msgid "Configuration saved"
-msgstr "Configura�ia salvat�"
+msgstr "Konfigūraciją išsaugota"
 
 #: src/prefs.c:1704
 msgid "Configuration unchanged"
-msgstr "Configura�ia neschimbat�"
+msgstr "Konfigūracija nepakeista"
 
 #: src/prefs.c:1796
 #, c-format
@@ -4524,120 +4469,118 @@ msgid ""
 "'%s'\n"
 "(%s) "
 msgstr ""
-" Calea aleas� pentru 'Calea implicit� spre fi�ierele' nu este corect�!\n"
-"'%s'\n"
-"(%s) "
+" Pasirinktas kelias „Numatytasis kelias iki failų“ nėra tinkamas!\n"
+"„%s“\n"
+"(%s)"
 
 #: src/prefs.c:1798
 msgid "Not a directory"
-msgstr "Nu este director"
+msgstr "Ne aplankas"
 
 #: src/prefs.c:1914
 #, c-format
 msgid "The audio file player '%s' can't be found!"
-msgstr ""
+msgstr "Audio failų grotuvas „%s“ nerastas!"
 
 #: src/scan.c:180
 msgid "Fill Tag"
-msgstr "Completeaz� eticheta"
+msgstr "Užpildyti žymę"
 
 #: src/scan.c:181
 msgid "Rename File and Directory"
-msgstr "Redenumeste fisierul si directorul"
+msgstr "Pervadinti failą ir aplanką"
 
 #: src/scan.c:182
 msgid "Process Fields"
-msgstr "Prelucreaz� fi�ierele"
+msgstr "Apdoroti laukelius"
 
 #: src/scan.c:365
 msgid "Tag successfully scanned..."
-msgstr "Eticheta examinat� cu succes..."
+msgstr "Žymės sėkmingai nuskenuotos..."
 
 #: src/scan.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "Tag successfully scanned...(%s)"
-msgstr "Eticheta examinata cu succes...(%s)"
+msgstr "Žymės sėkmingai nuskenuotos... (%s)"
 
 #: src/scan.c:407
 #, c-format
 msgid ""
 "Tag scanner: strange..., the extension '%s' was not found into filename '%s'!"
-msgstr ""
+msgstr "Žymių skeneris: keista..., plėtinys „%s“ failo varde „%s“ nerastas!"
 
 #: src/scan.c:489 src/scan.c:518
 #, c-format
 msgid "Scan Error: can't find separator '%s' within '%s'"
-msgstr "Eroare la examinare: nu pot g�si separatorul '%s' �n '%s'"
+msgstr "Skenavimo klaida: nepavyko rasti skirtuko „%s“ faile „%s“"
 
 #: src/scan.c:675
 #, c-format
 msgid "Could not convert filename '%s' into system filename encoding."
-msgstr ""
-"Nu am putut converti numele de fisier '%s' in codarea sistemului de fisiere."
+msgstr "Konvertuoti failo vardo „%s“ į sistemos failo vardų koduotę nepavyko."
 
 #: src/scan.c:705
 msgid "New file name successfully scanned..."
-msgstr "Noul nume de fi�ier examinat cu succes..."
+msgstr "Naujas failo vardas sėkmingai nuskenuotas..."
 
 #: src/scan.c:708
 #, c-format
 msgid "New file name successfully scanned...(%s)"
-msgstr "Noul nume de fi�ier examinat cu succes...(%s)"
+msgstr "Naujas failo vardas sėkmingai nuskenuotas...(%s)"
 
 #. The init position is define below, cause the scanner window must be showed before
 #. * to be able to move it.
 #. Title
 #: src/scan.c:2351
 msgid "Tag and File Name scan"
-msgstr "Examinarea etichetei �i numelui de fi�ier"
+msgstr "Žymės ir  failo vardo skenavimas"
 
 #. Option Menu
 #: src/scan.c:2373
 msgid "Scanner:"
-msgstr "Examinator :"
+msgstr "Skeneris:"
 
 #. Selection of the item made at the end of the function
 #: src/scan.c:2395
 msgid "Select the type of scanner to use"
-msgstr "Alege�i tipul de examinator"
+msgstr "Pasirinkite skenerio tipą"
 
 #: src/scan.c:2404
 msgid "Open scanner window / Scan selected files"
-msgstr "Deschide fereastra examinatorului / Examinati fisierele alese"
+msgstr "Atverkite skenerio langą/Skenuokite pasirinktus failus"
 
 #: src/scan.c:2417
 msgid "Scanner Options"
-msgstr "Op�iunile examinatorului"
+msgstr "Skenerio parinktys"
 
 #: src/scan.c:2426
 msgid "Show / Hide Masks Editor"
-msgstr "Arat� / ascunde editorul mask"
+msgstr "Rodyti/Slėpti šablonų redaktorių"
 
 #: src/scan.c:2436
 msgid "Show / Hide Legend"
-msgstr "Arat� / ascunde legenda"
+msgstr "Rodyti/Slėpti legendą"
 
 #: src/scan.c:2446
 msgid "Close this window"
-msgstr "�nchide aceast� fereastr�"
+msgstr "Užverti šį langą"
 
 #: src/scan.c:2474
 msgid ""
 "Select or type in a mask using codes (see Legend) to parse file name and "
 "path. Used to fill in tag fields."
 msgstr ""
-"Alege�i sau introduceti un mask folosind codurile (vezi legenda) pentru a "
-"examina numele de fi�iere �i calea. Folosit pentru a completa c�mpurile "
-"etichetei."
+"Norėdami apdoroti failo vardą ir kelią pasirinkite arba įrašykite šabloną "
+"naudojant kodus(žiūrėkite legendą). Naudota žymių užpildymui."
 
 #. Preview label
 #: src/scan.c:2500
 msgid "Fill tag preview..."
-msgstr "Completeaza previzualizarea etichetei..."
+msgstr "Užpildytų žymių peržiūra..."
 
 #: src/scan.c:2527
 msgid "Prefix mask with current path"
-msgstr "Pune calea actuala inaintea mastii"
+msgstr "Priešdėlio šablonas su esamu keliu"
 
 #: src/scan.c:2540
 msgid ""
@@ -4646,27 +4589,27 @@ msgid ""
 "Use / to make directories. If the first character is /, it's a absolute "
 "path, otherwise is relative to the old path."
 msgstr ""
-"Alegeti sau introduceti o masca utilizind codurile (v. Legenda) pentru a "
-"parcurge cimpurile etichetelor. Folosit pentru a redenumi fisierul.\n"
-"Folositi / pentru a crea directoare. Daca primul caracter este / va fi o "
-"cale absoluta, altfel este relativ la vechea cale."
+"Norėdami apdoroti žymių laukelius apdorokite arba įrašykite šabloną "
+"naudojant kodus(žiūrėkite legendą). Naudojama pervadinti failą.\n"
+"Aplankų sukūrimui naudokite „/“. Jei pirmas simbolis yra „/“, tai yra "
+"absoliutus kelias, kitu atveju tai reliatyvus kelias(senam keliui)."
 
 #. Preview label
 #: src/scan.c:2567
 msgid "Rename file preview..."
-msgstr "Previziualizeaz� redenumirea fi�ierului"
+msgstr "Pervadinto failo peržiūra..."
 
 #: src/scan.c:2587
 msgid "Select fields:"
-msgstr "Alege�i c�mpurile:"
+msgstr "Pasirinkite laukelius:"
 
 #: src/scan.c:2590
 msgid ""
 "The buttons on the right represent the fields which can be processed. Select "
 "those who interest you."
 msgstr ""
-"Butoantele de pe dreapta reprezint� c�mpurile care pot fi prelucrate. "
-"Alege�i acelea care v� intereseaz�."
+"Mygtukai dešinėje parodo laukelius kuriuos galima apdoroti. Pasirinkite jus "
+"dominančius."
 
 #. Advice for Translators : set the first letter of filename translated
 #: src/scan.c:2593
@@ -4675,35 +4618,34 @@ msgstr "F"
 
 #: src/scan.c:2594
 msgid "Process file name field"
-msgstr "Prelucrez c�mpul nume de fi�ier"
+msgstr "Apdoroti failo vardo laukelį"
 
 #. Advice for Translators : set the first letter of title translated
 #: src/scan.c:2596
 msgid "T"
-msgstr "T"
+msgstr "P"
 
 #: src/scan.c:2597
 msgid "Process title field"
-msgstr "Prelucrez c�mpul titlu"
+msgstr "Apdoroti pavadinimo laukelį"
 
 #. Advice for Translators : set the first letter of artist translated
 #: src/scan.c:2599
 msgid "Ar"
-msgstr "Ar"
+msgstr "A"
 
 #: src/scan.c:2600
 msgid "Process file artist field"
-msgstr "Prelucrez c�mpul artist"
+msgstr "Apdoroti failo atlikėjo laukelį"
 
 #. Advice for Translators : set the first letter of album artist translated
 #: src/scan.c:2602
 msgid "AA"
-msgstr ""
+msgstr "AA"
 
 #: src/scan.c:2603
-#, fuzzy
 msgid "Process album artist field"
-msgstr "Prelucrez c�mpul artist"
+msgstr "Apdoroti albumo atlikėjo laukelį"
 
 #. Advice for Translators : set the first letter of album translated
 #: src/scan.c:2605
@@ -4712,34 +4654,34 @@ msgstr "Al"
 
 #: src/scan.c:2606
 msgid "Process album field"
-msgstr "Prelucrez c�mpul album"
+msgstr "Apdoroti albumo laukelį"
 
 #. Advice for Translators : set the first letter of genre translated
 #: src/scan.c:2608
 msgid "G"
-msgstr "G"
+msgstr "Ž"
 
 #: src/scan.c:2609
 msgid "Process genre field"
-msgstr "Prelucrez c�mpul gen"
+msgstr "Apdoroti žanro laukelį"
 
 #. Advice for Translators : set the first letter of comment translated
 #: src/scan.c:2611
 msgid "Cm"
-msgstr "Cm"
+msgstr "K"
 
 #: src/scan.c:2612
 msgid "Process comment field"
-msgstr "Prelucrez c�mpul comentariu"
+msgstr "Apdoroti komentaro laukelį"
 
 #. Advice for Translators : set the first letter of composer translated
 #: src/scan.c:2614
 msgid "Cp"
-msgstr "Cp"
+msgstr "Km"
 
 #: src/scan.c:2615
 msgid "Process composer field"
-msgstr "Prelucrez c�mpul compozitor"
+msgstr "Apdoroti kompozitoriaus laukelį"
 
 #. Advice for Translators : set the first letter of orig artist translated
 #: src/scan.c:2617
@@ -4748,16 +4690,16 @@ msgstr "O"
 
 #: src/scan.c:2618
 msgid "Process original artist field"
-msgstr "Prelucrez c�mpul artist initial"
+msgstr "Apdoroti originalaus atlikėjo laukelį"
 
 #. Advice for Translators : set the first letter of copyright translated
 #: src/scan.c:2620
 msgid "Cr"
-msgstr "Cr"
+msgstr "At"
 
 #: src/scan.c:2621
 msgid "Process copyright field"
-msgstr "Prelucrez c�mpul 'drept de autor'"
+msgstr "Apdoroti autorinių teisių laukelį"
 
 #. Advice for Translators : set the first letter of URL translated
 #: src/scan.c:2623
@@ -4766,286 +4708,284 @@ msgstr "U"
 
 #: src/scan.c:2624
 msgid "Process URL field"
-msgstr "Prelucrez c�mpul URL"
+msgstr "Apdoroti URL kanalą laukelį"
 
 #. Advice for Translators : set the first letter of encoder name translated
 #: src/scan.c:2626
 msgid "E"
-msgstr "E"
+msgstr "Kd"
 
 #: src/scan.c:2627
 msgid "Process encoder name field"
-msgstr "Prelucrez c�mpul nume de codor"
+msgstr "Apdoroti kodavimo pavadinimo laukelį"
 
 #: src/scan.c:2676
 msgid "Invert Selection"
-msgstr "Inveseaz� alegerea"
+msgstr "Invertuoti pasirinkimą"
 
 #: src/scan.c:2685
 msgid "Select/Unselect All."
-msgstr "Alege/dealege toate."
+msgstr "Pasirinkti/Nepasirinkti visus"
 
 #. Group: character conversion
 #: src/scan.c:2692
 msgid "Convert '_' and '%20' to ' '"
-msgstr "Schimb� '_' �i '%20' �n ' '"
+msgstr "Konvertuoti „_“ ir „%20“ į „ “"
 
 #: src/scan.c:2698
 msgid "Convert:"
-msgstr "Conversie :"
+msgstr "Konvertuoti:"
 
 #: src/scan.c:2700
 msgid "to: "
-msgstr "la : "
+msgstr "į:"
 
 #: src/scan.c:2729
 msgid ""
 "The underscore character or the string '%20' are replaced by one space. "
 "Example, before: 'Text%20In%20An_Entry', after: 'Text In An Entry'."
 msgstr ""
-"Caracterul '_' sau �irul '%20' s�nt �nlocuite de un spa�iu. Exemplu, "
-"�nainte: 'Text%20Introdus_�nainte', dup�: 'Text Introdus �nainte'."
+"Pabraukimo simbolis ar eilutė „%20“ pakeičiami tarpu. Pavyzdžiui, prieš: "
+"„Tekstas%20įraše“, po: „Tekstas įraše“."
 
 #: src/scan.c:2732
 msgid ""
 "The space character is replaced by one underscore character. Example, "
 "before: 'Text In An Entry', after: 'Text_In_An_Entry'."
 msgstr ""
-"Spa�iul este �nlocuit de un '_'. Examplu, �nainte: 'text introdus', dup�: "
-"'text_introdus'."
+"Tarpo simbolis pakeičiamas pabraukimo simboliu. Pavyzdžiui, prieš: „Tekstas "
+"įraše“, po: „Tekstas_įraše“."
 
 #: src/scan.c:2735
 msgid ""
 "Replace a string by an other one. Note that the search is case sensitive."
-msgstr ""
+msgstr "Pakeisti eilutę kita. Paieška skiria didžiąsias ir mažąsias raides."
 
 #: src/scan.c:2748
 msgid "Detect Roman numerals"
-msgstr ""
+msgstr "Aptikti romėniškus skaičius"
 
 #: src/scan.c:2775
 msgid ""
 "Convert all words in all fields to upper case. Example, before: 'Text IN AN "
 "entry', after: 'TEXT IN AN ENTRY'."
 msgstr ""
-"Schimb� toate cuvintele �n toate c�mpurile �n majuscule. Exemplu, �nainte "
-"'Text INTROUDS', dup�: 'TEXT INTRODUS'."
+"Konvertuoti visus žodžius laukeliuose į didžiąsias raides. Pavyzdžiui, "
+"prieš: „TekstaS įRašE“, po: „TEKSTAS ĮRAŠE“."
 
 #: src/scan.c:2778
 msgid ""
 "Convert all words in all fields to lower case. Example, before: 'TEXT IN an "
 "entry', after: 'text in an entry'."
 msgstr ""
-"Schimb� toate cuvintele �n toate c�mpurile �n minuscule. Exemplu, �nainte: "
-"'TEXT �nainte', dup�: 'text �nainte'."
+"Konvertuoti visus žodžius laukeliuose į mažąsias raides. Pavyzdžiui, prieš: "
+"„TekstaS įRašE“, po: „tekstas įraše“."
 
 #: src/scan.c:2781
 msgid ""
 "Convert the initial of the first word in all fields to upper case. Example, "
 "before: 'text IN An ENTRY', after: 'Text in an entry'."
 msgstr ""
-"Schimb� ini�iala primului cuv�nt �n toate c�mpurile �n majuscul�. Exemplu "
-"�nainte: 'tEXt �nainte', dup�: 'Text �nainte'."
+"Konvertuoti pirmo žodžio pirmą raidę visuose laukeliuose į didžiąją raidę. "
+"Pavyzdžiui, prieš: „TekstaS įRašE“, po: „Tekstas įraše“."
 
 #: src/scan.c:2784
 msgid ""
 "Convert the initial of each word in all fields to upper case. Example, "
 "before: 'Text in an ENTRY', after: 'Text In An Entry'."
 msgstr ""
-"Schimb� ini�iala fiec�rui cuv�nt �n toate c�mpurile �n majuscul�. Exemplu "
-"�nainte: 'tEXt �nainte', dup�: 'Text �nainte'."
+"Konvertuoti kiekvieno žodžio pirmą raidę visuose laukeliuose į didžiąją "
+"raidę. Pavyzdžiui, prieš: „TekstaS įRašE“, po: „Tekstas Įraše“."
 
 #: src/scan.c:2787
-#, fuzzy
 msgid ""
 "Force to convert to upper case the Roman numerals. Example, before: 'ix. "
 "text in an entry', after: 'IX. Text In An Entry'."
 msgstr ""
-"Un spa�iu este introdus �nainte de fiecare majuscul�. Exemplu, �nainte: "
-"'Text�nainte', dup�: 'Text �nainte'."
+"Romėniškuose skaičiuose priverstinai konvertuoti į didžiąsias raides. "
+"Pavyzdžiui, prieš: „ix. tekstas įraše“, po: „IX. Tekstas Įraše.“"
 
 #: src/scan.c:2796
 msgid "Insert a space before an uppercase letter"
-msgstr "Introdu un spa�iu �nainte de o majuscul�"
+msgstr "Prieš didžiąją raidę įterpti tarpą"
 
 #: src/scan.c:2797
 msgid "Remove duplicates of space or underscore"
-msgstr "�terge spa�iile sau '_' multiple"
+msgstr "Pašalinti kelis tarpus ar pabraukimo simbolius"
 
 #: src/scan.c:2815
 msgid ""
 "All spaces between words are removed. Example, before: 'Text In An Entry', "
 "after: 'TextInAnEntry'."
 msgstr ""
-"Toate pa�iile dintre cuvinte s� fie �terse. Exemplu, �nainte: 'Text "
-"�nainte', dup�: 'Text�nainte'."
+"Visi tarpai tarp žodžių pašalinami. Pavyzdžiui, prieš: „Tekstas Įraše“, po: "
+"„TekstasĮraše“."
 
 #: src/scan.c:2818
 msgid ""
 "A space is inserted before each upper case letter. Example, before: "
 "'TextInAnEntry', after: 'Text In An Entry'."
 msgstr ""
-"Un spa�iu este introdus �nainte de fiecare majuscul�. Exemplu, �nainte: "
-"'Text�nainte', dup�: 'Text �nainte'."
+"Prieš kiekvieną didžiąją raidę įterpiamas tarpas. Pavyzdžiui, prieš: "
+"„TekstasĮraše“, po: „Tekstas Įraše“."
 
 #: src/scan.c:2821
 msgid ""
 "Duplicated spaces or underscores are removed. Example, before: "
 "'Text__In__An   Entry', after: 'Text_In_An Entry'."
 msgstr ""
-"Spa�iile sau '_' multiple s�nt �terse. Exemplu, �nainte: 'Text__�nainte', "
-"dup�: 'Text_�nainte'."
+"Keli tarpai ir pabraukimo simboliai pašalinami. Pavyzdžiui, prieš: "
+"„  Tekstas__Įraše   “, po: „Tekstas_Įraše“."
 
 #.
 #. * Frame to display codes legend
 #.
 #: src/scan.c:2828
 msgid "Legend"
-msgstr "Legend�"
+msgstr "Legenda"
 
 #: src/scan.c:2834
 #, c-format
 msgid "%a : artist"
-msgstr "%a : artist"
+msgstr "%a: atlikėjas"
 
 #: src/scan.c:2837
-#, fuzzy
 msgid "%z : album artist"
-msgstr "%a : artist"
+msgstr "%z: albumo atlikėjas"
 
 #: src/scan.c:2840
 msgid "%b : album"
-msgstr "%b : album"
+msgstr "%b: albumas"
 
 #: src/scan.c:2843
 #, c-format
 msgid "%c : comment"
-msgstr "%c : comentariu"
+msgstr "%c: komentaras"
 
 #: src/scan.c:2846
 #, c-format
 msgid "%p : composer"
-msgstr "%c : compozitor"
+msgstr "%p: kompozitorius"
 
 #: src/scan.c:2849
 msgid "%r : copyright"
-msgstr "%r: drept autor"
+msgstr "%r: autorinės teisės"
 
 #: src/scan.c:2852
 #, c-format
 msgid "%d : disc number"
-msgstr ""
+msgstr "%d: disko numeris"
 
 #: src/scan.c:2855
 #, c-format
 msgid "%e : encoded by"
-msgstr "%e: codat de"
+msgstr "%e: kodavo"
 
 #: src/scan.c:2858
 #, c-format
 msgid "%g : genre"
-msgstr "%g : gen"
+msgstr "%g: žanras"
 
 #: src/scan.c:2861
 #, c-format
 msgid "%i : ignored"
-msgstr "%i : ignorat"
+msgstr "%i: nepaisoma"
 
 #: src/scan.c:2864
 msgid "%l : number of tracks"
-msgstr "%l : num�r de piste"
+msgstr "%l: takelių numeris"
 
 #: src/scan.c:2867
 #, c-format
 msgid "%o : orig. artist"
-msgstr "%a : artist initial"
+msgstr "%o: orig. atlikėjas"
 
 #: src/scan.c:2870
 #, c-format
 msgid "%n : track"
-msgstr "%n : pist�"
+msgstr "%n: takelis"
 
 #: src/scan.c:2873
 msgid "%t : title"
-msgstr "%t : titlu"
+msgstr "%t: pavadinimas"
 
 #: src/scan.c:2876
 #, c-format
 msgid "%u : URL"
-msgstr "%u : URL"
+msgstr "%u: URL"
 
 #: src/scan.c:2879
 msgid "%y : year"
-msgstr "%y : an"
+msgstr "%y: metai"
 
 #.
 #. * Masks Editor
 #.
 #: src/scan.c:2886
 msgid "Mask Editor"
-msgstr "Editor de m�ti"
+msgstr "Šablonų redaktorius"
 
 #: src/scan.c:2943
 msgid "Create New Mask"
-msgstr "Creaz� o masc� nou�"
+msgstr "Sukurti naują šabloną"
 
 #: src/scan.c:2953
 msgid "Move Up this Mask"
-msgstr "Mut� sus aceast� masc�"
+msgstr "Šį šabloną perkelti aukštyn"
 
 #: src/scan.c:2963
 msgid "Move Down this Mask"
-msgstr "Mut� jos aceast� masc�"
+msgstr "Šį šabloną perkelti žemyn"
 
 #: src/scan.c:2973
 msgid "Duplicate Mask"
-msgstr "Copiaz� masca"
+msgstr "Dubliuoti šabloną"
 
 #: src/scan.c:2983
 msgid "Add Default Masks"
-msgstr "Adaug� o masc� implicit�"
+msgstr "Pridėti numatytąjį šabloną"
 
 #: src/scan.c:2993
 msgid "Remove Mask"
-msgstr "�terge masca"
+msgstr "Pašalinti šabloną"
 
 #: src/scan.c:3003
 msgid "Save Masks"
-msgstr "Salveaz� masca"
+msgstr "Išsaugoti šablonus"
 
 #: src/scan.c:3594
 msgid "New_mask"
-msgstr "Masc� nou�"
+msgstr "Naujas _šablonas"
 
 #: src/scan.c:3632
 msgid "Copy: No row selected!"
-msgstr "Copiaz�: Nici un r�nd ales!"
+msgstr "Kopijuoti: nepasirinkta eilutė!"
 
 #: src/scan.c:3738
 msgid "Remove: No row selected!"
-msgstr "�terge: Nici un r�nd ales!"
+msgstr "Pašalinti: nepasirinkta eilutė!"
 
 #: src/scan.c:3785
 msgid "Move Up: No row selected!"
-msgstr "Mut� sus: Nici un r�nd ales!"
+msgstr "Perkelti aukštyn: nepasirinkta eilutė!"
 
 #: src/scan.c:3838
 msgid "Move Down: No row selected!"
-msgstr "Mut� jos: Nici un r�nd ales!"
+msgstr "Perkelti žemyn: nepasirinkta eilutė!"
 
 #: src/setting.c:933
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Can't write config file: %s (%s)"
-msgstr "Eroare: Nu pot scrie fisierul configuratie: %s (%s)\a"
+msgstr "KLAIDA: įrašyti konfigūracijos failo nepavyko: %s (%s)"
 
 #: src/setting.c:1082 src/setting.c:1125
 #, c-format
 msgid "Can't open configuration file '%s' (%s)"
-msgstr "Nu pot deschide fi�ierul configura�ie '%s' (%s)"
+msgstr "Atverti konfigūracijos failo „%s“ nepavyko (%s)"
 
 #: src/setting.c:1083
 msgid "Loading default configuration..."
-msgstr "�ncarc configura�ia implicit�..."
+msgstr "Įkeliama numatytoji konfigūracija..."
 
 #: src/setting.c:1196 src/setting.c:1203 src/setting.c:1210 src/setting.c:1217
 #: src/setting.c:1224 src/setting.c:1231 src/setting.c:1238 src/setting.c:1245
@@ -5054,123 +4994,115 @@ msgstr "�ncarc configura�ia implicit�..."
 #: src/setting.c:1308
 #, c-format
 msgid "Can't create or open file '%s' (%s)"
-msgstr "Nu pot crea sau deschide '%s' (%s)"
+msgstr "Sukurti arba atverti failo „%s“ nepavyko (%s)"
 
 #: src/setting.c:1347
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Can't write list to file: %s (%s)"
-msgstr ""
-"Eroare: Nu pot scrie lista �n fisier: %s (%s)\n"
-"\a"
+msgstr "KLAIDA: sąrašo įrašyti į failą nepavyko: %s (%s)"
 
 #. Fall back to defaults
 #: src/setting.c:1435
 msgid "Loading default 'Fill Tag' masks..."
-msgstr "�ncarc mask 'Completeaz� eticheta' implicit..."
+msgstr "Įkeliami numatytieji „Užpildyti žymes“ šablonai..."
 
 #. Fall back to defaults
 #: src/setting.c:1463
 msgid "Loading default 'Rename File' masks..."
-msgstr "�ncarc mask-ul 'Redenume�te fi�ierul' implicit..."
+msgstr "Įkeliami numatytieji „Pervadinti failą “ šablonai..."
 
 #. Fall back to defaults
 #: src/setting.c:1490
-#, fuzzy
 msgid "Loading default 'Rename Directory' masks..."
-msgstr "�ncarc mask-ul 'Redenume�te fi�ierul' implicit..."
+msgstr "Įkeliami numatytieji „Pervadinti aplanką“ šablonai..."
 
 #: src/setting.c:1684
-#, fuzzy
 msgid "ERROR: The environment variable HOME is not defined!"
-msgstr ""
-"Eroare: Variabila de mediu $HOME nu este definit�!\n"
-"\n"
+msgstr "KLAIDA: aplinkos kintamasis HOME nenustatytas!"
 
 #: src/setting.c:1705
 #, c-format
 msgid "ERROR: Can't create directory '%s' (%s)!"
-msgstr "Eroare: Nu pot crea directorul '%s' (%s)!"
+msgstr "KLAIDA: Sukurti aplanko „%s“ nepavyko(%s)!"
 
 #: src/vcedit.c:287
 msgid "Input truncated or empty."
-msgstr "Intrarea truchiat� sau goal�."
+msgstr "Įvestis nukirpta arba tuščia."
 
 #: src/vcedit.c:289
 msgid "Input is not an Ogg bitstream."
-msgstr "Intrarea nu este un flux Ogg."
+msgstr "Įvestis nėra Ogg bitų srautas."
 
 #: src/vcedit.c:307
 msgid "Error reading first page of Ogg bitstream."
-msgstr "Eroare la citirea primei pagini a fluxului Ogg."
+msgstr "Klaida skaitant pirmą Ogg bitų srauto puslapį."
 
 #: src/vcedit.c:313
 msgid "Error reading initial header packet."
-msgstr "Eroare la citirea pachetului antet ini�ial."
+msgstr "Klaida skaitant pradinį antraštės paketą."
 
 #: src/vcedit.c:341
-#, fuzzy
 msgid "Ogg bitstream contains neither speex or vorbis data."
-msgstr "Fluxul Ogg nu con�ine date vorbis."
+msgstr "Ogg bitų sraute yra ne vorbis ir ne speex duomenys."
 
 #: src/vcedit.c:375
 msgid "Corrupt secondary header."
-msgstr "Antet secundar incorect."
+msgstr "Sugadinta antra antraštė."
 
 #: src/vcedit.c:405
 msgid "Need to save extra headers - TODO!!"
-msgstr ""
+msgstr "Reikia išsaugoti ir papildomas antraštes - TODO!!"
 
 #: src/vcedit.c:419
 msgid "EOF before end of vorbis headers."
-msgstr "EOF �nainte de sf�r�itul anteletolor vorbis."
+msgstr "EOF prieš vorbis antraščių pabaigą."
 
 #: src/vcedit.c:584
 msgid "Corrupt or missing data, continuing..."
-msgstr "Date incorete sau lips�, continui..."
+msgstr "Sugadinti arba trūkstami duomenys, tęsiama..."
 
 #: src/vcedit.c:621
 msgid ""
 "Error writing stream to output. Output stream may be corrupted or truncated."
 msgstr ""
-"Eroare la scrierea fluxului la ie�ire. Fluxul de ie�ire poate fi incorect "
-"sau trunchiat."
+"Klaida rašant srautą į išvestį. Išvesties srautas gali būti sugadintas arba "
+"nepilnas."
 
 #. Log_Print(_("DLL '%s' not already loaded. Try loading it..."), dllname);
 #: src/win32/win32dep.c:122
 #, c-format
 msgid "DLL '%s' not already loaded. Try loading it..."
-msgstr ""
+msgstr "DLL „%s“ dar neįkelta. Bandoma įkelti..."
 
 #. Log_Print(_("DLL '%s' could not be loaded"), dllname);
 #: src/win32/win32dep.c:126
 #, c-format
 msgid "DLL '%s' could not be loaded"
-msgstr ""
+msgstr "Įkelti DLL „%s“ nepavyko"
 
 #. Log_Print(_("This version of '%s' contains '%s'"), dllname, procedure);
 #: src/win32/win32dep.c:136
 #, c-format
 msgid "This version of '%s' contains '%s'"
-msgstr ""
+msgstr "Ši „%s“ versija turi „%s“"
 
 #. Log_Print(_("Function '%s' not found in dll '%s'"), procedure, dllname);
 #: src/win32/win32dep.c:142
 #, c-format
 msgid "Function '%s' not found in dll '%s'"
-msgstr ""
+msgstr "Funkcija „%s“ nerasta dll „%s“ bibliotekoje"
 
 #. ET_Win32_Path_Replace_Backslashes(app_data_dir);
 #. Log_Print(_("EasyTAG settings dir: '%s'"), app_data_dir);
 #: src/win32/win32dep.c:278
 #, c-format
 msgid "EasyTAG settings dir: '%s'"
-msgstr ""
+msgstr "EasyTAG nustatymų aplankas: „%s“"
 
 #. Log_Print(_("weasytag_init start..."));
 #: src/win32/win32dep.c:469
-#, fuzzy
 msgid "weasytag_init start..."
-msgstr "Gata s� pornesc..."
+msgstr "weasytag_init pradžia..."
 
 #. Log_Print(_("EasyTAG version: %s"),VERSION);
 #. g_print(_("EasyTAG version: %s"),VERSION);
@@ -5178,387 +5110,16 @@ msgstr "Gata s� pornesc..."
 #: src/win32/win32dep.c:475
 #, c-format
 msgid "Glib version: %u.%u.%u\n"
-msgstr ""
+msgstr "Glib versija: %u.%u.%u\n"
 
 #. Set Environmental Variables
 #. Log_Print(_("weasytag_init end..."));
 #: src/win32/win32dep.c:493
 msgid "weasytag_init end..."
-msgstr ""
+msgstr "weasytag_init pabaiga..."
 
 #. Log_Print(_("Audio player: '%s'"), player);
 #: src/win32/win32dep.c:614
-#, fuzzy, c-format
+#, c-format
 msgid "Audio player: '%s'"
-msgstr "Execut� playerul audio"
-
-#~ msgid "Files have been partially saved..."
-#~ msgstr "Fi�ierele au fost par�ial salvate..."
-
-#~ msgid " OK "
-#~ msgstr " OK "
-
-#~ msgid " Yes "
-#~ msgstr " Da "
-
-#~ msgid " No "
-#~ msgstr " Nu "
-
-#~ msgid " Apply "
-#~ msgstr " Aplica "
-
-#~ msgid " Save "
-#~ msgstr " Salveaz� "
-
-#~ msgid " Cancel "
-#~ msgstr " Anuleaz� "
-
-#~ msgid " Close "
-#~ msgstr " �nchide "
-
-#~ msgid " Write "
-#~ msgstr " Scrie "
-
-#~ msgid " Execute "
-#~ msgstr " Execut� "
-
-#~ msgid " Search "
-#~ msgstr " Caut� "
-
-#~ msgid " Browse... "
-#~ msgstr " Navigheaz�... "
-
-#~ msgid ""
-#~ "The entered path is invalid!:\n"
-#~ "%s\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Calea introdus� nu este valid�!:\n"
-#~ "%s\n"
-#~ "(%s)"
-
-#, fuzzy
-#~ msgid "(case sensitive)"
-#~ msgstr "Cu majuscule seminifcative"
-
-#~ msgid "Replace a character by an other one."
-#~ msgstr "Inlocuiti caracterul cu un altul."
-
-#~ msgid "Loaded File Content :"
-#~ msgstr "Con�inutul fi�ierului �ncarcat :"
-
-#~ msgid "Files Name List :"
-#~ msgstr "Lista numelor de fi�iere :"
-
-#, fuzzy
-#~ msgid "(MP3 file support enabled using: libid3tag %s)"
-#~ msgstr "(Suportul pentru FLAC dezactivat)"
-
-#, fuzzy
-#~ msgid "(ID3v2.3 tags support enabled using: id3lib %d.%d.%d)"
-#~ msgstr "(Suportul pentru FLAC dezactivat)"
-
-#, fuzzy
-#~ msgid "ID3V2 tag Version"
-#~ msgstr "Versiune de etichet� incorect�"
-
-#~ msgid "Unicode (UTF-7)"
-#~ msgstr "Unicode (UTF-7)"
-
-#~ msgid "Unicode (UTF-16BE)"
-#~ msgstr "Unicode (UTF-16BE)"
-
-#~ msgid "Unicode (UTF-16LE)"
-#~ msgstr "Unicode (UTF-16LE)"
-
-#~ msgid "Use padding"
-#~ msgstr "Foloseste completarea"
-
-#~ msgid ""
-#~ "Set padding in the ID3v2 tags for faster writing during next changes in "
-#~ "the tag."
-#~ msgstr ""
-#~ "Completeaza etichetele ID3v2 pentru scriere mai rapida la urmatoarele "
-#~ "schimbari in eticheta."
-
-#, fuzzy
-#~ msgid "Use non standard character set for reading ID3 tags: "
-#~ msgstr ""
-#~ "Foloseste setul de caractere ISO-8859-1 standard pentru etichetele ID3 "
-#~ "(recomandat)"
-
-#, fuzzy
-#~ msgid "Use non standard character set for writing ID3 tags: "
-#~ msgstr ""
-#~ "Foloseste setul de caractere ISO-8859-1 standard pentru etichetele ID3 "
-#~ "(recomandat)"
-
-#~ msgid ""
-#~ "The character set translation from '%s'\n"
-#~ "to '%s' isn't supported!"
-#~ msgstr ""
-#~ "Schimbarea setului de caractere de la '%s'\n"
-#~ "la '%s' nu este suportat�!"
-
-#, fuzzy
-#~ msgid "ERROR while opening file: '%s' (%s)\a"
-#~ msgstr ""
-#~ "Eroare �n timpul deschiderii fisierului: '%s' (%s).\n"
-#~ "\a"
-
-#~ msgid "Load on startup the directory"
-#~ msgstr "�ncarc� la pornire directorul"
-
-#~ msgid "#:"
-#~ msgstr "#:"
-
-#~ msgid "Set yellow background for tooltips"
-#~ msgstr "Fixeaz� fundal galben pentru ponturi"
-
-#~ msgid ""
-#~ "If activated, the background of tooltips will be yellow colored, "
-#~ "overriding your window manager."
-#~ msgstr ""
-#~ "Daca este activat�, fundalul ponturilor va fi colorat �n galben, ne�in�nd "
-#~ "seama de administratorul de ferestre."
-
-#, fuzzy
-#~ msgid "Can't execute %s (%d)!\n"
-#~ msgstr "Nu pot executa %s (%s)!\n"
-
-#~ msgid "Set new style for displaying list items"
-#~ msgstr "Alegeti un nou stil pentru afisarea listelor"
-
-#~ msgid ""
-#~ "If activated, items in list will be styled black and bold instead of red "
-#~ "and gray (example : for changed and not saved files)."
-#~ msgstr ""
-#~ "Daca este activat, elementele listei vor fi negre si ingrosate in loc de "
-#~ "rosu si gri (ex. pentru fisiere modificate si nesalvate)."
-
-#~ msgid "Save _Configuration Now"
-#~ msgstr "Salveaza _configuratia acum"
-
-#~ msgid "Save Configuration Now"
-#~ msgstr "Salveaza configuratia acum"
-
-#~ msgid "Set main window size"
-#~ msgstr "Fixeaz� dimensiunea ferestrei principale"
-
-#~ msgid "Width :"
-#~ msgstr "L��ime :"
-
-#~ msgid "Height :"
-#~ msgstr "�n�l�ime :"
-
-#~ msgid " Get current size "
-#~ msgstr " Ob�ine dimensiunea curent� "
-
-#~ msgid ""
-#~ "Specify the default size for the main window. You must restart the "
-#~ "program to apply the new size. For your display, the max values are: "
-#~ "width=%d and height=%d."
-#~ msgstr ""
-#~ "Specifica�i dimensiunea implicit� pentru fereastra principal�. Trebuie s� "
-#~ "reporni�i programul pentru a aplica noua dimensiune. Pentru ecranul dvs., "
-#~ "valorile maxime s�nt: l��ime=%d �i �n�l�ime=%d."
-
-#~ msgid "Width: set -1 for automatic size"
-#~ msgstr "L��imea: alege�i -1 pentru dimensionarea automat�"
-
-#~ msgid "Heigth: set -1 for automatic size"
-#~ msgstr "�n�l�imea: alege�i -1 pentru dimensionarea automat�"
-
-#~ msgid "Set vertical right pane handle position"
-#~ msgstr "Alegeti pozitia panoului vertical din dreapta"
-
-#~ msgid "Position :"
-#~ msgstr "Pozi�ia :"
-
-#~ msgid " Get current position "
-#~ msgstr " Ob�ine pozi�ia curent� "
-
-#~ msgid ""
-#~ "Specify the default position for the pane handle located between the "
-#~ "browser frame and the tag frame. Changes will be applied the next start."
-#~ msgstr ""
-#~ "Specificati pozitia implicita pentru panoul aflat intre rama "
-#~ "navigatorului si rama etichetei. Modificarile vor fi aplicate la "
-#~ "urmatoarea pornire."
-
-#~ msgid "Position: set -1 for automatic positioning"
-#~ msgstr "Pozi�ia: alege�i -1 pentru pozi�ionarea automat�"
-
-#~ msgid "Set vertical left pane handle position"
-#~ msgstr "Alegeti pozitia panoului vertical din stinga"
-
-#~ msgid ""
-#~ "Specify the default position for the pane handle located between the "
-#~ "browser tree and the list of files. Changes will be applied the next "
-#~ "start."
-#~ msgstr ""
-#~ "Specificati pozitia implicita pentru panoul aflat intre arborele "
-#~ "navigatorului si lista de fisiere. Modificarile o sa fie aplicate la "
-#~ "urmatoarea pornire."
-
-#~ msgid "Set horizontal pane handle position"
-#~ msgstr "Alegeti pozitia panouluiorizontal"
-
-#~ msgid ""
-#~ "Specify the default position for the pane handle located between the "
-#~ "artist list and album list. Changes will be applied the next start."
-#~ msgstr ""
-#~ "Specificati pozitia implicita pentru panoul aflat intre lista cu artisti "
-#~ "si lista de albume. Modificarile o sa fie aplicate la urmatoarea pornire."
-
-#~ msgid "Set scanner window position"
-#~ msgstr "Fixeaz� pozi�ia ferestrei examinatorului"
-
-#~ msgid ""
-#~ "If activated, the scanner window will appear at the specified coordinates "
-#~ "relative to the main window. Use it if you want to keep the same position "
-#~ "of the scanner window each times you open it. If deactivated, the window "
-#~ "manager determines the position."
-#~ msgstr ""
-#~ "Dac� este activat�, fereastra examinatorului va ap�rea la coordonatele "
-#~ "specificate, relativ la fereastra principal�. Folosi�i aceast� op�iune "
-#~ "pentru a p�stra aceea�i pozi�ie a ferestrei examinatorului de fiecare "
-#~ "dat� c�nd o deschide�i. Dac� o dezactiva�i, administratorul de ferestre "
-#~ "va fixa pozi�ia."
-
-#~ msgid "X :"
-#~ msgstr "X :"
-
-#~ msgid "Y :"
-#~ msgstr "Y :"
-
-#~ msgid "CD Data Base Window"
-#~ msgstr "Fereastra bazei de date CD"
-
-#~ msgid "Set CD Data Base window size"
-#~ msgstr "Fixeaza dimensiunea ferestrei CDDB"
-
-#~ msgid "Specify the default size for the CDDB window."
-#~ msgstr "Specific� dimensiunea implicit� pentru fereastra CDDB."
-
-#~ msgid "Set pane handle position"
-#~ msgstr "Alegeti potizia panoului"
-
-#~ msgid "Specify the default position for the pane handle in the CDDB window."
-#~ msgstr "Specificati pozitia implicita pentru panoul ferestrei CDDB."
-
-#~ msgid " Window height (%d) is bigger than screen height (%d)! "
-#~ msgstr ""
-#~ " �n�l�imea ferestrei (%d) este mai mare dec�t �nal�imea ecranului (%d)! "
-
-#~ msgid "Size Error..."
-#~ msgstr "Eroare de dimensiune..."
-
-#~ msgid " Window width (%d) is bigger than screen width (%d)! "
-#~ msgstr "L��imea ferestrei (%d) este mai mare dec�t l��imea ecranului (%d)! "
-
-#~ msgid "The scanner window must be open to get its current position!"
-#~ msgstr ""
-#~ "Fereastra examinatorului trebuie s� fie deschis� pentru a-i ob�ine "
-#~ "pozi�ia curent�"
-
-#~ msgid "The CDDB window must be open to get its current position!"
-#~ msgstr ""
-#~ "Fereastra CDDB trebuie s� fie deschis� pentru a-i ob�ine pozi�ia curent�!"
-
-#~ msgid "Save the configuration before exiting the program"
-#~ msgstr "Salveaz� configura�ia �nainte de ie�irea din program"
-
-#~ msgid ""
-#~ "If activated, the configuration will be automatically saved before "
-#~ "exiting the program."
-#~ msgstr ""
-#~ "Dac� este activat�, configura�ia va fi automat salvat� inainte de "
-#~ "p�r�sirea programului."
-
-#, fuzzy
-#~ msgid ""
-#~ "...and apply these rules if conversion to character set for writing ID3 "
-#~ "tags fails:"
-#~ msgstr ""
-#~ "Foloseste setul de caractere ISO-8859-1 standard pentru etichetele ID3 "
-#~ "(recomandat)"
-
-#~ msgid "Unicode (UTF-32BE)"
-#~ msgstr "Unicode (UTF-32BE)"
-
-#~ msgid "Unicode (UTF-32LE)"
-#~ msgstr "Unicode (UTF-32LE)"
-
-#, fuzzy
-#~ msgid ""
-#~ "If activated, the ID3 tag will be written with the ISO-8859-1 character "
-#~ "set. Note that non-ISO-8859-1 characters will be lost. Note also that "
-#~ "ID3v2.3 tags support only ISO-8859-1 and UTF-16. If disabled, it will "
-#~ "check automatically the right encoding to use."
-#~ msgstr ""
-#~ "Daca este activata, eticheta ID3 va fi scrisa cu setul de caractere "
-#~ "ISO-8859-1. Remarcati ca etichetele ID3v2.3 accepta doar ISO-8859-1 si "
-#~ "UTF16"
-
-#, fuzzy
-#~ msgid "Use this character set translation for ID3 tags (for expert user) :"
-#~ msgstr ""
-#~ "Foloseste aceasta conversie pentru setul de caractere al etichetelor ID3:"
-
-#, fuzzy
-#~ msgid ""
-#~ "If activated, this character set translation will be used for reading and "
-#~ "writing ID3 tag (for MP3 and MP2 files only)."
-#~ msgstr ""
-#~ "Daca este activata, conversia va fi folosita pentru citirea si scrierea "
-#~ "etichetelor ID3 (pentru fisiere mp3 si mp2)."
-
-#~ msgid "Convert character set from :"
-#~ msgstr "Setul de caractere convertit din:"
-
-#~ msgid "to :"
-#~ msgstr "la :"
-
-#, fuzzy
-#~ msgid ""
-#~ "The filename '%s' couldn't be converted into UTF-8 (%s).\n"
-#~ "To fix : this file name musn't be in UTF-8 encoding. So specify the right "
-#~ "encoding for file name in the G_FILENAME_ENCODING environment variable "
-#~ "(for example : export G_FILENAME_ENCODING=ISO-8859-1).\n"
-#~ msgstr ""
-#~ "Numele de fisier '%s' nu a putut fi convertit la UTF-8 (%s).\n"
-#~ "Rezolvare: acest nume de fisier nu trebuie sa fie codat UTF-8. "
-#~ "Specificati codarea corecta pentru numele de fisiere in variabila de "
-#~ "mediu G_FILENAME_ENCODING (ex.: export G_FILENAME_ENCODING=ISO-8859-16).\n"
-
-#~ msgid "Currently using G_FILENAME_ENCODING=%s ...\n"
-#~ msgstr "Folosesc  G_FILENAME_ENCODING=%s ...\n"
-
-#~ msgid "Currently using G_BROKEN_FILENAMES=%s ...\n"
-#~ msgstr "Flosesc acum  G_BROKEN_FILENAME=%s ...\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "ERROR while opening file: '%s'(%s).\n"
-#~ "\a"
-#~ msgstr ""
-#~ "Eroare �n timpul deschiderii fisierului: '%s' (%s).\n"
-#~ "\a"
-
-#, fuzzy
-#~ msgid "AAC/MPEG-4 File"
-#~ msgstr "Fi�ier MP3"
-
-#~ msgid "Use DLM to match lines with files"
-#~ msgstr "Foloseste DLM pentru a asocia liniile cu fisierele"
-
-#~ msgid ""
-#~ "When activating this option, matching of lines with files is done by a "
-#~ "fuzzy string matching, instead of direct position."
-#~ msgstr ""
-#~ "Cind este aceasta optiune activata, liniile sint asociate cu fisiere "
-#~ "folosid "
-
-#~ msgid "Use title case while making first letter uppercase of each word."
-#~ msgstr "Use title case while making first letter uppercase of each word."
+msgstr "Audio grotuvas: „%s“"
